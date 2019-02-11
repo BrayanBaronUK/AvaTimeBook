@@ -1,2 +1,2 @@
 # AvaTimeBook
-Aplicación de intercambio de libros
+Aplicación de intercambio de libros con Framework Cordova
