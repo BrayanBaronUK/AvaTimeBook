@@ -1,9 +1,17 @@
-<ul>
+<!--<ul>
   <li class="text" *ngFor="let item of items | async">
     {{item.name}}
   </li>
   <li class="text" *ngFor="let contacto of contactos | async">
       {{contacto.libro}}
     </li>
-</ul>
+</ul>-->
+<!--BEGIN OF CCSANCHEZC 16/02/2019 -->
+<app-navbar></app-navbar>
+<div class="container">
+  <flash-messages></flash-messages>
+  <router-outlet></router-outlet>
+</div>
+
+<!--END OF CCSANCHEZC 16/02/2019-->
 
