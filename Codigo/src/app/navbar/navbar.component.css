@@ -2,3 +2,7 @@ img.rounded-circle{
     width: 45px;
     height: 45px;
 }
+
+[class*="social-portal"] {
+  background-image: url("/AvaTimeBook/Codigo/src/img/navbar-book.png");
+}
