@@ -24,6 +24,7 @@ import { AuthGuard } from './Core/auth.guard';
 import { SocialPageComponent } from './social-page/social-page.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FormPersonComponent } from './form-person/form-person.component';
+import { PerfilComponent } from './perfil/perfil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { FormPersonComponent } from './form-person/form-person.component';
     SocialPageComponent,
     ForgotPasswordComponent,
     FormPersonComponent,
+    PerfilComponent,
     
   ],
   imports: [
