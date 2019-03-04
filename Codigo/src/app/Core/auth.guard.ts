@@ -13,7 +13,7 @@ import {AuthService} from '../Core/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  public a: number;
+  public a: String;
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate {
          if (!authenticated) {
            this.router.navigate(['/login']);
            
-         }else if( this.a == 1){
+         }else if( this.a == "1"){
           this.router.navigate(['/form-person']);
 
          }
