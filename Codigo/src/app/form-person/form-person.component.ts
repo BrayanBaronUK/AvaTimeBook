@@ -16,8 +16,12 @@ export class FormPersonComponent implements OnInit {
 
   onClickValidar() {
     this.authService.setParametro(1);
-  }
-  onClickNoValidar() {
-    this.authService.setParametro(0);
+    try{
+      if(this.authService.getParameto() == "1"){
+        console.log("falta completar");
+      }
+    }catch{
+      console.log("registro completado");
+    }
   }
 }
