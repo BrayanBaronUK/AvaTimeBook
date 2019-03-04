@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service'
-import { Router, Params } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 import {FlashMessagesService} from 'angular2-flash-messages';
 
 @Component({
