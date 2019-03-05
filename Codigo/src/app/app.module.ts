@@ -51,6 +51,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     ReactiveFormsModule,
     FormsModule,
     FlashMessagesModule,
+    AngularFireStorageModule,
+   
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService],
   bootstrap: [AppComponent]

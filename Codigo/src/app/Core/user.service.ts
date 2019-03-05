@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { defineBase } from '@angular/core/src/render3';
 //END OF CCSANCHEZC 15/02/20197:44
 @Injectable({
   providedIn: 'root'
@@ -37,4 +38,20 @@ export class UserService {
       }, err => reject(err))
     })
   }
+  createPefil(data: {nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string}){
+    return this.db.collection('perfil').add(data);
+  }
+
+  updatePerfil(documentId: string, data:any){
+    return this.db.collection('perfil').doc(documentId).set(data);
+  }
+
+  public getPerfil(documentId: string){
+    return this.db.collection('perfil').doc(documentId).snapshotChanges();
+  }
+
+  public getPerfiles(){
+    return this.db.collection('perfil').snapshotChanges();
+  }
+
 }
