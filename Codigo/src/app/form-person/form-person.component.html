@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+
 <body>
-  <div style="text-align : center">
+  <div class="col-md-12" style="text-align : center">
     <h1>Completar Perfil</h1>
     <form>
       <div class="col-md-12">
         <div class="col-md-6">
-          <label>Nombre</label>
+          <h4>Nombre</h4>
           <input type="Nombre" class="form-control" id="Nombre" placeholder="Nombre">
         </div>
         <div class="col-md-6">
-          <label>Apellido</label>
+          <h4>Apellido</h4>
           <input type="Apellido" class="form-control" id="Apellido" placeholder="Apellido">
         </div>
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <h4>Género</h4>
+          <label class="checkbox-inline"><input type="checkbox" value="">Masculino</label>
+          <label class="checkbox-inline"><input type="checkbox" value="">Femenino</label>
+        </div>
+        <div class="col-md-6">
+          <label for="sel1">
+            <h4>Edad</h4>
+          </label>
+          <select class="form-control" id="sel1">
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlSelect2">Example multiple select</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <h4>Celular</h4>
+          <input type="Celular" class="form-control" id="Celular" placeholder="Celular">
+        </div>
+        <div class="col-md-6">
+          <h4>Nacionalidad</h4>
+          <input type="Nacionalidad" class="form-control" id="Nacionalidad" placeholder="Nacionalidad">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <h4>Subir imagen</h4>
+          <input class="form-control" placeholder="Cargar imagen">
+        </div>
+
+      </div>
+      <div class=" col-md-12 form-group">
+        <div class="col-md-12">
+          <label for="exampleFormControlTextarea1">Escribe tus Gustos</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
       </div>
       <div style="text-align : center">
-        <button class="btn btn-primary btn-block btn-lg" (click)="onClickValidar()" style="">Guardar</button>
+        <button class="btn btn-primary btn-block btn-lg" (click)="onClickValidar()">Guardar</button>
       </div>
 
     </form>
-
 
   </div>
 </body>
