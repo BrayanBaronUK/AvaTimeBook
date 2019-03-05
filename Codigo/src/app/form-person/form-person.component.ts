@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from '../Core/auth.guard';
-import { UserService} from '../Core/user.service';
+import { UserService } from '../Core/user.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { text } from '@angular/core/src/render3';
+import { prefillHostVars } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-form-person',
@@ -15,7 +17,9 @@ export class FormPersonComponent implements OnInit {
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
 
-  public perfiles =[];
+  public perfiles = [];
+  public documentId = null;
+  public currentStatus = 1;
 
   constructor(
     public authService: AuthGuard,
@@ -24,6 +28,7 @@ export class FormPersonComponent implements OnInit {
 
   ) {
     this.newperfilForm.setValue({
+      id: '',
       nombre: '',
       apellido: '',
       genero: '',
@@ -34,6 +39,7 @@ export class FormPersonComponent implements OnInit {
     });
   }
   public newperfilForm = new FormGroup({
+    id: new FormControl(''),
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     genero: new FormControl('', Validators.required),
@@ -45,8 +51,8 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
-    this.UserServices.getPerfiles().subscribe((perfilesSnapshot) =>
-    {
+    //se instacia y se obtiene la informacion completa de firebase
+    this.UserServices.getPerfiles().subscribe((perfilesSnapshot) => {
       this.perfiles = [];
       perfilesSnapshot.forEach((perfilData: any) => {
         this.perfiles.push({
@@ -89,16 +95,22 @@ export class FormPersonComponent implements OnInit {
       console.log("registro completado");
     }
   }
- /* public newPerfil(form, documentId = this.documentId) {
+  public newPerfil(form, documentId = this.documentId) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
       let data = {
         nombre: form.nombre,
-        url: form.url
+        apellido: form.apellido,
+        genero: form.genero,
+        edad: form.edad,
+        celular: form.celular,
+        nacionalidad: form.nacionalidad,
+        text: form.text
       }
       this.UserServices.createPefil(data).then(() => {
         console.log('Documento creado exitósamente!');
         this.newperfilForm.setValue({
+          id:'',
           nombre: '',
           apellido: '',
           genero: '',
@@ -112,12 +124,19 @@ export class FormPersonComponent implements OnInit {
       });
     } else {
       let data = {
+        
         nombre: form.nombre,
-        url: form.url
+        apellido: form.apellido,
+        genero: form.genero,
+        edad: form.edad,
+        celular: form.celular,
+        nacionalidad: form.nacionalidad,
+        text: form.text
       }
-      this.UserServices.updatePerfil().then(() => {
+      this.UserServices.updatePerfil(documentId, data).then(() => {
         this.currentStatus = 1;
         this.newperfilForm.setValue({
+          id:'',
           nombre: '',
           apellido: '',
           genero: '',
@@ -131,5 +150,19 @@ export class FormPersonComponent implements OnInit {
         console.log(error);
       });
     }
-  }*/
+  }
+
+  public editarperfil(documentId) {
+    let editSubscribe = this.UserServices.getPerfil(documentId).subscribe((perfil) => {
+      this.currentStatus = 2;
+      this.documentId = documentId;
+      this.newperfilForm.setValue({
+        id:documentId,
+        nombre: perfil.payload.data(),
+        Apellido: perfil.payload.data(),
+        
+      })
+      editSubscribe.unsubscribe();
+    });
+  }
 }
