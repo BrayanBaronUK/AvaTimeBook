@@ -40,12 +40,12 @@ export class FormPersonComponent implements OnInit {
   }
   public newperfilForm = new FormGroup({
     id: new FormControl(''),
-    nombre: new FormControl('', Validators.required),
-    apellido: new FormControl('', Validators.required),
-    genero: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required),
-    celular: new FormControl('', Validators.required),
-    nacionalidad: new FormControl('', Validators.required),
+    nombre: new FormControl(null, Validators.required),
+    apellido: new FormControl(null, Validators.required),
+    genero: new FormControl(null, Validators.required),
+    edad: new FormControl(null, Validators.required),
+    celular: new FormControl(null, Validators.required),
+    nacionalidad: new FormControl(null, Validators.required),
     text: new FormControl('')
   })
   onSubmit() {
