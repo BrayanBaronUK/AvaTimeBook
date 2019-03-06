@@ -16,18 +16,22 @@ export class UserService {
     public afAuth: AngularFireAuth
   ) { }
 
-  getCurrentUser(){
+  getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function(user){
+      var user = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           resolve(user);
+          return user.uid;
         } else {
           reject('No user logged in');
         }
       })
     })
   }
-  updateCurrentUser(value){
+  getIud() {
+    return firebase.auth().currentUser.uid;
+  }
+  updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
       var user = firebase.auth().currentUser;
       user.updateProfile({
@@ -38,20 +42,20 @@ export class UserService {
       }, err => reject(err))
     })
   }
-  createPefil(data: {nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string}){
-    return this.db.collection('perfil').add(data);
+  createPefil(data: { nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
+    console.log(this.getIud());
+    return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
 
-  updatePerfil(documentId: string, data:any){
+  updatePerfil(documentId: string, data: any) {
     return this.db.collection('perfil').doc(documentId).set(data);
   }
 
-  public getPerfil(documentId: string){
+  public getPerfil(documentId: string) {
     return this.db.collection('perfil').doc(documentId).snapshotChanges();
   }
 
-  public getPerfiles(){
+  public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
-
 }
