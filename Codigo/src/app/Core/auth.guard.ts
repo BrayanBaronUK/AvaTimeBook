@@ -13,7 +13,7 @@ import {AuthService} from '../Core/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  public a: String;
+  public a: String= "1";
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,

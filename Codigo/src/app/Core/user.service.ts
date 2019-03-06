@@ -42,11 +42,12 @@ export class UserService {
       }, err => reject(err))
     })
   }
-  createPefil(data: { nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
-    console.log(this.getIud());
+  createPefil(data: {nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
+   // trae iud de usuario login console.log(this.getIud());
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
 
+<<<<<<< HEAD
   createPefilview() {
     console.log(this.getIud());
     return this.db.collection('perfil').doc(this.getIud())
@@ -55,6 +56,10 @@ export class UserService {
 
   updatePerfil(documentId: string, data: any) {
     return this.db.collection('perfil').doc(documentId).set(data);
+=======
+  updatePerfil(data: any) {
+    return this.db.collection('perfil').doc(this.getIud()).set(data);
+>>>>>>> b567d0f7015ce71ef6428702996ae20eaf338740
   }
 
   public getPerfil(documentId: string) {

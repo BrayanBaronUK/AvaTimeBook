@@ -4,8 +4,9 @@ import { UserService } from '../Core/user.service';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { text } from '@angular/core/src/render3';
-import { prefillHostVars } from '@angular/core/src/render3/instructions';
+import { Router } from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-form-person',
@@ -18,14 +19,14 @@ export class FormPersonComponent implements OnInit {
   uploadURL: Observable<string>;
 
   public perfiles = [];
-  public documentId = null;
   public currentStatus = 1;
 
   constructor(
     public authService: AuthGuard,
     private _storage: AngularFireStorage,
-    public UserServices: UserService
-
+    public UserServices: UserService,
+    public router: Router,
+    public flashMensaje: FlashMessagesService
   ) {
     this.newperfilForm.setValue({
       id: '',
@@ -33,20 +34,31 @@ export class FormPersonComponent implements OnInit {
       apellido: '',
       genero: '',
       edad: '',
+      url: '',
       celular: '',
       nacionalidad: '',
-      text: ''
+      text: '',
+      nombre_libro: '',
+      autor_libro: '',
+      text_libro: '',
+      url_libro: ''
+
     });
   }
   public newperfilForm = new FormGroup({
     id: new FormControl(''),
-    nombre: new FormControl(null, Validators.required),
-    apellido: new FormControl(null, Validators.required),
-    genero: new FormControl(null, Validators.required),
-    edad: new FormControl(null, Validators.required),
-    celular: new FormControl(null, Validators.required),
-    nacionalidad: new FormControl(null, Validators.required),
-    text: new FormControl('')
+    nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+    apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+    url: new FormControl(null),
+    genero: new FormControl(Validators.required, Validators.required),
+    edad: new FormControl(Validators.required, Validators.required),
+    celular: new FormControl(Validators.required, Validators.required),
+    nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+    text: new FormControl(''),
+    nombre_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
+    autor_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
+    text_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
+    url_libro: new FormControl(null)
   })
   onSubmit() {
   }
@@ -69,7 +81,7 @@ export class FormPersonComponent implements OnInit {
     // Generate a random ID
     const randomId = Math.random().toString(36).substring(2);
     console.log(randomId);
-    const filepath = `images/${randomId}`;
+    const filepath = `/${randomId}`;
 
     const fileRef = this._storage.ref(filepath);
 
@@ -85,20 +97,18 @@ export class FormPersonComponent implements OnInit {
     ).subscribe();
   }
 
+
   onClickValidar() {
-    this.authService.setParametro(1);
-    try {
-      if (this.authService.getParameto() == "1") {
-        console.log("falta completar");
-      }
-    } catch{
-      console.log("registro completado");
-    }
+    this.authService.setParametro(2);
   }
+<<<<<<< HEAD
 
 
   
   public newPerfil(form, documentId = this.documentId) {
+=======
+  public newPerfil(form) {
+>>>>>>> b567d0f7015ce71ef6428702996ae20eaf338740
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
       let data = {
@@ -106,22 +116,32 @@ export class FormPersonComponent implements OnInit {
         apellido: form.apellido,
         genero: form.genero,
         edad: form.edad,
+        url: form.url,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
-        text: form.text
+        text: form.text,
+        nombre_libro: form.nombre_libro,
+        autor_libro: form.autor_libro,
+        text_libro: form.text_libro,
+        url_libro: form.url_libro
       }
       this.UserServices.createPefil(data).then(() => {
-        console.log('Documento creado exitósamente!');
         this.newperfilForm.setValue({
-          id:'',
+          id: '',
           nombre: '',
           apellido: '',
           genero: '',
           edad: '',
+          url: '',
           celular: '',
           nacionalidad: '',
-          text: ''
+          text: '',
+          nombre_libro: '',
+          autor_libro: '',
+          text_libro: '',
+          url_libro: ''
         });
+<<<<<<< HEAD
 
 
 
@@ -129,49 +149,14 @@ export class FormPersonComponent implements OnInit {
       //    console.log('Documento creado exitósamente!', resp);})
         
         }, (error) => {
+=======
+        this.flashMensaje.show('Información Cargada correctamente.',
+        {cssClass: 'alert-success', timeout: 4000});
+        this.router.navigate(['/social']);
+      }, (error) => {
+>>>>>>> b567d0f7015ce71ef6428702996ae20eaf338740
         console.error(error);
       });
-    } else {
-      let data = {
-        
-        nombre: form.nombre,
-        apellido: form.apellido,
-        genero: form.genero,
-        edad: form.edad,
-        celular: form.celular,
-        nacionalidad: form.nacionalidad,
-        text: form.text
-      }
-      this.UserServices.updatePerfil(documentId, data).then(() => {
-        this.currentStatus = 1;
-        this.newperfilForm.setValue({
-          id:'',
-          nombre: '',
-          apellido: '',
-          genero: '',
-          edad: '',
-          celular: '',
-          nacionalidad: '',
-          text: ''
-        });
-        console.log('Documento editado exitósamente');
-      }, (error) => {
-        console.log(error);
-      });
-    }
-  }
-
-  public editarperfil(documentId) {
-    let editSubscribe = this.UserServices.getPerfil(documentId).subscribe((perfil) => {
-      this.currentStatus = 2;
-      this.documentId = documentId;
-      this.newperfilForm.setValue({
-        id:documentId,
-        nombre: perfil.payload.data(),
-        Apellido: perfil.payload.data(),
-        
-      })
-      editSubscribe.unsubscribe();
-    });
+    } 
   }
 }
