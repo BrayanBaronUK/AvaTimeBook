@@ -33,4 +33,6 @@ export class PerfilComponent implements OnInit {
     // let nombreFoto= $event.target.files[0].name;
   }
 
+  
+
 }

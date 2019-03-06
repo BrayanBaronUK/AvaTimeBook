@@ -95,6 +95,9 @@ export class FormPersonComponent implements OnInit {
       console.log("registro completado");
     }
   }
+
+
+  
   public newPerfil(form, documentId = this.documentId) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
@@ -119,7 +122,13 @@ export class FormPersonComponent implements OnInit {
           nacionalidad: '',
           text: ''
         });
-      }, (error) => {
+
+
+
+    //    this.UserServices.createPefilview().subscribe(  resp =>{
+      //    console.log('Documento creado exitósamente!', resp);})
+        
+        }, (error) => {
         console.error(error);
       });
     } else {
