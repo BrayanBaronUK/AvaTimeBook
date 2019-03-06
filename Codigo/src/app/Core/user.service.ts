@@ -47,8 +47,8 @@ export class UserService {
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
 
-  updatePerfil(documentId: string, data: any) {
-    return this.db.collection('perfil').doc(documentId).set(data);
+  updatePerfil(data: any) {
+    return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
 
   public getPerfil(documentId: string) {

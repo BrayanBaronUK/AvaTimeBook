@@ -15,15 +15,15 @@ const routes: Routes = [];
 //BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: HomePageComponent },
+  { path: '', component: HomePageComponent,canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // { path: 'user', component: UserComponent,  resolve: { data: UserResolver }}
   { path: 'user', component: UserComponent },
   { path: 'social', component: SocialPageComponent, canActivate: [AuthGuard] },
-  { path: 'forgot', component: ForgotPasswordComponent },
-  { path: 'form-person', component: FormPersonComponent, },
-  { path: 'perfil', component: PerfilComponent, },
+  { path: 'forgot', component: ForgotPasswordComponent},
+  { path: 'form-person', component: FormPersonComponent},
+  { path: 'perfil', component: PerfilComponent,canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
 
 ];
