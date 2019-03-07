@@ -63,16 +63,6 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
-    //se instacia y se obtiene la informacion completa de firebase
-    this.UserServices.getPerfiles().subscribe((perfilesSnapshot) => {
-      this.perfiles = [];
-      perfilesSnapshot.forEach((perfilData: any) => {
-        this.perfiles.push({
-          id: perfilData.payload.doc.id,
-          data: perfilData.payload.doc.data()
-        });
-      })
-    });
   }
   upload(event) {
     // Get input file
@@ -101,14 +91,7 @@ export class FormPersonComponent implements OnInit {
   onClickValidar() {
     this.authService.setParametro(2);
   }
-<<<<<<< HEAD
-
-
-  
-  public newPerfil(form, documentId = this.documentId) {
-=======
   public newPerfil(form) {
->>>>>>> b567d0f7015ce71ef6428702996ae20eaf338740
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
       let data = {
@@ -141,22 +124,17 @@ export class FormPersonComponent implements OnInit {
           text_libro: '',
           url_libro: ''
         });
-<<<<<<< HEAD
-
-
-
-    //    this.UserServices.createPefilview().subscribe(  resp =>{
-      //    console.log('Documento creado exitósamente!', resp);})
-        
-        }, (error) => {
-=======
         this.flashMensaje.show('Información Cargada correctamente.',
         {cssClass: 'alert-success', timeout: 4000});
         this.router.navigate(['/social']);
       }, (error) => {
->>>>>>> b567d0f7015ce71ef6428702996ae20eaf338740
         console.error(error);
       });
     } 
+  }
+
+  
+  informacionUsuario(){
+    console.log(this.UserServices.getPerfil());
   }
 }
