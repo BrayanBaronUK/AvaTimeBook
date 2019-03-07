@@ -27,12 +27,15 @@ export class NavbarComponent implements OnInit {
         this.nombreUsuario = auth.displayName;
         this.emailUsuario = auth.email;
         this.fotoUsuario = auth.photoURL;
+        if (this.fotoUsuario == null){
+
+          this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
+        }
       } else {
-        this.isLogin = false;
-      //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
-        
+           this.isLogin = false;
+           //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
+        }
       }
-    }
     );
   }
   onClickLogout() {

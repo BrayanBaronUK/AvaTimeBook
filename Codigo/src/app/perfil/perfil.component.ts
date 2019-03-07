@@ -14,6 +14,10 @@ export class PerfilComponent implements OnInit {
     this.foto='http://ssl.gstatic.com/accounts/ui/avatar_2x.png';
    }
 
+
+   
+
+
   ngOnInit() {
   }
 
