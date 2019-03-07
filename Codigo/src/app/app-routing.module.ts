@@ -10,21 +10,30 @@ import { SocialPageComponent } from '../app/social-page/social-page.component';
 import { ForgotPasswordComponent } from '../app/forgot-password/forgot-password.component';
 import { FormPersonComponent } from '../app/form-person/form-person.component';
 import { PerfilComponent } from '../app/perfil/perfil.component';
+<<<<<<< HEAD
 import { LibrosComponent } from '../app/libros/libros.component';
+=======
+
+
+>>>>>>> cesar
 const routes: Routes = [];
 //BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: HomePageComponent,canActivate: [AuthGuard] },
+  { path: '', component: HomePageComponent,},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // { path: 'user', component: UserComponent,  resolve: { data: UserResolver }}
   { path: 'user', component: UserComponent },
-  { path: 'social', component: SocialPageComponent, canActivate: [AuthGuard] },
+  { path: 'social', component: SocialPageComponent },//,canActivate: [AuthGuard] 
   { path: 'forgot', component: ForgotPasswordComponent},
   { path: 'form-person', component: FormPersonComponent},
+<<<<<<< HEAD
   { path: 'perfil', component: PerfilComponent,canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent,canActivate: [AuthGuard] },
+=======
+  { path: 'perfil', component: PerfilComponent,},
+>>>>>>> cesar
   { path: '**', component: NotFoundComponent },
 
 ];
