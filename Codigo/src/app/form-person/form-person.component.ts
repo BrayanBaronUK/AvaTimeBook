@@ -20,13 +20,14 @@ export class FormPersonComponent implements OnInit {
 
   public perfiles = [];
   public currentStatus = 1;
+  userFirebase
 
   constructor(
     public authService: AuthGuard,
     private _storage: AngularFireStorage,
     public UserServices: UserService,
     public router: Router,
-    public flashMensaje: FlashMessagesService
+    public flashMensaje: FlashMessagesService,
   ) {
     this.newperfilForm.setValue({
       id: '',
@@ -63,6 +64,7 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
+   
   }
   upload(event) {
     // Get input file
@@ -132,9 +134,6 @@ export class FormPersonComponent implements OnInit {
       });
     } 
   }
+ 
 
-  
-  informacionUsuario(){
-    console.log(this.UserServices.getPerfil());
-  }
 }
