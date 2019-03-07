@@ -27,7 +27,7 @@
     <div class="container bootstrap snippet">
         <div class="row">
             <div class="col-sm-10">
-                <h1>BRAYANBOOK66</h1>
+                <h1>{{userFirebase.nombre}}</h1>
             </div>
 
         </div>
@@ -37,19 +37,18 @@
 
 
                 <div class="text-center">
-                    <img [src]="foto" class="avatar img-circle img-thumbnail fotoprueba"
+                    <img [src]="userFirebase.url" class="avatar img-circle img-thumbnail fotoprueba"
                         alt="avatar"> 
-                    <h6>Cargue una foto de perfil...</h6>
-                    <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload">
+                    <h6>Cambie foto...</h6>
+                    <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload" value="Cambiar foto">
                 </div><br>
 
 
                 <div class="panel panel-default">
                     <div class="panel-heading">intereses<i class="fa fa-link fa-1x"></i></div>
-                    <div class="panel-body"><a>Me interesa los libros de accion y drama, tambien los de comedia y de
-                            mucho terror.Agradezco los
-                            libros en buen estado
-                        </a></div>
+                    <div class="panel-body">
+                        {{userFirebase.text}}
+                    </div>
                 </div>
 
 
