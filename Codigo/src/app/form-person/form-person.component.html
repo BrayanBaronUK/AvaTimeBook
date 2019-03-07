@@ -84,6 +84,7 @@
         <div class="col-md-12" style="text-align : center; margin-top: 1%">
           <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newperfilForm.valid"
             value="Agregar" (click)="onClickValidar()">Guardar</button>
+            <button (click)="informacionUsuario()">mostrar</button>
         </div>
       </div>
 
@@ -94,10 +95,11 @@
    
     <div class="media" *ngFor="let perfil of perfiles">
       <div class="media-body">
-        <p>{{perfil.data.nombre}}</p>
+        <p>{{perfil.nombre}}</p>
         <div>{{ uploadProgress | async }}</div>
         <a [href]="uploadURL | async">{{ uploadURL | async }}</a>
       </div>
+      
     </div>
 
   </div>

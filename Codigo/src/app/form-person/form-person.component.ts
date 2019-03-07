@@ -63,16 +63,6 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
-    //se instacia y se obtiene la informacion completa de firebase
-    this.UserServices.getPerfiles().subscribe((perfilesSnapshot) => {
-      this.perfiles = [];
-      perfilesSnapshot.forEach((perfilData: any) => {
-        this.perfiles.push({
-          id: perfilData.payload.doc.id,
-          data: perfilData.payload.doc.data()
-        });
-      })
-    });
   }
   upload(event) {
     // Get input file
@@ -141,5 +131,10 @@ export class FormPersonComponent implements OnInit {
         console.error(error);
       });
     } 
+  }
+
+  
+  informacionUsuario(){
+    console.log(this.UserServices.getPerfil());
   }
 }
