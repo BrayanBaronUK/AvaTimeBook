@@ -1,27 +1,31 @@
-body {
-    background-color: #eeeeee;
-}
-
-.h7 {
-    font-size: 0.8rem;
-}
-
-.gedf-wrapper {
-    margin-top: 0.97rem;
-}
-
-@media (min-width: 992px) {
-    .gedf-main {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-    .gedf-card {
-        margin-bottom: 2.77rem;
-    }
-}
-
-/**Reset Bootstrap*/
-.dropdown-toggle::after {
-    content: none;
-    display: none;
-}
+/* Structure */
+.space {
+    flex: 1 1 auto
+  }
+  
+  table {
+    width: 90%;
+  }
+  
+  table th {
+    font-weight: bolder;
+    color: black
+  }
+  
+  .mat-form-field {
+    font-size: inherit;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+  
+  }
+  
