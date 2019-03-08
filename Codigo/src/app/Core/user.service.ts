@@ -47,19 +47,8 @@ export class UserService {
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
 
-<<<<<<< HEAD
-  createPefilview() {
-    console.log(this.getIud());
-    return this.db.collection('perfil').doc(this.getIud())
-    
-  }
-
-  updatePerfil(documentId: string, data: any) {
-    return this.db.collection('perfil').doc(documentId).set(data);
-=======
   updatePerfil(data: any) {
     return this.db.collection('perfil').doc(this.getIud()).set(data);
->>>>>>> cesar
   }
 
   public getPerfil() {

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   MatToolbarModule,
-  MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
   MatGridListModule,
@@ -16,12 +15,13 @@ import {
   MatMenuModule,
   MatListModule,
   MatPaginatorModule,
-  MatTableDataSource,
+  
   MatTableModule,
   MatColumnDef,
   MatProgressBarModule,
-  MatSortModule
-} from '@angular/material';
+  MatSortModule,
+  MatFormFieldModule
+} from '@angular/material'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
@@ -43,8 +43,10 @@ import { AuthGuard } from './Core/auth.guard';
 import { SocialPageComponent } from './social-page/social-page.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FormPersonComponent } from './form-person/form-person.component';
+ 
 import { PerfilComponent } from './perfil/perfil.component';
 import { LibrosComponent } from './libros/libros.component';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,9 +59,11 @@ import { LibrosComponent } from './libros/libros.component';
     SocialPageComponent,
     ForgotPasswordComponent,
     FormPersonComponent,
+ 
     PerfilComponent,
+ 
     LibrosComponent,
-    
+  
   ],
   imports: [
     BrowserModule,
@@ -89,6 +93,9 @@ import { LibrosComponent } from './libros/libros.component';
     MatButtonModule,
     MatCardModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    
+    
    
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService],
