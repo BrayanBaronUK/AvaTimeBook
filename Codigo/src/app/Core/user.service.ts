@@ -46,20 +46,12 @@ export class UserService {
    // trae iud de usuario login console.log(this.getIud());
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
-
-<<<<<<< HEAD
-  createPefilview() {
-    console.log(this.getIud());
-    return this.db.collection('perfil').doc(this.getIud())
-    
+  createLibro(data: {nombre_libro: string, autor_libro: string, categoria_libro:string, text_libro:string}){
+    return this.db.collection('libro').doc(this.getIud()).set(data)
   }
 
-  updatePerfil(documentId: string, data: any) {
-    return this.db.collection('perfil').doc(documentId).set(data);
-=======
   updatePerfil(data: any) {
     return this.db.collection('perfil').doc(this.getIud()).set(data);
->>>>>>> cesar
   }
 
   public getPerfil() {

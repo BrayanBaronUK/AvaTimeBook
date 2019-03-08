@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
@@ -18,7 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!---<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -37,10 +34,10 @@
 
 
                 <div class="text-center">
-                    <img [src]="userFirebase.url" class="avatar img-circle img-thumbnail fotoprueba"
-                        alt="avatar"> 
+                    <img [src]="userFirebase.url" class="avatar img-circle img-thumbnail fotoprueba" alt="avatar">
                     <h6>Cambie foto...</h6>
-                    <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload" value="Cambiar foto">
+                    <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload"
+                        value="Cambiar foto">
                 </div><br>
 
 
@@ -67,129 +64,20 @@
                     <div class="panel-heading">Redes sociales</div>
                     <div class="panel-body">
                         <a class="fa fa-facebook fa-2x" href="https://www.facebook.com" target="_blank"></a>
-                         <a class="fa fa-github fa-2x" href="https://github.com/" target="_blank"></a>
-                         <a class="fa fa-twitter fa-2x" href="https://twitter.com/" target="_blank"></a> 
-                         <a class="fa fa-pinterest fa-2x" href="https://www.pinterest.es/" target="_blank"></a> 
-                         <a class="fa fa-google-plus fa-2x" href="https://gmail.com/" target="_blank"></a>
+                        <a class="fa fa-github fa-2x" href="https://github.com/" target="_blank"></a>
+                        <a class="fa fa-twitter fa-2x" href="https://twitter.com/" target="_blank"></a>
+                        <a class="fa fa-pinterest fa-2x" href="https://www.pinterest.es/" target="_blank"></a>
+                        <a class="fa fa-google-plus fa-2x" href="https://gmail.com/" target="_blank"></a>
                     </div>
                 </div>
 
             </div>
             <!--/col-3-->
-            <div class="col-sm-9">
-
-
-
-                <div class="tab-content">
-                    <div class="tab-pane active" id="home">
-
-                        <form class="form" action="##" method="post" id="registrationForm">
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="first_name">
-                                        <h4>Nombres</h4>
-                                    </label>
-                                    <input type="text" class="form-control" name="first_name" id="first_name"
-                                        placeholder="Brayan" title="enter your first name if any.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="last_name">
-                                        <h4>Apellidos</h4>
-                                    </label>
-                                    <input type="text" class="form-control" name="last_name" id="last_name"
-                                        placeholder="Baron" title="enter your last name if any.">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="phone">
-                                        <h4>Telefono</h4>
-                                    </label>
-                                    <input type="text" class="form-control" name="phone" id="phone"
-                                        placeholder="4810677" title="enter your phone number if any.">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <label for="mobile">
-                                        <h4>Genero</h4>
-                                    </label>
-                                    <input type="text" class="form-control" name="mobile" id="mobile"
-                                        placeholder="3507105174" title="enter your mobile number if any.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="email">
-                                        <h4>correo</h4>
-                                    </label>
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="brancholeon.baron@gmail.com" title="enter your email.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="email">
-                                        <h4>Domicilio</h4>
-                                    </label>
-                                    <input type="email" class="form-control" id="location" placeholder="Bogotá"
-                                        title="enter a location">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="password">
-                                        <h4>contraseña</h4>
-                                    </label>
-                                    <input type="password" class="form-control" name="password" id="password"
-                                        placeholder="password" title="enter your password.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="password2">
-                                        <h4>verificar</h4>
-                                    </label>
-                                    <input type="password" class="form-control" name="password2" id="password2"
-                                        placeholder="password2" title="enter your password2.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <br>
-                                    <button class="btn btn-lg btn-success" type="submit"><i
-                                            class="glyphicon glyphicon-ok-sign"></i>Guardar</button>
-                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
-                                        resetear</button>
-                                </div>
-                            </div>
-                        </form>
-
-
-                    </div>
-                    <!--/tab-pane-->
-
-                </div>
-                <!--/tab-pane-->
-            </div>
-            <!--/tab-content-->
-
         </div>
         <!--/col-9-->
     </div>
     <!--/row-->
-   
+
 </body>
 
 </html>

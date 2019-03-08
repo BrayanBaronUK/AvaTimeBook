@@ -45,6 +45,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { FormPersonComponent } from './form-person/form-person.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LibrosComponent } from './libros/libros.component';
+import { CrearLibroComponent } from './crear-libro/crear-libro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { LibrosComponent } from './libros/libros.component';
     FormPersonComponent,
     PerfilComponent,
     LibrosComponent,
+    CrearLibroComponent,
     
   ],
   imports: [
