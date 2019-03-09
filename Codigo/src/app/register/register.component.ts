@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     .then((res) => {
       this.flashMensaje.show('Usuario creado correctamente.',
       {cssClass: 'alert-success', timeout: 4000});
-     this.router.navigate(['/crearlibro']);
+     this.router.navigate(['/form-person']);
     }).catch( (err) => {
       debugger;
       this.flashMensaje.show( 'Error:' && err.message,

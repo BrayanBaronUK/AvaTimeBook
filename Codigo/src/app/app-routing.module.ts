@@ -24,7 +24,7 @@ export const rootRouterConfig: Routes = [
   { path: 'social', component: SocialPageComponent },//,canActivate: [AuthGuard] 
   { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'form-person', component: FormPersonComponent },
-  { path: 'crearlibro', component: CrearLibroComponent },
+  { path: 'crearlibro', component: CrearLibroComponent,canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
