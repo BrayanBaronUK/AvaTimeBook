@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../Core/user.service';
-
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from 'angularfire2/storage';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -8,9 +9,14 @@ import { UserService } from '../Core/user.service';
 })
 export class PerfilComponent implements OnInit {
 
+  uploadProgress: Observable<number>;
+  uploadURL: Observable<string>;
   private foto: string;
   userFirebase
-  constructor(public UserServices: UserService) {
+  constructor(
+    public UserServices: UserService,
+    private _storage: AngularFireStorage
+  ) {
     //this.foto = this.userFirebase.nombre;
   }
 
@@ -38,22 +44,43 @@ export class PerfilComponent implements OnInit {
   }
 
 
-subirFoto($event: any){
+  subirFoto($event: any) {
 
-  let fileReader = new FileReader();
-  //let ruta= fileReader.readAsDataURL($event.target.files[0])
-  //  console.log("rtua", ruta)
-  // this.foto= ruta;
-  fileReader.onload = ($event: any) => {
-    this.foto = $event.target.result;
+    let fileReader = new FileReader();
+    //let ruta= fileReader.readAsDataURL($event.target.files[0])
+    //  console.log("rtua", ruta)
+    // this.foto= ruta;
+    fileReader.onload = ($event: any) => {
+      this.foto = $event.target.result;
 
+    }
+    fileReader.readAsDataURL($event.target.files[0])
+
+
+    // let nombreFoto= $event.target.files[0].name;
   }
-  fileReader.readAsDataURL($event.target.files[0])
+  upload(event) {
+    // Get input file
+    const file = event.target.files[0];
 
+    // Generate a random ID
+    const randomId = Math.random().toString(36).substring(2);
+    console.log(randomId);
+    const filepath = `/${randomId}`;
 
-  // let nombreFoto= $event.target.files[0].name;
-}
+    const fileRef = this._storage.ref(filepath);
 
-  
+    // Upload image
+    const task = this._storage.upload(filepath, file);
+
+    // Observe percentage changes
+    this.uploadProgress = task.percentageChanges();
+
+    // Get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      (() => this.uploadURL = fileRef.getDownloadURL())
+    ).subscribe();
+  }
+
 
 }

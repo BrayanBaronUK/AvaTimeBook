@@ -35,7 +35,7 @@
 
                 <div class="text-center">
                     <img [src]="userFirebase.url" class="avatar img-circle img-thumbnail fotoprueba" alt="avatar">
-                    <h6>Cambie foto...</h6>
+                    <h6><a [href]="uploadURL | async">{{ uploadURL| async }}</a></h6>
                     <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload"
                         value="Cambiar foto">
                 </div><br>
