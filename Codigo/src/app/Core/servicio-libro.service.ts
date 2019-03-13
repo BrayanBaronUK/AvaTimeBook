@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-//BEGIND OF CCSANCHEZC 15/02/20197:44
 import 'rxjs/add/operator/toPromise';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { defineBase } from '@angular/core/src/render3';
-//END OF CCSANCHEZC 15/02/20197:44
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ServicioLibroService {
 
   constructor(
     public db: AngularFirestore,
@@ -42,21 +39,10 @@ export class UserService {
       }, err => reject(err))
     })
   }
-  createPefil(data: {nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
-   // trae iud de usuario login console.log(this.getIud());
-   
-    return this.db.collection('perfil').doc(this.getIud()).set(data);
+  createLibro(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string }) {
+    return this.db.collection('libro-persona').doc(this.getIud()).collection("libro").add(data);
   }
-
-  updatePerfil(data: any) {
-    return this.db.collection('perfil').doc(this.getIud()).set(data);
-  }
-
-  public getPerfil() {
-    return this.db.collection('perfil').doc(this.getIud());
-  }
-
-  public getPerfiles() {
-    return this.db.collection('perfil').snapshotChanges();
+  getLibro() {
+    return this.db.collection('libro-persona').doc(this.getIud()).collection("libro").snapshotChanges();
   }
 }

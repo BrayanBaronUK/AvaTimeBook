@@ -3,7 +3,7 @@ import { AuthService } from '../Core/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../Core/user.service';
+import { ServicioLibroService } from '../Core/servicio-libro.service';
 
 @Component({
   selector: 'app-crear-libro',
@@ -14,40 +14,37 @@ export class CrearLibroComponent implements OnInit {
 
   public Libros = [];
   public currentStatus = 1;
-
+  userFirebase
   constructor(
     public authService: AuthService,
     public router: Router,
     public flashMensaje: FlashMessagesService,
-    public UserServices: UserService
+    public UserServices: ServicioLibroService
     ) { 
       this.newlibroForm.setValue({
         nombre_libro: '',
         autor_libro: '',
         categoria_libro: '',
         text_libro:''
-
       })
     }
+    public newlibroForm = new FormGroup({
+      nombre_libro: new FormControl(null,Validators.required),
+      autor_libro: new FormControl(null,Validators.required),
+      categoria_libro: new FormControl(null, Validators.required),
+      text_libro: new FormControl(null,Validators.required)
+    })
 
   ngOnInit() {
   }
-  onSubmitAddUser() {
-
-    this.flashMensaje.show('Información Guardada con exito.',
-      { cssClass: 'alert-success', timeout: 4000 });
-    this.router.navigate(['/social']);
+  onSubmit() {
   }
 
   Siguiente(){
+    console.log(this.UserServices.getLibro());
     this.router.navigate(['/social']);
   }
-  public newlibroForm = new FormGroup({
-    nombre_libro: new FormControl(null,Validators.required),
-    autor_libro: new FormControl(null,Validators.required),
-    categoria_libro: new FormControl(null, Validators.required),
-    text_libro: new FormControl(null,Validators.required)
-  })
+  
 
   public newlibro(form) {
     console.log(`Status: ${this.currentStatus}`);
@@ -65,9 +62,10 @@ export class CrearLibroComponent implements OnInit {
           categoria_libro: '',
           text_libro: ''
         });
+        console.log(this.UserServices.getLibro());
         this.flashMensaje.show('Información Cargada correctamente.',
         {cssClass: 'alert-success', timeout: 4000});
-        this.router.navigate(['/social']);
+        this.router.navigate(['/crearlibro']);
       }, (error) => {
         console.error(error);
       });

@@ -6,72 +6,74 @@
 </head>
 
 <body>
-  <div class="row">
-    <div class="col-md-6 mx-auto mt-5">
-      <div class="card">
-        <div class="card-body">
-          <form (ngSubmit)="newPerfil(newperfilForm.value)" [formGroup]="newperfilForm">
-            <div style="text-justify: center">
-              <h4>Nombre</h4>
-              <input type="Nombre" class="form-control" id="Nombre" placeholder="Nombre" formControlName="nombre">
-            </div>
-            <div>
-              <h4>Apellido</h4>
-              <input type="Apellido" class="form-control" id="Apellido" placeholder="Apellido"
-                formControlName="apellido">
-            </div>
+  <div class="container">
+      <br>
+    <div class="row">
+      <div class="col-md-12" style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+        <h1 style="text-align: center"><b>INFORMACIÓN PERSONAL</b></h1>
+      </div>
+      <div class="col-md-12"
+        style="border-width: 1px; border-style: solid; border-color: lightgrey; background:#282828;">
+            <form (ngSubmit)="newPerfil(newperfilForm.value)" [formGroup]="newperfilForm">
+              <div style="text-justify: center">
+                <h5><b>Nombre:</b></h5>
+                <input  class="form-control" id="Nombre" placeholder="Nombre" formControlName="nombre">
+              </div>
 
-
-            <div>
-              <label for="sel1">
-                <h4>Género</h4>
-              </label>
-              <select class="form-control" id="sel1" formControlName="genero">
-                <option>Masculino</option>
-                <option>Femenino</option>
-              </select>
-            </div>
-            <div>
-              <h4>Edad</h4>
-              <input class="form-control" id="edad" placeholder="Coloque su edad" formControlName="edad">
-            </div>
-
-
-            <div>
-              <h4>Celular</h4>
-              <input type="Celular" class="form-control" id="Celular" placeholder="Celular" formControlName="celular">
-            </div>
-            <div>
-              <h4>Nacionalidad</h4>
-              <input type="Nacionalidad" class="form-control" id="Nacionalidad" placeholder="Nacionalidad"
-                formControlName="nacionalidad">
-            </div>
-
-
-            <div>
-              <h4>Subir imagen</h4>
-              <input style="text-align : center" type="file" (change)="upload($event)" accept="images/*"
-                formControlName="url">
-            </div>
-
-            <div class="form-group">
               <div>
-                <label>
-                  <h4>Escribe tus Gustos</h4>
-                </label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                  formControlName="text"></textarea>
+                <h5><b>Apellido:</b></h5>
+                <input  class="form-control" id="Apellido" placeholder="Apellido" formControlName="apellido">
               </div>
-            </div>
-            <div class="col-md-12">
-              <div class="col-md-12" style="text-align : center; margin-top: 1%">
-                <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newperfilForm.valid"
-                  value="Agregar" (click)="onClickValidar()">Guardar</button>
 
+              <div>
+                <label for="sel1">
+                  <h5><b>Género:</b></h5>
+                </label>
+                <select class="form-control" id="sel1" formControlName="genero">
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
               </div>
-            </div>
-          </form>
-        </div>
+
+              <div>
+                <h5><b>Edad:</b></h5>
+                <input class="form-control" id="edad" placeholder="Coloque su edad" formControlName="edad">
+              </div>
+
+              <div>
+                <h5><b>Celular:</b></h5>
+                <input  class="form-control" id="Celular" placeholder="Celular" formControlName="celular">
+              </div>
+              <div>
+                <h5><b>Nacionalidad:</b></h5>
+                <input type="Nacionalidad" class="form-control" id="Nacionalidad" placeholder="Nacionalidad"
+                  formControlName="nacionalidad">
+              </div>
+
+
+              <div>
+                <h5><b>Subir imagen</b></h5>
+                <input style="text-align : center" type="file" (change)="upload($event)" accept="images/*"
+                  formControlName="url">
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <label>
+                    <h5><b>Escribe tus gustos:</b></h5>
+                  </label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    formControlName="text"></textarea>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="col-md-12" style="text-align : center; margin-top: 1%">
+                  <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newperfilForm.valid"
+                    value="Agregar" (click)="onClickValidar()">Guardar</button>
+
+                </div>
+              </div>
+        </form>
       </div>
     </div>
   </div>
