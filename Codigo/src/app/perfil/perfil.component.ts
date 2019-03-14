@@ -41,9 +41,9 @@ export class PerfilComponent implements OnInit {
 subirFoto($event: any){
 
   let fileReader = new FileReader();
-  //let ruta= fileReader.readAsDataURL($event.target.files[0])
-  //  console.log("rtua", ruta)
-  // this.foto= ruta;
+  //let ruta= fileReader.readAsDataURL($event.target.files[0])//
+ //   console.log("rtua", ruta)//
+  //this.foto= ruta;
   fileReader.onload = ($event: any) => {
     this.foto = $event.target.result;
 
@@ -51,7 +51,7 @@ subirFoto($event: any){
   fileReader.readAsDataURL($event.target.files[0])
 
 
-  // let nombreFoto= $event.target.files[0].name;
+  //let nombreFoto= $event.target.files[0].name;//
 }
 
   
