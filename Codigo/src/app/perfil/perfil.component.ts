@@ -53,8 +53,17 @@ export class PerfilComponent implements OnInit {
     fileReader.onload = ($event: any) => {
       this.foto = $event.target.result;
 
+<<<<<<< HEAD
     }
     fileReader.readAsDataURL($event.target.files[0])
+=======
+  let fileReader = new FileReader();
+  //let ruta= fileReader.readAsDataURL($event.target.files[0])//
+ //   console.log("rtua", ruta)//
+  //this.foto= ruta;
+  fileReader.onload = ($event: any) => {
+    this.foto = $event.target.result;
+>>>>>>> brayan
 
 
     // let nombreFoto= $event.target.files[0].name;
@@ -68,6 +77,7 @@ export class PerfilComponent implements OnInit {
     console.log(randomId);
     const filepath = `/${randomId}`;
 
+<<<<<<< HEAD
     const fileRef = this._storage.ref(filepath);
 
     // Upload image
@@ -81,6 +91,10 @@ export class PerfilComponent implements OnInit {
       (() => this.uploadURL = fileRef.getDownloadURL())
     ).subscribe();
   }
+=======
+  //let nombreFoto= $event.target.files[0].name;//
+}
+>>>>>>> brayan
 
 
 }
