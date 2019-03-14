@@ -10,23 +10,25 @@ import { SocialPageComponent } from '../app/social-page/social-page.component';
 import { ForgotPasswordComponent } from '../app/forgot-password/forgot-password.component';
 import { FormPersonComponent } from '../app/form-person/form-person.component';
 import { PerfilComponent } from '../app/perfil/perfil.component';
-import { LibrosComponent } from '../app/libros/libros.component'
-
+import { LibrosComponent } from '../app/libros/libros.component';
+import { CrearLibroComponent } from '../app/crear-libro/crear-libro.component';
 const routes: Routes = [];
 //BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   //{ path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: HomePageComponent,},
+  { path: '', component: HomePageComponent, },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   // { path: 'user', component: UserComponent,  resolve: { data: UserResolver }}
   { path: 'user', component: UserComponent },
   { path: 'social', component: SocialPageComponent },//,canActivate: [AuthGuard] 
-  { path: 'forgot', component: ForgotPasswordComponent},
-  { path: 'form-person', component: FormPersonComponent},
-  { path: 'perfil', component: PerfilComponent,canActivate: [AuthGuard] },
-  { path: 'libros', component: LibrosComponent,canActivate: [AuthGuard] },
+  { path: 'forgot', component: ForgotPasswordComponent },
+  { path: 'form-person', component: FormPersonComponent },
+  { path: 'crearlibro', component: CrearLibroComponent },
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
+  { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
+  
 
 ];
 //END OF CCSANCHEZC 15/02/2019 7:29
