@@ -32,6 +32,8 @@ export class SocialPageComponent implements OnInit {
       console.log(this.userFirebase = user)
     });
     console.log(this.userFirebase)
+
+    // trae una informacion de libros
       this.Userlibro.getLibro().subscribe((catsSnapshot) => {
         this.libros = [];
         catsSnapshot.forEach((catData: any) => {
