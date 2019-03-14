@@ -1,3 +1,9 @@
 h5{
  color: white;
 }
+button, input{
+    color: white;
+}
+.container{
+    width: 60% !important;
+}

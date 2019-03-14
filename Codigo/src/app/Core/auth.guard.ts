@@ -13,20 +13,13 @@ import {AuthService} from '../Core/auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  public a: String= "1";
+  public a: String;
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
     
   ) {}
-
-  public getParameto(){
-    return this.a;
-  }
-  public setParametro(value){
-    this.a = value;
-  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -37,9 +30,6 @@ export class AuthGuard implements CanActivate {
          if (!authenticated) {
            this.router.navigate(['/login']);
            
-         }else if( this.a == "1"){
-        //  this.router.navigate(['/form-person']);
-
          }
      });
   }

@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
-//BEGIND OF CCSANCHEZC 15/02/20197:44
 import 'rxjs/add/operator/toPromise';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthService} from '../Core/auth.service';
 import * as firebase from 'firebase/app';
-import { defineBase } from '@angular/core/src/render3';
-//END OF CCSANCHEZC 15/02/20197:44
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ServicioComentarioService {
 
+  
   constructor(
     public db: AngularFirestore,
-    public afAuth: AngularFireAuth,
-    public auth: AuthService
+    public afAuth: AngularFireAuth
   ) { }
 
   getCurrentUser() {
@@ -31,10 +27,7 @@ export class UserService {
     })
   }
   getIud() {
-    if(this.auth.getAuth){
-      return firebase.auth().currentUser.uid;
-    }
-    
+    return firebase.auth().currentUser.uid;
   }
   updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -47,21 +40,10 @@ export class UserService {
       }, err => reject(err))
     })
   }
-  createPefil(data: {nombre: string, apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
-   // trae iud de usuario login console.log(this.getIud());
-   
-    return this.db.collection('perfil').doc(this.getIud()).set(data);
+  createComentario(data: { text: string }) {
+    return this.db.collection('perfil').doc(this.getIud()).collection('comentario').add(data);
   }
-
-  updatePerfil(data: any) {
-    return this.db.collection('perfil').doc(this.getIud()).set(data);
-  }
-
-  public getPerfil() {
-    return this.db.collection('perfil').doc(this.getIud());
-  }
-
-  public getPerfiles() {
-    return this.db.collection('perfil').snapshotChanges();
+  getComentario() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('comentario').snapshotChanges();
   }
 }

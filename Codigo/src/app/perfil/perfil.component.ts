@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../Core/user.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { ServicioComentarioService } from '../Core/servicio-comentario.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { $$ } from 'protractor';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -13,15 +16,28 @@ export class PerfilComponent implements OnInit {
   uploadURL: Observable<string>;
   private foto: string;
   userFirebase
+  public userComentario = [];
+  public currentStatus = 1;
   constructor(
     public UserServices: UserService,
-    private _storage: AngularFireStorage
+    private _storage: AngularFireStorage,
+    public UserComentario: ServicioComentarioService,
+
   ) {
-    //this.foto = this.userFirebase.nombre;
+    // this.foto = this.userFirebase.nombre;
+
+    //crea comentario
+    this.newcomentarioForm.setValue({
+      text: ''
+
+    });
   }
-
-
+   //crea comentario
+   public newcomentarioForm = new FormGroup({
+    text: new FormControl('')
+  })
   ngOnInit() {
+    //trae la informacion de usuario
     this.userFirebase = {
       nombre: "",
       apellido: "",
@@ -30,19 +46,33 @@ export class PerfilComponent implements OnInit {
       url: "",
       celular: "",
       nacionalidad: "",
-      text: "",
-      nombre_libro: "",
-      autor_libro: "",
-      text_libro: "",
-      url_libro: ""
+      text: ""
     }
     this.UserServices.getPerfil().valueChanges().subscribe((user) => {
       console.log(this.userFirebase = user)
-
     });
-    console.log(this.userFirebase)
-  }
 
+     //trae todos los comentarios
+     this.UserComentario.getComentario().subscribe((comentario)=> {
+      this.userComentario = [];
+      comentario.forEach((comentariodata: any) =>{
+        this.userComentario.push({
+          id: comentariodata.payload.doc.id,
+          data: comentariodata.payload.doc.data()
+        });
+      });
+    });
+  }
+  MostrarInformacion() {
+    $(document).on('click', '.informacion', function () {
+      document.getElementById("informacion").style.display = "block";
+      document.getElementById("primero").style.display = "none";
+    });
+    $(document).on('click', '.publicaciones', function () {
+      document.getElementById("informacion").style.display = "none";
+      document.getElementById("primero").style.display = "block";
+    });
+  }
 
   subirFoto($event: any) {
 
@@ -81,6 +111,21 @@ export class PerfilComponent implements OnInit {
       (() => this.uploadURL = fileRef.getDownloadURL())
     ).subscribe();
   }
-
+  // envia datos del comentario
+  public newComentario(form) {
+    console.log(`Status: ${this.currentStatus}`);
+    if (this.currentStatus == 1) {
+      let data = {
+        text: form.text
+      }
+      this.UserComentario.createComentario(data).then(() => {
+        this.newcomentarioForm.setValue({
+          text: ''
+        });
+      }, (error) => {
+        console.error(error);
+      });
+    }
+  }
 
 }

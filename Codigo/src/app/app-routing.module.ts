@@ -21,9 +21,9 @@ export const rootRouterConfig: Routes = [
   { path: 'register', component: RegisterComponent },
   // { path: 'user', component: UserComponent,  resolve: { data: UserResolver }}
   { path: 'user', component: UserComponent },
-  { path: 'social', component: SocialPageComponent },//,canActivate: [AuthGuard] 
+  { path: 'social', component: SocialPageComponent, canActivate: [AuthGuard] },//,canActivate: [AuthGuard] 
   { path: 'forgot', component: ForgotPasswordComponent },
-  { path: 'form-person', component: FormPersonComponent },
+  { path: 'form-person', component: FormPersonComponent  },
   { path: 'crearlibro', component: CrearLibroComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },

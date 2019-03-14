@@ -32,7 +32,7 @@ export class CrearLibroComponent implements OnInit {
       nombre_libro: new FormControl(null,Validators.required),
       autor_libro: new FormControl(null,Validators.required),
       categoria_libro: new FormControl(null, Validators.required),
-      text_libro: new FormControl(null,Validators.required)
+      text_libro: new FormControl(null)
     })
 
   ngOnInit() {

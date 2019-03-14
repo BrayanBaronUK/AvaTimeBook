@@ -38,11 +38,7 @@ export class FormPersonComponent implements OnInit {
       url: '',
       celular: '',
       nacionalidad: '',
-      text: '',
-      nombre_libro: '',
-      autor_libro: '',
-      text_libro: '',
-      url_libro: ''
+      text: ''
 
     });
   }
@@ -55,11 +51,7 @@ export class FormPersonComponent implements OnInit {
     edad: new FormControl(Validators.required, Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
-    text: new FormControl(''),
-    nombre_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
-    autor_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
-    text_libro: new FormControl(Validators.pattern('[a-zA-Z ]*')),
-    url_libro: new FormControl(null)
+    text: new FormControl('')
   })
   onSubmit() {
   }
@@ -88,11 +80,6 @@ export class FormPersonComponent implements OnInit {
       (() => this.uploadURL = fileRef.getDownloadURL())
     ).subscribe();
   }
-
-
-  onClickValidar() {
-    this.authService.setParametro(2);
-  }
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus == 1) {
@@ -104,11 +91,7 @@ export class FormPersonComponent implements OnInit {
         url: form.url,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
-        text: form.text,
-        nombre_libro: form.nombre_libro,
-        autor_libro: form.autor_libro,
-        text_libro: form.text_libro,
-        url_libro: form.url_libro
+        text: form.text
       }
       this.UserServices.createPefil(data).then(() => {
         this.newperfilForm.setValue({
@@ -120,11 +103,7 @@ export class FormPersonComponent implements OnInit {
           url: '',
           celular: '',
           nacionalidad: '',
-          text: '',
-          nombre_libro: '',
-          autor_libro: '',
-          text_libro: '',
-          url_libro: ''
+          text: ''
         });
         this.flashMensaje.show('Información Cargada correctamente.',
         {cssClass: 'alert-success', timeout: 4000});
