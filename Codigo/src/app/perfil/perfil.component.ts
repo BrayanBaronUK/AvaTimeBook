@@ -4,58 +4,57 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { ServicioComentarioService } from '../Core/servicio-comentario.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { $$ } from 'protractor';
+import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle, SafeHtml } from '@angular/platform-browser';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
   private foto: string;
-  userFirebase
+  userFirebase: any;
   public userComentario = [];
   public currentStatus = 1;
   constructor(
     public UserServices: UserService,
     private _storage: AngularFireStorage,
     public UserComentario: ServicioComentarioService,
-
+    private _sanitizer: DomSanitizer
   ) {
     // this.foto = this.userFirebase.nombre;
 
-    //crea comentario
+    // crea comentario;
     this.newcomentarioForm.setValue({
       text: ''
 
     });
   }
-   //crea comentario
-   public newcomentarioForm = new FormGroup({
+  // crea comentario
+  public newcomentarioForm = new FormGroup({
     text: new FormControl('')
-  })
+  });
   ngOnInit() {
-    //trae la informacion de usuario
+    // trae la informacion de usuario
     this.userFirebase = {
-      nombre: "",
-      apellido: "",
-      genero: "",
-      edad: "",
-      url: "",
-      celular: "",
-      nacionalidad: "",
-      text: ""
-    }
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
     this.UserServices.getPerfil().valueChanges().subscribe((user) => {
-      console.log(this.userFirebase = user)
+      console.log(this.userFirebase = user);
     });
 
-     //trae todos los comentarios
-     this.UserComentario.getComentario().subscribe((comentario)=> {
+    // trae todos los comentarios
+    this.UserComentario.getComentario().subscribe((comentario) => {
       this.userComentario = [];
-      comentario.forEach((comentariodata: any) =>{
+      comentario.forEach((comentariodata: any) => {
         this.userComentario.push({
           id: comentariodata.payload.doc.id,
           data: comentariodata.payload.doc.data()
@@ -63,32 +62,36 @@ export class PerfilComponent implements OnInit {
       });
     });
   }
+  sanitizeImg(url: any): SafeUrl {
+    return this._sanitizer.bypassSecurityTrustUrl(url);
+ }
   MostrarInformacion() {
-    $(document).on('click', '.informacion', function () {
-      document.getElementById("informacion").style.display = "block";
-      document.getElementById("primero").style.display = "none";
+    jQuery(document).on('click', '.informacion', function () {
+      document.getElementById('informacion').style.display = 'block';
+      document.getElementById('publicaciones').style.display = 'none';
+      document.getElementById('libros').style.display = 'none';
+      document.getElementById('seguidores').style.display = 'none';
     });
-    $(document).on('click', '.publicaciones', function () {
-      document.getElementById("informacion").style.display = "none";
-      document.getElementById("primero").style.display = "block";
+    jQuery(document).on('click', '.publicaciones', function () {
+      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('publicaciones').style.display = 'block';
+      document.getElementById('libros').style.display = 'none';
+      document.getElementById('seguidores').style.display = 'none';
+    });
+    jQuery(document).on('click', '.libros', function () {
+      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('publicaciones').style.display = 'none';
+      document.getElementById('libros').style.display = 'block';
+      document.getElementById('seguidores').style.display = 'none';
+    });
+    jQuery(document).on('click', '.seguidores', function () {
+      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('publicaciones').style.display = 'none';
+      document.getElementById('libros').style.display = 'none';
+      document.getElementById('seguidores').style.display = 'block';
     });
   }
 
-  subirFoto($event: any) {
-
-    let fileReader = new FileReader();
-    //let ruta= fileReader.readAsDataURL($event.target.files[0])
-    //  console.log("rtua", ruta)
-    // this.foto= ruta;
-    fileReader.onload = ($event: any) => {
-      this.foto = $event.target.result;
-
-    }
-    fileReader.readAsDataURL($event.target.files[0])
-
-
-    // let nombreFoto= $event.target.files[0].name;
-  }
   upload(event) {
     // Get input file
     const file = event.target.files[0];
@@ -114,10 +117,10 @@ export class PerfilComponent implements OnInit {
   // envia datos del comentario
   public newComentario(form) {
     console.log(`Status: ${this.currentStatus}`);
-    if (this.currentStatus == 1) {
-      let data = {
+    if (this.currentStatus === 1) {
+      const  data = {
         text: form.text
-      }
+      };
       this.UserComentario.createComentario(data).then(() => {
         this.newcomentarioForm.setValue({
           text: ''

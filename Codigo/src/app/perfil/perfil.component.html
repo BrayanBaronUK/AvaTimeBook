@@ -14,22 +14,19 @@
 
     <div class="container bootstrap snippet">
         <div class="row">
-            <div class="col-sm-10">
-                <h1>{{userFirebase.nombre}} {{userFirebase.apellido}}</h1>
+            <div class="col-sm-3">
+                <h1><span class="capitalize">{{userFirebase.nombre}} {{userFirebase.apellido}}</span></h1>
             </div>
 
         </div>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-3 columnas">
                 <!--left col-->
 
 
-                <div class="text-center">
-                    <img [src]="'https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg'"
+                <div class="text-center" >
+                    <img [src]="userFirebase.url"
                         class="avatar img-circle img-thumbnail fotoprueba" alt="avatar">
-                    <h6>Cambie foto...</h6>
-                    <input type="file" (change)='subirFoto($event)' class="text-center center-block file-upload"
-                        value="Cambiar foto">
                 </div><br>
 
 
@@ -45,12 +42,11 @@
                     <button class="list-group-item publicaciones" (click)="MostrarInformacion()">Publicaciones</button>
                     <button class="list-group-item informacion" (click)="MostrarInformacion()">Editar
                         Información</button>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong>seguidores</strong></span> 78
-                    </li>
+                    <button class="list-group-item libros" (click)="MostrarInformacion()">Libros</button>
+                    <button class="list-group-item seguidores" (click)="MostrarInformacion()"> Seguidores</button>
                 </ul>
 
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="text-align: center;">
                     <div class="panel-heading">Redes sociales</div>
                     <div class="panel-body">
                         <a class="fa fa-facebook fa-2x" href="https://www.facebook.com" target="_blank"></a>
@@ -63,126 +59,140 @@
 
             </div>
             <!--/col-3-->
-            <div class="col-sm-6" style="margin: auto;">
-                <section id="primero">
-                <div class="col-md-12 gedf-main">
-                    <!--- \\\\\\\Post-->
-                    <form (ngSubmit)="newComentario(newcomentarioForm.value)" [formGroup]="newcomentarioForm">
-                        <div class="card gedf-card">
-                            <div class="card-header">
-                                <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts"
-                                            role="tab" aria-controls="posts" aria-selected="true">Escribe
-                                            una publicación {{userFirebase.nombre}} {{userFirebase.apellido}} </a>
-                                    </li>
-                                    <!--  <li class="nav-item">
+            <div class="col-sm-8" style="margin: auto;">
+                <section id="publicaciones">
+                    <div class="col-md-12 gedf-main">
+                        <!--- \\\\\\\Post-->
+                        <form (ngSubmit)="newComentario(newcomentarioForm.value)" [formGroup]="newcomentarioForm">
+                            <div class="card gedf-card">
+                                <div class="card-header">
+                                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts"
+                                                role="tab" aria-controls="posts" aria-selected="true">Escribe
+                                                una publicación <span class="capitalize">{{userFirebase.nombre}} {{userFirebase.apellido}}</span> </a>
+                                        </li>
+                                        <!--  <li class="nav-item">
                                                             <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Images</a>
                                                         </li> -->
-                                </ul>
-                            </div>
-                            <div class="card-body">
-                                <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                        aria-labelledby="posts-tab">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="message">post</label>
-                                            <textarea class="form-control" id="message" rows="3"
-                                                placeholder="Quieres decir...." formControlName="text"></textarea>
-                                        </div>
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                            aria-labelledby="posts-tab">
+                                            <div class="form-group">
+                                                <label class="sr-only" for="message">post</label>
+                                                <textarea class="form-control" id="message" rows="3"
+                                                    placeholder="Quieres decir...." formControlName="text"></textarea>
+                                            </div>
 
+                                        </div>
+                                        <div class="tab-pane fade" id="images" role="tabpanel"
+                                            aria-labelledby="images-tab">
+                                            <div class="form-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile">
+                                                    <label class="custom-file-label" for="customFile">Upload
+                                                        image</label>
+                                                </div>
+                                            </div>
+                                            <div class="py-4"></div>
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile">
-                                                <label class="custom-file-label" for="customFile">Upload image</label>
+                                    <div class="btn-toolbar justify-content-between">
+                                        <div class="btn-group">
+                                            <button type="submit" class="btn btn-primary ">Compartir</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button id="btnGroupDrop1" type="button"
+                                                class="btn btn-link dropdown-toggle" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-globe"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right"
+                                                aria-labelledby="btnGroupDrop1">
+                                                <a class="dropdown-item" routerLink="/social"><i
+                                                        class="fa fa-globe"></i>
+                                                    Public</a>
+                                                <a class="dropdown-item" routerLink="/social"><i
+                                                        class="fa fa-users"></i>
+                                                    Friends</a>
+                                                <a class="dropdown-item" routerLinks="/social"><i
+                                                        class="fa fa-user"></i>
+                                                    Just me</a>
                                             </div>
                                         </div>
-                                        <div class="py-4"></div>
-                                    </div>
-                                </div>
-                                <div class="btn-toolbar justify-content-between">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-primary ">Compartir</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-globe"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" routerLink="/social"><i class="fa fa-globe"></i>
-                                                Public</a>
-                                            <a class="dropdown-item" routerLink="/social"><i class="fa fa-users"></i>
-                                                Friends</a>
-                                            <a class="dropdown-item" routerLinks="/social"><i class="fa fa-user"></i>
-                                                Just me</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </form>
+                        </form>
 
-                    <!-- Post /////-->
+                        <!-- Post /////-->
 
-                    <!--- \\\\\\\Post-->
-                    <div class="card gedf-card" *ngFor="let comentario of userComentario">
-                        <div class="card-header">
-                            <div class="d-flex justify-content-between align-items-center">
+                        <!--- \\\\\\\Post-->
+                        <div class="card gedf-card" *ngFor="let comentario of userComentario">
+                            <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <div class="h5 m-0">@{{userFirebase.nombre}}</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                            <div class="h6 dropdown-header">Configuration</div>
-                                            <a class="dropdown-item" href="#">Save</a>
-                                            <a class="dropdown-item" href="#">Hide</a>
-                                            <a class="dropdown-item" href="#">Report</a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" src="https://picsum.photos/50/50"
+                                                alt="">
+                                        </div>
+                                        <div class="ml-2">
+                                            <div class="h5 m-0">@{{userFirebase.nombre}}</div>
                                         </div>
                                     </div>
+                                    <div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                                <div class="h6 dropdown-header">Configuration</div>
+                                                <a class="dropdown-item" href="#">Save</a>
+                                                <a class="dropdown-item" href="#">Hide</a>
+                                                <a class="dropdown-item" href="#">Report</a>
+                                            </div>
+                                        </div>
 
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                            <!--<a class="card-link" href="#">
+                            </div>
+                            <div class="card-body">
+                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                                <!--<a class="card-link" href="#">
                                         <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
                                     </a>-->
 
-                            <p class="card-text">
-                                {{comentario.data.text}}
-                            </p>
-                        </div>
+                                <p class="card-text">
+                                    {{comentario.data.text}}
+                                </p>
+                            </div>
 
-                        <!--
+                            <!--
                                    <div class="card-footer">
                                     <a href="#" class="card-link" routerLink="/social"><i class="fa fa-gittip"></i> Like</a>
                                     <a href="#" class="card-link" routerLink="/social"><i class="fa fa-comment"></i> Comment</a>
                                     <a href="#" class="card-link" routerLink="/social"><i class="fa fa-mail-forward"></i> Share</a>
                                 </div>
                                -->
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             </div>
-           
+
             <section id="informacion" style="display:none;">
                 <p>hol mundo</p>
+            </section>
+            <section id="libros">
+
+            </section>
+            <section id="seguidores">
+
             </section>
 
         </div>

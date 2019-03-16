@@ -15,13 +15,12 @@ import {
   MatMenuModule,
   MatListModule,
   MatPaginatorModule,
-  
   MatTableModule,
   MatColumnDef,
   MatProgressBarModule,
   MatSortModule,
   MatFormFieldModule
-} from '@angular/material'; 
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
@@ -43,10 +42,10 @@ import { AuthGuard } from './Core/auth.guard';
 import { SocialPageComponent } from './social-page/social-page.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { FormPersonComponent } from './form-person/form-person.component';
-import { $$ } from 'protractor';
 import { PerfilComponent } from './perfil/perfil.component';
 import { LibrosComponent } from './libros/libros.component';
 import { CrearLibroComponent } from './crear-libro/crear-libro.component';
+import * as $ from 'jquery';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,12 +58,9 @@ import { CrearLibroComponent } from './crear-libro/crear-libro.component';
     SocialPageComponent,
     ForgotPasswordComponent,
     FormPersonComponent,
- 
     PerfilComponent,
- 
     LibrosComponent,
-    CrearLibroComponent,
-    
+    CrearLibroComponent
   ],
   imports: [
     BrowserModule,
@@ -94,10 +90,7 @@ import { CrearLibroComponent } from './crear-libro/crear-libro.component';
     MatButtonModule,
     MatCardModule,
     BrowserAnimationsModule,
-    MatTableModule
-    
-    
-   
+    MatTableModule,
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService],
   bootstrap: [AppComponent]
