@@ -17,20 +17,17 @@ export class FormPersonComponent implements OnInit {
 
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
-
-  public perfiles = [];
   public currentStatus = 1;
-  userFirebase
+  userFirebase: any;
 
   constructor(
     public authService: AuthGuard,
     private _storage: AngularFireStorage,
     public UserServices: UserService,
     public router: Router,
-    public flashMensaje: FlashMessagesService,
+    public flashMensaje: FlashMessagesService
   ) {
     this.newperfilForm.setValue({
-      id: '',
       nombre: '',
       apellido: '',
       genero: '',
@@ -43,7 +40,6 @@ export class FormPersonComponent implements OnInit {
     });
   }
   public newperfilForm = new FormGroup({
-    id: new FormControl(''),
     nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     url: new FormControl(null),
@@ -52,11 +48,10 @@ export class FormPersonComponent implements OnInit {
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     text: new FormControl('')
-  })
+  });
   onSubmit() {
   }
   ngOnInit() {
-   
   }
   upload(event) {
     // Get input file
@@ -82,8 +77,8 @@ export class FormPersonComponent implements OnInit {
   }
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
-    if (this.currentStatus == 1) {
-      let data = {
+    if (this.currentStatus === 1) {
+      const data = {
         nombre: form.nombre,
         apellido: form.apellido,
         genero: form.genero,
@@ -92,10 +87,9 @@ export class FormPersonComponent implements OnInit {
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text
-      }
+      };
       this.UserServices.createPefil(data).then(() => {
         this.newperfilForm.setValue({
-          id: '',
           nombre: '',
           apellido: '',
           genero: '',
@@ -111,8 +105,7 @@ export class FormPersonComponent implements OnInit {
       }, (error) => {
         console.error(error);
       });
-    } 
+    }
   }
- 
 
 }

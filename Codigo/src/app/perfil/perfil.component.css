@@ -1,6 +1,6 @@
 .fotoprueba{
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
 }
 .card{
     margin-bottom: 2%;  
@@ -15,4 +15,8 @@ button{
 }
 .capitalize { 
     text-transform: capitalize; 
+    
+}
+#informacion{
+    margin-left: 2%;
 }
