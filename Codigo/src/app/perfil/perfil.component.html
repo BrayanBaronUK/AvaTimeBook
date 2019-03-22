@@ -16,14 +16,14 @@
         <br>
         <div class="row">
             <div class="col-sm-3" style="text-align: center;">
-                <h5><span class="capitalize">{{userFirebase.nombre}} {{userFirebase.apellido}}
-                        {{userFirebase.genero}}</span></h5>
+                <h4><span class="capitalize">{{userFirebase.nombre}} {{userFirebase.apellido}}
+                        </span></h4>
             </div>
 
         </div>
         <div class="row">
             <br>
-            <div class="col-sm-3 columnas">
+            <div class="col-sm-3 columnas" style="height:100%;" >
                 <!--left col-->
                 <div class="text-center">
                     <img [src]="userFirebase.url" class="avatar img-circle img-thumbnail fotoprueba" alt="avatar">
@@ -31,9 +31,9 @@
 
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Intereses<i class="fa fa-link fa-1x"></i></div>
+                    <div class="panel-heading"><h5>Intereses</h5><i class="fa fa-link fa-1x"></i></div>
                     <div class="panel-body">
-                        {{userFirebase.text}}
+                        <h6>{{userFirebase.text}}</h6>
                     </div>
                 </div>
 
@@ -44,9 +44,9 @@
                         aria-haspopup="true" aria-expanded="false" (click)="MostrarInformacion()">
                         Información {{userFirebase.nombre}}</button>
                     <div class="dropdown-menu">
-                        <button class="dropdown-item informacion">Ver Informacion</button>
+                        <button class="dropdown-item Verinformacion">Ver Informacion</button>
                         <div class="dropdown-divider"></div>
-                        <button class="dropdown-item">Editar Informacion</button>
+                        <button class="dropdown-item Editarinformacion">Editar Informacion</button>
                     </div>
                     <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
                     <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
@@ -172,10 +172,11 @@
 
                             </div>
                             <div class="card-body">
-                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{comentario.data.date}}</div>
+                                <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{comentario.data.date}}
+                                </div>
                                 <!--<a class="card-link" href="#">
                                         <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
-                                    </a>--> 
+                                    </a>-->
 
                                 <p class="card-text">
                                     {{comentario.data.text}}
@@ -192,7 +193,7 @@
                         </div>
                     </div>
                 </section>
-                <section id="informacion" style="display:none;">
+                <section id="Editarinformacion" style="display:none;">
 
                     <form>
 
@@ -286,13 +287,63 @@
                 <section id="editarLibros" style="display:none;">
 
                 </section>
+                <section id="Verinformacion" style="display:none;">
+                    <div class="col-xs-6">
+                        <h5><b>Nombre:</b>
+                            <div class="capitalize">{{userFirebase.nombre}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Apellido:</b>
+                            <div class="capitalize">{{userFirebase.apellido}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Genero:</b>
+                            <div class="capitalize">{{userFirebase.genero}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Celular:</b>
+                            <div class="capitalize">{{userFirebase.celular}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Edad:</b>
+                            <div class="capitalize">{{userFirebase.Edad}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Nacionalidad:</b>
+                            <div class="capitalize">{{userFirebase.nacionalidad}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Seguidores:</b>
+                            <div class="capitalize">{{userFirebase.edad}}</div>
+                        </h5>
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Total de libros:</b>
+                            <div class="capitalize">{{userLibro.length}}</div>
+                        </h5>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <h5><b>Descripcion:</b>
+                            <div class="capitalize">{{userFirebase.text}}</div>
+                        </h5>
+                    </div>
+
+                </section>
             </div>
 
 
 
             <div class="col-sm-3">
                 <ul class="list-group">
-                    <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar Libros</button>
+                    <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar
+                        Libros</button>
                     <button class="list-group-item Eventos boton5" (click)="MostrarInformacion()">Eventos
                         Información</button>
                     <button class="list-group-item Grupos boton5" (click)="MostrarInformacion()">Grupos</button>

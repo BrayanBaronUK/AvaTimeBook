@@ -6,3 +6,18 @@ img.rounded-circle{
 [class*="social-portal"] {
   background-image: url("/AvaTimeBook/Codigo/src/img/navbar-book.png");
 }
+
+.ajuste{
+  position: relative;
+  left: 100%;
+}
+
+.nav-link:hover{
+  color:red !important;
+}
+.color{
+  color:white !important;
+}
+.texto{
+color: red !important;
+}
