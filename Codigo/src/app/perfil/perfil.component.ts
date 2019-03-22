@@ -163,7 +163,8 @@ export class PerfilComponent implements OnInit {
   // envia datos del comentario
   public newComentario(form) {
     const data = {
-      text: form.text
+      text: form.text,
+      date: this.UserComentario.getTimeStamp()
     };
     this.UserComentario.createComentario(data).then(() => {
       this.newcomentarioForm.setValue({

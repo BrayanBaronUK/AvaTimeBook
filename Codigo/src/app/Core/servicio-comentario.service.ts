@@ -40,10 +40,21 @@ export class ServicioComentarioService {
       }, err => reject(err));
     });
   }
-  createComentario(data: { text: string }) {
+  createComentario(data: { text: string, date: string }) {
     return this.db.collection('perfil').doc(this.getIud()).collection('comentario').add(data);
   }
   getComentario() {
     return this.db.collection('perfil').doc(this.getIud()).collection('comentario').snapshotChanges();
+  }
+  getTimeStamp() {
+    const now = new Date();
+    const date = now.getUTCFullYear() + '/' +
+                 (now.getUTCMonth() + 1) + '/' +
+                 now.getUTCDate();
+    const time = now.getUTCHours() + ':' +
+                 now.getUTCMinutes() + ':' +
+                 now.getUTCSeconds();
+
+    return (date + ' ' + time);
   }
 }

@@ -19,12 +19,13 @@ export class SocialPageComponent implements OnInit {
     public Userlibro: ServicioLibroService,
     public UserComentario: ServicioComentarioService
   ) {
+    // crea comentario
     this.newcomentarioForm.setValue({
       text: ''
 
     });
   }
-  // crea comentario
+  // envia formulario a funcion 
   public newcomentarioForm = new FormGroup({
     text: new FormControl('')
   });
@@ -73,11 +74,13 @@ export class SocialPageComponent implements OnInit {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus === 1) {
       const data = {
-        text: form.text
+        text: form.text,
+        date : this.UserComentario.getTimeStamp()
       };
       this.UserComentario.createComentario(data).then(() => {
         this.newcomentarioForm.setValue({
           text: ''
+         
         });
       }, (error) => {
         console.error(error);
