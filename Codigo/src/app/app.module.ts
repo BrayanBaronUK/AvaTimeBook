@@ -46,6 +46,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { LibrosComponent } from './libros/libros.component';
 import { CrearLibroComponent } from './crear-libro/crear-libro.component';
 import * as $ from 'jquery';
+import { FilterPipe } from './filter/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,8 @@ import * as $ from 'jquery';
     FormPersonComponent,
     PerfilComponent,
     LibrosComponent,
-    CrearLibroComponent
+    CrearLibroComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

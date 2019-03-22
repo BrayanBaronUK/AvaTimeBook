@@ -37,7 +37,7 @@
 
               <div>
                 <h5><b>Edad:</b></h5>
-                <input class="form-control" id="edad" placeholder="Coloque su edad" formControlName="edad">
+                <input type="number" class="form-control" id="edad" placeholder="Coloque su edad" formControlName="edad">
               </div>
 
               <div>
@@ -53,7 +53,7 @@
 
               <div>
                 <h5><b>Subir imagen</b></h5>
-                <input style="text-align : center" type="file" (change)="upload($event)" accept="images/*"
+                <input style="text-align : center" id="subir" type="file" (change)="upload($event)" accept="images/*"
                   formControlName="url">
               </div>
 

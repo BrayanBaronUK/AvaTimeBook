@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class SocialPageComponent implements OnInit {
 
-  userFirebase
+  userFirebase: any;
   public libros = [];
   public currentStatus = 1;
   public userComentario = [];
@@ -19,32 +19,32 @@ export class SocialPageComponent implements OnInit {
     public Userlibro: ServicioLibroService,
     public UserComentario: ServicioComentarioService
   ) {
-   
+    // crea comentario
     this.newcomentarioForm.setValue({
       text: ''
 
     });
   }
-  //crea comentario
+  // envia formulario a funcion 
   public newcomentarioForm = new FormGroup({
     text: new FormControl('')
-  })
+  });
 
   ngOnInit() {
-    //trae informacion de usuario
+    // trae informacion de usuario
     this.userFirebase = {
-      nombre: "",
-      apellido: "",
-      genero: "",
-      edad: "",
-      url: "",
-      celular: "",
-      nacionalidad: "",
-      text: ""
-    }
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
 
     this.UserServices.getPerfil().valueChanges().subscribe((user) => {
-      console.log(this.userFirebase = user)
+      console.log(this.userFirebase = user);
     });
 
     // trae una informacion de libros
@@ -58,10 +58,10 @@ export class SocialPageComponent implements OnInit {
       });
     });
 
-    //trae todos los comentarios
-    this.UserComentario.getComentario().subscribe((comentario)=> {
+    // trae todos los comentarios
+    this.UserComentario.getComentario().subscribe((comentario) => {
       this.userComentario = [];
-      comentario.forEach((comentariodata: any) =>{
+      comentario.forEach((comentariodata: any) => {
         this.userComentario.push({
           id: comentariodata.payload.doc.id,
           data: comentariodata.payload.doc.data()
@@ -72,13 +72,15 @@ export class SocialPageComponent implements OnInit {
   // envia datos del comentario
   public newComentario(form) {
     console.log(`Status: ${this.currentStatus}`);
-    if (this.currentStatus == 1) {
-      let data = {
-        text: form.text
-      }
+    if (this.currentStatus === 1) {
+      const data = {
+        text: form.text,
+        date : this.UserComentario.getTimeStamp()
+      };
       this.UserComentario.createComentario(data).then(() => {
         this.newcomentarioForm.setValue({
           text: ''
+         
         });
       }, (error) => {
         console.error(error);
