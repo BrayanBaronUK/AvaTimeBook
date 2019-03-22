@@ -12,8 +12,8 @@ img.rounded-circle{
   left: 100%;
 }
 
-a:hover{
-  color: red !important;
+.nav-link:hover{
+  color:red !important;
 }
 .color{
   color:white !important;
