@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
-
+import { UserService } from '../Core/user.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,11 +12,22 @@ export class NavbarComponent implements OnInit {
   public emailUsuario: string;
   public fotoUsuario: string;
   private fotico: string;
+  public userFirebase: any;
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public UserServices: UserService
 
   ) {
-
+    this.userFirebase = {
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
     this.fotico = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
   }
 
@@ -27,7 +38,10 @@ export class NavbarComponent implements OnInit {
         this.nombreUsuario = auth.displayName;
         this.emailUsuario = auth.email;
         this.fotoUsuario = auth.photoURL;
-        if (this.fotoUsuario == null){
+        this.UserServices.getPerfil().valueChanges().subscribe((user) => {
+          console.log(this.userFirebase = user);
+        });
+        if (this.fotoUsuario == null) {
 
           this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
         }
