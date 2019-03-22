@@ -8,7 +8,6 @@ import * as firebase from 'firebase/app';
 })
 export class ServicioComentarioService {
 
-  
   constructor(
     public db: AngularFirestore,
     public afAuth: AngularFireAuth
@@ -16,29 +15,30 @@ export class ServicioComentarioService {
 
   getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().onAuthStateChanged(function (user) {
+      // tslint:disable-next-line:no-shadowed-variable
+      const user = firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           resolve(user);
           return user.uid;
         } else {
           reject('No user logged in');
         }
-      })
-    })
+      });
+    });
   }
   getIud() {
     return firebase.auth().currentUser.uid;
   }
   updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
-      var user = firebase.auth().currentUser;
+      const user = firebase.auth().currentUser;
       user.updateProfile({
         displayName: value.name,
         photoURL: user.photoURL
       }).then(res => {
-        resolve(res)
-      }, err => reject(err))
-    })
+        resolve(res);
+      }, err => reject(err));
+    });
   }
   createComentario(data: { text: string }) {
     return this.db.collection('perfil').doc(this.getIud()).collection('comentario').add(data);
