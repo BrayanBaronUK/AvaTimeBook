@@ -37,15 +37,23 @@
                     </div>
                 </div>
 
-
                 <ul class="list-group">
-                    <button class="list-group-item publicaciones" (click)="MostrarInformacion()">Publicaciones</button>
-                    <button class="list-group-item informacion" (click)="MostrarInformacion()">Editar
-                        Información</button>
-                    <button class="list-group-item libros" (click)="MostrarInformacion()">Libros</button>
-                    <button class="list-group-item seguidores" (click)="MostrarInformacion()"> Seguidores</button>
+                    <button class="list-group-item publicaciones boton5"
+                        (click)="MostrarInformacion()">Publicaciones</button>
+                    <button class="nav-link dropdown-toggle boton5" data-toggle="dropdown" role="button"
+                        aria-haspopup="true" aria-expanded="false" (click)="MostrarInformacion()">
+                        Información {{userFirebase.nombre}}</button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item informacion">Ver Informacion</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item">Editar Informacion</button>
+                    </div>
+                    <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
+                    <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
+                        Seguidores</button>
                 </ul>
 
+                <br>
                 <div class="panel panel-default" style="text-align: center;">
                     <div class="panel-heading">Redes sociales</div>
                     <div class="panel-body">
@@ -243,13 +251,15 @@
                                 </div>-->
                         <br>
                         <div class="col-xs-12">
-                            <button type="submit" (click)="Obtenerinformacion()"
-                                class="btn btn-primary btn-block btn-lg" value="Agregar">Guardar</button>
+                            <button type="submit" (click)="Obtenerinformacion()" class="btn btn-primary"
+                                data-toggle="button" aria-pressed="false" autocomplete="off"
+                                value="Agregar">Guardar</button>
                         </div>
                     </form>
                 </section>
+
                 <section id="libros" style="display:none;">
-                    <table class="table">
+                    <table class="table table-dark">
                         <thead>
                             <tr>
                                 <th scope="col">Numero</th>
@@ -282,11 +292,11 @@
 
             <div class="col-sm-3">
                 <ul class="list-group">
-                    <button class="list-group-item editarLibros" (click)="MostrarInformacion()">Editar Libros</button>
-                    <button class="list-group-item Eventos" (click)="MostrarInformacion()">Eventos
+                    <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar Libros</button>
+                    <button class="list-group-item Eventos boton5" (click)="MostrarInformacion()">Eventos
                         Información</button>
-                    <button class="list-group-item Grupos" (click)="MostrarInformacion()">Grupos</button>
-                    
+                    <button class="list-group-item Grupos boton5" (click)="MostrarInformacion()">Grupos</button>
+
                 </ul>
             </div>
         </div>
