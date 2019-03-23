@@ -75,6 +75,7 @@ export class PerfilComponent implements OnInit {
           data: librodata.payload.doc.data()
         });
       });
+      console.log(this.userLibro.length);
     });
     console.log(this.userFirebase);
   }
@@ -84,16 +85,26 @@ export class PerfilComponent implements OnInit {
   }
   // funcion perfil
   MostrarInformacion() {
-    jQuery(document).on('click', '.informacion', function () {
-      document.getElementById('informacion').style.display = 'block';
+    jQuery(document).on('click', '.Editarinformacion', function () {
+      document.getElementById('Verinformacion').style.display = 'none';
+      document.getElementById('Editarinformacion').style.display = 'block';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
       document.getElementById('editarLibros').style.display = 'none';
 
     });
+    jQuery(document).on('click', '.Verinformacion', function () {
+      document.getElementById('Verinformacion').style.display = 'block';
+      document.getElementById('Editarinformacion').style.display = 'none';
+      document.getElementById('publicaciones').style.display = 'none';
+      document.getElementById('libros').style.display = 'none';
+      document.getElementById('seguidores').style.display = 'none';
+      document.getElementById('editarLibros').style.display = 'none';
+    });
     jQuery(document).on('click', '.publicaciones', function () {
-      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('Verinformacion').style.display = 'none';
+      document.getElementById('Editarinformacion').style.display = 'none';
       document.getElementById('publicaciones').style.display = 'block';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
@@ -101,7 +112,8 @@ export class PerfilComponent implements OnInit {
 
     });
     jQuery(document).on('click', '.libros', function () {
-      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('Verinformacion').style.display = 'none';
+      document.getElementById('Editarinformacion').style.display = 'none';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'block';
       document.getElementById('seguidores').style.display = 'none';
@@ -109,7 +121,8 @@ export class PerfilComponent implements OnInit {
 
     });
     jQuery(document).on('click', '.seguidores', function () {
-      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('Verinformacion').style.display = 'none';
+      document.getElementById('Editarinformacion').style.display = 'none';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'block';
@@ -117,7 +130,8 @@ export class PerfilComponent implements OnInit {
 
     });
     jQuery(document).on('click', '.editarLibros', function () {
-      document.getElementById('informacion').style.display = 'none';
+      document.getElementById('Verinformacion').style.display = 'none';
+      document.getElementById('Editarinformacion').style.display = 'none';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';

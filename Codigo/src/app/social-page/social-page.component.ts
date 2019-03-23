@@ -25,7 +25,7 @@ export class SocialPageComponent implements OnInit {
 
     });
   }
-  // envia formulario a funcion 
+  // envia formulario a funcion
   public newcomentarioForm = new FormGroup({
     text: new FormControl('')
   });
@@ -80,7 +80,6 @@ export class SocialPageComponent implements OnInit {
       this.UserComentario.createComentario(data).then(() => {
         this.newcomentarioForm.setValue({
           text: ''
-         
         });
       }, (error) => {
         console.error(error);

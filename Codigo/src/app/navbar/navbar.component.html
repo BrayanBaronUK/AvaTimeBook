@@ -1,41 +1,46 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">AvaTime<span class="text-danger">BOOK</span></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" routerLink="/">Home<span class="sr-only">(current)</span></a>
+  <a class="navbar-brand" href="#">AvaTime<span style="color:red;">BOOK</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link glyphicon glyphicon-book color" routerLink="/social">Social</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link glyphicon glyphicon-book color" routerLink="/perfil">Perfil</a>
+      </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Herramientas</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Configuracion</a>
+            <a class="dropdown-item" href="#">Privacidad</a>
+            <div class="dropdown-divider"></div>
+            <li class="nav-item" *ngIf="isLogin">
+                <a class="dropdown-item"  (click)="onClickLogout()">Salir {{emailUsuario}}</a>
+              </li>
+          </div>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link glyphicon glyphicon-book"  routerLink="/social">Social</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link glyphicon glyphicon-book"  routerLink="/perfil">Perfil</a>
-        </li>      
-      </ul>
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item" *ngIf="!isLogin">
-          <a class="nav-link" href="#" routerLink="/login">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="!isLogin">
-          <a class="nav-link" href="#" routerLink="/register">Registrarse</a>
-        </li>
-        <li class="nav-item" *ngIf="isLogin">
-          <a class="nav-link" href="#" (click)="onClickLogout()" >Salir</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">{{nombreUsuario}}</a>
-        </li>
-        <li class="nav-item" *ngIf="isLogin">
-           <img src="{{fotoUsuario}}" class="rounded-circle" href="#" routerLink="/social">
-         <!-- <img [src]="fotico" class="rounded-circle">-->
-          <span class="badge pill badge-secondary">{{emailUsuario}}</span>
-        </li>
-      </ul>
-      
-  
-    </div>
-  </nav>
+    </ul>
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item" *ngIf="!isLogin">
+        <a class="nav-link"  routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLogin">
+        <a class="nav-link" routerLink="/register">Registrarse</a>
+      </li>
+
+      <li class="nav-item ajuste" *ngIf="isLogin">
+        <img src="{{fotoUsuario}}" class="rounded-circle" routerLink="/social">
+        <!-- <img [src]="fotico" class="rounded-circle">-->
+        <span class="badge pill badge-secondary">{{userFirebase.nombre}}  {{userFirebase.apellido}}</span>
+      </li>
+    </ul>
+
+
+  </div>
+</nav>

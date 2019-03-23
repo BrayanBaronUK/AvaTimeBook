@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDDtitpmVY0a4nKM-jDAW4OfQ_9MsklBBw",
-    authDomain: "proyectolibro-b0994.firebaseapp.com",
-    databaseURL: "https://proyectolibro-b0994.firebaseio.com",
-    projectId: "proyectolibro-b0994",
-    storageBucket: "proyectolibro-b0994.appspot.com",
-    messagingSenderId: "916727015911"
+    apiKey: 'AIzaSyDDtitpmVY0a4nKM-jDAW4OfQ_9MsklBBw',
+    authDomain: 'proyectolibro-b0994.firebaseapp.com',
+    databaseURL: 'https://proyectolibro-b0994.firebaseio.com',
+    projectId: 'proyectolibro-b0994',
+    storageBucket: 'proyectolibro-b0994.appspot.com',
+    messagingSenderId: '916727015911'
   }
 };
 
