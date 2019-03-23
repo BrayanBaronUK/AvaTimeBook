@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -13,10 +14,11 @@ export class NavbarComponent implements OnInit {
   public fotoUsuario: string;
   private fotico: string;
   public userFirebase: any;
+
   constructor(
     public authService: AuthService,
-    public UserServices: UserService
-
+    public UserServices: UserService,
+    private router: Router,
   ) {
     this.userFirebase = {
       nombre: '',
@@ -54,6 +56,7 @@ export class NavbarComponent implements OnInit {
   }
   onClickLogout() {
     this.authService.doLogout();
+    this.router.navigate(['/login']);
   }
 
 }

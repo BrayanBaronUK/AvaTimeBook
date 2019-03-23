@@ -38,21 +38,21 @@ export class LoginComponent implements OnInit {
   onClickGoogleLogin() {
    this.authService.doGoogleLogin()
     .then((res) => {
-        this.router.navigate(['/social']);
+        this.router.navigate(['/form-person']);
     }).catch( err => console.log(err.message));
   }
 
   onClickFacebookLogin() {
     this.authService.doFacebookLogin()
       .then((res) => {
-          this.router.navigate(['/social']);
+          this.router.navigate(['/form-person']);
       }).catch( err => console.log(err.message));
   }
 
   onClickTwitterLogin() {
     this.authService.doTwitterLogin()
       .then((res) => {
-        this.router.navigate(['/social']);
+        this.router.navigate(['/form-person']);
       }).catch (err => console.log(err.message));
   }
 
