@@ -41,7 +41,7 @@ export class LibrosComponent implements OnInit {
   }
   filter(event){
     
-    this.items =  this.items.filter(x => x.nombre == event.target.value);
+    this.items =  this.items.filter( x =>  event.target.value == x.nombre );
     if(this.items.length == 0 ){
       this.items = this.items2;
     }
