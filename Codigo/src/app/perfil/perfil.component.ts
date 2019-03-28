@@ -54,10 +54,29 @@ export class PerfilComponent implements OnInit {
     this.newcomentarioForm.setValue({
       text: ''
     });
+
+    // crear libro
+    this.newlibroForm.setValue({
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    });
+
     this.EditarLibros();
     this.EditarUsuario();
     this.TraerInformacionUsuario();
   }
+
+ // formulario de libro
+  public newlibroForm = new FormGroup({
+    id: new FormControl(),
+    nombre_libro: new FormControl(null, Validators.required),
+    autor_libro: new FormControl(null, Validators.required),
+    categoria_libro: new FormControl(null, Validators.required),
+    text_libro: new FormControl(null)
+  });
 
   // crea comentario
   public newcomentarioForm = new FormGroup({
@@ -173,12 +192,14 @@ export class PerfilComponent implements OnInit {
 
   // funcion perfil
   MostrarInformacion() {
+    jQuery(document).on('click', '.botoncrear', function () {
+      document.getElementById('crearLibro').style.display = 'block';
+    });
     jQuery(document).on('click', '.Verinformacion', function () {
       document.getElementById('Verinformacion').style.display = 'block';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
     });
     jQuery(document).on('click', '.publicaciones', function () {
       document.getElementById('Verinformacion').style.display = 'none';
@@ -186,7 +207,6 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'block';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
 
     });
     jQuery(document).on('click', '.libros', function () {
@@ -195,7 +215,6 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'block';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
       document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
 
     });
@@ -205,16 +224,7 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'block';
-      document.getElementById('editarLibros').style.display = 'none';
 
-    });
-    jQuery(document).on('click', '.editarLibros', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'none';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'block';
     });
   }
 
@@ -255,5 +265,30 @@ export class PerfilComponent implements OnInit {
     }, (error) => {
       console.error(error);
     });
+  }
+
+  public newlibro(form) {
+    console.log(`Status: ${this.currentStatus}`);
+    if (this.currentStatus === 1) {
+      const data = {
+        nombre_libro: form.nombre_libro,
+        autor_libro: form.autor_libro,
+        categoria_libro: form.categoria_libro,
+        text_libro: form.text_libro
+      };
+      this.UserLibro.createLibro(data).then(() => {
+        this.newlibroForm.setValue({
+          id: '',
+          nombre_libro: '',
+          autor_libro: '',
+          categoria_libro: '',
+          text_libro: ''
+        });
+        this.flashMensaje.show('Información Cargada correctamente.',
+        {cssClass: 'alert-success', timeout: 4000});
+      }, (error) => {
+        console.error(error);
+      });
+    }
   }
 }
