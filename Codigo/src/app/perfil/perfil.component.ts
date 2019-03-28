@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { UserService } from '../Core/user.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -8,19 +8,37 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle, SafeHtml } from '@angular/platform-browser';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { debug } from 'util';
+
+
+
+
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+
+
+
+
 export class PerfilComponent implements OnInit {
+
+
+
+  @Output() cerrar = new EventEmitter();
+
   uploadProgress: Observable<number>;
   uploadURL: Observable<string>;
-  private foto: string;
   public userFirebase: any;
   public userComentario = [];
   public userLibro = [];
   public item = 1;
+  public currentStatus = 1;
+  public InformacionLibrosProvicional: any;
+  private id: any;
+
   constructor(
     public UserServices: UserService,
     private _storage: AngularFireStorage,
@@ -28,13 +46,62 @@ export class PerfilComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     public flashMensaje: FlashMessagesService,
     public router: Router,
-    public UserLibro: ServicioLibroService
-  ) {
+    public UserLibro: ServicioLibroService,
+    public fb: FormBuilder,
+    ) {
     // crea comentario;
     this.newcomentarioForm.setValue({
       text: ''
-
     });
+    this.EditarLibros();
+    this.TraerInformacionUsuario();
+  }
+  public form = new FormGroup({
+    nombre_libro: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+    autor_libro: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+    id: new FormControl(),
+    categoria_libro: new FormControl(),
+    text_libro: new FormControl('')
+  });
+
+  // crea comentario
+  public newcomentarioForm = new FormGroup({
+    text: new FormControl('')
+  });
+
+  ngOnInit() {
+    this.TraerComentario();
+    this.TraerLibro();
+    this.MostrarInformacion();
+  }
+
+  TraerLibro() {
+     // trae todos los libros
+     this.UserLibro.getLibro().subscribe((libro) => {
+      this.userLibro = [];
+       libro.forEach((librodata: any) => {
+        this.userLibro.push({
+          id: librodata.payload.doc.id,
+          data: librodata.payload.doc.data()
+        });
+      });
+    });
+  }
+
+  TraerComentario() {
+     // trae todos los comentarios
+     this.UserComentario.getComentario().subscribe((comentario) => {
+      this.userComentario = [];
+      comentario.forEach((comentariodata: any) => {
+        this.userComentario.push({
+          id: comentariodata.payload.doc.id,
+          data: comentariodata.payload.doc.data()
+        });
+      });
+    });
+  }
+
+  TraerInformacionUsuario() {
     this.userFirebase = {
       nombre: '',
       apellido: '',
@@ -49,40 +116,40 @@ export class PerfilComponent implements OnInit {
       console.log(this.userFirebase = user);
     });
   }
-  // crea comentario
-  public newcomentarioForm = new FormGroup({
-    text: new FormControl('')
-  });
-  ngOnInit() {
-    // trae todos los comentarios
-    this.UserComentario.getComentario().subscribe((comentario) => {
-      this.userComentario = [];
-      comentario.forEach((comentariodata: any) => {
-        this.userComentario.push({
-          id: comentariodata.payload.doc.id,
-          data: comentariodata.payload.doc.data()
-        });
-      });
-    });
-    console.log(this.userFirebase);
-
-    // trae todos los libros
-    this.UserLibro.getLibro().subscribe((libro) => {
-      this.userLibro = [];
-       libro.forEach((librodata: any) => {
-        this.userLibro.push({
-          id: librodata.payload.doc.id,
-          data: librodata.payload.doc.data()
-        });
-      });
-      console.log(this.userLibro.length);
-    });
-    console.log(this.userFirebase);
+  EditarLibros() {
+    this.InformacionLibrosProvicional = {
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
   }
+
+  onGuardar() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
+    this.onCancelar();
+  }
+  onCancelar() {
+    document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
+    this.InformacionLibrosProvicional = null;
+    this.cerrar.emit();
+  }
+  onLibro(libro, id) {
+    document.getElementById('mostrarInformacionEditarLibro').style.display = 'block';
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.id = id;
+    this.InformacionLibrosProvicional = libro;
+  }
+
   // imagenes
   sanitizeImg(url: any): SafeUrl {
     return this._sanitizer.bypassSecurityTrustUrl(url);
   }
+
+
   // funcion perfil
   MostrarInformacion() {
     jQuery(document).on('click', '.Editarinformacion', function () {
@@ -118,6 +185,7 @@ export class PerfilComponent implements OnInit {
       document.getElementById('libros').style.display = 'block';
       document.getElementById('seguidores').style.display = 'none';
       document.getElementById('editarLibros').style.display = 'none';
+      document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
 
     });
     jQuery(document).on('click', '.seguidores', function () {
@@ -138,19 +206,7 @@ export class PerfilComponent implements OnInit {
       document.getElementById('editarLibros').style.display = 'block';
     });
   }
- /* Obtenerinformacion() {
-    const nombreEnviar = $(document.getElementById('nombre'));
-      this.UserServices.updatePerfil({
-      nombre: nombreEnviar,
-      apellido: '',
-      genero: '',
-      edad: '',
-      url: '',
-      celular: '',
-      nacionalidad: '',
-      text: ''
-    });
-  }*/
+
   // Subir foto
   upload(event) {
     // Get input file
@@ -174,6 +230,7 @@ export class PerfilComponent implements OnInit {
       (() => this.uploadURL = fileRef.getDownloadURL())
     ).subscribe();
   }
+
   // envia datos del comentario
   public newComentario(form) {
     const data = {
