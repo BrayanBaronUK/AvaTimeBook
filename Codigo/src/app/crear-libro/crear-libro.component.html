@@ -27,6 +27,7 @@
         <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
         <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
           <!-- Inicio del div central parte de formulario información básica -->
+          <input type="hidden" formControlName="id">
           <div class="col-md-12"
             style="border-width: 1px; border-style: solid; border-color: lightgrey;  background:#282828;">
             <br>
