@@ -30,4 +30,8 @@ button{
   }
   .table th, .table td {
     padding: 0.25rem !important;
+    width:auto; 
+    height:20px;
 }
+
+

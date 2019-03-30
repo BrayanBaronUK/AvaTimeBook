@@ -51,9 +51,9 @@ export class ServicioComentarioService {
     const date = now.getUTCFullYear() + '/' +
                  (now.getUTCMonth() + 1) + '/' +
                  now.getUTCDate();
-    const time = now.getUTCHours() + ':' +
-                 now.getUTCMinutes() + ':' +
-                 now.getUTCSeconds();
+    const time = now.getHours() + ':' +
+                 now.getMinutes() + ':' +
+                 now.getSeconds();
 
     return (date + ' ' + time);
   }

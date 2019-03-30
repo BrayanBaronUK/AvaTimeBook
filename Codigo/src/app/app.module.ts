@@ -48,6 +48,7 @@ import { CrearLibroComponent } from './crear-libro/crear-libro.component';
 import * as $ from 'jquery';
 import { FilterPipe } from './filter/filter.pipe';
 import { MatTabsModule } from '@angular/material';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MatTabsModule } from '@angular/material';
     PerfilComponent,
     LibrosComponent,
     CrearLibroComponent,
-    FilterPipe
+    FilterPipe,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
