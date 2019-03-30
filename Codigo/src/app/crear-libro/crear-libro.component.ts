@@ -37,8 +37,6 @@ export class CrearLibroComponent implements OnInit {
       text_libro: new FormControl(null)
     });
   ngOnInit() {
-    this.Siguiente();
-
   }
   onSubmit() {
   }
