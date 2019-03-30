@@ -8,10 +8,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  items : Observable<any[]>;
-  contactos : Observable<any[]>;
-  constructor(db: AngularFirestore){
-    this.items =db.collection('items').valueChanges();
-    this.contactos =db.collection('contactos').valueChanges();
+  constructor(db: AngularFirestore) {
+  }
+
+  Obtener() {
+     // tslint:disable-next-line:no-debugger
+     debugger;
+     return document.getElementById('container').style.display = 'none';
+  }
+
+  Resetear () {
+    return document.getElementById('container').style.display = 'block';
   }
 }

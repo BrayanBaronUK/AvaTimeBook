@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+ // public herramientas: boolean;
   public isLogin: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
@@ -18,7 +19,11 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
+<<<<<<< HEAD
     private router: Router,
+=======
+    public app: AppComponent
+>>>>>>> cesar
   ) {
     this.userFirebase = {
       nombre: '',
@@ -58,5 +63,10 @@ export class NavbarComponent implements OnInit {
     this.authService.doLogout();
     this.router.navigate(['/login']);
   }
-
+  MostarInformacion() {
+      // tslint:disable-next-line:no-debugger
+      debugger;
+      this.app.Obtener();
+      document.getElementById('contraseña').style.display = 'block';
+  }
 }
