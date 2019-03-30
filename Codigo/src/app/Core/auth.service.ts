@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-//import 'rxjs/add/operator/toPromise';
-//import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/map';
 import { Observable, Subject } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -15,9 +15,9 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth
   ) { }
-  doFacebookLogin(){
+  doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {
-      let provider = new firebase.auth.FacebookAuthProvider();
+      const provider = new firebase.auth.FacebookAuthProvider();
       this.afAuth.auth
       .signInWithPopup(provider)
       .then(res => {
@@ -25,13 +25,13 @@ export class AuthService {
       }, err => {
         console.log(err);
         reject(err);
-      })
-    })
+      });
+    });
   }
 
-  doTwitterLogin(){
+  doTwitterLogin() {
     return new Promise<any>((resolve, reject) => {
-      let provider = new firebase.auth.TwitterAuthProvider();
+      const provider = new firebase.auth.TwitterAuthProvider();
       this.afAuth.auth
       .signInWithPopup(provider)
       .then(res => {
@@ -39,10 +39,10 @@ export class AuthService {
       }, err => {
         console.log(err);
         reject(err);
-      })
-    })
+      });
+    });
   }
-  doRecovery(i_email : string){
+  doRecovery(i_email: string) {
     return new Promise((resolve, reject) => {
         this.afAuth.auth.sendPasswordResetEmail(i_email)
         .then( () => {
@@ -50,13 +50,12 @@ export class AuthService {
         }, err => {
           console.log(err);
           reject(err);
-        })
-    
+        });
     });
   }
-  doGoogleLogin(){
+  doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
-      let provider = new firebase.auth.GoogleAuthProvider();
+      const provider = new firebase.auth.GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
       this.afAuth.auth
@@ -66,8 +65,8 @@ export class AuthService {
       }, err => {
         console.log(err);
         reject(err);
-      })
-    })
+      });
+    });
   }
 
   doRegister(email: string, pass: string) {
@@ -91,13 +90,12 @@ export class AuthService {
   }
 
 
-  doLogout(){
+  doLogout() {
     return new Promise((resolve, reject) => {
-      if(firebase.auth().currentUser){
-        this.afAuth.auth.signOut()
+      if (firebase.auth().currentUser) {
+        this.afAuth.auth.signOut();
         resolve();
-      }
-      else{
+      } else {
         reject();
       }
     });

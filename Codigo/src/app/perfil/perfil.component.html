@@ -15,41 +15,13 @@
     <div class="container bootstrap snippet">
 
         <br>
+
         <div class="row">
             <div class="col-sm-3" style="text-align: center;">
                 <h4><span class="capitalize">{{userFirebase.nombre}} {{userFirebase.apellido}}
                     </span></h4>
             </div>
-            <div class="col-sm-12">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <button class="list-group-item publicaciones boton5"
-                            (click)="MostrarInformacion()">Publicaciones</button>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <button class="list-group-item  boton5" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false" (click)="MostrarInformacion()">
-                            Información {{userFirebase.nombre}}</button>
-                        <div class="dropdown-menu">
-                            <button class="dropdown-item Verinformacion">Ver Informacion</button>
-                            <div class="dropdown-divider"></div>
-                            <button class="dropdown-item Editarinformacion">Editar Informacion</button>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
-
-                    </li>
-                    <li class="nav-item">
-                        <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
-                            Seguidores</button>
-                    </li>
-                </ul>
-            </div>
         </div>
-
         <div class="row">
             <br>
             <div class="col-sm-3 columnas" style="height:100%;">
@@ -82,6 +54,25 @@
             </div>
             <!--/col-3-->
             <div class="col-sm-6">
+                <div class="col-sm-12 gedf-main">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <button class="list-group-item publicaciones boton5"
+                                (click)="MostrarInformacion()">Publicaciones</button>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button class="list-group-item Verinformacion boton5" (click)="MostrarInformacion()">
+                                Información {{userFirebase.nombre}}</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
+                                Seguidores</button>
+                        </li>
+                    </ul>
+                </div>
                 <section id="publicaciones">
                     <div class="col-md-12 gedf-main">
                         <!--- \\\\\\\Post-->
@@ -196,7 +187,6 @@
                                     {{comentario.data.text}}
                                 </p>
                             </div>
-
                             <!--
                                    <div class="card-footer">
                                     <a href="#" class="card-link" routerLink="/social"><i class="fa fa-gittip"></i> Like</a>
@@ -207,81 +197,134 @@
                         </div>
                     </div>
                 </section>
-                <section id="Editarinformacion" style="display:none;">
 
-                    <form>
+                <section id="Verinformacion" style="display:none;">
+                    <div class="card w-100">
+                        <div class="card-header">
+                            <h3>
+                                <div class="capitalize">Información de {{userFirebase.nombre}}
+                                    {{userFirebase.apellido}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Nombre: </b>{{userFirebase.nombre}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Apellido: </b>{{userFirebase.apellido}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Genero:</b>{{userFirebase.genero}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Celular:</b>{{userFirebase.celular}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Edad:</b>{{userFirebase.edad}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Nacionalidad:</b>{{userFirebase.nacionalidad}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Seguidores:</b>{{userFirebase.edad}}</div>
+                                </h5>
+                            </div>
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Total de libros:</b>{{userLibro.length}}</div>
+                                </h5>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <h5>
+                                    <div class="capitalize"><b>Descripcion:</b>{{userFirebase.text}}</div>
+                                </h5>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary" (click)="onUsuario(userFirebase)">Editar
+                                    Informacion</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <section id="Editarinformacion" style="display:none;">
                         <div class="card">
                             <div class="card-header">
                                 <h3>Informacion Usuario</h3>
                             </div>
-                            <div class="card-body">
-                                <div class="panel panel-primary">
-                                    <h5><b>Nombre:</b></h5>
-                                    <input id="nombre" class="form-control" value="{{userFirebase.nombre}}">
-                                </div>
-                                <div class="col-xs-6">
-                                    <h5><b>Apellido:</b></h5>
-                                    <input id="apellido" class="form-control" value="{{userFirebase.apellido}}">
-                                </div>
+                            <div class="card-body" *ngIf="InformacionUsuarioProvicional">
+                                <div *ngIf="InformacionUsuarioProvicional">
+                                    <div class="panel panel-primary">
+                                        <h5><b>Nombre:</b></h5>
+                                        <input id="nombre" class="form-control"
+                                            [(ngModel)]="InformacionUsuarioProvicional.nombre"
+                                            value="{{InformacionUsuarioProvicional.nombre}}">
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <h5><b>Apellido:</b></h5>
+                                        <input id="apellido" class="form-control"
+                                            [(ngModel)]="InformacionUsuarioProvicional.apellido"
+                                            value="{{InformacionUsuarioProvicional.apellido}}">
+                                    </div>
 
-                                <div class="col-xs-6">
-                                    <h5><b>Celular:</b></h5>
-                                    <input id="celular" class="form-control" value="{{userFirebase.celular}}">
-                                </div>
+                                    <div class="col-xs-6">
+                                        <h5><b>Celular:</b></h5>
+                                        <input id="celular" class="form-control"
+                                            [(ngModel)]="InformacionUsuarioProvicional.celular"
+                                            value="{{InformacionUsuarioProvicional.celular}}">
+                                    </div>
 
-                                <div class="col-xs-6">
-                                    <h5><b>Nacionalidad:</b></h5>
-                                    <input id="nacionalidad" class="form-control" value="{{userFirebase.nacionalidad}}">
-                                </div>
-
-
-                                <div class="col-xs-6">
-                                    <h5><b>Edad</b></h5>
-                                    <input id="edad" type="number" min="10" max="99" class="form-control"
-                                        value={{userFirebase.edad}}>
-                                </div>
-
-                                <div class="col-xs-6">
-                                    <h5><b>Escribe tus gustos:</b></h5>
-                                    <textarea id="text" class="form-control" value="{{userFirebase.text}}"
-                                        rows="3"></textarea>
-                                </div>
+                                    <div class="col-xs-6">
+                                        <h5><b>Nacionalidad:</b></h5>
+                                        <input id="nacionalidad" class="form-control"
+                                            [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
+                                            value="{{InformacionUsuarioProvicional.nacionalidad}}">
+                                    </div>
 
 
-                                <div class="col-xs-12">
-                                    <button type="submit" (click)="Obtenerinformacion()" class="btn btn-primary"
-                                        data-toggle="button" aria-pressed="false" autocomplete="off"
-                                        value="Agregar">Guardar</button>
+                                    <div class="col-xs-6">
+                                        <h5><b>Edad</b></h5>
+                                        <input id="edad" class="form-control" type="number" min="10" max="99"
+                                            [(ngModel)]="InformacionUsuarioProvicional.edad"
+                                            value={{InformacionUsuarioProvicional.edad}}>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <h5><b>Escribe tus gustos:</b></h5>
+                                        <textarea id="text" class="form-control"
+                                            [(ngModel)]="InformacionUsuarioProvicional.text"
+                                            value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="submit" style="margin: 10px;" class="form-control"
+                                            (click)="onGuardarUsuario()" class="btn btn-primary">Guardar
+                                            Informacion</button>
+                                        <div></div>
+                                        <button type="submit" style="margin: 10px;" class="form-control"
+                                            (click)="onCancelar()" class="btn btn-primary">Cancelar</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-
-
-
-
-                        <!--<div class="form-group">
-                                     <div class="col-xs-6">
-                                        <label for="password">
-                                            <h4>contraseña</h4>
-                                        </label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2">
-                                            <h4>verificar</h4>
-                                        </label>
-                                        <input type="password" class="form-control" name="password2" id="password2"
-                                            placeholder="password2" title="enter your password2.">
-                                    </div>
-                                    
-                                </div>-->
-                    </form>
+                    </section>
                 </section>
-
                 <section id="libros" style="display:none;">
                     <div class="card">
                         <div class="card-header">
@@ -306,6 +349,9 @@
                                         <td>{{libro.data.categoria_libro}}</td>
                                         <td>{{libro.data.text_libro}}</td>
                                         <td><button md-button (click)="onLibro(libro.data, libro.id)">Editar</button>
+                                        </td>
+                                        <td><button md-button class="botoncrear"
+                                                (click)="MostrarInformacion()">CrearLibro</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -332,125 +378,151 @@
                                             value="{{InformacionLibrosProvicional.autor_libro}}">
                                     </div>
                                     <div>
-                                    <label for="sel1">
-                                        <h5><b>Categoria:</b></h5>
-                                    </label>
-                                    <select class="form-control" id="sel1" [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
-                                    value="{{InformacionLibrosProvicional.categoria_libro}}">
-                                        <option>Policial</option>
-                                        <option>Romántica</option>
-                                        <option>Aventura</option>
-                                        <option>Terror</option>
-                                        <option>Ficcion/Realiad</option>
-                                        <option>Ciencia Ficción</option>
-                                        <option>Investigación</option>
-                                        <option>Biográfica</option>
-                                        <option>Infantil</option>
-                                        <option>Autoayuda</option>
-                                        <option>Erótica</option>
-                                        <option>Hogar</option>
-                                        <option>Enciclopedia/Manual</option>
-                                        <option>Política</option>
-                                        <option>Economía/Marketing</option>
-                                        <option>Sociedad</option>
-                                        <option>Deportes</option>
-                                        <option>Viajes/Cultura</option>
-                                        <option>Otros temas/Varios</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <div class="capitalize"><b>Descripción libro: </b></div>
-                                    <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
-                                        value="{{InformacionLibrosProvicional.autor_libro}}">
-                                </div>
+                                        <label for="sel1">
+                                            <h5><b>Categoria:</b></h5>
+                                        </label>
+                                        <select class="form-control" id="sel1"
+                                            [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
+                                            value="{{InformacionLibrosProvicional.categoria_libro}}">
+                                            <option>Policial</option>
+                                            <option>Romántica</option>
+                                            <option>Aventura</option>
+                                            <option>Terror</option>
+                                            <option>Ficcion/Realiad</option>
+                                            <option>Ciencia Ficción</option>
+                                            <option>Investigación</option>
+                                            <option>Biográfica</option>
+                                            <option>Infantil</option>
+                                            <option>Autoayuda</option>
+                                            <option>Erótica</option>
+                                            <option>Hogar</option>
+                                            <option>Enciclopedia/Manual</option>
+                                            <option>Política</option>
+                                            <option>Economía/Marketing</option>
+                                            <option>Sociedad</option>
+                                            <option>Deportes</option>
+                                            <option>Viajes/Cultura</option>
+                                            <option>Otros temas/Varios</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <div class="capitalize"><b>Descripción libro: </b></div>
+                                        <input class="form-control"
+                                            [(ngModel)]="InformacionLibrosProvicional.text_libro"
+                                            value="{{InformacionLibrosProvicional.autor_libro}}">
+                                    </div>
 
-                                <button mat-raised-button (click)="onGuardar()">Guardar</button>
+                                    <button mat-raised-button (click)="onGuardar()">Guardar</button>
+                                </div>
                             </div>
                         </div>
+                    </section>
+                    <section id="crearLibro" style="display:none;">
+
+                        <!-- Contenido de la página -->
+                        <div class="container">
+                            <br>
+                            <div class="row">
+                                <!-- Columna de la izquierda -->
+                                <!-- Fin de Columna de la izquierda -->
+
+                                <!-- Parte central -->
+                                <div class="col-md-12">
+                                    <div class="col-md-12"
+                                        style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+                                        <h3 style="text-align: center">CREAR LIBRO<p><small>INGRESE SUS LIBROS A
+                                                    INTERCAMBIAR</small></p>
+                                        </h3>
+                                    </div>
+                                    <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
+                                    <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
+                                        <!-- Inicio del div central parte de formulario información básica -->
+                                        <input type="hidden" formControlName="id">
+                                        <div class="col-md-12"
+                                            style="border-width: 1px; border-style: solid; border-color: lightgrey;  background:#282828;">
+                                            <br>
+                                            <input type="text" class="form-control" id="nombre_libro"
+                                                placeholder="Nombre del libro" formControlName="nombre_libro">
+
+                                            <br>
+                                            <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
+                                                formControlName="autor_libro">
+
+                                            <br>
+                                            <div>
+                                                <label for="sel1">
+                                                    <h5><b>Categoria:</b></h5>
+                                                </label>
+                                                <select class="form-control" id="sel1"
+                                                    formControlName="categoria_libro">
+                                                    <option>Policial</option>
+                                                    <option>Romántica</option>
+                                                    <option>Aventura</option>
+                                                    <option>Terror</option>
+                                                    <option>Ficcion/Realiad</option>
+                                                    <option>Ciencia Ficción</option>
+                                                    <option>Investigación</option>
+                                                    <option>Biográfica</option>
+                                                    <option>Infantil</option>
+                                                    <option>Autoayuda</option>
+                                                    <option>Erótica</option>
+                                                    <option>Hogar</option>
+                                                    <option>Enciclopedia/Manual</option>
+                                                    <option>Política</option>
+                                                    <option>Economía/Marketing</option>
+                                                    <option>Sociedad</option>
+                                                    <option>Deportes</option>
+                                                    <option>Viajes/Cultura</option>
+                                                    <option>Otros temas/Varios</option>
+
+                                                </select>
+                                            </div>
+
+                                            <br>
+                                            <h5><b>Descripción del libro:</b></h5>
+                                            <textarea class="form-control" id="text_libro" formControlName="text_libro">
+                         </textarea>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-12" style="text-align : center; margin-top: 1%">
+                                                    <button type="submit" class="btn btn-primary btn-block btn-lg"
+                                                        [disabled]="!newlibroForm.valid"
+                                                        value="Agregar">Guardar</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- Fin del div central parte de formulario información básica -->
+                                        <!-- Fin Parte central - enlaces -->
+                                    </form>
+                                    <!-- Fin del form -->
+                                </div>
+                                <!-- Fin del div de parte central -->
+                            </div>
+                        </div>
+                        <!-- /.container -->
+                    </section>
+                </section>
+                <section id="seguidores">
+
+                </section>
+
             </div>
-            </section>
-            </section>
-            <section id="seguidores">
 
-            </section>
-            <section id="editarLibros" style="display:none;">
 
-            </section>
-            <section id="Verinformacion" style="display:none;">
-                <div class="card w-100">
-                    <div class="card-header">
-                        <h3>
-                            <div class="capitalize">Información de {{userFirebase.nombre}} {{userFirebase.apellido}}
-                            </div>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Nombre: </b>{{userFirebase.nombre}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Apellido: </b>{{userFirebase.apellido}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Genero:</b>{{userFirebase.genero}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Celular:</b>{{userFirebase.celular}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Edad:</b>{{userFirebase.Edad}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Nacionalidad:</b>{{userFirebase.nacionalidad}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Seguidores:</b>{{userFirebase.edad}}</div>
-                            </h5>
-                        </div>
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Total de libros:</b>{{userLibro.length}}</div>
-                            </h5>
-                        </div>
 
-                        <div class="col-xs-6">
-                            <h5>
-                                <div class="capitalize"><b>Descripcion:</b>{{userFirebase.text}}</div>
-                            </h5>
-                        </div>
-                    </div>
+            <div class="col-sm-3">
+                <ul class="list-group">
+                    <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar
+                        Libros</button>
+                    <button class="list-group-item Eventos boton5" (click)="MostrarInformacion()">Eventos
+                        Información</button>
+                    <button class="list-group-item Grupos boton5" (click)="MostrarInformacion()">Grupos</button>
 
-                </div>
-            </section>
+                </ul>
+            </div>
         </div>
-
-
-
-        <div class="col-sm-3">
-            <ul class="list-group">
-                <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar
-                    Libros</button>
-                <button class="list-group-item Eventos boton5" (click)="MostrarInformacion()">Eventos
-                    Información</button>
-                <button class="list-group-item Grupos boton5" (click)="MostrarInformacion()">Grupos</button>
-
-            </ul>
-        </div>
-    </div>
-    <!--/col-9-->
+        <!--/col-9-->
     </div>
     <!--/row-->
 

@@ -38,6 +38,7 @@ export class PerfilComponent implements OnInit {
   public currentStatus = 1;
   public InformacionLibrosProvicional: any;
   private id: any;
+  public InformacionUsuarioProvicional: any;
 
   constructor(
     public UserServices: UserService,
@@ -53,15 +54,28 @@ export class PerfilComponent implements OnInit {
     this.newcomentarioForm.setValue({
       text: ''
     });
+
+    // crear libro
+    this.newlibroForm.setValue({
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    });
+
     this.EditarLibros();
+    this.EditarUsuario();
     this.TraerInformacionUsuario();
   }
-  public form = new FormGroup({
-    nombre_libro: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
-    autor_libro: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
+
+ // formulario de libro
+  public newlibroForm = new FormGroup({
     id: new FormControl(),
-    categoria_libro: new FormControl(),
-    text_libro: new FormControl('')
+    nombre_libro: new FormControl(null, Validators.required),
+    autor_libro: new FormControl(null, Validators.required),
+    categoria_libro: new FormControl(null, Validators.required),
+    text_libro: new FormControl(null)
   });
 
   // crea comentario
@@ -116,6 +130,7 @@ export class PerfilComponent implements OnInit {
       console.log(this.userFirebase = user);
     });
   }
+  // editar libros
   EditarLibros() {
     this.InformacionLibrosProvicional = {
       nombre_libro: '',
@@ -125,21 +140,46 @@ export class PerfilComponent implements OnInit {
     };
   }
 
-  onGuardar() {
+  // editar informacion usuario
+  EditarUsuario() {
+    this.InformacionUsuarioProvicional = {
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
+  }
+  // resive la informacion a editar
+  onUsuario(usuario) {
     // tslint:disable-next-line:no-debugger
     debugger;
+    this.InformacionUsuarioProvicional = usuario;
+    document.getElementById('Editarinformacion').style.display = 'block';
+  }
+  onGuardarUsuario() {
+    document.getElementById('Editarinformacion').style.display = 'none';
+    this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    this.onCancelar();
+  }
+
+  // guardar los libros editados
+  onGuardar() {
     this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
     this.onCancelar();
   }
   onCancelar() {
     document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
+    document.getElementById('Editarinformacion').style.display = 'none';
+    this.InformacionUsuarioProvicional = null;
     this.InformacionLibrosProvicional = null;
     this.cerrar.emit();
   }
   onLibro(libro, id) {
     document.getElementById('mostrarInformacionEditarLibro').style.display = 'block';
-    // tslint:disable-next-line:no-debugger
-    debugger;
     this.id = id;
     this.InformacionLibrosProvicional = libro;
   }
@@ -152,22 +192,14 @@ export class PerfilComponent implements OnInit {
 
   // funcion perfil
   MostrarInformacion() {
-    jQuery(document).on('click', '.Editarinformacion', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'block';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
-
+    jQuery(document).on('click', '.botoncrear', function () {
+      document.getElementById('crearLibro').style.display = 'block';
     });
     jQuery(document).on('click', '.Verinformacion', function () {
       document.getElementById('Verinformacion').style.display = 'block';
-      document.getElementById('Editarinformacion').style.display = 'none';
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
     });
     jQuery(document).on('click', '.publicaciones', function () {
       document.getElementById('Verinformacion').style.display = 'none';
@@ -175,7 +207,6 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'block';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
 
     });
     jQuery(document).on('click', '.libros', function () {
@@ -184,7 +215,6 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'block';
       document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'none';
       document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
 
     });
@@ -194,16 +224,7 @@ export class PerfilComponent implements OnInit {
       document.getElementById('publicaciones').style.display = 'none';
       document.getElementById('libros').style.display = 'none';
       document.getElementById('seguidores').style.display = 'block';
-      document.getElementById('editarLibros').style.display = 'none';
 
-    });
-    jQuery(document).on('click', '.editarLibros', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'none';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('editarLibros').style.display = 'block';
     });
   }
 
@@ -244,5 +265,30 @@ export class PerfilComponent implements OnInit {
     }, (error) => {
       console.error(error);
     });
+  }
+
+  public newlibro(form) {
+    console.log(`Status: ${this.currentStatus}`);
+    if (this.currentStatus === 1) {
+      const data = {
+        nombre_libro: form.nombre_libro,
+        autor_libro: form.autor_libro,
+        categoria_libro: form.categoria_libro,
+        text_libro: form.text_libro
+      };
+      this.UserLibro.createLibro(data).then(() => {
+        this.newlibroForm.setValue({
+          id: '',
+          nombre_libro: '',
+          autor_libro: '',
+          categoria_libro: '',
+          text_libro: ''
+        });
+        this.flashMensaje.show('Información Cargada correctamente.',
+        {cssClass: 'alert-success', timeout: 4000});
+      }, (error) => {
+        console.error(error);
+      });
+    }
   }
 }
