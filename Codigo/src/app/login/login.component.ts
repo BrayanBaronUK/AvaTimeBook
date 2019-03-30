@@ -36,41 +36,24 @@ export class LoginComponent implements OnInit {
   }
 
   onClickGoogleLogin() {
-<<<<<<< HEAD
-   this.authService.doGoogleLogin()
-    .then((res) => {
-        this.router.navigate(['/form-person']);
-    }).catch( err => console.log(err.message));
-=======
     this.authService.doGoogleLogin()
       .then((res) => {
         this.router.navigate(['/social']);
       }).catch(err => console.log(err.message));
->>>>>>> cesar
   }
 
   onClickFacebookLogin() {
     this.authService.doFacebookLogin()
       .then((res) => {
-<<<<<<< HEAD
-          this.router.navigate(['/form-person']);
-      }).catch( err => console.log(err.message));
-=======
         this.router.navigate(['/social']);
       }).catch(err => console.log(err.message));
->>>>>>> cesar
   }
 
   onClickTwitterLogin() {
     this.authService.doTwitterLogin()
       .then((res) => {
-<<<<<<< HEAD
-        this.router.navigate(['/form-person']);
-      }).catch (err => console.log(err.message));
-=======
         this.router.navigate(['/social']);
       }).catch(err => console.log(err.message));
->>>>>>> cesar
   }
 
 
