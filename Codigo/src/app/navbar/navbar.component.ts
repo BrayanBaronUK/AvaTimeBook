@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
+<<<<<<< HEAD
 import { Router } from '@angular/router';
+=======
+import { AppComponent } from '../app.component';
+>>>>>>> cesar
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+ // public herramientas: boolean;
   public isLogin: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
@@ -18,7 +23,11 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
+<<<<<<< HEAD
     private router: Router,
+=======
+    public app: AppComponent
+>>>>>>> cesar
   ) {
     this.userFirebase = {
       nombre: '',
@@ -58,5 +67,10 @@ export class NavbarComponent implements OnInit {
     this.authService.doLogout();
     this.router.navigate(['/login']);
   }
-
+  MostarInformacion() {
+      // tslint:disable-next-line:no-debugger
+      debugger;
+      this.app.Obtener();
+      document.getElementById('contraseña').style.display = 'block';
+  }
 }

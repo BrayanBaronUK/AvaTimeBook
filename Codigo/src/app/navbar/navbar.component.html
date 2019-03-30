@@ -8,16 +8,16 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link glyphicon glyphicon-book color" routerLink="/social">Social</a>
+        <a class="nav-link glyphicon glyphicon-book color" routerLink="/social" *ngIf="!herramientas">Social</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link glyphicon glyphicon-book color" routerLink="/perfil">Perfil</a>
+        <a class="nav-link glyphicon glyphicon-book color" routerLink="/perfil" *ngIf="!herramientas">Perfil</a>
       </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Herramientas</a>
+            aria-expanded="false" *ngIf="!herramientas">Herramientas</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Configuracion</a>
+            <a class="dropdown-item con" (click)="MostarInformacion()">Recuperar contraseñas</a>
             <a class="dropdown-item" href="#">Privacidad</a>
             <div class="dropdown-divider"></div>
             <li class="nav-item" *ngIf="isLogin">
@@ -44,3 +44,11 @@
 
   </div>
 </nav>
+<section id="contraseña" style="display:none;">
+  <div>
+    <app-forgot-password></app-forgot-password>
+  </div>
+  <div>
+    <button>hola mundo</button>
+  </div>
+</section>
