@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
+import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
@@ -19,11 +20,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
-<<<<<<< HEAD
     private router: Router,
-=======
     public app: AppComponent
->>>>>>> cesar
   ) {
     this.userFirebase = {
       nombre: '',
