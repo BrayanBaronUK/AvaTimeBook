@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
-import {Router } from '@angular/router';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,14 +20,13 @@ export class RegisterComponent implements OnInit {
   }
   onSubmitAddUser() {
     this.authService.doRegister(this.email, this.password)
-    .then((res) => {
-      this.flashMensaje.show('Usuario creado correctamente.',
-      {cssClass: 'alert-success', timeout: 4000});
-     this.router.navigate(['/form-person']);
-    }).catch( (err) => {
-      debugger;
-      this.flashMensaje.show( 'Error:' && err.message,
-      {cssClass: 'alert-danger', timeout: 4000});
-    });
+      .then((res) => {
+        this.flashMensaje.show('Usuario creado correctamente.',
+          { cssClass: 'alert-success', timeout: 4000 });
+        this.router.navigate(['/form-person']);
+      }).catch((err) => {
+        this.flashMensaje.show('Error:' && err.message,
+          { cssClass: 'alert-danger', timeout: 4000 });
+      });
   }
 }

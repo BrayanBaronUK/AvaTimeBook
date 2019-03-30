@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+ // public herramientas: boolean;
   public isLogin: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
@@ -15,8 +17,8 @@ export class NavbarComponent implements OnInit {
   public userFirebase: any;
   constructor(
     public authService: AuthService,
-    public UserServices: UserService
-
+    public UserServices: UserService,
+    public app: AppComponent
   ) {
     this.userFirebase = {
       nombre: '',
@@ -55,5 +57,10 @@ export class NavbarComponent implements OnInit {
   onClickLogout() {
     this.authService.doLogout();
   }
-
+  MostarInformacion() {
+      // tslint:disable-next-line:no-debugger
+      debugger;
+      this.app.Obtener();
+      document.getElementById('contraseña').style.display = 'block';
+  }
 }
