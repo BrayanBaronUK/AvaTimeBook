@@ -332,27 +332,28 @@
                         </div>
 
                         <div class="card-body">
-                            <table class="table table-dark">
+                            <table  class="table  table-condensed ">
                                 <thead>
-                                    <tr>
+                                    <tr class="table-danger">
                                         <th scope="col">Numero</th>
                                         <th scope="col">Nombre libro</th>
                                         <th scope="col">Autor</th>
                                         <th scope="col">Categoria</th>
                                         <th scope="col">Descripción</th>
+                                        <th scope="col">Acción</th>
                                 </thead>
                                 <tbody *ngFor="let libro of userLibro; let i=index">
                                     <tr>
                                         <th scope="row">{{i+1}}</th>
-                                        <td>{{libro.data.nombre_libro}}</td>
+                                        <td width="5">{{libro.data.nombre_libro}}</td>
                                         <td>{{libro.data.autor_libro}}</td>
                                         <td>{{libro.data.categoria_libro}}</td>
                                         <td>{{libro.data.text_libro}}</td>
-                                        <td><button md-button (click)="onLibro(libro.data, libro.id)">Editar</button>
-                                        </td>
-                                        <td><button md-button class="botoncrear"
+                                        <td><button class="btn btn-primary" md-button (click)="onLibro(libro.data, libro.id)">Editar</button>
+                                            <button md-button class="btn btn-danger botoncrear"
                                                 (click)="MostrarInformacion()">CrearLibro</button>
                                         </td>
+                                       
                                     </tr>
                                 </tbody>
                             </table>
