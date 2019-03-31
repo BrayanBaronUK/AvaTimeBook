@@ -51,4 +51,7 @@ export class ServicioLibroService {
   updateLibro(id, libro: any) {
    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
   }
+  deleteLibro(id) {
+    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
+  }
 }

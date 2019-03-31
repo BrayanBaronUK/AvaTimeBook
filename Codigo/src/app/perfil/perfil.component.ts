@@ -53,6 +53,7 @@ export class PerfilComponent implements OnInit {
     ) {
     // crea comentario;
     this.newcomentarioForm.setValue({
+      id: '',
       text: ''
     });
 
@@ -63,6 +64,7 @@ export class PerfilComponent implements OnInit {
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
+    id: new FormControl(''),
     text: new FormControl('')
   });
 
@@ -155,6 +157,8 @@ export class PerfilComponent implements OnInit {
 
   // actualizar informacion usuario
   onGuardarUsuarioUpdate() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
     this.onCancelarUsuario();
   }
@@ -169,7 +173,7 @@ export class PerfilComponent implements OnInit {
   onCancelarUsuario() {
     document.getElementById('Editarinformacion').style.display = 'none';
     document.getElementById('Verinformacion').style.display = 'block';
-    this.CrearLibrosProvicional = null;
+    this.InformacionUsuarioProvicional = null;
     this.cerrar.emit();
   }
   // se cancela la funcion si no quiere seguir
@@ -267,11 +271,24 @@ export class PerfilComponent implements OnInit {
     };
     this.UserComentario.createComentario(data).then(() => {
       this.newcomentarioForm.setValue({
+        id: '',
         text: ''
       });
     }, (error) => {
       console.error(error);
     });
+  }
+
+
+
+  // FUNCIONES DE ELMININACION
+
+  EliminarComentario(id) {
+    this.UserComentario.deleteComentario(id);
+  }
+
+  EliminarLibro(id) {
+    this.UserLibro.deleteLibro(id);
   }
 
 }

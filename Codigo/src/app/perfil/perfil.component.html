@@ -166,9 +166,7 @@
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
                                                 <div class="h6 dropdown-header">Configuration</div>
-                                                <a class="dropdown-item" href="#">Save</a>
-                                                <a class="dropdown-item" href="#">Hide</a>
-                                                <a class="dropdown-item" href="#">Report</a>
+                                                <a class="dropdown-item" (click)="EliminarComentario(comentario.data.id)">Elminar</a>
                                             </div>
                                         </div>
 
@@ -344,7 +342,7 @@
                                             <th scope="col">Autor</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col">Descripción</th>
-                                            <th scope="col">Acción</th>
+                                            <th scope="col">Acción para el usuario</th>
                                     </thead>
                                     <tbody *ngFor="let libro of userLibro; let i=index">
                                         <tr>
@@ -356,8 +354,9 @@
                                             <td><button class="btn btn-primary tablalibros" md-button
                                                     (click)="MostrarInformacion()"
                                                     (click)="onLibro(libro.data, libro.id)">Editar</button>
+                                                    <button class="btn btn-primary tablalibros" md-button
+                                                (click)="EliminarLibro(libro.id)">Eliminar</button>
                                             </td>
-
                                         </tr>
                                     </tbody>
                                 </table>
