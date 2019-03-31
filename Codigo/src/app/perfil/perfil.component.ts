@@ -39,6 +39,7 @@ export class PerfilComponent implements OnInit {
   public InformacionLibrosProvicional: any;
   private id: any;
   public InformacionUsuarioProvicional: any;
+  public CrearLibrosProvicional: any;
 
   constructor(
     public UserServices: UserService,
@@ -55,29 +56,11 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-    // crear libro
-    this.newlibroForm.setValue({
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    });
-
     this.EditarLibros();
     this.EditarUsuario();
     this.TraerInformacionUsuario();
+    this.CrearLibros();
   }
-
- // formulario de libro
-  public newlibroForm = new FormGroup({
-    id: new FormControl(),
-    nombre_libro: new FormControl(null, Validators.required),
-    autor_libro: new FormControl(null, Validators.required),
-    categoria_libro: new FormControl(null, Validators.required),
-    text_libro: new FormControl(null)
-  });
-
   // crea comentario
   public newcomentarioForm = new FormGroup({
     text: new FormControl('')
@@ -139,7 +122,15 @@ export class PerfilComponent implements OnInit {
       text_libro: ''
     };
   }
-
+  CrearLibros() {
+    this.CrearLibrosProvicional = {
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+  };
+  }
   // editar informacion usuario
   EditarUsuario() {
     this.InformacionUsuarioProvicional = {
@@ -159,41 +150,57 @@ export class PerfilComponent implements OnInit {
     debugger;
     this.InformacionUsuarioProvicional = usuario;
     document.getElementById('Editarinformacion').style.display = 'block';
+    document.getElementById('Verinformacion').style.display = 'none';
   }
-  onGuardarUsuario() {
-    document.getElementById('Editarinformacion').style.display = 'none';
+
+  // actualizar informacion usuario
+  onGuardarUsuarioUpdate() {
     this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    this.onCancelarUsuario();
+  }
+
+  // crear libro por medio de perfil
+  onGuardarlibrocreado() {
+    this.UserLibro.createLibro(this.CrearLibrosProvicional);
     this.onCancelar();
   }
 
-  // guardar los libros editados
-  onGuardar() {
-    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
-    this.onCancelar();
+  // cancelar funcion usuario
+  onCancelarUsuario() {
+    document.getElementById('Editarinformacion').style.display = 'none';
+    document.getElementById('Verinformacion').style.display = 'block';
+    this.CrearLibrosProvicional = null;
+    this.cerrar.emit();
   }
+  // se cancela la funcion si no quiere seguir
   onCancelar() {
     document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
     document.getElementById('Editarinformacion').style.display = 'none';
+    document.getElementById('crearLibro').style.display = 'none';
+    document.getElementById('libros').style.display = 'block';
     this.InformacionUsuarioProvicional = null;
     this.InformacionLibrosProvicional = null;
     this.cerrar.emit();
   }
+  // se trae la informacion para editar
   onLibro(libro, id) {
+    document.getElementById('libros').style.display = 'none';
     document.getElementById('mostrarInformacionEditarLibro').style.display = 'block';
     this.id = id;
     this.InformacionLibrosProvicional = libro;
   }
 
-  // imagenes
-  sanitizeImg(url: any): SafeUrl {
-    return this._sanitizer.bypassSecurityTrustUrl(url);
+   // guardar los libros editados
+   onGuardareditarlibro() {
+    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
+    this.onCancelar();
   }
-
 
   // funcion perfil
   MostrarInformacion() {
-    jQuery(document).on('click', '.botoncrear', function () {
+    jQuery(document).on('click', '.crearlibro', function () {
       document.getElementById('crearLibro').style.display = 'block';
+      document.getElementById('libros').style.display = 'none';
     });
     jQuery(document).on('click', '.Verinformacion', function () {
       document.getElementById('Verinformacion').style.display = 'block';
@@ -267,28 +274,4 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  public newlibro(form) {
-    console.log(`Status: ${this.currentStatus}`);
-    if (this.currentStatus === 1) {
-      const data = {
-        nombre_libro: form.nombre_libro,
-        autor_libro: form.autor_libro,
-        categoria_libro: form.categoria_libro,
-        text_libro: form.text_libro
-      };
-      this.UserLibro.createLibro(data).then(() => {
-        this.newlibroForm.setValue({
-          id: '',
-          nombre_libro: '',
-          autor_libro: '',
-          categoria_libro: '',
-          text_libro: ''
-        });
-        this.flashMensaje.show('Información Cargada correctamente.',
-        {cssClass: 'alert-success', timeout: 4000});
-      }, (error) => {
-        console.error(error);
-      });
-    }
-  }
 }

@@ -52,8 +52,8 @@
                 </div>
 
             </div>
-            <!--/col-3-->
-            <div class="col-sm-6">
+            <!--/col-9-->
+            <div class="col-sm-9">
                 <div class="col-sm-12 gedf-main">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -147,7 +147,7 @@
 
                         <!--- \\\\\\\Post-->
                         <div class="card gedf-card" *ngFor="let comentario of userComentario">
-                            <div class="card-header">
+                            <div class=" col-md-12 card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mr-2">
@@ -199,7 +199,7 @@
                 </section>
 
                 <section id="Verinformacion" style="display:none;">
-                    <div class="card w-100">
+                    <div class="card gedf-card">
                         <div class="card-header">
                             <h3>
                                 <div class="capitalize">Información de {{userFirebase.nombre}}
@@ -263,128 +263,207 @@
                         </div>
 
                     </div>
-                    <section id="Editarinformacion" style="display:none;">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Informacion Usuario</h3>
-                            </div>
-                            <div class="card-body" *ngIf="InformacionUsuarioProvicional">
-                                <div *ngIf="InformacionUsuarioProvicional">
-                                    <div class="panel panel-primary">
-                                        <h5><b>Nombre:</b></h5>
-                                        <input id="nombre" class="form-control"
-                                            [(ngModel)]="InformacionUsuarioProvicional.nombre"
-                                            value="{{InformacionUsuarioProvicional.nombre}}">
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <h5><b>Apellido:</b></h5>
-                                        <input id="apellido" class="form-control"
-                                            [(ngModel)]="InformacionUsuarioProvicional.apellido"
-                                            value="{{InformacionUsuarioProvicional.apellido}}">
-                                    </div>
 
-                                    <div class="col-xs-6">
-                                        <h5><b>Celular:</b></h5>
-                                        <input id="celular" class="form-control"
-                                            [(ngModel)]="InformacionUsuarioProvicional.celular"
-                                            value="{{InformacionUsuarioProvicional.celular}}">
-                                    </div>
-
-                                    <div class="col-xs-6">
-                                        <h5><b>Nacionalidad:</b></h5>
-                                        <input id="nacionalidad" class="form-control"
-                                            [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
-                                            value="{{InformacionUsuarioProvicional.nacionalidad}}">
-                                    </div>
-
-
-                                    <div class="col-xs-6">
-                                        <h5><b>Edad</b></h5>
-                                        <input id="edad" class="form-control" type="number" min="10" max="99"
-                                            [(ngModel)]="InformacionUsuarioProvicional.edad"
-                                            value={{InformacionUsuarioProvicional.edad}}>
-                                    </div>
-
-                                    <div class="col-xs-6">
-                                        <h5><b>Escribe tus gustos:</b></h5>
-                                        <textarea id="text" class="form-control"
-                                            [(ngModel)]="InformacionUsuarioProvicional.text"
-                                            value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <button type="submit" style="margin: 10px;" class="form-control"
-                                            (click)="onGuardarUsuario()" class="btn btn-primary">Guardar
-                                            Informacion</button>
-                                        <div></div>
-                                        <button type="submit" style="margin: 10px;" class="form-control"
-                                            (click)="onCancelar()" class="btn btn-primary">Cancelar</button>
-                                    </div>
-
+                </section>
+                <section id="Editarinformacion" style="display:none;">
+                    <div class="col-md-12 card">
+                        <div class="card-header">
+                            <h3>Informacion Usuario</h3>
+                        </div>
+                        <div class="card-body" *ngIf="InformacionUsuarioProvicional">
+                            <div *ngIf="InformacionUsuarioProvicional">
+                                <div class="panel panel-primary">
+                                    <h5><b>Nombre:</b></h5>
+                                    <input id="nombre" class="form-control"
+                                        [(ngModel)]="InformacionUsuarioProvicional.nombre"
+                                        value="{{InformacionUsuarioProvicional.nombre}}">
                                 </div>
+                                <div class="col-xs-6">
+                                    <h5><b>Apellido:</b></h5>
+                                    <input id="apellido" class="form-control"
+                                        [(ngModel)]="InformacionUsuarioProvicional.apellido"
+                                        value="{{InformacionUsuarioProvicional.apellido}}">
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <h5><b>Celular:</b></h5>
+                                    <input id="celular" class="form-control"
+                                        [(ngModel)]="InformacionUsuarioProvicional.celular"
+                                        value="{{InformacionUsuarioProvicional.celular}}">
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <h5><b>Nacionalidad:</b></h5>
+                                    <input id="nacionalidad" class="form-control"
+                                        [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
+                                        value="{{InformacionUsuarioProvicional.nacionalidad}}">
+                                </div>
+
+
+                                <div class="col-xs-6">
+                                    <h5><b>Edad</b></h5>
+                                    <input id="edad" class="form-control" type="number" min="10" max="99"
+                                        [(ngModel)]="InformacionUsuarioProvicional.edad"
+                                        value={{InformacionUsuarioProvicional.edad}}>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <h5><b>Escribe tus gustos:</b></h5>
+                                    <textarea id="text" class="form-control"
+                                        [(ngModel)]="InformacionUsuarioProvicional.text"
+                                        value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button  style="margin: 10px;" class="form-control"
+                                        (click)="onGuardarUsuarioUpdate()" class="btn btn-primary">Guardar
+                                        Informacion</button>
+                                    <div></div>
+                                    <button  style="margin: 10px;" class="form-control"
+                                        (click)="onCancelarUsuario()" class="btn btn-primary">Cancelar</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="libros" style="display:none;">
+                    <section id="tablalibros">
+                        <div class="card gedf-card">
+                            <div class="card-header">
+                                <h3>Libros</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table  table-condensed ">
+                                    <thead>
+                                        <button class="btn btn-danger crearlibro"
+                                            (click)="MostrarInformacion()">CrearLibro</button>
+                                        <tr class="table-danger">
+                                            <th scope="col">Numero</th>
+                                            <th scope="col">Nombre libro</th>
+                                            <th scope="col">Autor</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Descripción</th>
+                                            <th scope="col">Acción</th>
+                                    </thead>
+                                    <tbody *ngFor="let libro of userLibro; let i=index">
+                                        <tr>
+                                            <th scope="row">{{i+1}}</th>
+                                            <td width="5">{{libro.data.nombre_libro}}</td>
+                                            <td>{{libro.data.autor_libro}}</td>
+                                            <td>{{libro.data.categoria_libro}}</td>
+                                            <td>{{libro.data.text_libro}}</td>
+                                            <td><button class="btn btn-primary tablalibros" md-button
+                                                    (click)="MostrarInformacion()"
+                                                    (click)="onLibro(libro.data, libro.id)">Editar</button>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </section>
-                </section>
-                <section id="libros" style="display:none;">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Libros</h3>
-                        </div>
 
+
+                </section>
+
+                <section id="mostrarInformacionEditarLibro" style="display:none;">
+                    <div class="col-md-12 card">
+                        <div class="card-header">
+                            <h3>Informacion Libro</h3>
+                        </div>
                         <div class="card-body">
-                            <table  class="table  table-condensed ">
-                                <thead>
-                                    <tr class="table-danger">
-                                        <th scope="col">Numero</th>
-                                        <th scope="col">Nombre libro</th>
-                                        <th scope="col">Autor</th>
-                                        <th scope="col">Categoria</th>
-                                        <th scope="col">Descripción</th>
-                                        <th scope="col">Acción</th>
-                                </thead>
-                                <tbody *ngFor="let libro of userLibro; let i=index">
-                                    <tr>
-                                        <th scope="row">{{i+1}}</th>
-                                        <td width="5">{{libro.data.nombre_libro}}</td>
-                                        <td>{{libro.data.autor_libro}}</td>
-                                        <td>{{libro.data.categoria_libro}}</td>
-                                        <td>{{libro.data.text_libro}}</td>
-                                        <td><button class="btn btn-primary" md-button (click)="onLibro(libro.data, libro.id)">Editar</button>
-                                            <button md-button class="btn btn-danger botoncrear"
-                                                (click)="MostrarInformacion()">CrearLibro</button>
-                                        </td>
-                                       
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div *ngIf="InformacionLibrosProvicional">
+                                <div>
+                                    <div class="capitalize"><b>Nombre libro: </b></div>
+                                    <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
+                                        value="{{InformacionLibrosProvicional.nombre_libro}}">
+                                </div>
+                                <div>
+                                    <div class="capitalize"><b>Autor libro: </b></div>
+                                    <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.autor_libro"
+                                        value="{{InformacionLibrosProvicional.autor_libro}}">
+                                </div>
+                                <div>
+                                    <label for="sel1">
+                                        <b>Categoria:</b>
+                                    </label>
+                                    <select class="form-control" id="sel1"
+                                        [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
+                                        value="{{InformacionLibrosProvicional.categoria_libro}}">
+                                        <option>Policial</option>
+                                        <option>Romántica</option>
+                                        <option>Aventura</option>
+                                        <option>Terror</option>
+                                        <option>Ficcion/Realiad</option>
+                                        <option>Ciencia Ficción</option>
+                                        <option>Investigación</option>
+                                        <option>Biográfica</option>
+                                        <option>Infantil</option>
+                                        <option>Autoayuda</option>
+                                        <option>Erótica</option>
+                                        <option>Hogar</option>
+                                        <option>Enciclopedia/Manual</option>
+                                        <option>Política</option>
+                                        <option>Economía/Marketing</option>
+                                        <option>Sociedad</option>
+                                        <option>Deportes</option>
+                                        <option>Viajes/Cultura</option>
+                                        <option>Otros temas/Varios</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <div class="capitalize"><b>Descripción libro: </b></div>
+                                    <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
+                                        value="{{InformacionLibrosProvicional.autor_libro}}">
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary" (click)="onGuardareditarlibro()">Guardar</button>
+                                    <button class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <section id="mostrarInformacionEditarLibro">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Informacion Libro</h3>
-                            </div>
-                            <div class="card-body">
-                                <div *ngIf="InformacionLibrosProvicional">
-                                    <div>
-                                        <div class="capitalize"><b>Nombre libro: </b></div>
-                                        <input class="form-control"
-                                            [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
-                                            value="{{InformacionLibrosProvicional.nombre_libro}}">
-                                    </div>
-                                    <div>
-                                        <div class="capitalize"><b>Autor libro: </b></div>
-                                        <input class="form-control"
-                                            [(ngModel)]="InformacionLibrosProvicional.autor_libro"
-                                            value="{{InformacionLibrosProvicional.autor_libro}}">
-                                    </div>
+                </section>
+
+                <section id="crearLibro" style="display:none;">
+                    <!-- Contenido de la página -->
+                    <div class="container">
+                        <br>
+                        <div class="row">
+                            <!-- Columna de la izquierda -->
+                            <!-- Fin de Columna de la izquierda -->
+
+                            <!-- Parte central -->
+                            <div class="col-md-12">
+                                <div class="col-md-12"
+                                    style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+                                    <h3 style="text-align: center">
+                                        <p><small>Crear Libro</small></p>
+                                    </h3>
+                                </div>
+                                <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
+                                <!-- Inicio del div central parte de formulario información básica -->
+                                <input type="hidden" [(ngModel)]="CrearLibrosProvicional.id">
+                                <div class="col-md-12"
+                                    style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+                                    <br>
+                                    <input type="text" class="form-control" id="nombre_libro"
+                                        placeholder="Nombre del libro"
+                                        [(ngModel)]="CrearLibrosProvicional.nombre_libro">
+
+                                    <br>
+                                    <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
+                                        [(ngModel)]="CrearLibrosProvicional.autor_libro">
+
+                                    <br>
                                     <div>
                                         <label for="sel1">
                                             <h5><b>Categoria:</b></h5>
                                         </label>
                                         <select class="form-control" id="sel1"
-                                            [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
-                                            value="{{InformacionLibrosProvicional.categoria_libro}}">
+                                            [(ngModel)]="CrearLibrosProvicional.categoria_libro">
                                             <option>Policial</option>
                                             <option>Romántica</option>
                                             <option>Aventura</option>
@@ -404,123 +483,36 @@
                                             <option>Deportes</option>
                                             <option>Viajes/Cultura</option>
                                             <option>Otros temas/Varios</option>
+
                                         </select>
                                     </div>
-                                    <div>
-                                        <div class="capitalize"><b>Descripción libro: </b></div>
-                                        <input class="form-control"
-                                            [(ngModel)]="InformacionLibrosProvicional.text_libro"
-                                            value="{{InformacionLibrosProvicional.autor_libro}}">
+
+                                    <br>
+                                    <h5><b>Descripción del libro:</b></h5>
+                                    <textarea class="form-control" id="text_libro"
+                                        [(ngModel)]="CrearLibrosProvicional.text_libro">
+                                        </textarea>
+
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary" (click)="onGuardarlibrocreado()">Guardar</button>
+                                        <button class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
                                     </div>
 
-                                    <button mat-raised-button (click)="onGuardar()">Guardar</button>
                                 </div>
+                                <!-- Fin del div central parte de formulario información básica -->
+                                <!-- Fin Parte central - enlaces -->
+                                <!-- Fin del form -->
                             </div>
+                            <!-- Fin del div de parte central -->
                         </div>
-                    </section>
-                    <section id="crearLibro" style="display:none;">
-
-                        <!-- Contenido de la página -->
-                        <div class="container">
-                            <br>
-                            <div class="row">
-                                <!-- Columna de la izquierda -->
-                                <!-- Fin de Columna de la izquierda -->
-
-                                <!-- Parte central -->
-                                <div class="col-md-12">
-                                    <div class="col-md-12"
-                                        style="border-width: 1px; border-style: solid; border-color: lightgrey;">
-                                        <h3 style="text-align: center">CREAR LIBRO<p><small>INGRESE SUS LIBROS A
-                                                    INTERCAMBIAR</small></p>
-                                        </h3>
-                                    </div>
-                                    <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
-                                    <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
-                                        <!-- Inicio del div central parte de formulario información básica -->
-                                        <input type="hidden" formControlName="id">
-                                        <div class="col-md-12"
-                                            style="border-width: 1px; border-style: solid; border-color: lightgrey;  background:#282828;">
-                                            <br>
-                                            <input type="text" class="form-control" id="nombre_libro"
-                                                placeholder="Nombre del libro" formControlName="nombre_libro">
-
-                                            <br>
-                                            <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
-                                                formControlName="autor_libro">
-
-                                            <br>
-                                            <div>
-                                                <label for="sel1">
-                                                    <h5><b>Categoria:</b></h5>
-                                                </label>
-                                                <select class="form-control" id="sel1"
-                                                    formControlName="categoria_libro">
-                                                    <option>Policial</option>
-                                                    <option>Romántica</option>
-                                                    <option>Aventura</option>
-                                                    <option>Terror</option>
-                                                    <option>Ficcion/Realiad</option>
-                                                    <option>Ciencia Ficción</option>
-                                                    <option>Investigación</option>
-                                                    <option>Biográfica</option>
-                                                    <option>Infantil</option>
-                                                    <option>Autoayuda</option>
-                                                    <option>Erótica</option>
-                                                    <option>Hogar</option>
-                                                    <option>Enciclopedia/Manual</option>
-                                                    <option>Política</option>
-                                                    <option>Economía/Marketing</option>
-                                                    <option>Sociedad</option>
-                                                    <option>Deportes</option>
-                                                    <option>Viajes/Cultura</option>
-                                                    <option>Otros temas/Varios</option>
-
-                                                </select>
-                                            </div>
-
-                                            <br>
-                                            <h5><b>Descripción del libro:</b></h5>
-                                            <textarea class="form-control" id="text_libro" formControlName="text_libro">
-                         </textarea>
-
-                                            <div class="col-md-12">
-                                                <div class="col-md-12" style="text-align : center; margin-top: 1%">
-                                                    <button type="submit" class="btn btn-primary btn-block btn-lg"
-                                                        [disabled]="!newlibroForm.valid"
-                                                        value="Agregar">Guardar</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- Fin del div central parte de formulario información básica -->
-                                        <!-- Fin Parte central - enlaces -->
-                                    </form>
-                                    <!-- Fin del form -->
-                                </div>
-                                <!-- Fin del div de parte central -->
-                            </div>
-                        </div>
-                        <!-- /.container -->
-                    </section>
+                    </div>
+                    <!-- /.container -->
                 </section>
+
                 <section id="seguidores">
 
                 </section>
 
-            </div>
-
-
-
-            <div class="col-sm-3">
-                <ul class="list-group">
-                    <button class="list-group-item editarLibros boton5" (click)="MostrarInformacion()">Editar
-                        Libros</button>
-                    <button class="list-group-item Eventos boton5" (click)="MostrarInformacion()">Eventos
-                        Información</button>
-                    <button class="list-group-item Grupos boton5" (click)="MostrarInformacion()">Grupos</button>
-
-                </ul>
             </div>
         </div>
         <!--/col-9-->
