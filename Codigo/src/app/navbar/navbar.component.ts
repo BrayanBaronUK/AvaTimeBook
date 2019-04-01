@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
+import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
-    private router: Router,
+    public app: AppComponent,
+    private router: Router
   ) {
     this.userFirebase = {
       nombre: '',
@@ -62,7 +64,7 @@ export class NavbarComponent implements OnInit {
   MostarInformacion() {
       // tslint:disable-next-line:no-debugger
       debugger;
-      //this.app.Obtener();
+      this.app.Obtener();
       document.getElementById('contraseña').style.display = 'block';
   }
 
