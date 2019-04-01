@@ -9,6 +9,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle, SafeHtml } from '@an
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { debug } from 'util';
+import { validateConfig } from '@angular/router/src/config';
 
 
 
@@ -53,7 +54,7 @@ export class PerfilComponent implements OnInit {
     ) {
     // crea comentario;
     this.newcomentarioForm.setValue({
-      id: '',
+      ids: '',
       text: ''
     });
 
@@ -64,8 +65,8 @@ export class PerfilComponent implements OnInit {
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
-    id: new FormControl(''),
-    text: new FormControl('')
+    text: new FormControl(''),
+    ids: new FormControl()
   });
 
   ngOnInit() {
@@ -165,6 +166,8 @@ export class PerfilComponent implements OnInit {
 
   // crear libro por medio de perfil
   onGuardarlibrocreado() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.UserLibro.createLibro(this.CrearLibrosProvicional);
     this.onCancelar();
   }
@@ -239,32 +242,12 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  // Subir foto
-  upload(event) {
-    // Get input file
-    const file = event.target.files[0];
 
-    // Generate a random ID
-    const randomId = Math.random().toString(36).substring(2);
-    console.log(randomId);
-    const filepath = `/${randomId}`;
-
-    const fileRef = this._storage.ref(filepath);
-
-    // Upload image
-    const task = this._storage.upload(filepath, file);
-
-    // Observe percentage changes
-    this.uploadProgress = task.percentageChanges();
-
-    // Get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      (() => this.uploadURL = fileRef.getDownloadURL())
-    ).subscribe();
-  }
 
   // envia datos del comentario
   public newComentario(form) {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     const data = {
       text: form.text,
       date: this.UserComentario.getTimeStamp()
@@ -288,6 +271,8 @@ export class PerfilComponent implements OnInit {
   }
 
   EliminarLibro(id) {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.UserLibro.deleteLibro(id);
   }
 

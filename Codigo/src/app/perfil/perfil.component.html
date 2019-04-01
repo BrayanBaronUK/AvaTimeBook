@@ -77,6 +77,7 @@
                     <div class="col-md-12 gedf-main">
                         <!--- \\\\\\\Post-->
                         <form (ngSubmit)="newComentario(newcomentarioForm.value)" [formGroup]="newcomentarioForm">
+                            <input type="hidden" formControlName="ids">
                             <div class="card gedf-card">
                                 <div class="card-header">
                                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -165,8 +166,8 @@
                                                 <i class="fa fa-ellipsis-h"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                                <div class="h6 dropdown-header">Configuration</div>
-                                                <a class="dropdown-item" (click)="EliminarComentario(comentario.data.id)">Elminar</a>
+                                                <div class="h6 dropdown-header">Configuracion</div>
+                                                <a class="dropdown-item" (click)="EliminarComentario(comentario.id)">Elminar</a>
                                             </div>
                                         </div>
 
