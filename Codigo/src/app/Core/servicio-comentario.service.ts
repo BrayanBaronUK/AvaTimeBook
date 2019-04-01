@@ -57,4 +57,8 @@ export class ServicioComentarioService {
 
     return (date + ' ' + time);
   }
+
+  deleteComentario(id) {
+    return this.db.collection('perfil').doc(this.getIud()).collection('comentario').doc(id).delete();
+  }
 }
