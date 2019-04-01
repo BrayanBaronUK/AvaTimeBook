@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
   MostarInformacion() {
       // tslint:disable-next-line:no-debugger
       debugger;
-      this.app.Obtener();
+      //this.app.Obtener();
       document.getElementById('contraseña').style.display = 'block';
   }
 
