@@ -3,6 +3,7 @@ import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { UserService} from '../Core/user.service';
 
 @Component({
   selector: 'app-login',

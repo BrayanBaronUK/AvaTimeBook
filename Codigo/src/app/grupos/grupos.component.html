@@ -1,19 +1,25 @@
-<div class="container bootstrap snippet" style="margin-top:3%;">
+<div class="container bootstrap snippet" style="margin-top:3%; margin-left: 15%;">
   <div class="row">
-    <div class="col-sm-3 columnas">
-        <ul>
-            <li>
-              <button class="btn btn-primary ">Crear Grupo</button>
-            </li>
-            <li>
-              <button class="btn btn-primary ">Visualizar Grupos</button>
-            </li>
-            <li>
-              <button class="btn btn-primary ">Otros Grupos</button>
-            </li>
-          </ul>
-    </div>
     <div class="col-sm-9">
+        <div class="col-sm-12 gedf-main">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <button class="list-group-item publicaciones boton5"
+                        (click)="MostrarInformacion()">Publicaciones</button>
+                </li>
+                <li class="nav-item dropdown">
+                    <button class="list-group-item Verinformacion boton5" (click)="MostrarInformacion()">
+                        Información {{userFirebase.nombre}}</button>
+                </li>
+                <li class="nav-item">
+                    <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
+                </li>
+                <li class="nav-item">
+                    <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
+                        Seguidores</button>
+                </li>
+            </ul>
+        </div>
       <form>
         <div class="form-group">
           <label for="exampleFormControlInput1">Email address</label>
