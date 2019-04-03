@@ -42,16 +42,19 @@ export class ServicioLibroService {
     });
   }
   createLibro(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string }) {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
+    return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
   }
   getLibro() {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
+    return this.db.collection('perfil').doc(this.getIud()).
+    collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
   }
 
   updateLibro(id, libro: any) {
-   return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
+   return this.db.collection('perfil').doc(this.getIud()).
+   collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
   }
   deleteLibro(id) {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
+    return this.db.collection('perfil').doc(this.getIud()).
+    collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
   }
 }

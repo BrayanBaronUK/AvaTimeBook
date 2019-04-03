@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
     private router: Router,
     private afAuth: AngularFireAuth,
     private authService: AuthService,
-    
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -29,9 +28,7 @@ export class AuthGuard implements CanActivate {
       .do( authenticated => {
          if (!authenticated) {
            this.router.navigate(['/login']);
-           
          }
      });
   }
-   
 }

@@ -19,7 +19,7 @@ const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'grupos', component: GruposComponent},
+  { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard]},
   { path: 'eventos', component: EventosComponent},
   { path: '', component: HomePageComponent, },
   { path: 'login', component: LoginComponent },
