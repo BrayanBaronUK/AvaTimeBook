@@ -20,13 +20,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
-<<<<<<< HEAD
-    private router: Router,
-    public app: AppComponent
-=======
     public app: AppComponent,
     private router: Router
->>>>>>> cesar
   ) {
     this.userFirebase = {
       nombre: '',
