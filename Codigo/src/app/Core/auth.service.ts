@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 // import 'rxjs/add/operator/toPromise';
@@ -11,10 +11,13 @@ import 'rxjs/add/operator/catch';
   providedIn: 'root'
 })
 export class AuthService {
-
+  user$ : Observable<any>;
   constructor(
-    public afAuth: AngularFireAuth
-  ) { }
+    public afAuth: AngularFireAuth,
+    
+  ) {
+    
+   }
   doFacebookLogin() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
