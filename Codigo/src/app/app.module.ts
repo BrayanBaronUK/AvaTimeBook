@@ -49,6 +49,8 @@ import * as $ from 'jquery';
 import { FilterPipe } from './filter/filter.pipe';
 import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
+import { GruposComponent } from './grupos/grupos.component';
+import { EventosComponent } from './eventos/eventos.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { ChatComponent } from './chat/chat.component';
     LibrosComponent,
     CrearLibroComponent,
     FilterPipe,
-    ChatComponent
+    ChatComponent,
+    GruposComponent,
+    EventosComponent
   ],
   imports: [
     BrowserModule,

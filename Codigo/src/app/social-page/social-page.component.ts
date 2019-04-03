@@ -87,4 +87,10 @@ export class SocialPageComponent implements OnInit {
     }
   }
 
+    // FUNCIONES DE ELMININACION
+
+    EliminarComentario(id) {
+      this.UserComentario.deleteComentario(id);
+    }
+
 }

@@ -20,8 +20,13 @@ export class NavbarComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public UserServices: UserService,
+<<<<<<< HEAD
     private router: Router,
     public app: AppComponent
+=======
+    public app: AppComponent,
+    private router: Router
+>>>>>>> cesar
   ) {
     this.userFirebase = {
       nombre: '',
@@ -66,5 +71,9 @@ export class NavbarComponent implements OnInit {
       debugger;
       this.app.Obtener();
       document.getElementById('contraseña').style.display = 'block';
+  }
+
+  onSalirRecuperar() {
+    return document.getElementById('contraseña').style.display = 'none';
   }
 }
