@@ -12,7 +12,7 @@ import { empty } from 'rxjs';
  
 export class LibrosComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'apellido', 'nombre_libro' ];
-  public items;
+  public items = [];
   public items2;
   public dataSource2;
   public datos;
@@ -26,7 +26,7 @@ export class LibrosComponent implements OnInit {
     //this.dataSource2 =   new MatTableDataSource(this.datos);
 
    }
-  
+
   ngOnInit() {
     this.UserServices.getPerfiles().subscribe(actionArray => {
       this.items = actionArray.map(item => {
@@ -40,8 +40,8 @@ export class LibrosComponent implements OnInit {
     this.dataSource2 = this.items;
   }
   filter(event){
-    
-    this.items =  this.items.filter( x =>  event.target.value == x.nombre );
+    debugger;
+    this.items =  this.items.filter( x =>  event.target.value in x.nombre );
     if(this.items.length == 0 ){
       this.items = this.items2;
     }
