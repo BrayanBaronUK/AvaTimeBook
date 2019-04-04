@@ -6,12 +6,12 @@ import { firestore } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
 import { UserService } from './user.service';
-import 'rxjs/add/operator/map';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-
+  public uids: any;
   constructor(
     private afs: AngularFirestore,
     private auth: AuthService,
@@ -104,10 +104,13 @@ export class ChatService {
       switchMap(c => {
         // Unique User IDs
         chat = c;
-        const uids = Array.from(new Set(c.messages.map(v => v.uid)));
+        debugger;
+        //this.uids = Array.from(new Set(c.messages.map(vida => vida.uid)));
+        // this.uids =  c.messages.();
+        //Array.from(new Set(c.messages.pipe(switchMap( u => { u.uid } ))));
 
         // Firestore User Doc Reads
-        const userDocs = uids.map(u =>
+        const userDocs = this.uids.map(u =>
           this.afs.doc(`users/${u}`).valueChanges()
         );
 

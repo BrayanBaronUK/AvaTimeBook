@@ -51,6 +51,7 @@ import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { EventosComponent } from './eventos/eventos.component';
+import 'rxjs/add/operator/map';
 
 @NgModule({
   declarations: [
