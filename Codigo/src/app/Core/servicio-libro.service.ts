@@ -42,16 +42,27 @@ export class ServicioLibroService {
     });
   }
   createLibro(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string }) {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
+    return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
   }
   getLibro() {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
+    return this.db.collection('perfil').doc(this.getIud()).
+    collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
   }
 
   updateLibro(id, libro: any) {
-   return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
+   return this.db.collection('perfil').doc(this.getIud()).
+   collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
   }
   deleteLibro(id) {
-    return this.db.collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
+    return this.db.collection('perfil').doc(this.getIud()).
+    collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
+  }
+
+  obtenerLibrofilter1() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    return this.db.collection('perfil', (ref) => ref.where(this.getIud(), '>', true).where(this.getIud(), '<', true)).
+    // tslint:disable-next-line:max-line-length
+    doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(), '>', true).where(this.getIud(), '<', true)).doc(this.getIud()).collection('libro').snapshotChanges();
   }
 }

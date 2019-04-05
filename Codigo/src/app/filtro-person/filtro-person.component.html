@@ -8,7 +8,7 @@
 
 <body>
 
-  <h2>Libros de tu interes</h2>
+  <h2>Personas</h2>
 
   <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name">
 
@@ -21,7 +21,7 @@
     <tbody *ngFor="let filtro of filtrouser">
       <tr>
 
-        <td>{{filtro.data.nombre_libro}}</td>
+        <td>{{filtro.data.nombre}}</td>
         <td>{{filtro.data.apellido}}</td>
       
       </tr>

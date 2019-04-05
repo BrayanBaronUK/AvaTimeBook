@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicioLibroService } from '../Core/servicio-libro.service';
-import { UserService} from '../Core/user.service';
-
+import { ServicioFiltroPersonaService} from '../Core/servicio-filtro-persona.service';
 @Component({
-  selector: 'app-libros',
-  templateUrl: './libros.component.html',
-  styleUrls: ['./libros.component.css']
+  selector: 'app-filtro-person',
+  templateUrl: './filtro-person.component.html',
+  styleUrls: ['./filtro-person.component.css']
 })
-export class LibrosComponent implements OnInit {
+export class FiltroPersonComponent implements OnInit {
 
   public filtrouser = [];
   public input: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
-  constructor(public userservice: ServicioLibroService,
-              public userservicioperfil: UserService
+  constructor(public userservice: ServicioFiltroPersonaService
     ) {
 
 
@@ -27,7 +24,7 @@ export class LibrosComponent implements OnInit {
 
   TraerLibros() {
     // trae todos los comentarios
-    this.userservice.obtenerLibrofilter1().subscribe((usuarios) => {
+    this.userservice.getPerfiles().subscribe((usuarios) => {
       this.filtrouser = [];
       usuarios.forEach((usuariosdata: any) => {
         this.filtrouser.push({
@@ -66,4 +63,5 @@ export class LibrosComponent implements OnInit {
       }
     }
   }
+
 }
