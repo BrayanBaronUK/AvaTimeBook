@@ -64,4 +64,11 @@ export class UserService {
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
+
+  
+  obtenerLibrofilter(){
+    debugger;
+   return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').snapshotChanges();
+
+  }
 }

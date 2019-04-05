@@ -57,4 +57,18 @@ export class ServicioLibroService {
     return this.db.collection('perfil').doc(this.getIud()).
     collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
   }
+
+  /*obtenerLibrofilter(){
+      var hola = this.db.collection('perfil');
+      var hola1 = hola.where(this.getIud(), "==", this.getIud()));
+      var hola2 = hola1.collection('libro-persona');
+      var hola3 = hola2.where(this.getIud(), "==", this.getIud()));
+      var hola4 = hola3.collection('libro').snapshotChanges();
+      return hola4;
+  }
+*/
+  obtenerLibrofilter1(){
+    debugger;
+    return this.db.collection('perfil', (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro').snapshotChanges();
+  }
 }
