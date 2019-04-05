@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
+import { UserService} from '../Core/user.service';
 
 @Component({
   selector: 'app-libros',
@@ -11,7 +12,9 @@ export class LibrosComponent implements OnInit {
   public filtrouser = [];
   public input: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
-  constructor(public userservice: ServicioLibroService) {
+  constructor(public userservice: ServicioLibroService,
+              public userservicioperfil: UserService
+    ) {
 
 
   }
