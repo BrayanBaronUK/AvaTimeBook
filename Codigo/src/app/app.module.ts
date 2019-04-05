@@ -51,6 +51,7 @@ import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { EventosComponent } from './eventos/eventos.component';
+import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { EventosComponent } from './eventos/eventos.component';
     FilterPipe,
     ChatComponent,
     GruposComponent,
-    EventosComponent
+    EventosComponent,
+    FiltroPersonComponent
   ],
   imports: [
     BrowserModule,

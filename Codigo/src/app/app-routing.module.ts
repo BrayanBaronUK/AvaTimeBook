@@ -15,6 +15,7 @@ import { CrearLibroComponent } from '../app/crear-libro/crear-libro.component';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent} from './grupos/grupos.component';
 import { EventosComponent} from './eventos/eventos.component';
+import { FiltroPersonComponent} from './filtro-person/filtro-person.component';
 const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
@@ -30,9 +31,10 @@ export const rootRouterConfig: Routes = [
   { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'form-person', component: FormPersonComponent  },
   { path: 'crearlibro', component: CrearLibroComponent },
-  { path: 'chats/:id', component: ChatComponent },
+  { path: 'chats/:id', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
+  { path: 'filtropersona', component: FiltroPersonComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent }
 ];
 // END OF CCSANCHEZC 15/02/2019 7:29

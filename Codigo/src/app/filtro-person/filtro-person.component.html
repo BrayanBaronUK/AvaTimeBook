@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+  <h2>Personas</h2>
+
+  <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:60%;">Nombre</th>
+      <th style="width:40%;">Apellido</th>
+
+    </tr>
+    <tbody *ngFor="let filtro of filtrouser">
+      <tr>
+
+        <td>{{filtro.data.nombre}}</td>
+        <td>{{filtro.data.apellido}}</td>
+      
+      </tr>
+    </tbody>
+  </table>
+
+
+
+</body>
+
+</html>
