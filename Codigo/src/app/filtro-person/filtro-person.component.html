@@ -7,23 +7,20 @@
 </head>
 
 <body>
-
-  <h2>Personas</h2>
-
   <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name">
 
   <table id="myTable">
     <tr class="header">
       <th style="width:60%;">Nombre</th>
       <th style="width:40%;">Apellido</th>
-
+      <th style="width:40%;">Seguir Persona</th> 
     </tr>
     <tbody *ngFor="let filtro of filtrouser">
       <tr>
 
         <td>{{filtro.data.nombre}}</td>
         <td>{{filtro.data.apellido}}</td>
-      
+        <td><button class="btn btn-primary" md-button (click)="onfiltro(filtro.uid)">Seguir</button></td>
       </tr>
     </tbody>
   </table>

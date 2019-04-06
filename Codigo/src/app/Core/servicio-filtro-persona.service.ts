@@ -19,4 +19,8 @@ export class ServicioFiltroPersonaService {
    getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
+
+  mostrarPerfiles() {
+
+  }
 }

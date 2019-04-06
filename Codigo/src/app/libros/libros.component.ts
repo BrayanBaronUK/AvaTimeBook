@@ -27,7 +27,7 @@ export class LibrosComponent implements OnInit {
 
   TraerLibros() {
     // trae todos los comentarios
-    this.userservice.obtenerLibrofilter1().subscribe((usuarios) => {
+    this.userservice.getLibro().subscribe((usuarios) => {
       this.filtrouser = [];
       usuarios.forEach((usuariosdata: any) => {
         this.filtrouser.push({
@@ -36,7 +36,6 @@ export class LibrosComponent implements OnInit {
         });
       });
     });
-    console.log(this.filtrouser);
   }
 
   myFunction() {

@@ -14,15 +14,18 @@
 
   <table id="myTable">
     <tr class="header">
-      <th style="width:60%;">Nombre</th>
-      <th style="width:40%;">Apellido</th>
-
+      <th style="width:20%;">Nombre libro</th>
+      <th style="width:20%;">Autor</th>
+      <th style="width:20%">Categoria</th>
+      <th style="width:20">Ver persona</th>
     </tr>
     <tbody *ngFor="let filtro of filtrouser">
       <tr>
 
         <td>{{filtro.data.nombre_libro}}</td>
-        <td>{{filtro.data.apellido}}</td>
+        <td>{{filtro.data.autor_libro}}</td>
+        <td>{{filtro.data.categoria_libro}}</td>
+        <td><button class="btn btn-primary" md-button (click)="onfiltro(filtro.id)">Persona</button></td>
       
       </tr>
     </tbody>
