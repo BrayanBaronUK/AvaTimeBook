@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     };
     this.fotico = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
   }
-
+///
   ngOnInit() {
     this.authService.getAuth().subscribe(auth => {
       if (auth) {
