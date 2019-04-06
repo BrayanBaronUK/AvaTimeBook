@@ -69,7 +69,7 @@ export class NavbarComponent implements OnInit {
       this.app.Obtener();
       document.getElementById('contraseña').style.display = 'block';
   }
-
+  //recuperar
   onSalirRecuperar() {
     return document.getElementById('contraseña').style.display = 'none';
   }
