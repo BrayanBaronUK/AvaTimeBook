@@ -41,6 +41,7 @@ export class ServicioLibroService {
       }, err => reject(err));
     });
   }
+  //crear libro
   createLibro(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string }) {
     return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
   }
