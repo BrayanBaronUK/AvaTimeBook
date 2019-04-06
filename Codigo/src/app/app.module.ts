@@ -51,6 +51,7 @@ import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { EventosComponent } from './eventos/eventos.component';
+import 'rxjs/add/operator/map';
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 import { ChatService } from './Core/chat.service';
 
@@ -73,8 +74,7 @@ import { ChatService } from './Core/chat.service';
     ChatComponent,
     GruposComponent,
     EventosComponent,
-    FiltroPersonComponent,
-    ChatService
+    FiltroPersonComponent
   ],
   imports: [
     BrowserModule,
