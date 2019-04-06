@@ -53,6 +53,7 @@ export class ServicioLibroService {
    return this.db.collection('perfil').doc(this.getIud()).
    collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
   }
+  //obtener libro
   deleteLibro(id) {
     return this.db.collection('perfil').doc(this.getIud()).
     collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).delete();
