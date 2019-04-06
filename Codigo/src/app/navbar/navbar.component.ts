@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
         this.fotoUsuario = auth.photoURL;
         this.UserServices.getPerfil().valueChanges().subscribe((user) => {
           console.log(this.userFirebase = user);
-          if(!auth.displayName){
+          if(auth.displayName == null){
             this.nombreUsuario = this.userFirebase.nombre
             this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png'
           }
