@@ -14,35 +14,37 @@ import { AuthService } from '../Core/auth.service';
 export class ChatComponent implements OnInit {
   chat$: Observable<any>;
   newMsg: string;
-
+  mensaje: string = "";
+  elemento: any;
   constructor(
-    public cs: ChatService,
+    
     private route: ActivatedRoute,
-    public auth: AuthService
-  ) {}
-
-  ngOnInit() {
-    const chatId = this.route.snapshot.paramMap.get('id');
-    const source = this.cs.get(chatId);
-    this.chat$ = this.cs.joinUsers(source); // .pipe(tap(v => this.scrollBottom(v)));
-    this.scrollBottom();
+    public auth: AuthService,
+    public _cs: ChatService,
+  ) {
+    this._cs.cargarMensjes().subscribe( ()=> {
+        setTimeout( ()=> {
+          this.elemento.scrollTop = this.elemento.scrollHeight;
+        },20)
+       
+    });
   }
+  enviar_mensaje(){
+    console.log( this.mensaje );
 
-  submit(chatId) {
-    if (!this.newMsg) {
-      return alert('you need to enter something');
+    if( this.mensaje.length === 0){
+      return;
     }
-    this.cs.sendMessage(chatId, this.newMsg);
-    this.newMsg = '';
-    this.scrollBottom();
+
+    this._cs.agregarMensaje( this.mensaje )
+          .then( ()=>this.mensaje="")
+          .catch( (err)=>console.error('Error al enviar', err));
+
+  }
+  ngOnInit() {
+    this.elemento = document.getElementById('app-mensajes');
   }
 
-  trackByCreated(i, msg) {
-    return msg.createdAt;
-  }
-
-  private scrollBottom() {
-    setTimeout(() => window.scrollTo(0, document.body.scrollHeight), 500);
-  }
+ 
 
 }

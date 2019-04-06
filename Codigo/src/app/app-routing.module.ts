@@ -20,7 +20,7 @@ const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard]},
+  { path: 'grupos', component: GruposComponent},
   { path: 'eventos', component: EventosComponent},
   { path: '', component: HomePageComponent, },
   { path: 'login', component: LoginComponent },
@@ -31,7 +31,7 @@ export const rootRouterConfig: Routes = [
   { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'form-person', component: FormPersonComponent  },
   { path: 'crearlibro', component: CrearLibroComponent },
-  { path: 'chats/:id', component: ChatComponent, canActivate: [AuthGuard] },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: 'filtropersona', component: FiltroPersonComponent, canActivate: [AuthGuard] },

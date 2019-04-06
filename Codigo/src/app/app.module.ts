@@ -51,11 +51,9 @@ import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { EventosComponent } from './eventos/eventos.component';
-<<<<<<< HEAD
 import 'rxjs/add/operator/map';
-=======
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
->>>>>>> 44a62c1e7300b9c516c70dfd90e21382e663bf13
+import { ChatService } from './Core/chat.service';
 
 @NgModule({
   declarations: [
@@ -109,7 +107,7 @@ import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
     MatTabsModule,
     MatIconModule
   ],
-  providers: [AuthService, AuthGuard, FlashMessagesService],
+  providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
