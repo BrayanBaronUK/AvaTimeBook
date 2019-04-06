@@ -31,11 +31,7 @@ export const rootRouterConfig: Routes = [
   { path: 'forgot', component: ForgotPasswordComponent },
   { path: 'form-person', component: FormPersonComponent  },
   { path: 'crearlibro', component: CrearLibroComponent },
-<<<<<<< HEAD
-  { path: 'chats/:id', component: ChatComponent, canActivate: [AuthGuard] },
-=======
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
->>>>>>> cristian
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: 'filtropersona', component: FiltroPersonComponent, canActivate: [AuthGuard] },

@@ -39,4 +39,12 @@ export class ForgotPasswordComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
+  MostarInformacion() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.app.Obtener();
+    document.getElementById('contraseña').style.display = 'none';
+    document.getElementById('navbarColor02').style.display = 'flex';
+    document.getElementById('container').style.display = 'block';
+}
 }
