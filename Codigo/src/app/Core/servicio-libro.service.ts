@@ -30,6 +30,7 @@ export class ServicioLibroService {
   getIud() {
     return firebase.auth().currentUser.uid;
   }
+  //actualizar usuario actual
   updateCurrentUser(value) {
     return new Promise<any>((resolve, reject) => {
       const user = firebase.auth().currentUser;
