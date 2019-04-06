@@ -42,7 +42,7 @@ export class ChatService {
         this.usuario.nombre = userse.getPerfil().valueChanges().subscribe( 
           (person)=>{
              this.usuario = person;
-             console.log('soy la persona', this.usuario);
+            
           } );
         this.useruid = user.uid;
       })
@@ -55,7 +55,7 @@ export class ChatService {
 
     this.itemsCollection = this.afs.collection<Mensaje>('chats', 
                                 ref => ref.orderBy('fecha','desc')
-                                .limit(5) );
+                                .limit(15) );
 
     return this.itemsCollection.valueChanges()
                                 .map( (mensajes:Mensaje[]) =>{

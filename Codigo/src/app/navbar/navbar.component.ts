@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
       nacionalidad: '',
       text: ''
     };
-    this.fotico = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
+    this.fotico = 'https://firebasestorage.googleapis.com/v0/b/proyectolibro-b0994.appspot.com/o/652rqf4g3bj?alt=media&token=26892209-8223-47f0-a4b7-b335c0976065';
   }
 ///
   ngOnInit() {
@@ -47,12 +47,12 @@ export class NavbarComponent implements OnInit {
           console.log(this.userFirebase = user);
           if(auth.displayName == null){
             this.nombreUsuario = this.userFirebase.nombre
-            this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png'
+            this.fotoUsuario = 'https://firebasestorage.googleapis.com/v0/b/proyectolibro-b0994.appspot.com/o/652rqf4g3bj?alt=media&token=26892209-8223-47f0-a4b7-b335c0976065'
           }
         });
         if (this.fotoUsuario == null) {
 
-          this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
+          this.fotoUsuario = 'https://firebasestorage.googleapis.com/v0/b/proyectolibro-b0994.appspot.com/o/652rqf4g3bj?alt=media&token=26892209-8223-47f0-a4b7-b335c0976065';
         }
       } else {
            this.isLogin = false;
