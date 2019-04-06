@@ -67,6 +67,7 @@ export class ServicioLibroService {
       return hola4;
   }
 */
+//metodo para el filtro
   obtenerLibrofilter1(){
     debugger;
     return this.db.collection('perfil', (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro').snapshotChanges();
