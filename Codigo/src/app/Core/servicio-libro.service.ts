@@ -13,7 +13,7 @@ export class ServicioLibroService {
     public db: AngularFirestore,
     public afAuth: AngularFireAuth
   ) { }
-
+////////obtener usuario actual
   getCurrentUser() {
     return new Promise<any>((resolve, reject) => {
       // tslint:disable-next-line:no-shadowed-variable
