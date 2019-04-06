@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioFiltroPersonaService} from '../Core/servicio-filtro-persona.service';
-<<<<<<< HEAD
 import { UserService} from '../Core/user.service';
-=======
->>>>>>> cristian
 @Component({
   selector: 'app-filtro-person',
   templateUrl: './filtro-person.component.html',
@@ -14,12 +11,8 @@ export class FiltroPersonComponent implements OnInit {
   public filtrouser = [];
   public input: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
-<<<<<<< HEAD
   constructor(public userservice: ServicioFiltroPersonaService,
               public userservicePerfil: UserService
-=======
-  constructor(public userservice: ServicioFiltroPersonaService
->>>>>>> cristian
     ) {
 
 
@@ -42,18 +35,12 @@ export class FiltroPersonComponent implements OnInit {
         });
       });
     });
-<<<<<<< HEAD
   }
 
   onflitro(id) {
     console.log(id);
  }
 
-=======
-    console.log(this.filtrouser);
-  }
-
->>>>>>> cristian
   myFunction() {
     // tslint:disable-next-line:no-debugger
     debugger;

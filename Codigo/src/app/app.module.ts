@@ -51,13 +51,8 @@ import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
 import { EventosComponent } from './eventos/eventos.component';
-<<<<<<< HEAD
-import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
-=======
-import 'rxjs/add/operator/map';
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 import { ChatService } from './Core/chat.service';
->>>>>>> cristian
 
 @NgModule({
   declarations: [
@@ -78,7 +73,8 @@ import { ChatService } from './Core/chat.service';
     ChatComponent,
     GruposComponent,
     EventosComponent,
-    FiltroPersonComponent
+    FiltroPersonComponent,
+    ChatService
   ],
   imports: [
     BrowserModule,
