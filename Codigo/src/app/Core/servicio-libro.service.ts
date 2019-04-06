@@ -74,6 +74,8 @@ export class ServicioLibroService {
 //metodo para el filtro
   obtenerLibrofilter1(){
     debugger;
-    return this.db.collection('perfil', (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(),'>',true).where(this.getIud(),'<',true)).doc(this.getIud()).collection('libro').snapshotChanges();
+    return this.db.collection('perfil', (ref) => ref.where(this.getIud(), '>', true).where(this.getIud(), '<', true)).
+    // tslint:disable-next-line:max-line-length
+    doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(), '>', true).where(this.getIud(), '<', true)).doc(this.getIud()).collection('libro').snapshotChanges();
   }
 }

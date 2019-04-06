@@ -1,19 +1,42 @@
+<ng-container *ngIf="chat$ | async as chat">
+  <ng-container *ngIf=" auth.user$ | async as user">
 
-<!doctype html>
-<html lang="en">
-<head>
-</head>
-<body>
-  <!-- BEGIN JIVOSITE CODE {literal} -->
-<script type='text/javascript'>
-  (function(){ var widget_id = '1qXpMIJzqN';var d=document;var w=window;function l(){
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
-    s.src = '//code.jivosite.com/script/widget/'+widget_id
-      ; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}
-    if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}
-    else{w.addEventListener('load',l,false);}}})();
-  </script>
-  <!-- {/literal} END JIVOSITE CODE -->
+    <div class="top">
+      <p><a class="tag" routerLink="/">Back</a>
+        <span class="tag is-success">
+          https://firestore-megachat.firebaseapp.com/chats/{{ chat.id }}
+        </span>
+      </p>
+    </div>
 
-</body>
-</html>
+
+    <div #chatBox class="chat">
+
+
+      <div class="msg animated zoomInUp" *ngFor="let msg of chat.messages; trackBy: trackByCreated">
+
+        <div class="user">
+          <img [src]="msg.user?.photoURL || 'assets/unicorn.svg'" width="50px">
+          <div><span class="tag is-dark">{{ msg.user?.displayName || msg.user?.uid }}</span></div>
+
+          <button *ngIf="chat.uid === user.uid || msg.uid === user.uid" class="button is-danger is-small" (click)="cs.deleteMessage(chat, msg)">Delete</button>
+
+        </div>
+
+        <p>{{ msg.content }}</p>
+
+
+      </div>
+
+
+
+    </div>
+
+    <div class="form">
+      <input class="input" [(ngModel)]="newMsg" maxlength="100" (keydown.enter)="submit(chat.id)">
+
+      <button (click)="submit(chat.id)" class="button is-info" [disabled]="!newMsg">Send</button>
+    </div>
+
+  </ng-container>
+</ng-container>

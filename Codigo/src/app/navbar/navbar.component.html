@@ -13,8 +13,14 @@
       <li class="nav-item active">
         <a class="nav-link glyphicon glyphicon-book color" routerLink="/perfil" *ngIf="!herramientas">Perfil</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link glyphicon glyphicon-book color" routerLink="/libros" *ngIf="!herramientas">Buscar</a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+          aria-expanded="false" *ngIf="!herramientas">Buscar</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" routerLink="/filtropersona">Personas</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/libros">Libros</a>
+        </div>
       </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
