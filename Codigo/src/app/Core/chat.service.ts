@@ -1,126 +1,84 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { firestore } from 'firebase/app';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
 import { UserService } from './user.service';
-import 'rxjs/add/operator/map';
+import { Mensaje } from "../interface/mensajes.interface";
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-
+  public uids: any;
+  private itemsCollection: AngularFirestoreCollection<Mensaje>;
+  public chats: Mensaje[] = [];
+  public usuario:any = {};
+  public useruid:any;
   constructor(
     private afs: AngularFirestore,
     private auth: AuthService,
     private router: Router,
-    private user : UserService
-  ) {}
-
-  get(chatId) {
-    return this.afs
-      .collection<any>('chats')
-      .doc(chatId)
-      .snapshotChanges()
-      .pipe(
-        map(doc => {
-          return { id: doc.payload.id, ...doc.payload.data() };
-        })
-      );
-  }
-
-  getUserChats() {
-    return this.auth.user$.pipe(
-      switchMap(user => {
-        return this.afs
-          .collection('chats', ref => ref.where('uid', '==', user.uid))
-          .snapshotChanges()
-          .pipe(
-            map(actions => {
-              return actions.map(a => {
-                const data: Object = a.payload.doc.data();
-                const id = a.payload.doc.id;
-                return { id, ...data };
-              });
-            })
-          );
+    private userse : UserService,
+   
+  ) {
+      this.auth.afAuth.authState.subscribe( user=> {
+        console.log('soy el user', user);
+        if(!user){
+          return;
+        }
+        this.usuario = {
+          nombre: '',
+          apellido: '',
+          genero: '',
+          edad: '',
+          url: '',
+          celular: '',
+          nacionalidad: '',
+          text: '',
+        };
+        
+        this.usuario.nombre = userse.getPerfil().valueChanges().subscribe( 
+          (person)=>{
+             this.usuario = person;
+             console.log('soy la persona', this.usuario);
+          } );
+        this.useruid = user.uid;
       })
-    );
+   
+      console.log('me llame' , this.usuario);
+      //this.usuario.nombre = user.getPerfil(this.usuario.uid).valueChanges().subscribe(user)
   }
+  
+  cargarMensjes(){
 
-  async create() {
-    const  uid  = await this.user.getIud( );
+    this.itemsCollection = this.afs.collection<Mensaje>('chats', 
+                                ref => ref.orderBy('fecha','desc')
+                                .limit(5) );
 
-    const data = {
-      uid,
-      createdAt: Date.now(),
-      count: 0,
-      messages: []
-    };
+    return this.itemsCollection.valueChanges()
+                                .map( (mensajes:Mensaje[]) =>{
+                                  
+                                  this.chats = [];
+                                  for( let mensaje of mensajes ){
+                                    this.chats.unshift( mensaje );
+                                  }
+                                
+                                })
 
-    const docRef = await this.afs.collection('chats').add(data);
-
-    return this.router.navigate(['chats', docRef.id]);
   }
+   
+  agregarMensaje( texto:string ){
+    let mensaje : Mensaje = {
+      nombre: this.usuario.nombre,
+      mensaje: texto,
+      fecha: new Date().getTime(),
+      uid: this.userse.getIud(),
 
-  async sendMessage(chatId, content) {
-    const  uid  = await this.user.getIud( );
-
-    const data = {
-      uid,
-      content,
-      createdAt: Date.now()
-    };
-
-    if (uid) {
-      const ref = this.afs.collection('chats').doc(chatId);
-      return ref.update({
-        messages: firestore.FieldValue.arrayUnion(data)
-      });
     }
+   return this.itemsCollection.add( mensaje );
   }
 
-  async deleteMessage(chat, msg) {
-    const  uid  = await this.user.getIud( );
 
-    const ref = this.afs.collection('chats').doc(chat.id);
-    console.log(msg);
-    if (chat.uid === uid || msg.uid === uid) {
-      // Allowed to delete
-      delete msg.user;
-      return ref.update({
-        messages: firestore.FieldValue.arrayRemove(msg)
-      });
-    }
-  }
-
-  joinUsers(chat$: Observable<any>) {
-    let chat;
-    const joinKeys = {};
-
-    return chat$.pipe(
-      switchMap(c => {
-        // Unique User IDs
-        chat = c;
-        const uids = Array.from(new Set(c.messages.map(v => v.uid)));
-
-        // Firestore User Doc Reads
-        const userDocs = uids.map(u =>
-          this.afs.doc(`users/${u}`).valueChanges()
-        );
-
-        return userDocs.length ? combineLatest(userDocs) : of([]);
-      }),
-      map(arr => {
-        arr.forEach(v => (joinKeys[(<any>v).uid] = v));
-        chat.messages = chat.messages.map(v => {
-          return { ...v, user: joinKeys[v.uid] };
-        });
-
-        return chat;
-      })
-    );
-  }
 }
