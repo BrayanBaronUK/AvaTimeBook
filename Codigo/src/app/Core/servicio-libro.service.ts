@@ -48,7 +48,7 @@ export class ServicioLibroService {
     return this.db.collection('perfil').doc(this.getIud()).
     collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
   }
-
+  //actualizar libro
   updateLibro(id, libro: any) {
    return this.db.collection('perfil').doc(this.getIud()).
    collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);
