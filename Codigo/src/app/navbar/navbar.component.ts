@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
+  //click sobre salir
   onClickLogout() {
     this.authService.doLogout();
     this.router.navigate(['/login']);
