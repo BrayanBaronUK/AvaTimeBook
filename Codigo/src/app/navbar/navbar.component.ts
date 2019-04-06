@@ -62,6 +62,7 @@ export class NavbarComponent implements OnInit {
     this.authService.doLogout();
     this.router.navigate(['/login']);
   }
+  //mostrar info
   MostarInformacion() {
       // tslint:disable-next-line:no-debugger
       debugger;
