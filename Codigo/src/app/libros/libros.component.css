@@ -33,3 +33,12 @@
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+.boton{
+  display: inline-block;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+button{
+  margin: 10px;
+}

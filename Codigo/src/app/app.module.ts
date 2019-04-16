@@ -54,7 +54,11 @@ import { EventosComponent } from './eventos/eventos.component';
 import 'rxjs/add/operator/map';
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 import { ChatService } from './Core/chat.service';
-
+import {AccordionModule} from 'primeng/accordion';
+import {MenuItem} from 'primeng/api';
+import {PanelModule} from 'primeng/panel';
+import {TableModule} from 'primeng/table';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +81,11 @@ import { ChatService } from './Core/chat.service';
     FiltroPersonComponent
   ],
   imports: [
+    AccordionModule,
     BrowserModule,
+    PanelModule,
+    TableModule,
+    AngularFontAwesomeModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

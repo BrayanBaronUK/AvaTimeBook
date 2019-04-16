@@ -1,33 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
-import { UserService} from '../Core/user.service';
-
+import { UserService } from '../Core/user.service';
+import { Libros } from '../variables/libros';
+import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
   styleUrls: ['./libros.component.css']
 })
 export class LibrosComponent implements OnInit {
-
+  @Output() cerrar = new EventEmitter();
   public filtrouser = [];
+  public userLibro: any;
+  public colum: any[];
   public input: any;
+  public InformacionLibrosProvicional: any;
+  public CrearLibrosProvicional: any;
+  private id: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
-  constructor(public userservice: ServicioLibroService,
-              public userservicioperfil: UserService
-    ) {
+  constructor(
+    public userservicioperfil: UserService,
+    public UserLibro: ServicioLibroService,
+    public flashMensaje: FlashMessagesService,
+    public router: Router
+  ) {
 
 
   }
 
   ngOnInit() {
-    this.TraerLibros();
+    this.Variables();
+    this.EditarLibros();
+    this.CrearLibros();
+    this.TraerLibrosFiltro();
+    this.TraerLibro();
+    this.MostrarColumnas();
   }
 
+  // iniciar variables
 
 
-  TraerLibros() {
+  MostrarColumnas() {
+    this.colum = [
+      { header: 'Nombre' },
+      { header: 'Autor' },
+      { header: 'Categoria' },
+      { header: 'Descripcion' }
+    ];
+  }
+  Variables() {
+    this.userLibro = {
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
+  }
+  CrearLibros() {
+    this.CrearLibrosProvicional = {
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
+  }
+  TraerLibrosFiltro() {
     // trae todos los comentarios
-    this.userservice.getLibro().subscribe((usuarios) => {
+    this.UserLibro.getLibro().subscribe((usuarios) => {
       this.filtrouser = [];
       usuarios.forEach((usuariosdata: any) => {
         this.filtrouser.push({
@@ -64,5 +105,67 @@ export class LibrosComponent implements OnInit {
         }
       }
     }
+  }
+
+
+  TraerLibro() {
+    // trae todos los libros
+    this.UserLibro.getLibro().subscribe((libros) => {
+      this.userLibro = [];
+      libros.forEach((librodata: any) => {
+        this.userLibro.push({
+          id: librodata.payload.doc.id,
+          data: librodata.payload.doc.data()
+        });
+      });
+    });
+  }
+
+  onCancelar() {
+    this.CrearLibrosProvicional = {
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
+    this.cerrar.emit();
+  }
+  // crear libro por medio de perfil
+  onGuardarlibrocreado() {
+    this.UserLibro.createLibro(this.CrearLibrosProvicional);
+    this.CrearLibrosProvicional = {
+      id: '',
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
+    this.flashMensaje.show('Libro creado.',
+      { cssClass: 'alert-success', timeout: 4000 });
+    this.onCancelar();
+  }
+  // editar libros
+  EditarLibros() {
+    this.InformacionLibrosProvicional = {
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
+    };
+  }
+
+  EliminarLibro(id) {
+    this.UserLibro.deleteLibro(id);
+  }
+  // se trae la informacion para editar
+  onLibro(libro, id) {
+    this.id = id;
+    this.InformacionLibrosProvicional = libro;
+  }
+  // guardar los libros editados
+  onGuardareditarlibro() {
+    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
+    this.onCancelar();
   }
 }
