@@ -1,55 +1,78 @@
-<div class="container bootstrap snippet" style="margin-top:3%; margin-left: 15%;">
-  <div class="row">
-    <div class="col-sm-9">
-        <div class="col-sm-12 gedf-main">
-            <ul class="nav nav-tabs">
+<!------ Include the above in your HEAD tag ---------->
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <ul class="nav nav-tabs list-group" role="tablist">
                 <li class="nav-item">
-                    <button class="list-group-item publicaciones boton5"
-                        (click)="MostrarInformacion()">Publicaciones</button>
-                </li>
-                <li class="nav-item dropdown">
-                    <button class="list-group-item Verinformacion boton5" (click)="MostrarInformacion()">
-                        Información {{userFirebase.nombre}}</button>
-                </li>
-                <li class="nav-item">
-                    <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
+                    <a class="nav-link " href="#crearLibro" role="tab" data-toggle="tab">Crear Grupo </a>
                 </li>
                 <li class="nav-item">
-                    <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
-                        Seguidores</button>
+                    <a class="nav-link active" href="#tablaLibros" role="tab" data-toggle="tab">Ver Grupo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#buscarLibros" role="tab" data-toggle="tab">Chat Grupal de grupos</a>
                 </li>
             </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">Social Media</div>
+                <div class="panel-body">
+                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
+                        class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
+                        class="fa fa-google-plus fa-2x"></i>
+                </div>
+            </div>
+
         </div>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <!--/col-3-->
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="table-responsive">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="tablaLibros">
+                                <p-table [value]="userLibro" [paginator]="true" [rows]="10">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Nombre Libro</th>
+                                            <th>Autor</th>
+                                            <th>Categoria</th>
+                                            <th>Descripcion</th>
+                                            <th>Funciones</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-userLibro>
+                                        <tr>
+                                            <td>{{userLibro.data.nombre_libro}}</td>
+                                            <td>{{userLibro.data.autor_libro}}</td>
+                                            <td>{{userLibro.data.categoria_libro}}</td>
+                                            <td>{{userLibro.data.text_libro}}</td>
+                                            <td><button class="btn btn-primary tablalibros"
+                                                    (click)="onLibro(userLibro.data, userLibro.id)" 
+                                                    ><a href="#mostrarInformacionEditarLibro">Editar</a></button>
+                                                <button class="btn btn-primary tablalibros" md-button
+                                                    (click)="EliminarLibro(userLibro.id)">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                
+                            </div>
+                          
+                        </div>
+                    </div>
+                    <!--/table-resp-->
+
+                </div>
+                <!--/tab-pane-->
+
+            </div>
+            <!--/tab-pane-->
         </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Example multiple select</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Example textarea</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-      </form>
+        <!--/col-9-->
     </div>
-  </div>
-</div>
+    <!--/row-->
