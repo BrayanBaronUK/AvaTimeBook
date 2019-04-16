@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -32,7 +33,6 @@ export class FormPersonComponent implements OnInit {
       apellido: '',
       genero: '',
       edad: '',
-      url: '',
       celular: '',
       nacionalidad: '',
       text: ''
@@ -42,7 +42,6 @@ export class FormPersonComponent implements OnInit {
   public newperfilForm = new FormGroup({
     nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
-    url: new FormControl(null),
     genero: new FormControl(Validators.required, Validators.required),
     edad: new FormControl(Validators.required, Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
@@ -52,6 +51,7 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
+
   }
   upload(event) {
     // Get input file
@@ -59,21 +59,23 @@ export class FormPersonComponent implements OnInit {
 
     // Generate a random ID
     const randomId = Math.random().toString(36).substring(2);
-    console.log(randomId);
-    const filepath = `/${randomId}`;
 
+    const filepath = `/${randomId}`;
+console.log(filepath);
     const fileRef = this._storage.ref(filepath);
 
     // Upload image
     const task = this._storage.upload(filepath, file);
-
+console.log(task);
     // Observe percentage changes
     this.uploadProgress = task.percentageChanges();
 
     // Get notified when the download URL is available
     task.snapshotChanges().pipe(
-      (() => this.uploadURL = fileRef.getDownloadURL())
+      finalize(() => this.uploadURL = fileRef.getDownloadURL())
     ).subscribe();
+    this.uploadURL = fileRef.getDownloadURL();
+    console.log(this.uploadURL + 'soy yo');
   }
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
@@ -83,18 +85,17 @@ export class FormPersonComponent implements OnInit {
         apellido: form.apellido,
         genero: form.genero,
         edad: form.edad,
-        url: form.url,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text
       };
+      console.log(data);
       this.UserServices.createPefil(data).then(() => {
         this.newperfilForm.setValue({
           nombre: '',
           apellido: '',
           genero: '',
           edad: '',
-          url: '',
           celular: '',
           nacionalidad: '',
           text: ''

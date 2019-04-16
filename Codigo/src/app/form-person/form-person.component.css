@@ -7,3 +7,6 @@ h5{
 .container{
     width: 60% !important;
 }
+.hidden {
+    display: none;
+  }
