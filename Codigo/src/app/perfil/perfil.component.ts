@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { UserService } from '../Core/user.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { ServicioLibroService} from '../core/servicio-libro.service';
 import { ServicioComentarioService } from '../Core/servicio-comentario.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle, SafeHtml } from '@angular/platform-browser';
@@ -34,13 +33,10 @@ export class PerfilComponent implements OnInit {
   uploadURL: Observable<string>;
   public userFirebase: any;
   public userComentario = [];
-  public userLibro = [];
   public item = 1;
   public currentStatus = 1;
-  public InformacionLibrosProvicional: any;
   private id: any;
   public InformacionUsuarioProvicional: any;
-  public CrearLibrosProvicional: any;
 
   constructor(
     public UserServices: UserService,
@@ -49,7 +45,6 @@ export class PerfilComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     public flashMensaje: FlashMessagesService,
     public router: Router,
-    public UserLibro: ServicioLibroService,
     public fb: FormBuilder,
     ) {
     // crea comentario;
@@ -58,10 +53,8 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-    this.EditarLibros();
     this.EditarUsuario();
     this.TraerInformacionUsuario();
-    this.CrearLibros();
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
@@ -70,23 +63,12 @@ export class PerfilComponent implements OnInit {
   });
 
   ngOnInit() {
+    console.log(this.userFirebase.url);
     this.TraerComentario();
-    this.TraerLibro();
-    this.MostrarInformacion();
+  //  this.MostrarInformacion();
   }
 
-  TraerLibro() {
-     // trae todos los libros
-     this.UserLibro.getLibro().subscribe((libro) => {
-      this.userLibro = [];
-       libro.forEach((librodata: any) => {
-        this.userLibro.push({
-          id: librodata.payload.doc.id,
-          data: librodata.payload.doc.data()
-        });
-      });
-    });
-  }
+
 
   TraerComentario() {
      // trae todos los comentarios
@@ -116,24 +98,8 @@ export class PerfilComponent implements OnInit {
       console.log(this.userFirebase = user);
     });
   }
-  // editar libros
-  EditarLibros() {
-    this.InformacionLibrosProvicional = {
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
-  }
-  CrearLibros() {
-    this.CrearLibrosProvicional = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-  };
-  }
+
+
   // editar informacion usuario
   EditarUsuario() {
     this.InformacionUsuarioProvicional = {
@@ -164,13 +130,7 @@ export class PerfilComponent implements OnInit {
     this.onCancelarUsuario();
   }
 
-  // crear libro por medio de perfil
-  onGuardarlibrocreado() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.UserLibro.createLibro(this.CrearLibrosProvicional);
-    this.onCancelar();
-  }
+
 
   // cancelar funcion usuario
   onCancelarUsuario() {
@@ -186,61 +146,11 @@ export class PerfilComponent implements OnInit {
     document.getElementById('crearLibro').style.display = 'none';
     document.getElementById('libros').style.display = 'block';
     this.InformacionUsuarioProvicional = null;
-    this.InformacionLibrosProvicional = null;
     this.cerrar.emit();
-  }
-  // se trae la informacion para editar
-  onLibro(libro, id) {
-    document.getElementById('libros').style.display = 'none';
-    document.getElementById('mostrarInformacionEditarLibro').style.display = 'block';
-    this.id = id;
-    this.InformacionLibrosProvicional = libro;
-  }
-
-   // guardar los libros editados
-   onGuardareditarlibro() {
-    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
-    this.onCancelar();
   }
 
   // funcion perfil
-  MostrarInformacion() {
-    jQuery(document).on('click', '.crearlibro', function () {
-      document.getElementById('crearLibro').style.display = 'block';
-      document.getElementById('libros').style.display = 'none';
-    });
-    jQuery(document).on('click', '.Verinformacion', function () {
-      document.getElementById('Verinformacion').style.display = 'block';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'none';
-    });
-    jQuery(document).on('click', '.publicaciones', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'none';
-      document.getElementById('publicaciones').style.display = 'block';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'none';
 
-    });
-    jQuery(document).on('click', '.libros', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'none';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'block';
-      document.getElementById('seguidores').style.display = 'none';
-      document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
-
-    });
-    jQuery(document).on('click', '.seguidores', function () {
-      document.getElementById('Verinformacion').style.display = 'none';
-      document.getElementById('Editarinformacion').style.display = 'none';
-      document.getElementById('publicaciones').style.display = 'none';
-      document.getElementById('libros').style.display = 'none';
-      document.getElementById('seguidores').style.display = 'block';
-
-    });
-  }
 
 
 
@@ -268,12 +178,6 @@ export class PerfilComponent implements OnInit {
 
   EliminarComentario(id) {
     this.UserComentario.deleteComentario(id);
-  }
-
-  EliminarLibro(id) {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.UserLibro.deleteLibro(id);
   }
 
 }
