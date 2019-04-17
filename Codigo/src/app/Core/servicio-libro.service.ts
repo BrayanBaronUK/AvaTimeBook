@@ -46,8 +46,6 @@ export class ServicioLibroService {
     return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
   }
   getLibro() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
     return this.db.collection('perfil').doc(this.getIud()).
     collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
   }
