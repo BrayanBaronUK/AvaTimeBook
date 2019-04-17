@@ -54,11 +54,12 @@ import { EventosComponent } from './eventos/eventos.component';
 import 'rxjs/add/operator/map';
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 import { ChatService } from './Core/chat.service';
-import {AccordionModule} from 'primeng/accordion';
-import {MenuItem} from 'primeng/api';
-import {PanelModule} from 'primeng/panel';
-import {TableModule} from 'primeng/table';
+import { AccordionModule } from 'primeng/accordion';
+import { MenuItem } from 'primeng/api';
+import { PanelModule } from 'primeng/panel';
+import { TableModule } from 'primeng/table';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     AccordionModule,
     BrowserModule,
     PanelModule,
+    DialogModule,
     TableModule,
     AngularFontAwesomeModule,
     AppRoutingModule,
