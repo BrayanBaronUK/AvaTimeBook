@@ -18,6 +18,8 @@ export class LibrosComponent implements OnInit {
   public InformacionLibrosProvicional: any;
   public CrearLibrosProvicional: any;
   private id: any;
+  // tslint:disable-next-line:no-inferrable-types
+  public display: boolean = false;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   constructor(
     public userservicioperfil: UserService,
@@ -48,6 +50,9 @@ export class LibrosComponent implements OnInit {
       { header: 'Categoria' },
       { header: 'Descripcion' }
     ];
+  }
+  showDialog() {
+    this.display = true;
   }
   Variables() {
     this.userLibro = {
@@ -129,6 +134,7 @@ export class LibrosComponent implements OnInit {
       categoria_libro: '',
       text_libro: ''
     };
+    this.display = false;
     this.cerrar.emit();
   }
   // crear libro por medio de perfil
@@ -160,6 +166,7 @@ export class LibrosComponent implements OnInit {
   }
   // se trae la informacion para editar
   onLibro(libro, id) {
+    this.showDialog();
     this.id = id;
     this.InformacionLibrosProvicional = libro;
   }

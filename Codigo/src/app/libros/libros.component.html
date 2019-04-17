@@ -1,10 +1,8 @@
 <!------ Include the above in your HEAD tag ---------->
-
-
 <hr>
 <div class="container bootstrap snippet">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <!--left col-->
 
             <ul class="nav nav-tabs list-group" role="tablist">
@@ -29,20 +27,21 @@
 
         </div>
         <!--/col-3-->
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <div class="table-responsive">
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="tablaLibros">
-                                <p-table [value]="userLibro" [paginator]="true" [rows]="10">
+                                <p-table [value]="userLibro" [paginator]="true" [rows]="8">
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th>Nombre Libro</th>
                                             <th>Autor</th>
                                             <th>Categoria</th>
                                             <th>Descripcion</th>
-                                            <th>Funciones</th>
+                                            <th style="width:7em">Editar</th>
+                                            <th style="width:8em">Eliminar</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-userLibro>
@@ -52,8 +51,9 @@
                                             <td>{{userLibro.data.categoria_libro}}</td>
                                             <td>{{userLibro.data.text_libro}}</td>
                                             <td><button class="btn btn-primary tablalibros"
-                                                    (click)="onLibro(userLibro.data, userLibro.id)" 
-                                                    ><a href="#mostrarInformacionEditarLibro">Editar</a></button>
+                                                    (click)="onLibro(userLibro.data, userLibro.id)">
+                                                    Editar</button></td>
+                                            <td>
                                                 <button class="btn btn-primary tablalibros" md-button
                                                     (click)="EliminarLibro(userLibro.id)">Eliminar</button>
                                             </td>
@@ -87,12 +87,12 @@
                                                 <br>
                                                 <input type="text" class="form-control" id="nombre_libro"
                                                     placeholder="Nombre del libro"
-                                                    [(ngModel)]="CrearLibrosProvicional.nombre_libro">
+                                                    [(ngModel)]="CrearLibrosProvicional.nombre_libro" required>
 
                                                 <br>
                                                 <input type="text" class="form-control" id="autor_libro"
                                                     placeholder="Autor"
-                                                    [(ngModel)]="CrearLibrosProvicional.autor_libro">
+                                                    [(ngModel)]="CrearLibrosProvicional.autor_libro" required>
 
                                                 <br>
                                                 <div>
@@ -187,11 +187,9 @@
     </div>
     <!--/row-->
 
-    <section id="mostrarInformacionEditarLibro" style="display:none;">
-            <div class="col-md-12 card">
-                <div class="card-header">
-                    <h3>Informacion Libro</h3>
-                </div>
+<p-dialog header="Editar Libro" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70" 
+    [maximizable]="true" [baseZIndex]="10000">
+            <div class="col-md-12">
                 <div class="card-body">
                     <div *ngIf="InformacionLibrosProvicional">
                         <div>
@@ -249,4 +247,5 @@
                     </div>
                 </div>
             </div>
-    </section>
+</p-dialog>
+    
