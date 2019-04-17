@@ -37,7 +37,10 @@ export class PerfilComponent implements OnInit {
   public currentStatus = 1;
   private id: any;
   public InformacionUsuarioProvicional: any;
-
+  public count = 0;
+    // tslint:disable-next-line:no-inferrable-types
+    public display: boolean = false;
+    public usuarioEdit: any;
   constructor(
     public UserServices: UserService,
     private _storage: AngularFireStorage,
@@ -53,7 +56,7 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-    this.EditarUsuario();
+   
     this.TraerInformacionUsuario();
   }
   // crea comentario
@@ -63,7 +66,6 @@ export class PerfilComponent implements OnInit {
   });
 
   ngOnInit() {
-    console.log(this.userFirebase.url);
     this.TraerComentario();
   //  this.MostrarInformacion();
   }
@@ -100,32 +102,17 @@ export class PerfilComponent implements OnInit {
   }
 
 
-  // editar informacion usuario
-  EditarUsuario() {
-    this.InformacionUsuarioProvicional = {
-      nombre: '',
-      apellido: '',
-      genero: '',
-      edad: '',
-      url: '',
-      celular: '',
-      nacionalidad: '',
-      text: ''
-    };
-  }
+ 
   // resive la informacion a editar
   onUsuario(usuario) {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.InformacionUsuarioProvicional = usuario;
-    document.getElementById('Editarinformacion').style.display = 'block';
-    document.getElementById('Verinformacion').style.display = 'none';
+    this.showDialog();
+    this.InformacionUsuarioProvicional = usuario; 
+    this.usuarioEdit = usuario;
   }
 
   // actualizar informacion usuario
   onGuardarUsuarioUpdate() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
+    this.count = 1;
     this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
     this.onCancelarUsuario();
   }
@@ -134,30 +121,13 @@ export class PerfilComponent implements OnInit {
 
   // cancelar funcion usuario
   onCancelarUsuario() {
-    document.getElementById('Editarinformacion').style.display = 'none';
-    document.getElementById('Verinformacion').style.display = 'block';
     this.InformacionUsuarioProvicional = null;
+    this.display = false;
     this.cerrar.emit();
   }
-  // se cancela la funcion si no quiere seguir
-  onCancelar() {
-    document.getElementById('mostrarInformacionEditarLibro').style.display = 'none';
-    document.getElementById('Editarinformacion').style.display = 'none';
-    document.getElementById('crearLibro').style.display = 'none';
-    document.getElementById('libros').style.display = 'block';
-    this.InformacionUsuarioProvicional = null;
-    this.cerrar.emit();
-  }
-
-  // funcion perfil
-
-
-
 
   // envia datos del comentario
   public newComentario(form) {
-    // tslint:disable-next-line:no-debugger
-    debugger;
     const data = {
       text: form.text,
       date: this.UserComentario.getTimeStamp()
@@ -171,7 +141,9 @@ export class PerfilComponent implements OnInit {
       console.error(error);
     });
   }
-
+  showDialog() {
+    this.display = true;
+  }
 
 
   // FUNCIONES DE ELMININACION

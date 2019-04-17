@@ -132,3 +132,6 @@ body{
       margin-right: auto;
       margin-left: auto;
     }
+    .ui-dialog .ui-dialog-titlebar-icon span{
+      display: none !important;
+    }
