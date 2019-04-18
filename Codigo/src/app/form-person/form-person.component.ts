@@ -5,7 +5,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { finalize } from 'rxjs/operators';
 
 
@@ -29,6 +29,7 @@ export class FormPersonComponent implements OnInit {
     public flashMensaje: FlashMessagesService
   ) {
     this.newperfilForm.setValue({
+      id: '',
       nombre: '',
       apellido: '',
       genero: '',
@@ -40,6 +41,7 @@ export class FormPersonComponent implements OnInit {
     });
   }
   public newperfilForm = new FormGroup({
+    id: new FormControl(),
     nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     genero: new FormControl(Validators.required, Validators.required),
@@ -61,12 +63,12 @@ export class FormPersonComponent implements OnInit {
     const randomId = Math.random().toString(36).substring(2);
 
     const filepath = `/${randomId}`;
-console.log(filepath);
+    console.log(filepath);
     const fileRef = this._storage.ref(filepath);
 
     // Upload image
     const task = this._storage.upload(filepath, file);
-console.log(task);
+    console.log(task);
     // Observe percentage changes
     this.uploadProgress = task.percentageChanges();
 
@@ -92,6 +94,7 @@ console.log(task);
       console.log(data);
       this.UserServices.createPefil(data).then(() => {
         this.newperfilForm.setValue({
+          id: '',
           nombre: '',
           apellido: '',
           genero: '',
@@ -101,7 +104,7 @@ console.log(task);
           text: ''
         });
         this.flashMensaje.show('Información Cargada correctamente.',
-        {cssClass: 'alert-success', timeout: 4000});
+          { cssClass: 'alert-success', timeout: 400000 });
         this.router.navigate(['/crearlibro']);
       }, (error) => {
         console.error(error);
