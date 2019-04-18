@@ -38,6 +38,7 @@ export class PerfilComponent implements OnInit {
   private id: any;
   public InformacionUsuarioProvicional: any;
   public count = 0;
+  public date14: Date;
     // tslint:disable-next-line:no-inferrable-types
     public display: boolean = false;
     public usuarioEdit: any;
@@ -56,7 +57,7 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-   
+
     this.TraerInformacionUsuario();
   }
   // crea comentario
@@ -102,11 +103,11 @@ export class PerfilComponent implements OnInit {
   }
 
 
- 
+
   // resive la informacion a editar
   onUsuario(usuario) {
     this.showDialog();
-    this.InformacionUsuarioProvicional = usuario; 
+    this.InformacionUsuarioProvicional = usuario;
     this.usuarioEdit = usuario;
   }
 
