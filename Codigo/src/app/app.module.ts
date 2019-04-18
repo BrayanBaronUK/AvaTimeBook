@@ -60,6 +60,7 @@ import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
+import { CalendarModule } from 'primeng/calendar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +87,7 @@ import { DialogModule } from 'primeng/dialog';
     BrowserModule,
     PanelModule,
     DialogModule,
+    CalendarModule,
     TableModule,
     AngularFontAwesomeModule,
     AppRoutingModule,
