@@ -48,7 +48,8 @@ export class UserService {
     });
   }
   createPefil (data: {nombre: string,
-    apellido: string, celular: number, edad: number, genero: string, nacionalidad: string, text: string }) {
+    apellido: string, celular: number, edad: number, genero: string,
+    nacionalidad: string, text: string }) {
    // trae iud de usuario login console.log(this.getIud());
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
