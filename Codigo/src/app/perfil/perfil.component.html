@@ -10,38 +10,50 @@
                 <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
                     <div class="row ">
                         <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
-                            <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png"
+                            <img src="{{userFirebase.url}}"
                                 class="rounded-circle">
                         </div>
-                        
-                        <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center" style="margin-top: 50px;">
-                            <div class="col-md-12 col-sm-12 user-detail-section2 pull-left">
-                                <div class="border"></div>
-                                <p>Seguidores</p>
-                                <span>320</span>
-                            </div>
-                        </div>  
+                        <br>
+                        <br>
+                        <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center" style="margin-top:25%;">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="h5">@{{userFirebase.nombre}}</div>
+                                        <div class="h7 text-muted"> Nombre : {{userFirebase.nombre}} {{userFirebase.apellido}}</div>
+                                        <div class="h7">{{userFirebase.text}}</div>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <div class="h6 text-muted">Seguidores</div>
+                                            <div class="h5">5.2342</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="h6 text-muted">Siguiendo</div>
+                                            <div class="h5">6758</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <br>
+                                <p-calendar [(ngModel)]="date14" [inline]="true"></p-calendar>
+                        </div>
 
                         <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
-                                <div class="panel-heading">Social Media</div>
-                                <div class="panel-body">
-                                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                                </div>
+                            <div class="panel-heading">Social Media</div>
+                            <div class="panel-body">
+                                <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
+                                    class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
+                                    class="fa fa-google-plus fa-2x"></i>
+                            </div>
                         </div>
 
                     </div>
-                    <br>
-                    <p-calendar [(ngModel)]="date14" [inline]="true"></p-calendar>
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
                     <div class="row profile-right-section-row">
                         <div class="col-md-11 profile-header">
                             <div class="row">
-                                <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 pull-left">
-                                    <h1>{{userFirebase.nombre}} {{userFirebase.apellido}}</h1>
-                                </div>
                                 <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
-                                    <a href="/search" class="btn btn-primary btn-block">Seguir buscando</a>
+                                    <a href="/search" class="btn btn-primary btn-block">Seguir o Siguiendo</a>
                                 </div>
                             </div>
                         </div>
@@ -233,15 +245,8 @@
                                             <div class="row">
                                                 <div class="col-md-12 gedf-main">
                                                     <section id="Verinformacion">
+                                                    <p-panel header="Información de {{userFirebase.nombre}} {{userFirebase.apellido}}">
                                                         <div class="card gedf-card">
-                                                            <div class="card-header">
-                                                                <h3>
-                                                                    <div class="capitalize">Información de
-                                                                        {{userFirebase.nombre}}
-                                                                        {{userFirebase.apellido}}
-                                                                    </div>
-                                                                </h3>
-                                                            </div>
                                                             <div class="card-body">
                                                                 <div class="col-xs-6">
                                                                     <h5>
@@ -302,19 +307,15 @@
                                                                         (click)="onUsuario(userFirebase)">Editar
                                                                         Informacion</button>
                                                                 </div>
-
                                                             </div>
-
                                                         </div>
-
+                                                    </p-panel>
+                                                        
                                                     </section>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -323,65 +324,56 @@
             </div>
         </div>
     </div>
-<p-dialog header="Editar informacion" [(visible)]="display" [modal]="true" [responsive]="true" [style]="{width: '350px', minWidth: '200px'}"  
- [baseZIndex]="10000">
-    <div class="col-md-12">
-        <div class="card-body"
-            *ngIf="InformacionUsuarioProvicional">
-            <div *ngIf="InformacionUsuarioProvicional">
-                <div class="panel panel-primary">
-                    <h5><b>Nombre:</b></h5>
-                    <input id="nombre" class="form-control"
-                        [(ngModel)]="InformacionUsuarioProvicional.nombre"
-                        value="{{InformacionUsuarioProvicional.nombre}}">
-                </div>
-                <div class="col-xs-6">
-                    <h5><b>Apellido:</b></h5>
-                    <input id="apellido" class="form-control"
-                        [(ngModel)]="InformacionUsuarioProvicional.apellido"
-                        value="{{InformacionUsuarioProvicional.apellido}}">
-                </div>
+    <p-dialog header="Editar informacion" [(visible)]="display" [modal]="true" [responsive]="true"
+        [style]="{width: '350px', minWidth: '200px'}" [baseZIndex]="10000">
+        <div class="col-md-12">
+            <div class="card-body" *ngIf="InformacionUsuarioProvicional">
+                <div *ngIf="InformacionUsuarioProvicional">
+                    <div class="panel panel-primary">
+                        <h5><b>Nombre:</b></h5>
+                        <input id="nombre" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.nombre"
+                            value="{{InformacionUsuarioProvicional.nombre}}">
+                    </div>
+                    <div class="col-xs-6">
+                        <h5><b>Apellido:</b></h5>
+                        <input id="apellido" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.apellido"
+                            value="{{InformacionUsuarioProvicional.apellido}}">
+                    </div>
 
-                <div class="col-xs-6">
-                    <h5><b>Celular:</b></h5>
-                    <input id="celular" class="form-control"
-                        [(ngModel)]="InformacionUsuarioProvicional.celular"
-                        value="{{InformacionUsuarioProvicional.celular}}">
-                </div>
+                    <div class="col-xs-6">
+                        <h5><b>Celular:</b></h5>
+                        <input id="celular" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.celular"
+                            value="{{InformacionUsuarioProvicional.celular}}">
+                    </div>
 
-                <div class="col-xs-6">
-                    <h5><b>Nacionalidad:</b></h5>
-                    <input id="nacionalidad" class="form-control"
-                        [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
-                        value="{{InformacionUsuarioProvicional.nacionalidad}}">
-                </div>
+                    <div class="col-xs-6">
+                        <h5><b>Nacionalidad:</b></h5>
+                        <input id="nacionalidad" class="form-control"
+                            [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
+                            value="{{InformacionUsuarioProvicional.nacionalidad}}">
+                    </div>
 
 
-                <div class="col-xs-6">
-                    <h5><b>Edad</b></h5>
-                    <input id="edad" class="form-control"
-                        type="number" min="10" max="99"
-                        [(ngModel)]="InformacionUsuarioProvicional.edad"
-                        value={{InformacionUsuarioProvicional.edad}}>
-                </div>
+                    <div class="col-xs-6">
+                        <h5><b>Edad</b></h5>
+                        <input id="edad" class="form-control" type="number" min="10" max="99"
+                            [(ngModel)]="InformacionUsuarioProvicional.edad"
+                            value={{InformacionUsuarioProvicional.edad}}>
+                    </div>
 
-                <div class="col-xs-6">
-                    <h5><b>Escribe tus gustos:</b></h5>
-                    <textarea id="text" class="form-control"
-                        [(ngModel)]="InformacionUsuarioProvicional.text"
-                        value="{{InformacionUsuarioProvicional.text}}"
-                        rows="3"></textarea>
-                </div>
-                <div class="col-xs-12">
-                    <button style="margin: 10px;"
-                        class="form-control"
-                        (click)="onGuardarUsuarioUpdate()"
-                        class="btn btn-primary">Guardar</button>
-                    <div></div>
-                </div>
+                    <div class="col-xs-6">
+                        <h5><b>Escribe tus gustos:</b></h5>
+                        <textarea id="text" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.text"
+                            value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
+                    </div>
+                    <div class="col-xs-12">
+                        <button style="margin: 10px;" class="form-control" (click)="onGuardarUsuarioUpdate()"
+                            class="btn btn-primary">Guardar</button>
+                        <div></div>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div> 
-</p-dialog>
+    </p-dialog>
 </body>
