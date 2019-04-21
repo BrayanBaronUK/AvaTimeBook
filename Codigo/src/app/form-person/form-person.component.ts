@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from '../Core/auth.guard';
 import { UserService } from '../Core/user.service';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/observable';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { finalize } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-form-person',
@@ -16,14 +15,14 @@ import { finalize } from 'rxjs/operators';
 })
 export class FormPersonComponent implements OnInit {
 
-  uploadProgress: Observable<number>;
-  uploadURL: Observable<string>;
+  uploadPercent: Observable<number>;
+  urlImage: Observable<string>;
   public currentStatus = 1;
   userFirebase: any;
 
   constructor(
     public authService: AuthGuard,
-    private _storage: AngularFireStorage,
+    private storage: AngularFireStorage,
     public UserServices: UserService,
     public router: Router,
     public flashMensaje: FlashMessagesService
@@ -34,6 +33,7 @@ export class FormPersonComponent implements OnInit {
       apellido: '',
       genero: '',
       edad: '',
+      url: '',
       celular: '',
       nacionalidad: '',
       text: ''
@@ -46,6 +46,7 @@ export class FormPersonComponent implements OnInit {
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     genero: new FormControl(Validators.required, Validators.required),
     edad: new FormControl(Validators.required, Validators.required),
+    url: new FormControl('', Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     text: new FormControl('')
@@ -55,30 +56,23 @@ export class FormPersonComponent implements OnInit {
   ngOnInit() {
 
   }
-  upload(event) {
-    // Get input file
-    const file = event.target.files[0];
 
-    // Generate a random ID
-    const randomId = Math.random().toString(36).substring(2);
 
-    const filepath = `/${randomId}`;
-    console.log(filepath);
-    const fileRef = this._storage.ref(filepath);
-
-    // Upload image
-    const task = this._storage.upload(filepath, file);
-    console.log(task);
-    // Observe percentage changes
-    this.uploadProgress = task.percentageChanges();
-
-    // Get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      finalize(() => this.uploadURL = fileRef.getDownloadURL())
-    ).subscribe();
-    this.uploadURL = fileRef.getDownloadURL();
-    console.log(this.uploadURL + 'soy yo');
+  onUpload(e) {
+    const id = Math.random().toString(36).substring(2);
+    const file = e.target.files[0];
+    const filePath = `uploads/profile_${id}`;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
+    .subscribe();
   }
+
+
+
+
+
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus === 1) {
@@ -87,6 +81,7 @@ export class FormPersonComponent implements OnInit {
         apellido: form.apellido,
         genero: form.genero,
         edad: form.edad,
+        url: form.url,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text
@@ -99,6 +94,7 @@ export class FormPersonComponent implements OnInit {
           apellido: '',
           genero: '',
           edad: '',
+          url: '',
           celular: '',
           nacionalidad: '',
           text: ''

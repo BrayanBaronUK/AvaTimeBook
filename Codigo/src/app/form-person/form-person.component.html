@@ -52,13 +52,18 @@
                 formControlName="nacionalidad">
             </div>
 
-
+            <hr>
             <div>
               <h5><b>Subir imagen</b></h5>
-              <input style="text-align : center" id="subir" type="file" (change)="upload($event)" accept="images/*"
-                formControlName="url">
+              <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
             </div>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" 
+              [style.width]="(uploadPercent | async) + '%'">
 
+              </div>
+            </div>
+            <input type="url" id="url" class="from-control" value="{{urlImage | async}}" formControlName="url" >
             <div class="form-group">
               <div>
                 <label>
