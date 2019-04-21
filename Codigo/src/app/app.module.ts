@@ -99,7 +99,6 @@ import { CalendarModule } from 'primeng/calendar';
     ReactiveFormsModule,
     FormsModule,
     FlashMessagesModule,
-    AngularFireStorageModule,
     MatGridListModule,
     MatSelectModule,
     MatOptionModule,
