@@ -49,7 +49,7 @@ export class UserService {
   }
   createPefil (data: {nombre: string,
     apellido: string, celular: number, edad: number, genero: string,
-    nacionalidad: string, text: string }) {
+    nacionalidad: string, text: string, url: string}) {
    // trae iud de usuario login console.log(this.getIud());
     return this.db.collection('perfil').doc(this.getIud()).set(data);
   }
