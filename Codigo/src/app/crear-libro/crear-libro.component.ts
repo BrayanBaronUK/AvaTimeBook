@@ -22,7 +22,6 @@ export class CrearLibroComponent implements OnInit {
     public UserServices: ServicioLibroService
     ) {
       this.newlibroForm.setValue({
-        id: '',
         nombre_libro: '',
         autor_libro: '',
         categoria_libro: '',
@@ -30,10 +29,9 @@ export class CrearLibroComponent implements OnInit {
       });
     }
     public newlibroForm = new FormGroup({
-      id: new FormControl(),
-      nombre_libro: new FormControl(null, Validators.required),
-      autor_libro: new FormControl(null, Validators.required),
-      categoria_libro: new FormControl(null, Validators.required),
+      nombre_libro: new FormControl(Validators.required),
+      autor_libro: new FormControl(Validators.required),
+      categoria_libro: new FormControl(Validators.required),
       text_libro: new FormControl(null)
     });
   ngOnInit() {
@@ -55,7 +53,6 @@ export class CrearLibroComponent implements OnInit {
       };
       this.UserServices.createLibro(data).then(() => {
         this.newlibroForm.setValue({
-          id: '',
           nombre_libro: '',
           autor_libro: '',
           categoria_libro: '',
