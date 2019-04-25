@@ -178,8 +178,8 @@
                                                                         <div
                                                                             class="d-flex justify-content-between align-items-center">
                                                                             <div class="mr-2">
-                                                                                <img class="rounded-circle" width="45"
-                                                                                    src="https://picsum.photos/50/50"
+                                                                                <img class="rounded-circle" width="50"
+                                                                                    src="{{userFirebase.url}}"
                                                                                     alt="">
                                                                             </div>
                                                                             <div class="ml-2">
@@ -366,7 +366,22 @@
                         <textarea id="text" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.text"
                             value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
                     </div>
-                    <div class="col-xs-12">
+                    <hr>
+                    <div>
+                        <h5><b>Subir imagen</b></h5>
+                        <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+                      </div>
+                      <br>
+                      
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" 
+                        [style.width]="(uploadPercent | async) + '%'">
+          
+                        </div>
+                      </div>
+                      <input #imageUser type="text" class="from-control" value="{{urlImage | async}}" style="display:none;" >
+                    
+                      <div class="col-xs-12">
                         <button style="margin: 10px;" class="form-control" (click)="onGuardarUsuarioUpdate()"
                             class="btn btn-primary">Guardar</button>
                         <div></div>
