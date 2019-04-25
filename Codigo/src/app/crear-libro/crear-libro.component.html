@@ -22,22 +22,22 @@
       <div class="col-md-12"
               style="border-width: 1px; border-style: solid; border-color: lightgrey;">
         <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
+        <p-panel header="Crear Libro">
         <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
-          <p-panel header="Crear Libro">
+          
             <!-- Inicio del div central parte de formulario información básica -->
-            <input type="hidden" formControlName="id">
               <br>
               <input type="text" class="form-control" id="nombre_libro" placeholder="Nombre del libro"
-                formControlName="nombre_libro">
+                formControlName="nombre_libro" required>
 
               <br>
               <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
-                formControlName="autor_libro">
+                formControlName="autor_libro" required>
 
               <div>
                 <label for="sel1">
                 </label>
-                <select class="form-control" id="sel1">
+                <select class="form-control" id="sel1" required>
                   <option value="">Categoria</option>
                   <option>Policial</option>
                   <option>Romántica</option>
@@ -83,9 +83,10 @@
             <!-- Fin del div central parte de formulario información básica -->
             <!-- Fin Parte central - enlaces -->
 
-          </p-panel>
+          
 
         </form>
+      </p-panel>
         <!-- Fin del form -->
       </div>
       <!-- Fin del div de parte central -->
