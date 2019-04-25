@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { AuthGuard } from '../Core/auth.guard';
 import { UserService } from '../Core/user.service';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -19,7 +19,7 @@ export class FormPersonComponent implements OnInit {
   urlImage: Observable<string>;
   public currentStatus = 1;
   userFirebase: any;
-
+  public url: string;
   constructor(
     public authService: AuthGuard,
     private storage: AngularFireStorage,
@@ -33,20 +33,19 @@ export class FormPersonComponent implements OnInit {
       apellido: '',
       genero: '',
       edad: '',
-      url: '',
       celular: '',
       nacionalidad: '',
       text: ''
 
     });
   }
+  @ViewChild('imageUser') inputImageUser: ElementRef;
   public newperfilForm = new FormGroup({
     id: new FormControl(),
     nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     genero: new FormControl(Validators.required, Validators.required),
     edad: new FormControl(Validators.required, Validators.required),
-    url: new FormControl('', Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     text: new FormControl('')
@@ -70,18 +69,17 @@ export class FormPersonComponent implements OnInit {
   }
 
 
-
-
-
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
+    // tslint:disable-next-line:no-debugger
+    debugger;
     if (this.currentStatus === 1) {
       const data = {
         nombre: form.nombre,
         apellido: form.apellido,
         genero: form.genero,
         edad: form.edad,
-        url: form.url,
+        url: this.inputImageUser.nativeElement.value,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text
@@ -94,7 +92,6 @@ export class FormPersonComponent implements OnInit {
           apellido: '',
           genero: '',
           edad: '',
-          url: '',
           celular: '',
           nacionalidad: '',
           text: ''
@@ -107,5 +104,4 @@ export class FormPersonComponent implements OnInit {
       });
     }
   }
-
 }
