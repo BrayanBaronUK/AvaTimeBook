@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService} from '../Core/auth.service';
 import * as firebase from 'firebase/app';
+import { Libros} from '../variables/libros';
 @Injectable({
   providedIn: 'root'
 })
@@ -78,4 +79,5 @@ export class ServicioLibroService {
     // tslint:disable-next-line:max-line-length
     doc(this.getIud()).collection('libro-persona',  (ref) => ref.where(this.getIud(), '>', true).where(this.getIud(), '<', true)).doc(this.getIud()).collection('libro').snapshotChanges();
   }
+
 }

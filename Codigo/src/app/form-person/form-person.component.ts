@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from '../Core/auth.guard';
 import { UserService } from '../Core/user.service';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/observable';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {FlashMessagesService} from 'angular2-flash-messages';
-
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-person',
@@ -15,19 +15,20 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 })
 export class FormPersonComponent implements OnInit {
 
-  uploadProgress: Observable<number>;
-  uploadURL: Observable<string>;
+  uploadPercent: Observable<number>;
+  urlImage: Observable<string>;
   public currentStatus = 1;
   userFirebase: any;
 
   constructor(
     public authService: AuthGuard,
-    private _storage: AngularFireStorage,
+    private storage: AngularFireStorage,
     public UserServices: UserService,
     public router: Router,
     public flashMensaje: FlashMessagesService
   ) {
     this.newperfilForm.setValue({
+      id: '',
       nombre: '',
       apellido: '',
       genero: '',
@@ -40,11 +41,12 @@ export class FormPersonComponent implements OnInit {
     });
   }
   public newperfilForm = new FormGroup({
+    id: new FormControl(),
     nombre: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     apellido: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
-    url: new FormControl(null),
     genero: new FormControl(Validators.required, Validators.required),
     edad: new FormControl(Validators.required, Validators.required),
+    url: new FormControl('', Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     text: new FormControl('')
@@ -52,29 +54,25 @@ export class FormPersonComponent implements OnInit {
   onSubmit() {
   }
   ngOnInit() {
+
   }
-  upload(event) {
-    // Get input file
-    const file = event.target.files[0];
 
-    // Generate a random ID
-    const randomId = Math.random().toString(36).substring(2);
-    console.log(randomId);
-    const filepath = `/${randomId}`;
 
-    const fileRef = this._storage.ref(filepath);
-
-    // Upload image
-    const task = this._storage.upload(filepath, file);
-
-    // Observe percentage changes
-    this.uploadProgress = task.percentageChanges();
-
-    // Get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      (() => this.uploadURL = fileRef.getDownloadURL())
-    ).subscribe();
+  onUpload(e) {
+    const id = Math.random().toString(36).substring(2);
+    const file = e.target.files[0];
+    const filePath = `uploads/profile_${id}`;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
+    .subscribe();
   }
+
+
+
+
+
   public newPerfil(form) {
     console.log(`Status: ${this.currentStatus}`);
     if (this.currentStatus === 1) {
@@ -88,8 +86,10 @@ export class FormPersonComponent implements OnInit {
         nacionalidad: form.nacionalidad,
         text: form.text
       };
+      console.log(data);
       this.UserServices.createPefil(data).then(() => {
         this.newperfilForm.setValue({
+          id: '',
           nombre: '',
           apellido: '',
           genero: '',
@@ -100,7 +100,7 @@ export class FormPersonComponent implements OnInit {
           text: ''
         });
         this.flashMensaje.show('Información Cargada correctamente.',
-        {cssClass: 'alert-success', timeout: 4000});
+          { cssClass: 'alert-success', timeout: 400000 });
         this.router.navigate(['/crearlibro']);
       }, (error) => {
         console.error(error);

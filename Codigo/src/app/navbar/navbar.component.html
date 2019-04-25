@@ -24,7 +24,7 @@
       </li>
         <li class="nav-item dropdown" *ngIf="isLogin">
           <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false" *ngIf="!herramientas">Herramientas</a>
+            aria-expanded="false" *ngIf="!herramientas">Configuraciones</a>
           <div class="dropdown-menu">
             <a class="dropdown-item con" (click)="MostarInformacion()">Recuperar contraseñas</a>
             <a class="dropdown-item" href="#">Privacidad</a>
@@ -34,15 +34,17 @@
               </li>
           </div>
         </li>
-        <li class="nav-item dropdown" *ngIf="isLogin">
-            <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-              aria-expanded="false" *ngIf="!herramientas">Creacion</a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" routerLink="/grupos">Grupos</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/eventos">Eventos</a>
-            </div>
-          </li>
+          <li class="nav-item dropdown" *ngIf="isLogin">
+              <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false" *ngIf="!herramientas">Herramientas</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" routerLink="/libros">Libros</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/grupos">Grupos</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" routerLink="/eventos">Eventos</a>
+              </div>
+            </li>
           <li class="nav-item dropdown" *ngIf="isLogin">
               <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                 aria-expanded="false" *ngIf="!herramientas">Comunidad</a>
