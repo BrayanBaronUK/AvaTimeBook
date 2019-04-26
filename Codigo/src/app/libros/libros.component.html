@@ -65,79 +65,14 @@
 
                             <div role="tabpanel" class="tab-pane fade" id="crearLibro">
                                 <!-- Contenido de la página -->
-                                <div class="container">
-                                    <br>
-                                    <div class="row">
+                                
                                         <!-- Columna de la izquierda -->
                                         <!-- Fin de Columna de la izquierda -->
 
                                         <!-- Parte central -->
-                                        <div class="col-md-12">
-                                            <p-panel header="Crear Libro">
-                                                <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
-                                                <!-- Inicio del div central parte de formulario información básica -->
-                                                <input type="hidden" [(ngModel)]="CrearLibrosProvicional.id">
-                                                <div class="col-md-12">
-                                                    <br>
-                                                    <input type="text" class="form-control" id="nombre_libro"
-                                                        placeholder="Nombre del libro"
-                                                        [(ngModel)]="CrearLibrosProvicional.nombre_libro" required>
-
-                                                    <br>
-                                                    <input type="text" class="form-control" id="autor_libro"
-                                                        placeholder="Autor"
-                                                        [(ngModel)]="CrearLibrosProvicional.autor_libro" required>
-
-                                                    <br>
-                                                    <div>
-                                                        <label for="sel1">
-                                                            <h5><b>Categoria:</b></h5>
-                                                        </label>
-                                                        <select class="form-control" id="sel1"
-                                                            [(ngModel)]="CrearLibrosProvicional.categoria_libro">
-                                                            <option>Policial</option>
-                                                            <option>Romántica</option>
-                                                            <option>Aventura</option>
-                                                            <option>Terror</option>
-                                                            <option>Ficcion/Realiad</option>
-                                                            <option>Ciencia Ficción</option>
-                                                            <option>Investigación</option>
-                                                            <option>Biográfica</option>
-                                                            <option>Infantil</option>
-                                                            <option>Autoayuda</option>
-                                                            <option>Erótica</option>
-                                                            <option>Hogar</option>
-                                                            <option>Enciclopedia/Manual</option>
-                                                            <option>Política</option>
-                                                            <option>Economía/Marketing</option>
-                                                            <option>Sociedad</option>
-                                                            <option>Deportes</option>
-                                                            <option>Viajes/Cultura</option>
-                                                            <option>Otros temas/Varios</option>
-
-                                                        </select>
-                                                    </div>
-
-                                                    <br>
-                                                    <h5><b>Descripción del libro:</b></h5>
-                                                    <textarea class="form-control" id="text_libro"
-                                                        [(ngModel)]="CrearLibrosProvicional.text_libro">
-                                                    </textarea>
-
-                                                    <div class="col-md-12 boton">
-                                                        <button class="btn btn-primary"
-                                                            (click)="onGuardarlibrocreado()">Guardar</button>
-                                                    </div>
-
-                                                </div>
-                                                <!-- Fin del div central parte de formulario información básica -->
-                                                <!-- Fin Parte central - enlaces -->
-                                                <!-- Fin del form -->
-                                            </p-panel>
-                                        </div>
+                                        <app-crear-libro></app-crear-libro>
                                         <!-- Fin del div de parte central -->
-                                    </div>
-                                </div>
+                                 
                                 <!-- /.container -->
                             </div>
                             <div role="tabpanel" class="tab-pane fade show" id="buscarLibros">

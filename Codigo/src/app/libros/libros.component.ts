@@ -4,6 +4,7 @@ import { UserService } from '../Core/user.service';
 import { Libros } from '../variables/libros';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -18,6 +19,7 @@ export class LibrosComponent implements OnInit {
   public InformacionLibrosProvicional: any;
   public CrearLibrosProvicional: any;
   private id: any;
+  public currentStatus = 1;
   // tslint:disable-next-line:no-inferrable-types
   public display: boolean = false;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
@@ -28,16 +30,16 @@ export class LibrosComponent implements OnInit {
     public router: Router
   ) {
 
-
   }
+
 
   ngOnInit() {
     this.Variables();
     this.EditarLibros();
-    this.CrearLibros();
     this.TraerLibrosFiltro();
     this.TraerLibro();
     this.MostrarColumnas();
+    document.getElementById('siguiente').style.display = 'none';
   }
 
   // iniciar variables
@@ -62,15 +64,7 @@ export class LibrosComponent implements OnInit {
       text_libro: ''
     };
   }
-  CrearLibros() {
-    this.CrearLibrosProvicional = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
-  }
+
   TraerLibrosFiltro() {
     // trae todos los comentarios
     this.UserLibro.getLibro().subscribe((usuarios) => {
