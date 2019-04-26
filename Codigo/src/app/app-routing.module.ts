@@ -14,13 +14,12 @@ import { LibrosComponent } from '../app/libros/libros.component';
 import { CrearLibroComponent } from '../app/crear-libro/crear-libro.component';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent} from './grupos/grupos.component';
-import { EventosComponent} from './eventos/eventos.component';
+
 import { FiltroPersonComponent} from './filtro-person/filtro-person.component';
 const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard]},
   { path: '', component: HomePageComponent, },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
