@@ -60,7 +60,7 @@ export class CrearLibroComponent implements OnInit {
         });
         console.log(this.UserServices.getLibro());
         this.flashMensaje.show('Información Cargada correctamente.',
-          { cssClass: 'alert-success', timeout: 400000 });
+          { cssClass: 'alert-success', timeout: 4500 });
       }, (error) => {
         console.error(error);
       });
