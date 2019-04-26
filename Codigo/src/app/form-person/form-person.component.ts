@@ -19,7 +19,6 @@ export class FormPersonComponent implements OnInit {
   urlImage: Observable<string>;
   public currentStatus = 1;
   userFirebase: any;
-  public url: string;
   constructor(
     public authService: AuthGuard,
     private storage: AngularFireStorage,

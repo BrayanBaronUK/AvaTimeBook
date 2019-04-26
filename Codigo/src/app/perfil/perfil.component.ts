@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild} from '@angular/core';
 import { UserService } from '../Core/user.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { DomSanitizer, SafeResourceUrl, SafeUrl, SafeStyle, SafeHtml } from '@angular/platform-browser';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { debug } from 'util';
 import { validateConfig } from '@angular/router/src/config';
 
@@ -28,9 +29,9 @@ export class PerfilComponent implements OnInit {
 
 
   @Output() cerrar = new EventEmitter();
-
-  uploadProgress: Observable<number>;
-  uploadURL: Observable<string>;
+  @ViewChild('imageUser') inputImageUser: ElementRef;
+  uploadPercent: Observable<number>;
+  urlImage: Observable<string>;
   public userFirebase: any;
   public userComentario = [];
   public item = 1;
@@ -44,6 +45,7 @@ export class PerfilComponent implements OnInit {
     public usuarioEdit: any;
   constructor(
     public UserServices: UserService,
+    private storage: AngularFireStorage,
     private _storage: AngularFireStorage,
     public UserComentario: ServicioComentarioService,
     private _sanitizer: DomSanitizer,
@@ -106,6 +108,16 @@ export class PerfilComponent implements OnInit {
 
   // resive la informacion a editar
   onUsuario(usuario) {
+    this.InformacionUsuarioProvicional = {
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
     this.showDialog();
     this.InformacionUsuarioProvicional = usuario;
     this.usuarioEdit = usuario;
@@ -114,6 +126,7 @@ export class PerfilComponent implements OnInit {
   // actualizar informacion usuario
   onGuardarUsuarioUpdate() {
     this.count = 1;
+    this.InformacionUsuarioProvicional.url = this.inputImageUser.nativeElement.value;
     this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
     this.onCancelarUsuario();
   }
@@ -146,6 +159,16 @@ export class PerfilComponent implements OnInit {
     this.display = true;
   }
 
+  onUpload(e) {
+    const id = Math.random().toString(36).substring(2);
+    const file = e.target.files[0];
+    const filePath = `uploads/profile_${id}`;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
+    .subscribe();
+  }
 
   // FUNCIONES DE ELMININACION
 

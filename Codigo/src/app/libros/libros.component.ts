@@ -175,4 +175,7 @@ export class LibrosComponent implements OnInit {
     this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
     this.onCancelar();
   }
+  onFiltro(id) {
+    console.log(id);
+  }
 }
