@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+//import { PickerModule } from '@ctrl/ngx-emoji-mart'//Agregar emojis camilo
 import {
   MatToolbarModule,
   MatGridListModule,
@@ -88,7 +89,7 @@ import { CalendarModule } from 'primeng/calendar';
     DialogModule,
     CalendarModule,
     TableModule,
-    //AngularFontAwesomeModule,
+   // PickerModule,//Agregar emojis camilo
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

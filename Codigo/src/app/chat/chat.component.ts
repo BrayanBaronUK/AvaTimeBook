@@ -16,6 +16,8 @@ export class ChatComponent implements OnInit {
   newMsg: string;
   mensaje: string = "";
   elemento: any;
+  
+  openPopup: Function;//for emoji
   constructor(
     
     private route: ActivatedRoute,
@@ -43,7 +45,10 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.elemento = document.getElementById('app-mensajes');
   }
-
+  setPopupAction(fn: any) {
+    console.log('setPopupAction');
+    this.openPopup = fn;
+  }
  
 
 }
