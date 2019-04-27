@@ -57,6 +57,7 @@
               <h5><b>Subir imagen</b></h5>
               <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
             </div>
+            <hr>
             <div class="progress">
               <div class="progress-bar progress-bar-striped bg-success" role="progressbar" 
               [style.width]="(uploadPercent | async) + '%'">
