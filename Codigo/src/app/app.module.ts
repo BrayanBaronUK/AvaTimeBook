@@ -61,6 +61,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import { EmojiModule } from 'angular-emojione';
+import {ProgressBarModule} from 'primeng/progressbar';
+import {GalleriaModule} from 'primeng/galleria';
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,7 +118,9 @@ import { EmojiModule } from 'angular-emojione';
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
-    EmojiModule
+    EmojiModule,
+    ProgressBarModule,
+    GalleriaModule
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
