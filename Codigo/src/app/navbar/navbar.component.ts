@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
       nacionalidad: '',
       text: ''
     };
-    this.fotico = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
   }
 
   ngOnInit() {
@@ -47,13 +46,8 @@ export class NavbarComponent implements OnInit {
           console.log(this.userFirebase = user);
           if ( auth.displayName == null) {
             this.nombreUsuario = this.userFirebase.nombre;
-            this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
           }
         });
-        if (this.fotoUsuario == null) {
-
-          this.fotoUsuario = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
-        }
       } else {
            this.isLogin = false;
            //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
