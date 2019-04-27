@@ -114,7 +114,7 @@ import { CalendarModule } from 'primeng/calendar';
     MatButtonModule,
     MatCardModule,
     BrowserAnimationsModule,
-    MatTabsModule,
+    MatTabsModule, //
     MatIconModule
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
