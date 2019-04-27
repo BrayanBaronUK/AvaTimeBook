@@ -19,6 +19,7 @@ export class FormPersonComponent implements OnInit {
   urlImage: Observable<string>;
   public currentStatus = 1;
   userFirebase: any;
+  foto: any;
   constructor(
     public authService: AuthGuard,
     private storage: AngularFireStorage,
@@ -65,6 +66,7 @@ export class FormPersonComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
     .subscribe();
+
   }
 
 
@@ -72,13 +74,18 @@ export class FormPersonComponent implements OnInit {
     console.log(`Status: ${this.currentStatus}`);
     // tslint:disable-next-line:no-debugger
     debugger;
+    if (this.inputImageUser.nativeElement.value !== '') {
+      this.foto = this.inputImageUser.nativeElement.value;
+    } else {
+      this.foto = 'https://angellomix.com/wp-content/uploads/2016/10/login.png';
+    }
     if (this.currentStatus === 1) {
       const data = {
         nombre: form.nombre,
         apellido: form.apellido,
         genero: form.genero,
         edad: form.edad,
-        url: this.inputImageUser.nativeElement.value,
+        url: this.foto,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text
