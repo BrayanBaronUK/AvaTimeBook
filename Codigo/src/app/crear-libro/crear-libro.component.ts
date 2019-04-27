@@ -20,20 +20,20 @@ export class CrearLibroComponent implements OnInit {
     public router: Router,
     public flashMensaje: FlashMessagesService,
     public UserServices: ServicioLibroService
-    ) {
-      this.newlibroForm.setValue({
-        nombre_libro: '',
-        autor_libro: '',
-        categoria_libro: '',
-        text_libro: ''
-      });
-    }
-    public newlibroForm = new FormGroup({
-      nombre_libro: new FormControl(Validators.required),
-      autor_libro: new FormControl(Validators.required),
-      categoria_libro: new FormControl(Validators.required),
-      text_libro: new FormControl(null)
+  ) {
+    this.newlibroForm.setValue({
+      nombre_libro: '',
+      autor_libro: '',
+      categoria_libro: '',
+      text_libro: ''
     });
+  }
+  public newlibroForm = new FormGroup({
+    nombre_libro: new FormControl(Validators.required),
+    autor_libro: new FormControl(Validators.required),
+    categoria_libro: new FormControl(Validators.required),
+    text_libro: new FormControl(null)
+  });
   ngOnInit() {
   }
   onSubmit() {
@@ -60,8 +60,7 @@ export class CrearLibroComponent implements OnInit {
         });
         console.log(this.UserServices.getLibro());
         this.flashMensaje.show('Información Cargada correctamente.',
-        {cssClass: 'alert-success', timeout: 4000});
-        this.router.navigate(['/crearlibro']);
+          { cssClass: 'alert-success', timeout: 4500 });
       }, (error) => {
         console.error(error);
       });
