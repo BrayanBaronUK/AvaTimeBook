@@ -82,7 +82,7 @@ import { CalendarModule } from 'primeng/calendar';
     FiltroPersonComponent
   ],
   imports: [
-    AccordionModule,
+    AccordionModule,//union
     BrowserModule,
     PanelModule,
     DialogModule,
