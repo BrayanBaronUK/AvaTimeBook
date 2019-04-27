@@ -19,75 +19,74 @@
       <!-- Fin de Columna de la izquierda -->
 
       <!-- Parte central -->
-      <div class="col-md-12">
-        <div class="col-md-12" style="border-width: 1px; border-style: solid; border-color: lightgrey;">
-          <h3 style="text-align: center">CREAR LIBRO<p><small>INGRESE SUS LIBROS A INTERCAMBIAR</small></p>
-          </h3>
-        </div>
+      <div class="col-md-12"
+              style="border-width: 1px; border-style: solid; border-color: lightgrey; padding: 0px !important; overflow: auto;">
         <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
+        <p-panel header="Crear Libro">
         <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
-          <!-- Inicio del div central parte de formulario información básica -->
-          <input type="hidden" formControlName="id">
-          <div class="col-md-12"
-            style="border-width: 1px; border-style: solid; border-color: lightgrey;  background:#282828;">
-            <br>
-            <input type="text" class="form-control" id="nombre_libro" placeholder="Nombre del libro"
-              formControlName="nombre_libro">
+          
+            <!-- Inicio del div central parte de formulario información básica -->
+              <br>
+              <input type="text" class="form-control" id="nombre_libro" placeholder="Nombre del libro"
+                formControlName="nombre_libro" required>
 
-            <br>
-            <input type="text" class="form-control" id="autor_libro" placeholder="Autor" formControlName="autor_libro">
+              <br>
+              <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
+                formControlName="autor_libro" required>
 
-            <br>
               <div>
                 <label for="sel1">
-                  <h5><b>Categoria:</b></h5>
                 </label>
-                <select class="form-control" id="sel1" formControlName="categoria_libro">
-                  <option>Policial</option>
-                  <option>Romántica</option>
-                  <option>Aventura</option>
-                  <option>Terror</option>
-                  <option>Ficcion/Realiad</option>
-                  <option>Ciencia Ficción</option>
-                  <option>Investigación</option>
-                  <option>Biográfica</option>
-                  <option>Infantil</option>
-                  <option>Autoayuda</option>
-                  <option>Erótica</option>
-                  <option>Hogar</option>
-                  <option>Enciclopedia/Manual</option>
-                  <option>Política</option>
-                  <option>Economía/Marketing</option>
-                  <option>Sociedad</option>
-                  <option>Deportes</option>
-                  <option>Viajes/Cultura</option>
-                  <option>Otros temas/Varios</option>
+                <select class="form-control" id="sel1" required>
+                  <option  value="">Categoria</option>
+                  <option value="Policial">Policial</option>
+                  <option value="Romántica">Romántica</option>
+                  <option value="Aventura">Aventura</option>
+                  <option value="Terror">Terror</option>
+                  <option value="Ficcion/Realidad">Ficcion/Realidad</option>
+                  <option value="Ciencia Ficcion">Ciencia Ficción</option>
+                  <option values= "Investigación">Investigación</option>
+                  <option value="Biográfica">Biográfica</option>
+                  <option value="Infantil">Infantil</option>
+                  <option value="Autoayuda">Autoayuda</option>
+                  <option value="Erótica">Erótica</option>
+                  <option value="Hogar">Hogar</option>
+                  <option value="Enciclopedia/Manual">Enciclopedia/Manual</option>
+                  <option value="Política">Política</option>
+                  <option value="Economía/Marketing">Economía/Marketing</option>
+                  <option value="Sociedad">Sociedad</option>
+                  <option value="Deportes">Deportes</option>
+                  <option value="Viajes/Cultura">Viajes/Cultura</option>
+                  <option value="Otro temas/Varios">Otros temas/Varios</option>
 
                 </select>
               </div>
 
-            <br>
-            <h5><b>Descripción del libro:</b></h5>
-            <textarea class="form-control" id="text_libro" formControlName="text_libro">
+              <br>
+              <h5><b>Descripción del libro:</b></h5>
+              <textarea class="form-control" id="text_libro" formControlName="text_libro">
                      </textarea>
 
-            <div class="col-md-12">
-              <div class="col-md-12" style="text-align : center; margin-top: 1%">
-                <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newlibroForm.valid"
-                value="Agregar" >Guardar</button>
-              </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="col-md-12" style="text-align : center; margin-top: 1%">
-                  <button type="submit" class="btn btn-primary btn-block btn-lg" (click)="Siguiente()">Siguiente</button>
+              <div class="col-md-12">
+                <div class="col-md-12 guardar"  style="text-align : center; margin-top: 1%">
+                  <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newlibroForm.valid"
+                    value="Agregar">Guardar</button>
                 </div>
               </div>
 
-          </div>
-          <!-- Fin del div central parte de formulario información básica -->
-          <!-- Fin Parte central - enlaces -->
+              <div class="col-md-12">
+                <div class="col-md-12" id="siguiente" style="text-align : center; margin-top: 1%">
+                  <button type="submit" class="btn btn-primary btn-block btn-lg"
+                    (click)="Siguiente()">Siguiente</button>
+                </div>
+              </div>
+            <!-- Fin del div central parte de formulario información básica -->
+            <!-- Fin Parte central - enlaces -->
+
+          
+
         </form>
+      </p-panel>
         <!-- Fin del form -->
       </div>
       <!-- Fin del div de parte central -->

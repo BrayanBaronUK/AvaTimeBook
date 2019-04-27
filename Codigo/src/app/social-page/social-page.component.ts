@@ -15,6 +15,7 @@ export class SocialPageComponent implements OnInit {
   public currentStatus = 1;
   public userComentario = [];
   public input: any;
+  public date14: Date;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   constructor(
     public UserServices: UserService,

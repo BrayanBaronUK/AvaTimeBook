@@ -1,55 +1,125 @@
-<div class="container bootstrap snippet" style="margin-top:3%; margin-left: 15%;">
-  <div class="row">
-    <div class="col-sm-9">
-        <div class="col-sm-12 gedf-main">
-            <ul class="nav nav-tabs">
+<!------ Include the above in your HEAD tag ---------->
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <ul class="nav nav-tabs list-group" role="tablist">
                 <li class="nav-item">
-                    <button class="list-group-item publicaciones boton5"
-                        (click)="MostrarInformacion()">Publicaciones</button>
-                </li>
-                <li class="nav-item dropdown">
-                    <button class="list-group-item Verinformacion boton5" (click)="MostrarInformacion()">
-                        Información {{userFirebase.nombre}}</button>
-                </li>
-                <li class="nav-item">
-                    <button class="list-group-item libros boton5" (click)="MostrarInformacion()">Libros</button>
+                    <a class="nav-link " href="#crearLibro" role="tab" data-toggle="tab">Crear Grupo </a>
                 </li>
                 <li class="nav-item">
-                    <button class="list-group-item seguidores boton5" (click)="MostrarInformacion()">
-                        Seguidores</button>
+                    <a class="nav-link active" href="#tablaGrupos" role="tab" data-toggle="tab">Ver Grupo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#buscarLibros" role="tab" data-toggle="tab">Chat Grupal de grupos</a>
                 </li>
             </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">Social Media</div>
+                <div class="panel-body">
+                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
+                        class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
+                        class="fa fa-google-plus fa-2x"></i>
+                </div>
+            </div>
+
         </div>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <!--/col-3-->
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="table-responsive">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="tablaGrupos">
+                                <p-table [value]="grupos" [paginator]="true" [rows]="10">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Nombre Grupo</th>
+                                            <th>Personas</th>
+                                            <th style="width:7em">Editar</th>
+                                            <th style="width:8em">Eliminar</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-grupos>
+                                        <tr>
+                                            <td>{{grupos.data.nombre_grupo}}</td>
+                                            <td>{{grupos.data.personas_grupo}}</td>
+                                            <td><button class="btn btn-primary tablalibros"
+                                                    (click)="onLibro(userLibro.data, userLibro.id)" 
+                                                    ><a href="#mostrarInformacionEditarLibro">Editar</a></button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary tablalibros" md-button
+                                                    (click)="EliminarLibro(userLibro.id)">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                                
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade " id="crearLibro">
+                                <!-- Contenido de la página -->
+                                <div class="container">
+                                    <br>
+                                    <div class="row">
+                                        <!-- Columna de la izquierda -->
+                                        <!-- Fin de Columna de la izquierda -->
+
+                                        <!-- Parte central -->
+                                        <div class="col-md-12">
+                                            <div class="col-md-12"
+                                                style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+                                                <h3 style="text-align: center">
+                                                    <p><small>Crear Grupo</small></p>
+                                                </h3>
+                                            </div>
+                                            <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
+                                            <!-- Inicio del div central parte de formulario información básica -->
+                                            <input type="hidden" [(ngModel)]="crearGrupo.id">
+                                            <div class="col-md-12"
+                                                style="border-width: 1px; border-style: solid; border-color: lightgrey;">
+                                                <br>
+                                                <input type="text" class="form-control" id="nombre_grupo"
+                                                    placeholder="Nombre del Grupo"
+                                                    [(ngModel)]="crearGrupo.nombre_grupo" required>
+
+                                                <br>
+                                                <input type="text" class="form-control" id="personas_grupo"
+                                                    placeholder="Personas"
+                                                    [(ngModel)]="crearGrupo.personas_grupo">
+                                                <br>
+
+                                                <div class="col-md-12 boton">
+                                                    <button class="btn btn-primary"
+                                                        (click)="onGuardarGrupocreado()">Guardar</button>
+                                                    <button class="btn btn-primary"
+                                                        (click)="onCancelar()">Cancelar</button>
+                                                </div>
+
+                                            </div>
+                                            <!-- Fin del div central parte de formulario información básica -->
+                                            <!-- Fin Parte central - enlaces -->
+                                            <!-- Fin del form -->
+                                        </div>
+                                        <!-- Fin del div de parte central -->
+                                    </div>
+                                </div>
+                                <!-- /.container -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--/table-resp-->
+
+                </div>
+                <!--/tab-pane-->
+
+            </div>
+            <!--/tab-pane-->
         </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Example select</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect2">Example multiple select</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Example textarea</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-      </form>
+        <!--/col-9-->
     </div>
-  </div>
-</div>
+    <!--/row-->

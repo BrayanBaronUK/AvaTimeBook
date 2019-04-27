@@ -39,7 +39,6 @@ export class ChatComponent implements OnInit {
     this._cs.agregarMensaje( this.mensaje )
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));
-
   }
   ngOnInit() {
     this.elemento = document.getElementById('app-mensajes');

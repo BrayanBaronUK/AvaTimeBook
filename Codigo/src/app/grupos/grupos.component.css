@@ -1,0 +1,9 @@
+.boton{
+    display: inline-block;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+  }
+  button{
+    margin: 10px;
+  }

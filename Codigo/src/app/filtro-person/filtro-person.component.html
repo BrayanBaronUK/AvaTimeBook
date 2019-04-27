@@ -7,40 +7,24 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-=======
-
-  <h2>Personas</h2>
-
->>>>>>> cristian
   <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.." title="Type in a name">
 
-  <table id="myTable">
-    <tr class="header">
-      <th style="width:60%;">Nombre</th>
-      <th style="width:40%;">Apellido</th>
-<<<<<<< HEAD
-      <th style="width:40%;">Seguir Persona</th> 
-=======
-
->>>>>>> cristian
-    </tr>
-    <tbody *ngFor="let filtro of filtrouser">
+  <p-table id="myTable" [value]="filtrouser" [paginator]="true" [rows]="12">
+    <ng-template pTemplate="header">
       <tr>
-
-        <td>{{filtro.data.nombre}}</td>
-        <td>{{filtro.data.apellido}}</td>
-<<<<<<< HEAD
-        <td><button class="btn btn-primary" md-button (click)="onfiltro(filtro.uid)">Seguir</button></td>
-=======
-      
->>>>>>> cristian
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Seguir Persona</th>
       </tr>
-    </tbody>
-  </table>
-
-
-
+    </ng-template>
+    <ng-template pTemplate="body" let-filtrouser>
+      <tr>
+        <td>{{filtrouser.data.nombre}}</td>
+        <td>{{filtrouser.data.apellido}}</td>
+        <td><button class="btn btn-primary" md-button (click)="onfiltro(filtrouser.id)">Seguir</button></td>
+      </tr>
+    </ng-template>
+  </p-table>
 </body>
 
 </html>

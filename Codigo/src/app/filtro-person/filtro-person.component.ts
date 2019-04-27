@@ -37,8 +37,8 @@ export class FiltroPersonComponent implements OnInit {
     });
   }
 
-  onflitro(id) {
-    console.log(id);
+  onfiltro(id) {
+    console.log('el id del usuario es:' + id);
  }
 
   myFunction() {

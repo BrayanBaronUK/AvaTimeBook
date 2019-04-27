@@ -14,14 +14,12 @@ import { LibrosComponent } from '../app/libros/libros.component';
 import { CrearLibroComponent } from '../app/crear-libro/crear-libro.component';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent} from './grupos/grupos.component';
-import { EventosComponent} from './eventos/eventos.component';
+
 import { FiltroPersonComponent} from './filtro-person/filtro-person.component';
 const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
   // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard]},
-  { path: 'eventos', component: EventosComponent},
   { path: '', component: HomePageComponent, },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -29,12 +27,18 @@ export const rootRouterConfig: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'social', component: SocialPageComponent, canActivate: [AuthGuard] },
   { path: 'forgot', component: ForgotPasswordComponent },
+<<<<<<< HEAD
   { path: 'form-person', component: FormPersonComponent  },
   { path: 'crearlibro', component: CrearLibroComponent },
+=======
+  { path: 'form-person', component: FormPersonComponent, canActivate: [AuthGuard] },
+  { path: 'crearlibro', component: CrearLibroComponent, canActivate: [AuthGuard] },
+>>>>>>> brayan
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: 'filtropersona', component: FiltroPersonComponent, canActivate: [AuthGuard] },
+  { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent }
 ];
 // END OF CCSANCHEZC 15/02/2019 7:29
