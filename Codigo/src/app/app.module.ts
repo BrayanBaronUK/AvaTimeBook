@@ -78,7 +78,7 @@ import { CalendarModule } from 'primeng/calendar';
     CrearLibroComponent,
     FilterPipe,
     ChatComponent,
-    GruposComponent,
+    GruposComponent,//eliminar eventos
     FiltroPersonComponent
   ],
   imports: [
