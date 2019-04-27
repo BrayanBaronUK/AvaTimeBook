@@ -27,13 +27,8 @@ export const rootRouterConfig: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'social', component: SocialPageComponent, canActivate: [AuthGuard] },
   { path: 'forgot', component: ForgotPasswordComponent },
-<<<<<<< HEAD
-  { path: 'form-person', component: FormPersonComponent  },
-  { path: 'crearlibro', component: CrearLibroComponent },
-=======
   { path: 'form-person', component: FormPersonComponent, canActivate: [AuthGuard] },
   { path: 'crearlibro', component: CrearLibroComponent, canActivate: [AuthGuard] },
->>>>>>> brayan
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
