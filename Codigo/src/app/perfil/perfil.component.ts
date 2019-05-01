@@ -38,6 +38,7 @@ export class PerfilComponent implements OnInit {
   public currentStatus = 1;
   private id: any;
   public InformacionUsuarioProvicional: any;
+  public foto: any;
   public count = 0;
   public date14: Date;
   text: String;
@@ -72,8 +73,8 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.TraerComentario();
-    this.fotos();
     this.TraerInformacionUsuario();
+    this.fotos();
   //  this.MostrarInformacion();
   }
 
@@ -179,8 +180,16 @@ export class PerfilComponent implements OnInit {
   }
 
   fotos() {
+    this.foto = {
+      url: ''
+    };
+    this.UserServices.getPerfil().valueChanges().subscribe((user) => {
+      console.log(this.foto = user);
+    });
     this.images = [];
-    this.images.push({source: this.userFirebase.url.trim()});
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.images.push({source: this.foto.url});
   }
 
   // FUNCIONES DE ELMININACION
