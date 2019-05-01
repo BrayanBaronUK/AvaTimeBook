@@ -41,9 +41,9 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
                             <div class="panel-heading">Social Media</div>
                             <div class="panel-body">
-                                    <i class="fab fa-facebook-square"></i>  
-                                    <i class="fab fa-twitter-square"></i>
-                                    <i class="fab fa-google-plus-square"></i>
+                                <i class="fab fa-facebook-square"></i>
+                                <i class="fab fa-twitter-square"></i>
+                                <i class="fab fa-google-plus-square"></i>
                             </div>
                         </div>
 
@@ -347,68 +347,65 @@
         [style]="{width: '400px', minWidth: '200px', heigth: '300px'}" [minY]="70" [maximizable]="true"
         [baseZIndex]="10000">
         <div class="col-md-12">
-            <div class="card-body" *ngIf="InformacionUsuarioProvicional">
+            <div class="card-body">
                 <div *ngIf="InformacionUsuarioProvicional">
-                    <div class="panel panel-primary">
-                        <h5><b>Nombre:</b></h5>
-                        <input id="nombre" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.nombre"
-                            value="{{InformacionUsuarioProvicional.nombre}}">
-                    </div>
-                    <div class="col-xs-6">
-                        <h5><b>Apellido:</b></h5>
-                        <input id="apellido" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.apellido"
-                            value="{{InformacionUsuarioProvicional.apellido}}">
-                    </div>
+                    <form (ngSubmit)="onGuardarUsuarioUpdate()" [noValidate]=false>
 
-                    <div class="col-xs-6">
-                        <h5><b>Celular:</b></h5>
-                        <input id="celular" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.celular"
-                            value="{{InformacionUsuarioProvicional.celular}}">
-                    </div>
-
-                    <div class="col-xs-6">
-                        <h5><b>Nacionalidad:</b></h5>
-                        <input id="nacionalidad" class="form-control"
-                            [(ngModel)]="InformacionUsuarioProvicional.nacionalidad"
-                            value="{{InformacionUsuarioProvicional.nacionalidad}}">
-                    </div>
-
-
-                    <div class="col-xs-6">
-                        <h5><b>Edad</b></h5>
-                        <input id="edad" class="form-control" type="number" min="10" max="99"
-                            [(ngModel)]="InformacionUsuarioProvicional.edad"
-                            value={{InformacionUsuarioProvicional.edad}}>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <h5><b>Escribe tus gustos:</b></h5>
-                        <textarea id="text" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.text"
-                            value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
-                    </div>
-                    <hr>
-                    <div>
-                        <h5><b>Subir imagen</b></h5>
-                        <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
-                    </div>
-                    <br>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                            [style.width]="(uploadPercent | async) + '%'">
-
+                        <div class="col-xs-6">
+                            <label>Nombre: </label>
+                            <input id="nombre" name="nombre" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.nombre"
+                                value="{{InformacionUsuarioProvicional.nombre}}" [required]=true>
                         </div>
-                    </div>
-                    <input #imageUser type="text" class="from-control" value="{{urlImage | async}}"
-                        style="display:none;">
 
-                    <div class="col-xs-12">
-                        <button style="margin: 10px;" class="form-control" (click)="onGuardarUsuarioUpdate()"
-                            class="btn btn-primary">Guardar</button>
-                        <div></div>
-                    </div>
+                        <div class="col-xs-6">
+                            <label>Apellido: </label>
+                            <input id="apellido" name="apellido" class="form-control"
+                                [(ngModel)]="InformacionUsuarioProvicional.apellido"
+                                value="{{InformacionUsuarioProvicional.apellido}}" [required]=true>
+                        </div>
 
+                        <div class="col-xs-6">
+                            <label>Celular: </label>
+                            <input id="celular" name="celular" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.celular"
+                                value="{{InformacionUsuarioProvicional.celular}}" [required]=true>
+                        </div>
+
+
+                        <div class="col-xs-6">
+                            <label>Edad: </label>
+                            <input id="edad" name="edad" class="form-control" type="number" min="18"
+                                [(ngModel)]="InformacionUsuarioProvicional.edad"
+                                value={{InformacionUsuarioProvicional.edad}} [required]=true>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <label>Escribe tus gustos: </label>
+                            <textarea id="text" name="texto" class="form-control" [(ngModel)]="InformacionUsuarioProvicional.text"
+                                value="{{InformacionUsuarioProvicional.text}}" rows="3"></textarea>
+                        </div>
+                        <hr>
+                        <div>
+                            <label>Subir imagen: </label>
+                            <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
+                        </div>
+                        <br>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                [style.width]="(uploadPercent | async) + '%'">
+
+                            </div>
+                        </div>
+                        <input #imageUser type="text" class="from-control" value="{{urlImage | async}}"
+                            style="display:none;">
+
+                        <div class="col-xs-12">
+                            <button style="margin: 10px;" class="form-control" class="btn btn-primary">Guardar</button>
+                            <div></div>
+                        </div>
+                    </form>
                 </div>
+
             </div>
         </div>
     </p-dialog>

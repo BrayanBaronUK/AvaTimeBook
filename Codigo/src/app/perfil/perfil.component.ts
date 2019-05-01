@@ -115,15 +115,14 @@ export class PerfilComponent implements OnInit {
     this.InformacionUsuarioProvicional = {
       nombre: '',
       apellido: '',
-      genero: '',
       edad: '',
       url: '',
       celular: '',
-      nacionalidad: '',
       text: ''
     };
     this.showDialog();
     this.InformacionUsuarioProvicional = usuario;
+    usuario = null;
     this.usuarioEdit = usuario;
   }
 
@@ -181,7 +180,7 @@ export class PerfilComponent implements OnInit {
 
   fotos() {
     this.images = [];
-    this.images.push({source: this.userFirebase.url.trim(), alt: 'imagen de foto', title: 'Title 1'});
+    this.images.push({source: this.userFirebase.url.trim()});
   }
 
   // FUNCIONES DE ELMININACION
