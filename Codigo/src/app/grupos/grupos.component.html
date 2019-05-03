@@ -46,20 +46,21 @@
                                     </ng-template>
                                     <ng-template pTemplate="body" let-grupos>
                                         <tr>
-                                            <td>{{grupos.data.nombre_grupo}}</td>
-                                            <td>{{grupos.data.personas_grupo}}</td>
+                                            <td>{{grupos.nombre_grupo}}</td>
+                                            <td>{{grupos.personas_grupo}}</td>
                                             <td><button class="btn btn-primary tablalibros"
-                                                    (click)="onLibro(userLibro.data, userLibro.id)" 
-                                                    ><a href="#mostrarInformacionEditarLibro">Editar</a></button>
+                                                    (click)="onLibro(userLibro.data, userLibro.id)">
+                                                    <i class="fas fa-edit"></i></button>
                                             </td>
                                             <td>
-                                                <button class="btn btn-primary tablalibros" md-button
-                                                    (click)="EliminarLibro(userLibro.id)">Eliminar</button>
+                                                <button class="btn btn-primary tablalibros"
+                                                    (click)="EliminarLibro(userLibro.id)">
+                                                    <i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
                                     </ng-template>
                                 </p-table>
-                                
+
                             </div>
                             <div role="tabpanel" class="tab-pane fade " id="crearLibro">
                                 <!-- Contenido de la página -->
@@ -84,13 +85,19 @@
                                                 style="border-width: 1px; border-style: solid; border-color: lightgrey;">
                                                 <br>
                                                 <input type="text" class="form-control" id="nombre_grupo"
-                                                    placeholder="Nombre del Grupo"
-                                                    [(ngModel)]="crearGrupo.nombre_grupo" required>
+                                                    placeholder="Nombre del Grupo" [(ngModel)]="crearGrupo.nombre_grupo"
+                                                    required>
 
                                                 <br>
-                                                <input type="text" class="form-control" id="personas_grupo"
-                                                    placeholder="Personas"
-                                                    [(ngModel)]="crearGrupo.personas_grupo">
+                                                <p-listbox [options]="personas" [(ngModel)]="personaseleccionada"
+                                                multiple="multiple" checkbox="checkbox" filter="filter"
+                                                    optionLabel="data.nombre" optionLabe=" data.apellido" [style]="{width: '100%', heigth: '100%'}" (click)="OcultarTablero()" id="crearfiltro">
+                                                    <p-header>
+                                                        <i class="fas fa-users"></i>
+                                                        Seguidores
+                                                    </p-header>
+                                                </p-listbox>
+                                                <p>Persona Seleccionada: <span *ngFor="let c of personaseleccionada" style="margin-right: 10px">{{c.data.nombre}} {{c.data.apellido}}</span></p>
                                                 <br>
 
                                                 <div class="col-md-12 boton">
@@ -115,6 +122,8 @@
                     <!--/table-resp-->
 
                 </div>
+
+
                 <!--/tab-pane-->
 
             </div>
