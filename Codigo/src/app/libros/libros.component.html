@@ -1,8 +1,8 @@
 <!------ Include the above in your HEAD tag ---------->
 <hr>
 <div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-sm-2">
+    <div class="row" id="contenedor">
+        <div class="col-lg-3 col-md-3 col-sm-9 col-xs-12">
             <!--left col-->
 
             <ul class="nav nav-tabs list-group" role="tablist">
@@ -19,7 +19,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media</div>
                 <div class="panel-body">
-                    <i class="fab fa-facebook-square"></i>  
+                    <i class="fab fa-facebook-square"></i>
                     <i class="fab fa-twitter-square"></i>
                     <i class="fab fa-google-plus-square"></i>
                 </div>
@@ -27,21 +27,24 @@
 
         </div>
         <!--/col-3-->
-        <div class="col-sm-10">
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <div class="table-responsive">
                         <div class="tab-content">
+
+
+
                             <div role="tabpanel" class="tab-pane fade show active" id="tablaLibros">
                                 <p-table [value]="userLibro" [paginator]="true" [rows]="8">
                                     <ng-template pTemplate="header">
                                         <tr>
-                                            <th style="width:6em">Nombre Libro</th>
-                                            <th style="width:6em">Autor</th>
-                                            <th style="width:6em">Categoria</th>
-                                            <th style="width:6em">Descripcion</th>
-                                            <th style="width:3em">Editar</th>
-                                            <th style="width:3em">Eliminar</th>
+                                            <th>Nombre Libro</th>
+                                            <th>Autor</th>
+                                            <th>Categoria</th>
+                                            <th>Descripcion</th>
+                                            <th>Editar</th>
+                                            <th>Eliminar</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-userLibro>
@@ -52,7 +55,8 @@
                                             <td>{{userLibro.data.text_libro}}</td>
                                             <td><button class="btn btn-primary tablalibros"
                                                     (click)="onLibro(userLibro.data, userLibro.id)">
-                                                    <i class="fas fa-edit"></i></button></td>
+                                                    <i class="fas fa-edit"></i></button>
+                                            </td>
                                             <td>
                                                 <button class="btn btn-primary tablalibros"
                                                     (click)="EliminarLibro(userLibro.id)">
@@ -64,29 +68,31 @@
 
                             </div>
 
+
                             <div role="tabpanel" class="tab-pane fade" id="crearLibro">
                                 <!-- Contenido de la página -->
-                                
-                                        <!-- Columna de la izquierda -->
-                                        <!-- Fin de Columna de la izquierda -->
 
-                                        <!-- Parte central -->
-                                        <app-crear-libro></app-crear-libro>
-                                        <!-- Fin del div de parte central -->
-                                 
+                                <!-- Columna de la izquierda -->
+                                <!-- Fin de Columna de la izquierda -->
+
+                                <!-- Parte central -->
+                                <app-crear-libro></app-crear-libro>
+                                <!-- Fin del div de parte central -->
+
                                 <!-- /.container -->
                             </div>
                             <div role="tabpanel" class="tab-pane fade show" id="buscarLibros">
+                                    
                                 <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.."
-                                    title="Type in a name">
+                                    title="Type in a name"><i class="fas fa-search"></i> 
 
                                 <p-table [value]="filtrouser" [paginator]="true" [rows]="10">
                                     <ng-template pTemplate="header">
                                         <tr>
-                                            <th style="width:20%;">Nombre libro</th>
-                                            <th style="width:20%;">Autor</th>
-                                            <th style="width:20%">Categoria</th>
-                                            <th style="width:20">Ver persona</th>
+                                            <th>Nombre libro</th>
+                                            <th>Autor</th>
+                                            <th>Categoria</th>
+                                            <th>Ver persona</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-filtrouser>
@@ -96,7 +102,8 @@
                                             <td>{{filtrouser.data.autor_libro}}</td>
                                             <td>{{filtrouser.data.categoria_libro}}</td>
                                             <td><button class="btn btn-primary" md-button
-                                                    (click)="onfiltro(filtrouser.id)">Persona</button></td>
+                                                    (click)="onfiltro(filtrouser.id)">Persona</button>
+                                            </td>
 
                                         </tr>
                                     </ng-template>
@@ -120,55 +127,59 @@
         [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
         <div class="col-md-12">
             <div class="card-body">
-                <div *ngIf="InformacionLibrosProvicional">
+                <form (ngSubmit)="onGuardareditarlibro()" [noValidate]=false>
                     <div>
-                        <div class="capitalize"><b>Nombre libro: </b></div>
-                        <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
-                            value="{{InformacionLibrosProvicional.nombre_libro}}">
+                        <div>
+                            <div class="capitalize"><b>Nombre libro: </b></div>
+                            <input class="form-control" name="nombreLibro" [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
+                                value="{{InformacionLibrosProvicional.nombre_libro}}" [required]=true>
+                        </div>
+                        <div>
+                            <div class="capitalize"><b>Autor libro: </b></div>
+                            <input class="form-control" name="autorLibro" [(ngModel)]="InformacionLibrosProvicional.autor_libro"
+                                value="{{InformacionLibrosProvicional.autor_libro}}" [required]=true>
+                        </div>
+                        <div>
+                            <label for="sel1">
+                                <b>Categoria:</b>
+                            </label>
+                            <select class="form-control" id="sel1"
+                                [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
+                                value="{{InformacionLibrosProvicional.categoria_libro}}" name="categoriaLibro" [required]=true>
+                                <option  value="">Categoria</option>
+                                <option value="Policial">Policial</option>
+                                <option value="Romántica">Romántica</option>
+                                <option value="Aventura">Aventura</option>
+                                <option value="Terror">Terror</option>
+                                <option value="Ficcion/Realidad">Ficcion/Realidad</option>
+                                <option value="Ciencia Ficcion">Ciencia Ficción</option>
+                                <option values= "Investigación">Investigación</option>
+                                <option value="Biográfica">Biográfica</option>
+                                <option value="Infantil">Infantil</option>
+                                <option value="Autoayuda">Autoayuda</option>
+                                <option value="Erótica">Erótica</option>
+                                <option value="Hogar">Hogar</option>
+                                <option value="Enciclopedia/Manual">Enciclopedia/Manual</option>
+                                <option value="Política">Política</option>
+                                <option value="Economía/Marketing">Economía/Marketing</option>
+                                <option value="Sociedad">Sociedad</option>
+                                <option value="Deportes">Deportes</option>
+                                <option value="Viajes/Cultura">Viajes/Cultura</option>
+                                <option value="Otro temas/Varios">Otros temas/Varios</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="capitalize"><b>Descripción libro: </b></div>
+                            <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
+                                value="{{InformacionLibrosProvicional.autor_libro}}" name="descripcionLibro" [required]=true>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <button class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
+                        </div>
                     </div>
-                    <div>
-                        <div class="capitalize"><b>Autor libro: </b></div>
-                        <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.autor_libro"
-                            value="{{InformacionLibrosProvicional.autor_libro}}">
-                    </div>
-                    <div>
-                        <label for="sel1">
-                            <b>Categoria:</b>
-                        </label>
-                        <select class="form-control" id="sel1"
-                            [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
-                            value="{{InformacionLibrosProvicional.categoria_libro}}">
-                            <option>Policial</option>
-                            <option>Romántica</option>
-                            <option>Aventura</option>
-                            <option>Terror</option>
-                            <option>Ficcion/Realiad</option>
-                            <option>Ciencia Ficción</option>
-                            <option>Investigación</option>
-                            <option>Biográfica</option>
-                            <option>Infantil</option>
-                            <option>Autoayuda</option>
-                            <option>Erótica</option>
-                            <option>Hogar</option>
-                            <option>Enciclopedia/Manual</option>
-                            <option>Política</option>
-                            <option>Economía/Marketing</option>
-                            <option>Sociedad</option>
-                            <option>Deportes</option>
-                            <option>Viajes/Cultura</option>
-                            <option>Otros temas/Varios</option>
-                        </select>
-                    </div>
-                    <div>
-                        <div class="capitalize"><b>Descripción libro: </b></div>
-                        <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
-                            value="{{InformacionLibrosProvicional.autor_libro}}">
-                    </div>
-                    <div>
-                        <button class="btn btn-primary" (click)="onGuardareditarlibro()">Guardar</button>
-                       <a href="libros/#tablaLibros"><button class="btn btn-primary" (click)="onCancelar()">Cancelar</button></a>
-                    </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </p-dialog>
