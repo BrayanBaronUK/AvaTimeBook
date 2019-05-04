@@ -51,10 +51,6 @@ import { FilterPipe } from './filter/filter.pipe';
 import { MatTabsModule } from '@angular/material';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent } from './grupos/grupos.component';
-<<<<<<< HEAD
-
-=======
->>>>>>> cesar
 import 'rxjs/add/operator/map';
 import { FiltroPersonComponent } from './filtro-person/filtro-person.component';
 import { ChatService } from './Core/chat.service';
@@ -65,7 +61,7 @@ import { TableModule } from 'primeng/table';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
-import { EmojiModule } from 'angular-emojione';
+//import { EmojiModule } from 'angular-emojione';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
@@ -86,11 +82,7 @@ import {ListboxModule} from 'primeng/listbox';
     CrearLibroComponent,
     FilterPipe,
     ChatComponent,
-<<<<<<< HEAD
-    GruposComponent,//eliminar eventos
-=======
     GruposComponent,
->>>>>>> cesar
     FiltroPersonComponent
   ],
   imports: [
@@ -126,17 +118,12 @@ import {ListboxModule} from 'primeng/listbox';
     MatButtonModule,
     MatCardModule,
     BrowserAnimationsModule,
-<<<<<<< HEAD
-    MatTabsModule, //
-    MatIconModule
-=======
     MatTabsModule,
     MatIconModule,
-    EmojiModule,
+//   EmojiModule,
     ProgressBarModule,
     GalleriaModule,
     ListboxModule
->>>>>>> cesar
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]

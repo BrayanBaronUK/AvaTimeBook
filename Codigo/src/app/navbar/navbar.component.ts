@@ -36,10 +36,6 @@ export class NavbarComponent implements OnInit {
       nacionalidad: '',
       text: ''
     };
-<<<<<<< HEAD
-    this.fotico = 'https://firebasestorage.googleapis.com/v0/b/proyectolibro-b0994.appspot.com/o/652rqf4g3bj?alt=media&token=26892209-8223-47f0-a4b7-b335c0976065';
-=======
->>>>>>> cesar
   }
 ///
   ngOnInit() {
@@ -55,13 +51,6 @@ export class NavbarComponent implements OnInit {
             this.nombreUsuario = this.userFirebase.nombre;
           }
         });
-<<<<<<< HEAD
-        if (this.fotoUsuario == null) {
-
-          this.fotoUsuario = 'https://firebasestorage.googleapis.com/v0/b/proyectolibro-b0994.appspot.com/o/652rqf4g3bj?alt=media&token=26892209-8223-47f0-a4b7-b335c0976065';
-        }
-=======
->>>>>>> cesar
       } else {
            this.isLogin = false;
            //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
