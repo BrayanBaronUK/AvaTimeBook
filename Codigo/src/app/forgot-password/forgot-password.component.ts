@@ -4,7 +4,6 @@ import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AppComponent } from '../app.component';
-import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,12 +13,11 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class ForgotPasswordComponent implements OnInit {
   public email: string;
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private router: Router,
     private fb: FormBuilder,
     public flashMensaje: FlashMessagesService,
-    public app: AppComponent,
-    public narbar: NavbarComponent
+    public app: AppComponent
   ) { }
 
   ngOnInit() {
@@ -29,9 +27,7 @@ export class ForgotPasswordComponent implements OnInit {
       .then(() => {
         this.flashMensaje.show('Contraseña Enviada a ' + this.email,
           { cssClass: 'alert-success', timeout: 4000 });
-        this.app.Resetear();
         this.authService.doLogout();
-        this.narbar.onSalirRecuperar();
         this.router.navigate(['/login']);
       }).catch((err) => {
         this.flashMensaje.show(err,
@@ -39,12 +35,4 @@ export class ForgotPasswordComponent implements OnInit {
         this.router.navigate(['/login']);
       });
   }
-  MostarInformacion() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.app.Obtener();
-    document.getElementById('contraseña').style.display = 'none';
-    document.getElementById('navbarColor02').style.display = 'flex';
-    document.getElementById('container').style.display = 'block';
-}
 }

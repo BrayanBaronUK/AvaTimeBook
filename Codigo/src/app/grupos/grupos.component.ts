@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { GrupoServiceService} from '../Core/grupo-service.service';
+import { GrupoServiceService } from '../Core/grupo-service.service';
+import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
+import { AuthService } from '../Core/auth.service';
 @Component({
   selector: 'app-grupos',
   templateUrl: './grupos.component.html',
@@ -10,23 +12,24 @@ export class GruposComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public crearGrupo: any;
   public grupos: any;
+  public personas: any;
+  public personaseleccionada: Object[];
   constructor(public flashMensaje: FlashMessagesService,
-    public grupoS: GrupoServiceService) { }
+    public grupoS: GrupoServiceService,
+    public person: ServicioFiltroPersonaService) { }
 
   ngOnInit() {
     this.CrearGrupos();
     this.TraerGrupos();
+    this.Traerperson();
+    this.OcultarTablero();
   }
 
   TraerGrupos() {
-    // trae todos los comentarios
-    this.grupoS.getGrupos().subscribe((usuarios) => {
-      this.grupos = [];
-      usuarios.forEach((usuariosdata: any) => {
-        this.grupos.push({
-          id: usuariosdata.payload.doc.id,
-          data: usuariosdata.payload.doc.data()
-        });
+    // trae todos los grupos
+    this.grupoS.getGrupos().subscribe(usuarios => {
+      this.grupos = usuarios.map((element) => {
+        return element.payload.doc.data();
       });
     });
   }
@@ -58,5 +61,34 @@ export class GruposComponent implements OnInit {
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
+  }
+
+  Traerperson() {
+    this.personas = {
+      nombre: '',
+      apellido: '',
+    };
+    // trae todos los libros
+    this.person.getPerfiles().subscribe((p) => {
+      this.personas = [];
+      p.map((persondata: any) => {
+        this.personas.push({
+          id: persondata.payload.doc.id,
+          data: persondata.payload.doc.data()
+        });
+      });
+    });
+    console.log(this.personas);
+  }
+
+  OcultarTablero() {
+    // if (this.personaseleccionada == null) {
+    //   $('.ui-listbox-list-wrapper').css('none');
+    // } else {
+    //   $('.ui-listbox-list-wrapper').css('none');
+    // }
+    jQuery(document).on('click', '.crearfiltro', function () {
+      document.getElementById('#ui-listbox-list-wrapper').style.display = 'none';
+    });
   }
 }

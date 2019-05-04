@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { UserService } from '../Core/user.service';
 import { Libros } from '../variables/libros';
-import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -27,7 +27,7 @@ export class LibrosComponent implements OnInit {
     public userservicioperfil: UserService,
     public UserLibro: ServicioLibroService,
     public flashMensaje: FlashMessagesService,
-    public router: Router
+    private router: Router,
   ) {
 
   }
@@ -121,13 +121,8 @@ export class LibrosComponent implements OnInit {
   }
 
   onCancelar() {
-    this.CrearLibrosProvicional = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
+    document.getElementById('contenedor').style.visibility = 'visible';
+    this.router.navigate(['/libros']);
     this.display = false;
     this.cerrar.emit();
   }
@@ -160,9 +155,13 @@ export class LibrosComponent implements OnInit {
   }
   // se trae la informacion para editar
   onLibro(libro, id) {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.showDialog();
+    document.getElementById('contenedor').style.visibility = 'hidden';
     this.id = id;
     this.InformacionLibrosProvicional = libro;
+    libro = null;
   }
   // guardar los libros editados
   onGuardareditarlibro() {

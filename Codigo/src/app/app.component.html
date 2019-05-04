@@ -1,18 +1,23 @@
-<!--<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.name}}
-  </li>
-  <li class="text" *ngFor="let contacto of contactos | async">
-      {{contacto.libro}}
-    </li>
-</ul>-->
 <!--BEGIN OF CCSANCHEZC 16/02/2019 -->
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-<app-navbar></app-navbar>
-<div class="container" id="container">
-  <flash-messages></flash-messages>
-  <router-outlet></router-outlet>
-</div>
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css" />
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+  <app-navbar></app-navbar>
+  <div class="container" id="container">
+    <flash-messages></flash-messages>
+    <router-outlet></router-outlet>
+  </div>
+</body>
+
+</html>
 <!--END OF CCSANCHEZC 16/02/2019-->
-

@@ -38,8 +38,11 @@ export class PerfilComponent implements OnInit {
   public currentStatus = 1;
   private id: any;
   public InformacionUsuarioProvicional: any;
+  public foto: any;
   public count = 0;
   public date14: Date;
+  text: String;
+  images: any[];
     // tslint:disable-next-line:no-inferrable-types
     public display: boolean = false;
     public usuarioEdit: any;
@@ -59,17 +62,19 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-
+    this.text = `This will be converted to EmojiOne emojis! :thumbsup: ❤️`;
     this.TraerInformacionUsuario();
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
-    text: new FormControl(''),
+    text: new FormControl(null, Validators.required),
     ids: new FormControl()
   });
 
   ngOnInit() {
     this.TraerComentario();
+    this.TraerInformacionUsuario();
+    this.fotos();
   //  this.MostrarInformacion();
   }
 
@@ -111,23 +116,27 @@ export class PerfilComponent implements OnInit {
     this.InformacionUsuarioProvicional = {
       nombre: '',
       apellido: '',
-      genero: '',
       edad: '',
       url: '',
       celular: '',
-      nacionalidad: '',
       text: ''
     };
     this.showDialog();
     this.InformacionUsuarioProvicional = usuario;
+    usuario = null;
     this.usuarioEdit = usuario;
   }
 
   // actualizar informacion usuario
   onGuardarUsuarioUpdate() {
     this.count = 1;
-    this.InformacionUsuarioProvicional.url = this.inputImageUser.nativeElement.value;
-    this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    if (this.inputImageUser.nativeElement.value !== '' ) {
+      this.InformacionUsuarioProvicional.url = this.inputImageUser.nativeElement.value;
+      this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    } else {
+      this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    }
+
     this.onCancelarUsuario();
   }
 
@@ -168,6 +177,19 @@ export class PerfilComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
     .subscribe();
+  }
+
+  fotos() {
+    this.foto = {
+      url: ''
+    };
+    this.UserServices.getPerfil().valueChanges().subscribe((user) => {
+      console.log(this.foto = user);
+    });
+    this.images = [];
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    this.images.push({source: this.foto.url});
   }
 
   // FUNCIONES DE ELMININACION

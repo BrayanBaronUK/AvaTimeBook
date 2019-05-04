@@ -11,25 +11,26 @@
     <div class="row">
       <div class="col-md-12"
         style="border-width: 1px; border-style: solid; border-color: lightgrey; padding: 0px !important; overflow: auto;">
-        
-        <form (ngSubmit)="newPerfil(newperfilForm.value)" [formGroup]="newperfilForm">
+
+        <form (ngSubmit)="newPerfil(newperfilForm.value)" [formGroup]="newperfilForm" [noValidate]=false>
           <p-panel header="Informacion Usuario">
             <input type="hidden" formControlName="id">
             <div style="text-justify: center">
-              <h5><b>Nombre:</b></h5>
-              <input class="form-control" id="Nombre" placeholder="Nombre" formControlName="nombre">
+              <label>Nombre: </label>
+              <input class="form-control" id="Nombre" placeholder="Nombre" formControlName="nombre" [required]=true>
             </div>
 
             <div>
-              <h5><b>Apellido:</b></h5>
-              <input class="form-control" id="Apellido" placeholder="Apellido" formControlName="apellido">
+              <label>Apellido: </label>
+              <input class="form-control" id="Apellido" placeholder="Apellido"  formControlName="apellido"
+                [required]=true>
             </div>
 
             <div>
               <label for="sel1">
-                <h5><b>Género:</b></h5>
+                <label>Género: </label>>
               </label>
-              <select class="form-control" id="sel1" formControlName="genero" aria-placeholder="Genero">
+              <select class="form-control" id="sel1" formControlName="genero" aria-placeholder="Genero" [required]=true>
                 <option value="">Genero</option>
                 <option>Masculino</option>
                 <option>Femenino</option>
@@ -38,45 +39,45 @@
             </div>
 
             <div>
-              <h5><b>Edad:</b></h5>
-              <input type="number" class="form-control" id="edad" placeholder="Coloque su edad" formControlName="edad">
+              <label>Edad: </label>
+              <input type="number" class="form-control" id="edad" min="18" placeholder="Coloque su edad"
+                formControlName="edad">
             </div>
 
             <div>
-              <h5><b>Celular:</b></h5>
-              <input class="form-control" id="Celular" placeholder="Celular" formControlName="celular">
+              <label>Celular: </label>
+              <input class="form-control" id="Celular" pattern="^[0-9]*$" title="Ejemplo número valido 3201234567"
+                minlength="10" maxlength="10" placeholder="Celular" formControlName="celular">
             </div>
             <div>
-              <h5><b>Nacionalidad:</b></h5>
+              <label>Nacionalidad: </label>
               <input type="Nacionalidad" class="form-control" id="Nacionalidad" placeholder="Nacionalidad"
-                formControlName="nacionalidad">
+                formControlName="nacionalidad" [required]=true>
             </div>
 
             <hr>
             <div>
-              <h5><b>Subir imagen</b></h5>
+              <label>Subir imagen </label>
               <input type="file" accept=".png, .jpg" (change)="onUpload($event)">
             </div>
+            <hr>
             <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" 
-              [style.width]="(uploadPercent | async) + '%'">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                [style.width]="(uploadPercent | async) + '%'">
 
               </div>
             </div>
-            <input #imageUser type="text" class="from-control" value="{{urlImage | async}}" style="display:none;" >
+            <input #imageUser type="text" class="from-control" value="{{urlImage | async}}" style="display:none;">
             <div class="form-group">
               <div>
-                <label>
-                  <h5><b>Escribe tus gustos:</b></h5>
-                </label>
+                <label> Escribe tus gustos:</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                   formControlName="text"></textarea>
               </div>
             </div>
             <div class="col-md-12">
               <div class="col-md-12" style="text-align : center; margin-top: 1%">
-                <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newperfilForm.valid"
-                  value="Agregar">Guardar</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg" value="Agregar">Guardar</button>
 
               </div>
             </div>
