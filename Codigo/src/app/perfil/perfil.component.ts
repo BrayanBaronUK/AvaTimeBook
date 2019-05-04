@@ -40,6 +40,8 @@ export class PerfilComponent implements OnInit {
   public InformacionUsuarioProvicional: any;
   public count = 0;
   public date14: Date;
+  text: String;
+  images: any[];
     // tslint:disable-next-line:no-inferrable-types
     public display: boolean = false;
     public usuarioEdit: any;
@@ -59,17 +61,19 @@ export class PerfilComponent implements OnInit {
       text: ''
     });
 
-
+    this.text = `This will be converted to EmojiOne emojis! :thumbsup: ❤️`;
     this.TraerInformacionUsuario();
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
-    text: new FormControl(''),
+    text: new FormControl(null, Validators.required),
     ids: new FormControl()
   });
 
   ngOnInit() {
     this.TraerComentario();
+    this.fotos();
+    this.TraerInformacionUsuario();
   //  this.MostrarInformacion();
   }
 
@@ -126,8 +130,13 @@ export class PerfilComponent implements OnInit {
   // actualizar informacion usuario
   onGuardarUsuarioUpdate() {
     this.count = 1;
-    this.InformacionUsuarioProvicional.url = this.inputImageUser.nativeElement.value;
-    this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    if (this.inputImageUser.nativeElement.value !== '' ) {
+      this.InformacionUsuarioProvicional.url = this.inputImageUser.nativeElement.value;
+      this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    } else {
+      this.UserServices.updatePerfil(this.InformacionUsuarioProvicional);
+    }
+
     this.onCancelarUsuario();
   }
 
@@ -168,6 +177,11 @@ export class PerfilComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe( finalize(() => this.urlImage = ref.getDownloadURL()))
     .subscribe();
+  }
+
+  fotos() {
+    this.images = [];
+    this.images.push({source: this.userFirebase.url.trim(), alt: 'imagen de foto', title: 'Title 1'});
   }
 
   // FUNCIONES DE ELMININACION

@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { UserService } from '../Core/user.service';
 import { Libros } from '../variables/libros';
-import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -27,7 +27,7 @@ export class LibrosComponent implements OnInit {
     public userservicioperfil: UserService,
     public UserLibro: ServicioLibroService,
     public flashMensaje: FlashMessagesService,
-    public router: Router
+    private router: Router,
   ) {
 
   }
@@ -128,6 +128,7 @@ export class LibrosComponent implements OnInit {
       categoria_libro: '',
       text_libro: ''
     };
+    this.router.navigate(['/libros/#tablaLibros']);
     this.display = false;
     this.cerrar.emit();
   }

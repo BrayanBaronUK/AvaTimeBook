@@ -20,9 +20,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media</div>
                 <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i
-                        class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
-                        class="fa fa-google-plus fa-2x"></i>
+                    <i class="fab fa-facebook-square"></i>  
+                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-google-plus-square"></i>
                 </div>
             </div>
 
@@ -41,8 +41,8 @@
                                             <th style="width:6em">Autor</th>
                                             <th style="width:6em">Categoria</th>
                                             <th style="width:6em">Descripcion</th>
-                                            <th style="width:6em">Editar</th>
-                                            <th style="width:5em">Eliminar</th>
+                                            <th style="width:3em">Editar</th>
+                                            <th style="width:3em">Eliminar</th>
                                         </tr>
                                     </ng-template>
                                     <ng-template pTemplate="body" let-userLibro>
@@ -53,10 +53,11 @@
                                             <td>{{userLibro.data.text_libro}}</td>
                                             <td><button class="btn btn-primary tablalibros"
                                                     (click)="onLibro(userLibro.data, userLibro.id)">
-                                                    Editar</button></td>
+                                                    <i class="fas fa-edit"></i></button></td>
                                             <td>
-                                                <button class="btn btn-primary tablalibros" md-button
-                                                    (click)="EliminarLibro(userLibro.id)">Eliminar</button>
+                                                <button class="btn btn-primary tablalibros"
+                                                    (click)="EliminarLibro(userLibro.id)">
+                                                    <i class="fas fa-trash-alt"></i></button>
                                             </td>
                                         </tr>
                                     </ng-template>
@@ -166,7 +167,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary" (click)="onGuardareditarlibro()">Guardar</button>
-                        <button class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
+                       <a href="libros/#tablaLibros"><button class="btn btn-primary" (click)="onCancelar()">Cancelar</button></a>
                     </div>
                 </div>
             </div>
