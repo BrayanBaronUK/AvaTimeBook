@@ -63,6 +63,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { EmojiModule } from 'angular-emojione';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
+import {ListboxModule} from 'primeng/listbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +121,8 @@ import {GalleriaModule} from 'primeng/galleria';
     MatIconModule,
     EmojiModule,
     ProgressBarModule,
-    GalleriaModule
+    GalleriaModule,
+    ListboxModule
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]

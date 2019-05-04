@@ -3,14 +3,14 @@
     <div class="card">
       <div class="card-body">
         <h1 class="text-center">Login</h1>
-        <form (submit)="onSubmitLogin()">
+        <form (submit)="onSubmitLogin()" [noValidate]="false">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" [(ngModel)]="email" class="form-control">
+            <input type="email" name="email" id="email" [(ngModel)]="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [required]=true>
           </div>
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" [(ngModel)]="password" class="form-control">
+            <input type="password" name="password" id="password" [(ngModel)]="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" type="password" [required]=true>
           </div>
           <input type="submit" value="Iniciar sesion" class="btn btn-primary btn-block btn-lg">
         </form>

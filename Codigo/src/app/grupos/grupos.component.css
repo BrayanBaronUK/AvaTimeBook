@@ -7,3 +7,8 @@
   button{
     margin: 10px;
   }
+  th{
+    width: 100px;
+    padding: 5px;
+    margin: 5px;
+  }

@@ -23,22 +23,21 @@
               style="border-width: 1px; border-style: solid; border-color: lightgrey; padding: 0px !important; overflow: auto;">
         <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
         <p-panel header="Crear Libro">
-        <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm">
+        <form (ngSubmit)="newlibro(newlibroForm.value)" [formGroup]="newlibroForm" [noValidate]=false>
           
             <!-- Inicio del div central parte de formulario información básica -->
               <br>
               <input type="text" class="form-control" id="nombre_libro" placeholder="Nombre del libro"
-                formControlName="nombre_libro" required>
+                formControlName="nombre_libro"  [required]=true >
 
               <br>
               <input type="text" class="form-control" id="autor_libro" placeholder="Autor"
-                formControlName="autor_libro" required>
+                formControlName="autor_libro" [required]=true>
 
               <div>
                 <label for="sel1">
                 </label>
-                <!--categorias-->
-                <select class="form-control" id="sel1" required>
+                <select class="form-control" id="sel1" [required]=true>
                   <option  value="">Categoria</option>
                   <option value="Policial">Policial</option>
                   <option value="Romántica">Romántica</option>
@@ -66,12 +65,12 @@
               <br>
               <!--descripcion-->
               <h5><b>Descripción del libro:</b></h5>
-              <textarea class="form-control" id="text_libro" formControlName="text_libro">
+              <textarea class="form-control" id="text_libro" formControlName="text_libro" [required]=true>
                      </textarea>
 
               <div class="col-md-12">
                 <div class="col-md-12 guardar"  style="text-align : center; margin-top: 1%">
-                  <button type="submit" class="btn btn-primary btn-block btn-lg" [disabled]="!newlibroForm.valid"
+                  <button type="submit" class="btn btn-primary btn-block btn-lg"
                     value="Agregar">Guardar</button>
                 </div>
               </div>

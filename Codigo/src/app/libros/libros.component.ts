@@ -121,14 +121,8 @@ export class LibrosComponent implements OnInit {
   }
 
   onCancelar() {
-    this.CrearLibrosProvicional = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
-    this.router.navigate(['/libros/#tablaLibros']);
+    document.getElementById('contenedor').style.visibility = 'visible';
+    this.router.navigate(['/libros']);
     this.display = false;
     this.cerrar.emit();
   }
@@ -161,9 +155,13 @@ export class LibrosComponent implements OnInit {
   }
   // se trae la informacion para editar
   onLibro(libro, id) {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     this.showDialog();
+    document.getElementById('contenedor').style.visibility = 'hidden';
     this.id = id;
     this.InformacionLibrosProvicional = libro;
+    libro = null;
   }
   // guardar los libros editados
   onGuardareditarlibro() {

@@ -3,13 +3,16 @@ import { AuthService } from '../Core/auth.service';
 import { UserService } from '../Core/user.service';
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
-  // public herramientas: boolean;
+ // public herramientas: boolean;
+  public email: any;
   public isLogin: boolean;
   public nombreUsuario: string;
   public emailUsuario: string;
@@ -18,10 +21,11 @@ export class NavbarComponent implements OnInit {
   public userFirebase: any;
 
   constructor(
-    public authService: AuthService,
-    public UserServices: UserService,
+    private authService: AuthService,
+    private UserServices: UserService,
     public app: AppComponent,
-    private router: Router
+    private router: Router,
+    public flashMensaje: FlashMessagesService,
   ) {
     this.userFirebase = {
       nombre: '',
@@ -70,4 +74,31 @@ export class NavbarComponent implements OnInit {
   onSalirRecuperar() {
     return document.getElementById('contraseña').style.display = 'none';
   }
+
+  MostarInformacions() {
+    // tslint:disable-next-line:no-debugger
+    debugger;
+    document.getElementById('contraseña').style.display = 'none';
+    this.app.Resetear();
+    document.getElementById('navbarColor02').style.display = 'block';
+    this.router.navigate(['/social']);
+}
+
+onSubmitPassword() {
+  // tslint:disable-next-line:no-debugger
+  debugger;
+  this.authService.doRecovery(this.email)
+    .then(() => {
+      this.flashMensaje.show('Contraseña Enviada a ' + this.email,
+        { cssClass: 'alert-success', timeout: 4000 });
+      this.authService.doLogout();
+      document.getElementById('contraseña').style.display = 'none';
+      this.app.Resetear();
+      this.router.navigate(['/login']);
+    }).catch((err) => {
+      this.flashMensaje.show(err,
+        { cssClass: 'alert-danger', timeout: 4000 });
+      this.router.navigate(['/login']);
+    });
+}
 }
