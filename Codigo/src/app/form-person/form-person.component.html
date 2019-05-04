@@ -40,14 +40,14 @@
 
             <div>
               <label>Edad: </label>
-              <input type="number" class="form-control" id="edad" min="18" placeholder="Coloque su edad"
-                formControlName="edad">
+              <input type="number" class="form-control" id="edad" min="18" max="99" placeholder="Coloque su edad"
+                formControlName="edad" [required]=true>
             </div>
 
             <div>
               <label>Celular: </label>
               <input class="form-control" id="Celular" pattern="^[0-9]*$" title="Ejemplo número valido 3201234567"
-                minlength="10" maxlength="10" placeholder="Celular" formControlName="celular">
+                minlength="10" maxlength="10" placeholder="Celular" formControlName="celular" [required]=true>
             </div>
             <div>
               <label>Nacionalidad: </label>
