@@ -65,6 +65,7 @@ import { CalendarModule } from 'primeng/calendar';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,7 +124,8 @@ import {ListboxModule} from 'primeng/listbox';
 //   EmojiModule,
     ProgressBarModule,
     GalleriaModule,
-    ListboxModule
+    ListboxModule,
+    AutoCompleteModule
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
