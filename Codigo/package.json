@@ -25,7 +25,11 @@
     "@angular/router": "~7.0.0",
     "@material/form-field": "^1.0.0",
     "angular-bootstrap-md": "^7.4.2",
+<<<<<<< HEAD
     "angular-emoji": "^0.1.45",
+=======
+    "angular-font-awesome": "^3.1.2",
+>>>>>>> 53a37624d49172eefe62f9c7b68b408ea519883e
     "angular2-flash-message": "^1.0.2",
     "angular2-flash-messages": "^3.0.1",
     "angularfire2": "^5.1.1",

@@ -61,7 +61,10 @@ import { TableModule } from 'primeng/table';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
+<<<<<<< HEAD
 //import { EmojiModule } from 'angular-emojione';
+=======
+>>>>>>> 53a37624d49172eefe62f9c7b68b408ea519883e
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
@@ -121,7 +124,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
+<<<<<<< HEAD
 //   EmojiModule,
+=======
+>>>>>>> 53a37624d49172eefe62f9c7b68b408ea519883e
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
