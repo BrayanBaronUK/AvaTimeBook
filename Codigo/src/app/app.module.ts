@@ -62,9 +62,12 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 <<<<<<< HEAD
+<<<<<<< HEAD
 //import { EmojiModule } from 'angular-emojione';
 =======
 >>>>>>> 53a37624d49172eefe62f9c7b68b408ea519883e
+=======
+>>>>>>> cesar
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
@@ -125,9 +128,12 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     MatTabsModule,
     MatIconModule,
 <<<<<<< HEAD
+<<<<<<< HEAD
 //   EmojiModule,
 =======
 >>>>>>> 53a37624d49172eefe62f9c7b68b408ea519883e
+=======
+>>>>>>> cesar
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
