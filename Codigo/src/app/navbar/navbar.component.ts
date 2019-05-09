@@ -11,7 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 
 export class NavbarComponent implements OnInit {
- // public herramientas: boolean;
+  // public herramientas: boolean;
   public email: any;
   public isLogin: boolean;
   public nombreUsuario: string;
@@ -68,16 +68,16 @@ export class NavbarComponent implements OnInit {
     debugger;
     this.app.Obtener();
     document.getElementById('contraseña').style.display = 'block';
-    document.getElementById('navbarColor02').style.display = 'none';
-  }
-
-  onSalirRecuperar() {
-    return document.getElementById('contraseña').style.display = 'none';
-  }
-
+  document.getElementById('navbarColor02').style.display = 'none';
+  
+  
+  SalirRecuperar() {
+  return document.getElementById('contraseña').style.display = 'none';
+  
+  
   MostarInformacions() {
     // tslint:disable-next-line:no-debugger
-    debugger;
+
     document.getElementById('contraseña').style.display = 'none';
     this.app.Resetear();
     document.getElementById('navbarColor02').style.display = 'block';
