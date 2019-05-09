@@ -80,7 +80,7 @@
                                                     required>
 
                                                 <br>
-                                                <p-listbox [options]="personas" [(ngModel)]="personaseleccionada"
+                                                <!-- <p-listbox [options]="personas" [(ngModel)]="personaseleccionada"
                                                     multiple="multiple" checkbox="checkbox" filter="filter"
                                                     optionLabel="data.nombre"
                                                     [style]="{width: '100%', heigth: '100%'}" (click)="OcultarTablero()"
@@ -92,21 +92,23 @@
                                                 </p-listbox>
                                                 <p>Persona Seleccionada: <span *ngFor="let c of personaseleccionada"
                                                         style="margin-right: 10px">{{c.data.nombre}}
-                                                        {{c.data.apellido}}</span></p>
+                                                        {{c.data.apellido}}</span></p> -->
 
 
                                                 <h3>Multiple</h3>
-                                                <span class="ui-fluid">
-                                                    <p-autoComplete [(ngModel)]="personaseleccionada"
-                                                        [suggestions]="filtropersona"
-                                                        (completeMethod)=" filtropersonamultiple($event)"
-                                                        styleClass="wid100" [minLength]="1" placeholder="Personas"
-                                                        field="data.nombre" [multiple]="true">
-                                                    </p-autoComplete>
-                                                </span>
-                                                <ul>
-                                                    <li *ngFor="let c of personaseleccionada">{{c.nombre}}</li>
-                                                </ul>
+                                                    <span class="ui-fluid">
+                                                        <p-autoComplete [(ngModel)]="personaseleccionada"
+                                                            [suggestions]="filteredCountriesMultiple"
+                                                            (completeMethod)=" BuscarPersonas($event)"
+                                                            styleClass="wid100" [minLength]="1" placeholder="Personas"
+                                                            field="data.nombre" [multiple]="true">
+                                                            
+                                                        </p-autoComplete>
+                                                    </span>
+                                                    <ul>
+                                                        <li *ngFor="let c of personaseleccionada">{{c.nombre}}</li>
+                                                    </ul>
+                                             
                                                 <br>
 
                                                 <div class="col-md-12 boton">
