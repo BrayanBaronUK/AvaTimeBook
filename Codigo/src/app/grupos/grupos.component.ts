@@ -95,7 +95,6 @@ export class GruposComponent implements OnInit {
 
   BuscarPersonas(event) {
     debugger;
-    // let value = this.searchValue.toLowerCase();
           this.filteredCountriesMultiple = this.filterCountry(event.query, this.personas);
     }
 

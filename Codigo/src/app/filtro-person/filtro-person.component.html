@@ -22,12 +22,15 @@
       <ng-template pTemplate="header">
         <tr>
           <th>Persona</th>
+          <th>Cantidad de libros</th>
           <th>Seguir Persona</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-filtrouser>
+      <ng-template pTemplate="body" let-filtrouser let-LibrosTotal>
         <tr>
-          <td>{{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
+          <td><img class="rounded-circle" width="50" height="50"
+            src="{{filtrouser.data.url}}" alt=""></td>
+            <td>{{filtrouser.LibrosTotal.nombre_libro}}</td>
           <td><button class="btn btn-primary" md-button (click)="onfiltro(filtrouser.id)">Seguir</button></td>
         </tr>
       </ng-template>

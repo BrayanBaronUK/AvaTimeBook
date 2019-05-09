@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { UserService } from '../Core/user.service';
+import { ServicioLibroService } from '../Core/servicio-libro.service';
 @Component({
   selector: 'app-filtro-person',
   templateUrl: './filtro-person.component.html',
@@ -8,39 +9,53 @@ import { UserService } from '../Core/user.service';
 })
 export class FiltroPersonComponent implements OnInit {
 
-  public filtrouser = [];
+   filtrouser = [];
+  public p = [];
   public input: any;
   public input2: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
   constructor(public userservice: ServicioFiltroPersonaService,
-    public userservicePerfil: UserService
+    public userservicePerfil: UserService,
+    public servicioLibroService: ServicioLibroService
   ) {
 
 
   }
 
   ngOnInit() {
-    this.TraerLibros();
+    this.TraerPersonas();
   }
 
 
 
-  TraerLibros() {
-    // trae todos los comentarios
+  TraerPersonas() {
     this.userservice.getPerfiles().subscribe((usuarios) => {
-      this.filtrouser = [];
       usuarios.forEach((usuariosdata: any) => {
-        this.filtrouser.push({
-          id: usuariosdata.payload.doc.id,
-          data: usuariosdata.payload.doc.data()
+        this.servicioLibroService.getLibros(usuariosdata.payload.doc.id).subscribe((libro) => {
+          if (libro.length == 0) {
+            this.filtrouser.push({
+              id: usuariosdata.payload.doc.id,
+              data: usuariosdata.payload.doc.data(),
+              LibrosTotal: [
+             
+              ]
+            });
+          } else {
+            this.filtrouser.push({
+              id: usuariosdata.payload.doc.id,
+              data: usuariosdata.payload.doc.data(),
+              LibrosTotal: [
+                libro.map((l: any) => {
+                  return l.payload.doc.id, l.payload.doc.data();
+                })
+              ]
+            });
+          }
         });
       });
     });
-  }
-
-  onfiltro(id) {
-    console.log('el id del usuario es:' + id);
+    console.log(this.filtrouser);
   }
 
   myFunctionNombre() {
@@ -64,18 +79,6 @@ export class FiltroPersonComponent implements OnInit {
       this.tr.getElementsByTagName('td').style.display = 'block';
     }
 
-  }
-
-  myFunctionApellido() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.input2 = document.getElementById('myInput');
-    this.filter2 = this.input2.value.toUpperCase();
-    this.table2 = document.getElementById('myTable');
-    this.tr2 = this.table2.getElementsByTagName('tr');
-    for (this.i2 = 0; this.i2 < this.tr2.length; this.i2++) {
-      this.td2 = this.tr2[this.i2].getElementsByTagName('td')[1];
-    }
   }
 
 }
