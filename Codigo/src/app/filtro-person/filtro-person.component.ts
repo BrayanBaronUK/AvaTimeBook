@@ -9,7 +9,7 @@ import { ServicioLibroService } from '../Core/servicio-libro.service';
 })
 export class FiltroPersonComponent implements OnInit {
 
-   filtrouser = [];
+  filtrouser = [];
   public p = [];
   public input: any;
   public input2: any;
@@ -31,31 +31,26 @@ export class FiltroPersonComponent implements OnInit {
 
   TraerPersonas() {
     this.userservice.getPerfiles().subscribe((usuarios) => {
-      usuarios.forEach((usuariosdata: any) => {
+      usuarios.map((usuariosdata: any) => {
         this.servicioLibroService.getLibros(usuariosdata.payload.doc.id).subscribe((libro) => {
-          if (libro.length == 0) {
-            this.filtrouser.push({
-              id: usuariosdata.payload.doc.id,
-              data: usuariosdata.payload.doc.data(),
-              LibrosTotal: [
-             
+
+          this.filtrouser.push({
+            id: usuariosdata.payload.doc.id,
+            data: usuariosdata.payload.doc.data(),
+            libros: [
+              libro.map(l => {
+                 // tslint:disable-next-line:no-unused-expression
+                 return l.payload.doc.id, l.payload.doc.data();
+              })
               ]
-            });
-          } else {
-            this.filtrouser.push({
-              id: usuariosdata.payload.doc.id,
-              data: usuariosdata.payload.doc.data(),
-              LibrosTotal: [
-                libro.map((l: any) => {
-                  return l.payload.doc.id, l.payload.doc.data();
-                })
-              ]
-            });
-          }
+          });
         });
       });
     });
     console.log(this.filtrouser);
+  }
+  onfiltro(id) {
+    console.log(id);
   }
 
   myFunctionNombre() {

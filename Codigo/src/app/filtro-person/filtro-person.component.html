@@ -26,16 +26,20 @@
           <th>Seguir Persona</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-filtrouser let-LibrosTotal>
+      <ng-template pTemplate="body" let-filtrouser let-filtrouser.libros.[].[]>
         <tr>
           <td><img class="rounded-circle" width="50" height="50"
-            src="{{filtrouser.data.url}}" alt=""></td>
-            <td>{{filtrouser.LibrosTotal.nombre_libro}}</td>
+            src="{{filtrouser.data.url}}" alt=""> {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
+            <td>{{filtrouser.libros.length}}</td>
           <td><button class="btn btn-primary" md-button (click)="onfiltro(filtrouser.id)">Seguir</button></td>
         </tr>
+   
       </ng-template>
     </p-table>
   </p-panel>
+  <div *ngFor="let c of filtrouser.libros">
+    {{c.data.libros.lenght.nombre_libro}}
+</div>
 
 </body>
 

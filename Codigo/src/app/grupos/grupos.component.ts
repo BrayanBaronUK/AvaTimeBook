@@ -94,14 +94,11 @@ export class GruposComponent implements OnInit {
   }
 
   BuscarPersonas(event) {
-    debugger;
           this.filteredCountriesMultiple = this.filterCountry(event.query, this.personas);
     }
 
-  filterCountry(query, countries: any[]):any[] {
-      debugger;
-      console.log(countries);
-      //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+  filterCountry(query, countries: any[]): any[] {
+      // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
       let filtered : any[] = [];
       for(let i = 0; i < countries.length; i++) {
           let country = countries[i];
