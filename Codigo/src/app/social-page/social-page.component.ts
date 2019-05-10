@@ -43,7 +43,9 @@ export class SocialPageComponent implements OnInit {
       url: '',
       celular: '',
       nacionalidad: '',
-      text: ''
+      text: '',
+      seguidores: 0,
+      siguiendo: 0
     };
 
     this.UserServices.getPerfil().valueChanges().subscribe((user) => {
