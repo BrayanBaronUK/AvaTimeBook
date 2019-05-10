@@ -18,7 +18,7 @@
     <a class="navbar-brand" href="#">AvaTime<span class="text-danger">BOOK</span></a>
     <form class="form-inline">
         <div class="input-group">
-            <input type="text" id="input" placeholder="Buscar personas.." title="Type in a name">
+            <input type="text" id="input" (keyup)="myFunctionNombre()" placeholder="Buscar personas.." title="Type in a name">
             <div class="input-group-append">
                 <button class="btn btn-outline-primary filtro " (click)="MostrarInformacion()" type="button" id="button-addon2">
                     <i class="fa fa-search"></i>

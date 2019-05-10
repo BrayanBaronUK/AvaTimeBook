@@ -71,8 +71,7 @@ export class SocialPageComponent implements OnInit {
         });
       });
     });
-
-    this.myFunction();
+    this.myFunctionNombre();
   }
   // envia datos del comentario
   public newComentario(form) {
@@ -98,9 +97,7 @@ export class SocialPageComponent implements OnInit {
       this.UserComentario.deleteComentario(id);
     }
 
-    myFunction() {
-      // tslint:disable-next-line:no-debugger
-      debugger;
+    myFunctionNombre() {
       this.input = document.getElementById('input');
       if ( this.input.value === '') {
           this.OcultarTablero();
