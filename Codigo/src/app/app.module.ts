@@ -64,6 +64,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +86,6 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     FiltroPersonComponent
   ],
   imports: [
-    AccordionModule,
     BrowserModule,
     PanelModule,
     DialogModule,
@@ -122,7 +122,9 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    DataTableModule,
+    SharedModule,
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]

@@ -1,14 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, ChangeDetectorRef, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { UserService } from '../Core/user.service';
 import { Libros } from '../variables/libros';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {InputText} from 'primeng/primeng'
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
-  styleUrls: ['./libros.component.css']
+  styleUrls: ['./libros.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LibrosComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
@@ -23,15 +25,30 @@ export class LibrosComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   public display: boolean = false;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
+
+
+  cars = [
+    {"vin":"a1653d4d","brand":"VW","year":1998,"color":"White","price":10000},
+    {"vin":"ddeb9b10","brand":"Mercedes","year":1985,"color":"Green","price":25000},
+    {"vin":"d8ebe413","brand":"Jaguar","year":1979,"color":"Silver","price":30000},
+    {"vin":"aab227b7","brand":"Audi","year":1970,"color":"Black","price":12000},
+    {"vin":"631f7412","brand":"Volvo","year":1992,"color":"Red","price":15500},
+    {"vin":"7d2d22b0","brand":"VW","year":1993,"color":"Maroon","price":40000},
+    {"vin":"50e900ca","brand":"Fiat","year":1964,"color":"Blue","price":25000},
+    {"vin":"4bbcd603","brand":"Renault","year":1983,"color":"Maroon","price":22000},
+    {"vin":"70214c7e","brand":"Renault","year":1961,"color":"Black","price":19000},
+    {"vin":"ec229a92","brand":"Audi","year":1984,"color":"Brown","price":36000},
+    {"vin":"1083ee40","brand":"VW","year":1984,"color":"Silver","price":215000},
+  ]
   constructor(
     public userservicioperfil: UserService,
     public UserLibro: ServicioLibroService,
     public flashMensaje: FlashMessagesService,
     private router: Router,
+    private cd: ChangeDetectorRef,
   ) {
 
   }
-
 
   ngOnInit() {
     this.Variables();
@@ -44,25 +61,22 @@ export class LibrosComponent implements OnInit {
 
   // iniciar variables
 
+  detectChanges() {
+    this.cd.detectChanges();
+  }
 
   MostrarColumnas() {
     this.colum = [
-      { header: 'Nombre' },
-      { header: 'Autor' },
-      { header: 'Categoria' },
-      { header: 'Descripcion' }
+      { field: 'vin', header: 'Vin' },
+      { field: 'year', header: 'Year' },
+      { field: 'brand', header: 'Brand' },
+      { field: 'color', header: 'Color' }
     ];
   }
   showDialog() {
     this.display = true;
   }
   Variables() {
-    this.userLibro = {
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
   }
 
   TraerLibrosFiltro() {
@@ -111,7 +125,7 @@ export class LibrosComponent implements OnInit {
     // trae todos los libros
     this.UserLibro.getLibro().subscribe((libros) => {
       this.userLibro = [];
-      libros.forEach((librodata: any) => {
+      libros.map((librodata: any) => {
         this.userLibro.push({
           id: librodata.payload.doc.id,
           data: librodata.payload.doc.data()

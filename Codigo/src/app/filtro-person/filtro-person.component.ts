@@ -40,7 +40,7 @@ export class FiltroPersonComponent implements OnInit {
             libros: [
               libro.map(l => {
                  // tslint:disable-next-line:no-unused-expression
-                 return l.payload.doc.id, l.payload.doc.data();
+                 return  l.payload.doc.data();
               })
               ]
           });
