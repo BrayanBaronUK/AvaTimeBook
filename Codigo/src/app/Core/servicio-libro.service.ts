@@ -52,7 +52,11 @@ export class ServicioLibroService {
     return this.db.collection('perfil').doc(this.getIud()).
     collection('libro-persona').doc(this.getIud()).collection('libro').snapshotChanges();
   }
-  //actualizar libro
+  getLibros(id) {
+    return this.db.collection('perfil').doc(id).
+    collection('libro-persona').doc(id).collection('libro').snapshotChanges();
+  }
+
   updateLibro(id, libro: any) {
    return this.db.collection('perfil').doc(this.getIud()).
    collection('libro-persona').doc(this.getIud()).collection('libro').doc(id).set(libro);

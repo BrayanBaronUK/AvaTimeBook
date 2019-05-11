@@ -60,12 +60,11 @@ import { TableModule } from 'primeng/table';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
-import { EmojiModule } from 'angular-emojione';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
-//import { EmojiPickerModule } from 'ng-emoji-picker';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +86,6 @@ import {ListboxModule} from 'primeng/listbox';
     FiltroPersonComponent
   ],
   imports: [
-    AccordionModule,
     BrowserModule,
     PanelModule,
     DialogModule,
@@ -121,11 +119,12 @@ import {ListboxModule} from 'primeng/listbox';
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
-    EmojiModule,
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
-  //  EmojiPickerModule
+    AutoCompleteModule,
+    DataTableModule,
+    SharedModule,
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]

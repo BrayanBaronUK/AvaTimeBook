@@ -35,7 +35,9 @@ export class FormPersonComponent implements OnInit {
       edad: '',
       celular: '',
       nacionalidad: '',
-      text: ''
+      text: '',
+      seguidores:  0,
+      siguiendo: 0
 
     });
   }
@@ -48,7 +50,9 @@ export class FormPersonComponent implements OnInit {
     edad: new FormControl(Validators.required, Validators.required),
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
-    text: new FormControl('')
+    text: new FormControl(''),
+    seguidores: new FormControl(0),
+    siguiendo: new FormControl(0)
   });
   onSubmit() {
   }
@@ -88,7 +92,10 @@ export class FormPersonComponent implements OnInit {
         url: this.foto,
         celular: form.celular,
         nacionalidad: form.nacionalidad,
-        text: form.text
+        text: form.text,
+        seguidores: form.seguidores,
+        siguiendo: form.siguiendo
+
       };
       console.log(data);
       this.UserServices.createPefil(data).then(() => {
