@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { UserService} from '../Core/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -58,7 +59,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-  ///
 
   ngOnInit() {
   }

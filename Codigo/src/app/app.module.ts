@@ -66,7 +66,11 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+<<<<<<< HEAD
 import { RoomComponent } from './room/room.component';
+=======
+import {DataTableModule, SharedModule} from 'primeng/primeng';
+>>>>>>> cesar
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +93,10 @@ import { RoomComponent } from './room/room.component';
     RoomComponent,
   ],
   imports: [
+<<<<<<< HEAD
     AccordionModule,//union
+=======
+>>>>>>> cesar
     BrowserModule,
     PanelModule,
     DialogModule,
@@ -127,8 +134,10 @@ import { RoomComponent } from './room/room.component';
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
-    AutoCompleteModule
-  ],
+    AutoCompleteModule,
+    DataTableModule,
+    SharedModule,
+   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
 })

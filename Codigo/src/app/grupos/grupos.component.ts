@@ -13,7 +13,8 @@ export class GruposComponent implements OnInit {
   public crearGrupo: any;
   public grupos: any;
   public personas: any;
-  public personaseleccionada: Object[];
+  personaseleccionada: any[];
+  filteredCountriesMultiple: any[];
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
     public person: ServicioFiltroPersonaService) { }
@@ -23,6 +24,7 @@ export class GruposComponent implements OnInit {
     this.TraerGrupos();
     this.Traerperson();
     this.OcultarTablero();
+
   }
 
   TraerGrupos() {
@@ -78,7 +80,6 @@ export class GruposComponent implements OnInit {
         });
       });
     });
-    console.log(this.personas);
   }
 
   OcultarTablero() {
@@ -91,4 +92,22 @@ export class GruposComponent implements OnInit {
       document.getElementById('#ui-listbox-list-wrapper').style.display = 'none';
     });
   }
-}
+
+  BuscarPersonas(event) {
+          this.filteredCountriesMultiple = this.filterCountry(event.query, this.personas);
+    }
+
+  filterCountry(query, countries: any[]): any[] {
+      // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+      let filtered : any[] = [];
+      for(let i = 0; i < countries.length; i++) {
+          let country = countries[i];
+          if(country.data.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(country);
+          }
+      }
+      console.log(filtered);
+      return filtered;
+  }
+ 
+  }

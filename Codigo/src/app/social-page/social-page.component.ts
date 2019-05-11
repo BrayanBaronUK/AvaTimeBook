@@ -43,7 +43,9 @@ export class SocialPageComponent implements OnInit {
       url: '',
       celular: '',
       nacionalidad: '',
-      text: ''
+      text: '',
+      seguidores: 0,
+      siguiendo: 0
     };
 
     this.UserServices.getPerfil().valueChanges().subscribe((user) => {
@@ -71,8 +73,7 @@ export class SocialPageComponent implements OnInit {
         });
       });
     });
-
-    this.myFunction();
+    this.myFunctionNombre();
   }
   // envia datos del comentario
   public newComentario(form) {
@@ -98,32 +99,22 @@ export class SocialPageComponent implements OnInit {
       this.UserComentario.deleteComentario(id);
     }
 
-    myFunction() {
-      // tslint:disable-next-line:no-debugger
-      debugger;
+    myFunctionNombre() {
       this.input = document.getElementById('input');
       if ( this.input.value === '') {
           this.OcultarTablero();
       } else {
       this.filter = this.input.value.toUpperCase();
-      console.log(this.filter);
       this.table = document.getElementById('myTable');
-      console.log(this.table);
       this.tr = this.table.getElementsByTagName('tr');
-      console.log(this.tr);
       for (this.i = 0; this.i < this.tr.length; this.i++) {
         this.td = this.tr[this.i].getElementsByTagName('td')[0];
-        console.log(this.td);
         if (this.td) {
           this.txtValue = this.td.textContent || this.td.innerText;
-          console.log(this.td);
           if (this.txtValue.toUpperCase().indexOf(this.filter) > -1) {
-            console.log(this.filter);
             this.tr[this.i].style.display = '';
-            console.log(this.tr);
           } else {
             this.tr[this.i].style.display = 'none';
-            console.log(this.tr);
           }
         }
       }
@@ -135,7 +126,7 @@ export class SocialPageComponent implements OnInit {
       jQuery(document).on('click', '.filtro', function () {
         document.getElementById('filtro').style.display = 'block';
         document.getElementById('social').style.display = 'none';
-        document.getElementById('myInput').style.display = 'none';
+        document.getElementById('seccionBuscar').style.display = 'none';
       });
     }
     OcultarTablero() {

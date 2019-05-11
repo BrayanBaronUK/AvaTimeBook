@@ -37,7 +37,7 @@
               <div>
                 <label for="sel1">
                 </label>
-                <select class="form-control" id="sel1" [required]=true>
+                <select class="form-control" id="sel1" [required]=true formControlName="categoria_libro">
                   <option  value="">Categoria</option>
                   <option value="Policial">Policial</option>
                   <option value="Romántica">Romántica</option>
@@ -63,6 +63,7 @@
               </div>
 
               <br>
+              <!--descripcion-->
               <h5><b>Descripción del libro:</b></h5>
               <textarea class="form-control" id="text_libro" formControlName="text_libro" [required]=true>
                      </textarea>
@@ -73,7 +74,7 @@
                     value="Agregar">Guardar</button>
                 </div>
               </div>
-
+              <!--siguiente-->
               <div class="col-md-12">
                 <div class="col-md-12" id="siguiente" style="text-align : center; margin-top: 1%">
                   <button type="submit" class="btn btn-primary btn-block btn-lg"

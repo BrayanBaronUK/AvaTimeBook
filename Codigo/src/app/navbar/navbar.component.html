@@ -15,15 +15,6 @@
       </li>
       <li class="nav-item dropdown" *ngIf="isLogin">
         <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-          aria-expanded="false" *ngIf="!herramientas">Buscar</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" routerLink="/filtropersona">Personas</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" routerLink="/libros">Libros</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown" *ngIf="isLogin">
-        <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
           aria-expanded="false" *ngIf="!herramientas">Configuraciones</a>
         <div class="dropdown-menu">
           <a class="dropdown-item con" (click)="MostarInformacion()">Recuperar contraseñas</a>
@@ -35,10 +26,11 @@
   </li>
   <li class="nav-item dropdown" *ngIf="isLogin">
     <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-      aria-expanded="false" *ngIf="!herramientas">Herramientas</a>
+      aria-expanded="false" *ngIf="!herramientas">Crear & Buscar</a>
     <div class="dropdown-menu">
-      <a class="dropdown-item" routerLink="/libros">Libros</a>
+      <a class="dropdown-item" routerLink="/filtropersona">Personas</a>
       <div class="dropdown-divider"></div>
+      <a class="dropdown-item" routerLink="/libros">Libros</a>
       <a class="dropdown-item" routerLink="/grupos">Grupos</a>
     </div>
   </li>
@@ -59,7 +51,7 @@
     </li>
 
     <li class="nav-item ajuste" *ngIf="isLogin">
-      <img src="{{userFirebase.url}}" class="rounded-circle" routerLink="/social">
+      <img src="{{userFirebase.url}}" class="rounded-circle" width="50" height="50" routerLink="/social">
       <!-- <img [src]="fotico" class="rounded-circle">-->
       <span class="badge pill badge-secondary">{{userFirebase.nombre}} {{userFirebase.apellido}}</span>
     </li>
@@ -82,8 +74,7 @@
                 <p>You can reset your password here.</p>
                 <div class="panel-body">
 
-                  <form (submit)=" onSubmitPassword()" id="register-form" role="form" autocomplete="off" class="form"
-                    >
+                  <form (submit)=" onSubmitPassword()" id="register-form" role="form" autocomplete="off" class="form">
 
                     <div class="form-group">
                       <div class="input-group">

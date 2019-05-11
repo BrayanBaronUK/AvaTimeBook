@@ -16,6 +16,7 @@
                     <a class="nav-link" href="#buscarLibros" role="tab" data-toggle="tab">Buscar Libros</a>
                 </li>
             </ul>
+            <!--social media-->
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media</div>
                 <div class="panel-body">
@@ -36,7 +37,7 @@
 
 
                             <div role="tabpanel" class="tab-pane fade show active" id="tablaLibros">
-                                <p-table [value]="userLibro" [paginator]="true" [rows]="8">
+                                <p-table [value]="userLibro" [paginator]="true" [rows]="8" [responsive]="true">
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th>Nombre Libro</th>
@@ -49,10 +50,10 @@
                                     </ng-template>
                                     <ng-template pTemplate="body" let-userLibro>
                                         <tr>
-                                            <td>{{userLibro.data.nombre_libro}}</td>
-                                            <td>{{userLibro.data.autor_libro}}</td>
-                                            <td>{{userLibro.data.categoria_libro}}</td>
-                                            <td>{{userLibro.data.text_libro}}</td>
+                                            <td>{{userLibro.nombre_libro}}</td>
+                                            <td>{{userLibro.autor_libro}}</td>
+                                            <td>{{userLibro.categoria_libro}}</td>
+                                            <td>{{userLibro.text_libro}}</td>
                                             <td><button class="btn btn-primary tablalibros"
                                                     (click)="onLibro(userLibro.data, userLibro.id)">
                                                     <i class="fas fa-edit"></i></button>
@@ -82,31 +83,61 @@
                                 <!-- /.container -->
                             </div>
                             <div role="tabpanel" class="tab-pane fade show" id="buscarLibros">
-                                    
-                                <input type="text" id="myInput" (keyup)="myFunction()" placeholder="Search for names.."
-                                    title="Type in a name"><i class="fas fa-search"></i> 
+                               <!-- <p-panel header="Buscar Libros">
+                                        <div class="input-group">
+                                                <input style="width: 90%; height: 25%;" type="text"  id="myInput" placeholder="Buscar Libros..." title="Type in a name">
+                                                <div class="input-group-append">
+                                                    <button   style="height: 48px;" (click)="myFunction()" class="btn btn-outline-primary"  type="button" id="button-addon2">
+                                                        <i class="fa fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
 
-                                <p-table [value]="filtrouser" [paginator]="true" [rows]="10">
-                                    <ng-template pTemplate="header">
+                                    <p-table [value]="filtrouser" [paginator]="true" [rows]="8">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Nombre libro</th>
+                                                <th>Autor</th>
+                                                <th>Categoria</th>
+                                                <th>Ver persona</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-filtrouser>
+                                            <tr>
+
+                                                <td>{{filtrouser.data.nombre_libro}}</td>
+                                                <td>{{filtrouser.data.autor_libro}}</td>
+                                                <td>{{filtrouser.data.categoria_libro}}</td>
+                                                <td><button class="btn btn-primary" md-button
+                                                        (click)="onfiltro(filtrouser.id)">Persona</button>
+                                                </td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </p-panel> -->
+
+                                <p-table #dt [columns]="colum" [value]="userLibro"
+                                 (onFilter)="detectChanges()" [responsive]="true" [paginator]="true" [rows]="8">
+                                    <ng-template pTemplate="header" let-columns>
                                         <tr>
-                                            <th>Nombre libro</th>
-                                            <th>Autor</th>
-                                            <th>Categoria</th>
-                                            <th>Ver persona</th>
+                                            <th *ngFor="let col of columns">
+                                                {{col.header}}
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th *ngFor="let col of columns">
+                                                <input  pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                                            </th>
                                         </tr>
                                     </ng-template>
-                                    <ng-template pTemplate="body" let-filtrouser>
-                                        <tr>
-
-                                            <td>{{filtrouser.data.nombre_libro}}</td>
-                                            <td>{{filtrouser.data.autor_libro}}</td>
-                                            <td>{{filtrouser.data.categoria_libro}}</td>
-                                            <td><button class="btn btn-primary" md-button
-                                                    (click)="onfiltro(filtrouser.id)">Persona</button>
-                                            </td>
-
-                                        </tr>
-                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                            <tr>
+                                                <td *ngFor="let col of columns"  >
+                                                    {{rowData[col.field]}}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
                                 </p-table>
                             </div>
                         </div>
@@ -131,12 +162,14 @@
                     <div>
                         <div>
                             <div class="capitalize"><b>Nombre libro: </b></div>
-                            <input class="form-control" name="nombreLibro" [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
+                            <input class="form-control" name="nombreLibro"
+                                [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
                                 value="{{InformacionLibrosProvicional.nombre_libro}}" [required]=true>
                         </div>
                         <div>
                             <div class="capitalize"><b>Autor libro: </b></div>
-                            <input class="form-control" name="autorLibro" [(ngModel)]="InformacionLibrosProvicional.autor_libro"
+                            <input class="form-control" name="autorLibro"
+                                [(ngModel)]="InformacionLibrosProvicional.autor_libro"
                                 value="{{InformacionLibrosProvicional.autor_libro}}" [required]=true>
                         </div>
                         <div>
@@ -145,15 +178,16 @@
                             </label>
                             <select class="form-control" id="sel1"
                                 [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
-                                value="{{InformacionLibrosProvicional.categoria_libro}}" name="categoriaLibro" [required]=true>
-                                <option  value="">Categoria</option>
+                                value="{{InformacionLibrosProvicional.categoria_libro}}" name="categoriaLibro"
+                                [required]=true>
+                                <option value="">Categoria</option>
                                 <option value="Policial">Policial</option>
                                 <option value="Romántica">Romántica</option>
                                 <option value="Aventura">Aventura</option>
                                 <option value="Terror">Terror</option>
                                 <option value="Ficcion/Realidad">Ficcion/Realidad</option>
                                 <option value="Ciencia Ficcion">Ciencia Ficción</option>
-                                <option values= "Investigación">Investigación</option>
+                                <option values="Investigación">Investigación</option>
                                 <option value="Biográfica">Biográfica</option>
                                 <option value="Infantil">Infantil</option>
                                 <option value="Autoayuda">Autoayuda</option>
@@ -171,7 +205,8 @@
                         <div>
                             <div class="capitalize"><b>Descripción libro: </b></div>
                             <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
-                                value="{{InformacionLibrosProvicional.autor_libro}}" name="descripcionLibro" [required]=true>
+                                value="{{InformacionLibrosProvicional.autor_libro}}" name="descripcionLibro"
+                                [required]=true>
                         </div>
                         <div>
                             <button class="btn btn-primary" type="submit">Guardar</button>

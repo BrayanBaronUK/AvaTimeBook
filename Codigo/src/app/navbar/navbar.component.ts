@@ -9,8 +9,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
- // public herramientas: boolean;
+  // public herramientas: boolean;
   public email: any;
   public isLogin: boolean;
   public nombreUsuario: string;
@@ -37,7 +38,7 @@ export class NavbarComponent implements OnInit {
       text: ''
     };
   }
-///
+
   ngOnInit() {
     this.authService.getAuth().subscribe(auth => {
       if (auth) {
@@ -47,38 +48,36 @@ export class NavbarComponent implements OnInit {
         this.fotoUsuario = auth.photoURL;
         this.UserServices.getPerfil().valueChanges().subscribe((user) => {
           console.log(this.userFirebase = user);
-          if ( auth.displayName == null) {
+          if (auth.displayName == null) {
             this.nombreUsuario = this.userFirebase.nombre;
           }
         });
       } else {
-           this.isLogin = false;
-           //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
-        }
+        this.isLogin = false;
+        //  this.fotoUsuario='https://angellomix.com/wp-content/uploads/2016/10/login.png';
       }
+    }
     );
   }
-  //click sobre salir
   onClickLogout() {
     this.authService.doLogout();
     this.router.navigate(['/login']);
   }
-  //mostrar info
   MostarInformacion() {
-      // tslint:disable-next-line:no-debugger
-      debugger;
-      this.app.Obtener();
-      document.getElementById('contraseña').style.display = 'block';
-      document.getElementById('navbarColor02').style.display = 'none';
-  }
-  //recuperar
-  onSalirRecuperar() {
-    return document.getElementById('contraseña').style.display = 'none';
-  }
-
-  MostarInformacions() {
     // tslint:disable-next-line:no-debugger
     debugger;
+    this.app.Obtener();
+    document.getElementById('contraseña').style.display = 'block';
+  document.getElementById('navbarColor02').style.display = 'none';
+  }
+  
+  SalirRecuperar() {
+  return document.getElementById('contraseña').style.display = 'none';
+  }
+  
+  MostarInformacions() {
+    // tslint:disable-next-line:no-debugger
+
     document.getElementById('contraseña').style.display = 'none';
     this.app.Resetear();
     document.getElementById('navbarColor02').style.display = 'block';
