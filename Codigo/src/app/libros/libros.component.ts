@@ -5,17 +5,17 @@ import { Libros } from '../variables/libros';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {InputText} from 'primeng/primeng'
+import { InputText, SelectItem } from 'primeng/primeng';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
   styleUrls: ['./libros.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LibrosComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public filtrouser = [];
-  public userLibro: any;
+  public userLibro = [];
   public colum: any[];
   public input: any;
   public InformacionLibrosProvicional: any;
@@ -25,21 +25,8 @@ export class LibrosComponent implements OnInit {
   // tslint:disable-next-line:no-inferrable-types
   public display: boolean = false;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
+  public categoria: SelectItem[];
 
-
-  cars = [
-    {"vin":"a1653d4d","brand":"VW","year":1998,"color":"White","price":10000},
-    {"vin":"ddeb9b10","brand":"Mercedes","year":1985,"color":"Green","price":25000},
-    {"vin":"d8ebe413","brand":"Jaguar","year":1979,"color":"Silver","price":30000},
-    {"vin":"aab227b7","brand":"Audi","year":1970,"color":"Black","price":12000},
-    {"vin":"631f7412","brand":"Volvo","year":1992,"color":"Red","price":15500},
-    {"vin":"7d2d22b0","brand":"VW","year":1993,"color":"Maroon","price":40000},
-    {"vin":"50e900ca","brand":"Fiat","year":1964,"color":"Blue","price":25000},
-    {"vin":"4bbcd603","brand":"Renault","year":1983,"color":"Maroon","price":22000},
-    {"vin":"70214c7e","brand":"Renault","year":1961,"color":"Black","price":19000},
-    {"vin":"ec229a92","brand":"Audi","year":1984,"color":"Brown","price":36000},
-    {"vin":"1083ee40","brand":"VW","year":1984,"color":"Silver","price":215000},
-  ]
   constructor(
     public userservicioperfil: UserService,
     public UserLibro: ServicioLibroService,
@@ -67,10 +54,14 @@ export class LibrosComponent implements OnInit {
 
   MostrarColumnas() {
     this.colum = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
+      { field: 'nombre_libro', header: 'Nombre Libro' },
+      { field: 'autor_libro', header: 'Autor Libro' },
+      { field: 'categoria_libro', header: 'Categoria' },
+    ];
+
+    this.categoria = [
+      {label: 'Todo', value: 'null'},
+      {label: 'Investigacion', value: 'Investigacion'}
     ];
   }
   showDialog() {
@@ -92,46 +83,22 @@ export class LibrosComponent implements OnInit {
     });
   }
 
-  myFunction() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.input = document.getElementById('myInput');
-    this.filter = this.input.value.toUpperCase();
-    console.log(this.filter);
-    this.table = document.getElementById('myTable');
-    console.log(this.table);
-    this.tr = this.table.getElementsByTagName('tr');
-    console.log(this.tr);
-    for (this.i = 0; this.i < this.tr.length; this.i++) {
-      this.td = this.tr[this.i].getElementsByTagName('td')[0];
-      console.log(this.td);
-      if (this.td) {
-        this.txtValue = this.td.textContent || this.td.innerText;
-        console.log(this.td);
-        if (this.txtValue.toUpperCase().indexOf(this.filter) > -1) {
-          console.log(this.filter);
-          this.tr[this.i].style.display = '';
-          console.log(this.tr);
-        } else {
-          this.tr[this.i].style.display = 'none';
-          console.log(this.tr);
-        }
-      }
-    }
-  }
+
 
 
   TraerLibro() {
     // trae todos los libros
     this.UserLibro.getLibro().subscribe((libros) => {
-      this.userLibro = [];
       libros.map((librodata: any) => {
         this.userLibro.push({
-          id: librodata.payload.doc.id,
-          data: librodata.payload.doc.data()
+              id: librodata.payload.doc.id,
+              nombre_libro: librodata.payload.doc.data().nombre_libro,
+              autor_libro: librodata.payload.doc.data().autor_libro,
+              categoria_libro: librodata.payload.doc.data().categoria_libro
         });
       });
     });
+    console.log(this.userLibro);
   }
 
   onCancelar() {
