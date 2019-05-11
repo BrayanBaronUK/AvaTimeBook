@@ -125,7 +125,7 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
     AutoCompleteModule,
     DataTableModule,
     SharedModule,
-  ],
+   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
 })
