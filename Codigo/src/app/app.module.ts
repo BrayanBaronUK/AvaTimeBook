@@ -64,7 +64,7 @@ import { EmojiModule } from 'angular-emojione';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
-import { EmojiPickerModule } from 'ng-emoji-picker';
+//import { EmojiPickerModule } from 'ng-emoji-picker';
 
 @NgModule({
   declarations: [
@@ -125,7 +125,7 @@ import { EmojiPickerModule } from 'ng-emoji-picker';
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
-    EmojiPickerModule
+  //  EmojiPickerModule
   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
