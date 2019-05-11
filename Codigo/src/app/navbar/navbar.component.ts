@@ -69,11 +69,11 @@ export class NavbarComponent implements OnInit {
     this.app.Obtener();
     document.getElementById('contraseña').style.display = 'block';
   document.getElementById('navbarColor02').style.display = 'none';
-  
+  }
   
   SalirRecuperar() {
   return document.getElementById('contraseña').style.display = 'none';
-  
+  }
   
   MostarInformacions() {
     // tslint:disable-next-line:no-debugger
