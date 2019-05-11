@@ -57,7 +57,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { MenuItem } from 'primeng/api';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+//import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 import {ProgressBarModule} from 'primeng/progressbar';
@@ -91,7 +91,7 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
     DialogModule,
     CalendarModule,
     TableModule,
-    AngularFontAwesomeModule,
+    //AngularFontAwesomeModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -125,7 +125,7 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
     AutoCompleteModule,
     DataTableModule,
     SharedModule,
-  ],
+   ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
 })

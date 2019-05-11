@@ -56,6 +56,7 @@ export class FiltroPersonComponent implements OnInit {
   myFunctionNombre() {
     this.input = document.getElementById('myInput');
     if (this.input != null) {
+      
       this.filter = this.input.value.toUpperCase();
       this.table = document.getElementById('myTable');
       this.tr = this.table.getElementsByTagName('tr');

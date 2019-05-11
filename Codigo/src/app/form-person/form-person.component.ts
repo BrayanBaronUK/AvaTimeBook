@@ -110,7 +110,7 @@ export class FormPersonComponent implements OnInit {
           text: ''
         });
         this.flashMensaje.show('Información Cargada correctamente.',
-          { cssClass: 'alert-success', timeout: 400000 });
+          { cssClass: 'alert-success', timeout: 4000 });
         this.router.navigate(['/crearlibro']);
       }, (error) => {
         console.error(error);

@@ -10,7 +10,7 @@
   <p-panel header="Busqueda de personas">
 
     <div class="input-group" id="seccionBuscar">
-        <input style="width: 90%; height: 25%;" type="text"  id="myInput" placeholder="Buscar personas..." title="Type in a name">
+        <input style="width: 90%; height: 25%;" type="text"  id="myInput" (keyup)="myFunctionNombre()" placeholder="Buscar personas..." title="Type in a name">
         <div class="input-group-append">
             <button   style="height: 48px;" (click)="myFunctionNombre()" class="btn btn-outline-primary"  type="button" id="button-addon2">
                 <i class="fa fa-search"></i>
