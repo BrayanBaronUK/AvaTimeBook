@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit {
     public auth: AuthService,
     public _cs: ChatService,
   ) {
+  
     this._cs.cargarMensjes().subscribe( ()=> {
         setTimeout( ()=> {
           this.elemento.scrollTop = this.elemento.scrollHeight;
@@ -32,6 +33,7 @@ export class ChatComponent implements OnInit {
     });
   }
   enviar_mensaje(){
+    
     console.log( this.mensaje );
 
     if( this.mensaje.length === 0){
@@ -43,7 +45,7 @@ export class ChatComponent implements OnInit {
           .catch( (err)=>console.error('Error al enviar', err));
   }
   ngOnInit() {
-    this.elemento = document.getElementById('app-mensajes');
+    this.elemento = document.getElementById('room-list');
   }
   setPopupAction(fn: any) {
     console.log('setPopupAction');
