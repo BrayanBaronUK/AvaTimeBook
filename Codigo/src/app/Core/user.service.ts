@@ -65,12 +65,18 @@ export class UserService {
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
+  public GuardarPersonaSeguir(id, data){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).set(data); 
+  }
+  public GuadarPersonaSeguidor(id, data){
+    return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).set(data);
+  }
+  public CargarPersonaSeguir(){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').snapshotChanges();
+  }
 
 
   obtenerLibrofilter() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
    return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').snapshotChanges();
-
   }
 }

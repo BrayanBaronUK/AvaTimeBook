@@ -10,9 +10,11 @@ import { ServicioLibroService } from '../Core/servicio-libro.service';
 export class FiltroPersonComponent implements OnInit {
 
   filtrouser = [];
-  public p = [];
+  public seguir = [];
+  public userFirebase :any;
   public input: any;
   public input2: any;
+  public seguirBoolean = true;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
   constructor(public userservice: ServicioFiltroPersonaService,
@@ -20,11 +22,11 @@ export class FiltroPersonComponent implements OnInit {
     public servicioLibroService: ServicioLibroService
   ) {
 
-
   }
 
   ngOnInit() {
     this.TraerPersonas();
+
   }
 
 
@@ -47,10 +49,23 @@ export class FiltroPersonComponent implements OnInit {
         });
       });
     });
+    this.userservicePerfil.CargarPersonaSeguir().subscribe((seguir) => {
+      seguir.map((s) =>{
+        this.seguir.push({
+          id: s.payload.doc.id,
+          data: s.payload.doc.data()
+        });
+      });
+    });
+    console.log(this.seguir);
     console.log(this.filtrouser);
   }
-  onfiltro(id) {
-    console.log(id);
+  onfiltro(data,id) {
+    this.userservicePerfil.GuardarPersonaSeguir(id, data);
+    this.userservicePerfil.getPerfil().valueChanges().subscribe((user) => {
+      this.userservicePerfil.GuadarPersonaSeguidor(id, user);
+    });
+    
   }
 
   myFunctionNombre() {
@@ -76,5 +91,8 @@ export class FiltroPersonComponent implements OnInit {
     }
 
   }
+
+
+
 
 }
