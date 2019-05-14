@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { UserService } from '../Core/user.service';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-filtro-person',
   templateUrl: './filtro-person.component.html',
@@ -17,12 +17,14 @@ export class FiltroPersonComponent implements OnInit {
   public input2: any;
   public seguirBoolean = true;
   public colum: any;
-  public guardar: any;
+  public guardarLibro = [];
+  public usrLocal = [];
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
   constructor(public userservice: ServicioFiltroPersonaService,
     public userservicePerfil: UserService,
-    public servicioLibroService: ServicioLibroService
+    public servicioLibroService: ServicioLibroService,
+    public router: Router
   ) {
 
   }
@@ -41,18 +43,22 @@ export class FiltroPersonComponent implements OnInit {
   TraerPersonas() {
     this.userservicePerfil.CargarPersonaSeguir().subscribe((seguir) => {
       this.userservice.getPerfiles().subscribe((usuarios) => {
-
-        // this.servicioLibroService.getLibros(usuariosdata.payload.doc.id).subscribe((libro) => {       
+        this.userservicePerfil.getPerfilEvaluar().subscribe((usrLocal) => {
+          this.usrLocal[0] = usrLocal.id;
+        });
         usuarios.map((usuariosdata: any) => {
+          this.servicioLibroService.getLibros(usuariosdata.payload.doc.id).subscribe((libro) => {
+            libro.map(l => {
+              this.guardarLibro.push({
+                id: l.payload.doc.id,
+                data: l.payload.doc.data()
+              });
+            });
+          });
           this.filtrouser.push({
             id: usuariosdata.payload.doc.id,
             data: usuariosdata.payload.doc.data(),
-            // libros: [
-            //   libro.map(l => {
-            //     // tslint:disable-next-line:no-unused-expression
-            //     return l.payload.doc.data();
-            //   })
-            // ]
+            libros: [this.guardarLibro]
           });
         });
         seguir.map((seguirperson: any) => {
@@ -61,12 +67,13 @@ export class FiltroPersonComponent implements OnInit {
               this.seguir.push({
                 id: seguirperson.payload.doc.id,
                 data: seguirperson.payload.doc.data(),
-                // libros: [
-                //   libro.map(l => {
-                //     return l.payload.doc.data()
-                //   })
-                // ]
+                libros: [
+                  this.filtrouser[i].libros
+                ]
               });
+              this.filtrouser.splice(i, 1);
+            } 
+            else if (this.usrLocal[0] == this.filtrouser[i].id) {
               this.filtrouser.splice(i, 1);
             }
           }
@@ -76,12 +83,15 @@ export class FiltroPersonComponent implements OnInit {
     });
     console.log(this.seguir);
     console.log(this.filtrouser);
+    console.log(this.usrLocal);
   }
   onfiltro(data, id) {
     this.userservicePerfil.GuardarPersonaSeguir(id, data);
     this.userservicePerfil.getPerfil().valueChanges().subscribe((user) => {
-      this.userservicePerfil.GuadarPersonaSeguidor(id, user);
-    });
+      this.userservicePerfil.GuadarPersonaSeguidor(id, user); 
+      this.seguir = [];
+      this.TraerPersonas();
+    });  
 
   }
 

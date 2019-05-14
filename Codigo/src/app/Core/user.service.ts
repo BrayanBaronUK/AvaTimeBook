@@ -62,6 +62,10 @@ export class UserService {
     return this.db.collection('perfil').doc(this.getIud());
   }
 
+  public getPerfilEvaluar() {
+    return this.db.collection('perfil').doc(this.getIud()).get();
+  }
+
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
