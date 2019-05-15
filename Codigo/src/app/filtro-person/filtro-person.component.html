@@ -21,7 +21,7 @@
     </div>
 
 
-    <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="3">
+    <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="10">
       <ng-template pTemplate="header">
         <tr>
           <th>Persona</th>
@@ -33,13 +33,13 @@
         <tr>
           <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
             {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
-          <td><button class="btn btn-primary" md-button (click)="onfiltroSeguir(seguir.data, seguir.id)"><i
-                class="fas fa-check"></i> Siguiendo</button></td>
-          <td><button class="btn btn-primary" md-button>Ir Perfil</button></td>
+          <td><button class="btn btn-primary" md-button (click)="onfiltroNoSeguir(seguir.data, seguir.id)"><i
+                class="pi pi-check"></i> Siguiendo</button></td>
+          <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
         </tr>
       </ng-template>
     </p-table>
-    <p-table id="myTable" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="5">
+    <p-table id="myTable" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="10">
       <ng-template pTemplate="header">
         <tr>
           <th>Persona</th>
@@ -52,8 +52,8 @@
           <td><img class="rounded-circle" width="50" height="50" src="{{filtrouser.data.url}}" alt="">
             {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
           <td><button class="btn btn-primary" md-button
-              (click)="onfiltroNoSeguir(filtrouser.data, filtrouser.id)">Seguir</button></td>
-          <td><button class="btn btn-primary" md-button>Ir Perfil</button></td>
+              (click)="onfiltroSeguir(filtrouser.data, filtrouser.id)" ><i class="pi pi-user-plus"></i>Seguir</button></td>
+          <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
         </tr>
       </ng-template>
     </p-table>
@@ -61,17 +61,21 @@
 </body>
 </html>
 <!-- Confirmar seguir -->
-<p-dialog header="Seguir" [(visible)]="displaySeguir" [responsive]="true">
-  <form (ngSubmit)="crearSeguir()">
-    <button type="submit" value="Si">Si</button>
+<p-dialog header="Seguir a {{nombre}}" [(visible)]="displaySeguir" [modal]="true" [responsive]="true"
+ [minY]="70" [maximizable]="true"
+[baseZIndex]="10000">
+  <form>
+    <button (click)="crearSeguir()" value="Si" ><i class="pi pi-user-plus"></i>Si</button>
     <button (click)="onCancelar()" value="No">No</button>
   </form>
 </p-dialog>
 
 <!-- No seguir -->
-<p-dialog header="No Seguir" [(visible)]="displayNoSeguir" [responsive]="true">
-  <form (ngSubmit)="noSeguir()">
-    <button type="submit" value="Si">Si</button>
-    <button (click)="onCancelar()" value="No">No</button>
-  </form>
+<p-dialog header="Decea dejar de seguir a {{nombre}}" [(visible)]="displayNoSeguir" [modal]="true" [responsive]="true"
+ [minY]="70" [maximizable]="true"
+[baseZIndex]="10000">
+  <form>
+    <button (click)="noSeguir()" value="Si"><i class="pi pi-user-minus"></i>Si</button>
+    <button (click)="onCancelar()" value="No">No</button>   
+  </form>  
 </p-dialog>

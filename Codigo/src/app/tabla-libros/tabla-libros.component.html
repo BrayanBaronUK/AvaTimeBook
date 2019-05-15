@@ -15,12 +15,12 @@
           <td>{{userLibro.categoria_libro}}</td>
           <td><button class="btn btn-primary tablalibros"
                   (click)="onLibro(userLibro, userLibro.id)">
-                  <i class="fas fa-edit"></i></button>
+                  <i class="pi pi-pencil"></i></button>
           </td>
           <td>
               <button class="btn btn-primary tablalibros"
                   (click)="EliminarLibro(userLibro.id)">
-                  <i class="fas fa-trash-alt"></i></button>
+                  <i class="pi pi-times"></i></button>
           </td>
       </tr>
   </ng-template>
@@ -80,12 +80,10 @@
                         [required]=true>
                 </div>
                 <div>
-                    <button class="btn btn-primary" type="submit">Guardar</button>
-                    <button class="btn btn-primary" (click)="onCancelar()">Cancelar</button>
+                    <button class="btn btn-primary"  type="submit">Guardar</button>                   
                 </div>
             </div>
         </form>
-
     </div>
 </div>
 </p-dialog>

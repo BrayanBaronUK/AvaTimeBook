@@ -14,6 +14,7 @@ export class FiltroPersonComponent implements OnInit {
   filtrouser = [];
   public seguir = [];
   public userFirebase: any;
+  public nombre: String;
   public input: any;
   public input2: any;
   public seguirBoolean = true;
@@ -37,6 +38,7 @@ export class FiltroPersonComponent implements OnInit {
 
   ngOnInit() {
     this.TraerPersonas();
+    console.log(this.nombre);
   }
 
   MostrarColumnas() {
@@ -95,14 +97,14 @@ export class FiltroPersonComponent implements OnInit {
   onfiltroNoSeguir(data, id) {
     this.temporalDatos = data;
     this.id = id;
-    this.displaySeguir = true;
-    document.getElementById('TablaFiltro').style.visibility = 'hidden';
+    this.displayNoSeguir = true;
+    this.nombre = data.nombre;
   }
   onfiltroSeguir(data, id) {
     this.temporalDatos = data;
     this.id = id;
-    this.displayNoSeguir = true;
-    document.getElementById('TablaFiltro').style.visibility = 'hidden';
+    this.displaySeguir = true;
+    this.nombre = data.nombre;
   }
   crearSeguir() {
     this.userservicePerfil.GuardarPersonaSeguir(this.id, this.temporalDatos);
@@ -118,14 +120,12 @@ export class FiltroPersonComponent implements OnInit {
     this.userservicePerfil.QuitarPersonaSeguidor(this.id);
     this.flashMensaje.show('Informacion Aceptada.',
       { cssClass: 'alert-success', timeout: 2500 });
-    this.onCancelar();
+      this.displayNoSeguir = false;
   }
   onCancelar() {
-    document.getElementById('TablaFiltro').style.visibility = 'visible';
-    this.router.navigate(['/filtropersona']);
+    this.cerrar.emit();
     this.displaySeguir = false;
     this.displayNoSeguir = false;
-    this.cerrar.emit();
   }
 
   myFunctionNombre() {
