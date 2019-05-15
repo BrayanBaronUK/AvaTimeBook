@@ -4,7 +4,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService} from '../Core/auth.service';
 import * as firebase from 'firebase/app';
-import { Libros} from '../variables/libros';
 @Injectable({
   providedIn: 'root'
 })

@@ -11,11 +11,11 @@ import { AuthService } from '../Core/auth.service';
 export class GruposComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public crearGrupo: any;
-  public nombreGrupo: String;
+  public datosGuadar: any;
   public grupos: any;
   public personas: any;
-  personaseleccionada: any[];
-  filteredCountriesMultiple: any[];
+  public personaseleccionada: any;
+  public filteredCountriesMultiple: any[];
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
     public person: ServicioFiltroPersonaService) { }
@@ -23,6 +23,7 @@ export class GruposComponent implements OnInit {
   ngOnInit() {
     this.TraerGrupos();
     this.Traerperson();
+    this.variables();
   }
 
   TraerGrupos() {
@@ -37,11 +38,18 @@ export class GruposComponent implements OnInit {
     });
   }
 
+  variables(){
+    this.datosGuadar ={
+      nombre_grupo: '',
+      grupo: this.personaseleccionada
+    }
+  }
   onCancelar() {
     this.cerrar.emit();
   }
   onGuardarGrupocreado() {
-    this.grupoS.createGrupo(this.crearGrupo);
+    this.variables();
+    this.grupoS.createGrupo(this.datosGuadar);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
