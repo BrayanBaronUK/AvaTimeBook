@@ -63,8 +63,8 @@ import { CalendarModule } from 'primeng/calendar';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
-// import {AutoCompleteModule} from 'primeng/autocomplete';
-// import {DataTableModule, SharedModule} from 'primeng/primeng';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
 @NgModule({
@@ -126,9 +126,9 @@ import {PaginatorModule} from 'primeng/paginator';
     GalleriaModule,
     ListboxModule,
     PaginatorModule,
-    // AutoCompleteModule,
-    // DataTableModule,
-    // SharedModule,
+    AutoCompleteModule,
+    DataTableModule,
+    SharedModule,
    ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
