@@ -33,7 +33,6 @@ export class GruposComponent implements OnInit {
         this.grupos.push({
           data: element.payload.doc.data()
         });
-
       });
     });
   }

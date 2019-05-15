@@ -75,10 +75,11 @@
                                             <!-- Inicio del div central parte de formulario información básica -->
                                             <div>
                                              <br>
+                                                <label>Nombre de Grupo:</label>
                                                 <input type="text" class="form-control" id="nombre_grupo"
                                                     placeholder="Nombre del Grupo" [(ngModel)]="nombreGrupo" name="creargrupo"
                                                     required>
-                                                <h3>Buscar personas</h3>
+                                                <label>Buscar personas:</label>
                                                     <span class="ui-fluid">
                                                         <p-autoComplete [(ngModel)]="personaseleccionada" name="personaseleccionada"
                                                             [suggestions]="filteredCountriesMultiple"
@@ -87,12 +88,8 @@
                                                             field="nombre" [multiple]="true">                         
                                                         </p-autoComplete>
                                                     </span>                                            
-                                                <br>
-
                                                 <div class="col-md-12 boton">
                                                     <button class="btn btn-primary" type="submit">Guardar</button>
-                                                    <button class="btn btn-primary"
-                                                        (click)="onCancelar()">Cancelar</button>
                                                 </div>
 
                                             </div>
