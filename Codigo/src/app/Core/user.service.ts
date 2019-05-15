@@ -69,11 +69,19 @@ export class UserService {
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
+
+
   public GuardarPersonaSeguir(id, data){
     return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).set(data); 
   }
+  public QuitarPersonaSeguir(id){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).delete();
+  }
   public GuadarPersonaSeguidor(id, data){
     return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).set(data);
+  }
+  public QuitarPersonaSeguidor(id){
+    return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).delete();
   }
   public CargarPersonaSeguir(){
     return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').snapshotChanges();

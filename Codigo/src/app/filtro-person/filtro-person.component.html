@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <p-panel header="Busqueda de personas">
+  <p-panel id="TablaFiltro" header="Busqueda de personas">
 
     <div class="input-group" id="seccionBuscar">
       <input style="width: 90%; height: 25%;" type="text" id="myInput" (keyup)="myFunctionNombre()"
@@ -20,46 +20,58 @@
       </div>
     </div>
 
-        
-          <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="3">
-            <ng-template pTemplate="header">
-              <tr>
-                <th>Persona</th>
-                <th>Siguiendo Persona</th>
-                <th>Ir a Perfil</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-seguir>
-              <tr>
-                <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
-                  {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
-                <td><button class="btn btn-primary" md-button
-                    (click)="onfiltro(seguir.data, seguir.id)"><i class="fas fa-check"></i> Siguiendo</button></td>
-                <td><button class="btn btn-primary" md-button>Ir Perfil</button></td>
-              </tr>
-            </ng-template>
-          </p-table>
-            <p-table id="myTable" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="5">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>Persona</th>
-                    <th>Seguir Persona</th>
-                    <th>Ir a Perfil</th>
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-filtrouser>
-                  <tr>
-                    <td><img class="rounded-circle" width="50" height="50" src="{{filtrouser.data.url}}" alt="">
-                      {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
-                    <td><button class="btn btn-primary" md-button
-                        (click)="onfiltro(filtrouser.data, filtrouser.id)">Seguir</button></td>
-                    <td><button class="btn btn-primary" routerLink="/filtropersona" md-button>Ir Perfil</button></td>
-                  </tr>
-                </ng-template>
-              </p-table>
+
+    <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="3">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Persona</th>
+          <th>Siguiendo Persona</th>
+          <th>Ir a Perfil</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-seguir>
+        <tr>
+          <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
+            {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
+          <td><button class="btn btn-primary" md-button (click)="onfiltroSeguir(seguir.data, seguir.id)"><i
+                class="fas fa-check"></i> Siguiendo</button></td>
+          <td><button class="btn btn-primary" md-button>Ir Perfil</button></td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-table id="myTable" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="5">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Persona</th>
+          <th>Seguir Persona</th>
+          <th>Ir a Perfil</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-filtrouser>
+        <tr>
+          <td><img class="rounded-circle" width="50" height="50" src="{{filtrouser.data.url}}" alt="">
+            {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
+          <td><button class="btn btn-primary" md-button
+              (click)="onfiltroNoSeguir(filtrouser.data, filtrouser.id)">Seguir</button></td>
+          <td><button class="btn btn-primary" md-button>Ir Perfil</button></td>
+        </tr>
+      </ng-template>
+    </p-table>
   </p-panel>
-
-
 </body>
-
 </html>
+<!-- Confirmar seguir -->
+<p-dialog header="Seguir" [(visible)]="displaySeguir" [responsive]="true">
+  <form (ngSubmit)="crearSeguir()">
+    <button type="submit" value="Si">Si</button>
+    <button (click)="onCancelar()" value="No">No</button>
+  </form>
+</p-dialog>
+
+<!-- No seguir -->
+<p-dialog header="No Seguir" [(visible)]="displayNoSeguir" [responsive]="true">
+  <form (ngSubmit)="noSeguir()">
+    <button type="submit" value="Si">Si</button>
+    <button (click)="onCancelar()" value="No">No</button>
+  </form>
+</p-dialog>

@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { UserService } from '../Core/user.service';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { Router } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 @Component({
   selector: 'app-filtro-person',
   templateUrl: './filtro-person.component.html',
   styleUrls: ['./filtro-person.component.css']
 })
 export class FiltroPersonComponent implements OnInit {
-
+  @Output() cerrar = new EventEmitter();
   filtrouser = [];
   public seguir = [];
   public userFirebase: any;
@@ -19,12 +20,17 @@ export class FiltroPersonComponent implements OnInit {
   public colum: any;
   public guardarLibro = [];
   public usrLocal = [];
+  public temporalDatos = [];
+  public id;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
+  displaySeguir: boolean = false;
+  displayNoSeguir: boolean = false;
   constructor(public userservice: ServicioFiltroPersonaService,
     public userservicePerfil: UserService,
     public servicioLibroService: ServicioLibroService,
-    public router: Router
+    public router: Router,
+    public flashMensaje: FlashMessagesService
   ) {
 
   }
@@ -76,7 +82,7 @@ export class FiltroPersonComponent implements OnInit {
                 ]
               });
               this.filtrouser.splice(i, 1);
-            } 
+            }
             else if (this.usrLocal[0] == this.filtrouser[i].id) {
               this.filtrouser.splice(i, 1);
             }
@@ -85,18 +91,41 @@ export class FiltroPersonComponent implements OnInit {
         });
       });
     });
-    console.log(this.seguir);
-    console.log(this.filtrouser);
-    console.log(this.usrLocal);
   }
-  onfiltro(data, id) {
-    this.userservicePerfil.GuardarPersonaSeguir(id, data);
+  onfiltroNoSeguir(data, id) {
+    this.temporalDatos = data;
+    this.id = id;
+    this.displaySeguir = true;
+    document.getElementById('TablaFiltro').style.visibility = 'hidden';
+  }
+  onfiltroSeguir(data, id) {
+    this.temporalDatos = data;
+    this.id = id;
+    this.displayNoSeguir = true;
+    document.getElementById('TablaFiltro').style.visibility = 'hidden';
+  }
+  crearSeguir() {
+    this.userservicePerfil.GuardarPersonaSeguir(this.id, this.temporalDatos);
     this.userservicePerfil.getPerfil().valueChanges().subscribe((user) => {
-      this.userservicePerfil.GuadarPersonaSeguidor(id, user); 
-      this.seguir = [];
-      this.TraerPersonas();
-    });  
-
+      this.userservicePerfil.GuadarPersonaSeguidor(this.id, user);
+      this.flashMensaje.show('Informacion Aceptada.',
+        { cssClass: 'alert-success', timeout: 2500 });
+    });
+    this.onCancelar();
+  }
+  noSeguir() {
+    this.userservicePerfil.QuitarPersonaSeguir(this.id);
+    this.userservicePerfil.QuitarPersonaSeguidor(this.id);
+    this.flashMensaje.show('Informacion Aceptada.',
+      { cssClass: 'alert-success', timeout: 2500 });
+    this.onCancelar();
+  }
+  onCancelar() {
+    document.getElementById('TablaFiltro').style.visibility = 'visible';
+    this.router.navigate(['/filtropersona']);
+    this.displaySeguir = false;
+    this.displayNoSeguir = false;
+    this.cerrar.emit();
   }
 
   myFunctionNombre() {
