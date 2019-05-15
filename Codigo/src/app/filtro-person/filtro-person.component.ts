@@ -42,6 +42,10 @@ export class FiltroPersonComponent implements OnInit {
 
   TraerPersonas() {
     this.userservicePerfil.CargarPersonaSeguir().subscribe((seguir) => {
+      this.filtrouser = [];
+      this.guardarLibro = [];
+      this.seguir = [];
+      this.usrLocal = [];
       this.userservice.getPerfiles().subscribe((usuarios) => {
         this.userservicePerfil.getPerfilEvaluar().subscribe((usrLocal) => {
           this.usrLocal[0] = usrLocal.id;
