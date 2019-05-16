@@ -16,7 +16,9 @@ export class GruposComponent implements OnInit {
   public grupos: any;
   public personas: any;
   public personaseleccionada: any;
+  public guardarPersonasGrupo: any;
   public filteredCountriesMultiple: any[];
+  public display = false;
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
     public person: ServicioFiltroPersonaService,
@@ -34,18 +36,30 @@ export class GruposComponent implements OnInit {
       this.grupos = [];
       usuarios.map((element) => {
         this.grupos.push({
-          data: element.payload.doc.data()
+          id: element.payload.doc.id,
+          nombre: element.payload.doc.data().nombre_grupo,
+          data: element.payload.doc.data().data
         });
       });
-    });
+    });     
   }
 
-  variables(){
+  variables() {
   }
   onCancelar() {
     this.cerrar.emit();
     this.nombre = '';
     this.personaseleccionada = null;
+    this.display = false;
+  }
+  vistaGrupo(data, id) {
+    this.display = true;
+    this.guardarPersonasGrupo = data;
+
+  }
+  EliminarPersona(id) {
+    console.log(id)
+    this.onCancelar();
   }
   onGuardarGrupocreado() {
     this.variables();
