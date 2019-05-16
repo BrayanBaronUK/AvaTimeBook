@@ -26,4 +26,11 @@ export class GrupoServiceService {
   getGrupos() {
     return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').snapshotChanges();
   }
+  eliminarGrupo(id) {
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').doc(id).delete();
+  }
+  ActualizarGrupo(id, nombre_grupo: String, data: {}) {
+    this.eliminarGrupo(id);
+    this.createGrupo(nombre_grupo, data);
+  }
 }
