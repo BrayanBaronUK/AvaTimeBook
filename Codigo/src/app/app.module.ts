@@ -66,16 +66,14 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-<<<<<<< HEAD
+
 import { RoomComponent } from './room/room.component';
-=======
+
 import {DataTableModule, SharedModule} from 'primeng/primeng';
-<<<<<<< HEAD
->>>>>>> cesar
-=======
+
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
->>>>>>> cesar
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,17 +93,10 @@ import {PaginatorModule} from 'primeng/paginator';
     ChatComponent,
     GruposComponent,
     FiltroPersonComponent,
-<<<<<<< HEAD
     RoomComponent,
-=======
     TablaLibrosComponent
->>>>>>> cesar
   ],
   imports: [
-<<<<<<< HEAD
-    AccordionModule,//union
-=======
->>>>>>> cesar
     BrowserModule,
     PanelModule,
     DialogModule,
