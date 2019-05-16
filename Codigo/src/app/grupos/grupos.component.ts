@@ -11,7 +11,7 @@ import { AuthService } from '../Core/auth.service';
 export class GruposComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public crearGrupo: any;
-  public datosGuadar: any;
+  public nombre: any;
   public grupos: any;
   public personas: any;
   public personaseleccionada: any;
@@ -39,17 +39,13 @@ export class GruposComponent implements OnInit {
   }
 
   variables(){
-    this.datosGuadar ={
-      nombre_grupo: '',
-      grupo: this.personaseleccionada
-    }
   }
   onCancelar() {
     this.cerrar.emit();
   }
   onGuardarGrupocreado() {
     this.variables();
-    this.grupoS.createGrupo(this.datosGuadar);
+    this.grupoS.createGrupo(this.nombre, this.personaseleccionada);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
