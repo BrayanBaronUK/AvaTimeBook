@@ -71,7 +71,7 @@ export class FiltroPersonComponent implements OnInit {
       var count = this.filtrouser.length;
       while (b) {
         b = false;
-        if(this.seguir.length == 0){
+        if (this.seguir.length == 0) {
           for (var i = 0; i < count; i++) {
             if (this.usrLocal == this.filtrouser[i].id) {
               this.filtrouser.splice(i, 1);
@@ -80,26 +80,24 @@ export class FiltroPersonComponent implements OnInit {
           }
         } else {
           for (var i = 0; i < count; i++) {
-          if (i < this.filtrouser.length) {
-            for (var j = 0; j < this.seguir.length; j++) {
-              if (this.seguir[j].id == this.filtrouser[i].id) {
-                this.filtrouser.splice(i, 1);
-                b = true;
-              }
-              else if (this.usrLocal == this.filtrouser[i].id) {
-                this.filtrouser.splice(i, 1);
-                b = true;
+            if (i < this.filtrouser.length) {
+              for (var j = 0; j < this.seguir.length; j++) {
+                if (this.seguir[j].id == this.filtrouser[i].id) {
+                  this.filtrouser.splice(i, 1);
+                  b = true;
+                }
+                else if (this.usrLocal == this.filtrouser[i].id) {
+                  this.filtrouser.splice(i, 1);
+                  b = true;
+                }
               }
             }
           }
-        } 
         }
-       
+
       }
     });
-    console.log(this.seguir);
-    console.log(this.filtrouser);
-    console.log(this.usrLocal);
+
   }
   onfiltroNoSeguir(data, id) {
     debugger;
@@ -130,7 +128,7 @@ export class FiltroPersonComponent implements OnInit {
     this.userservicePerfil.QuitarPersonaSeguidor(this.id);
     this.flashMensaje.show('Informacion Aceptada.',
       { cssClass: 'alert-success', timeout: 2500 });
-      this.TraerPersonas();
+    this.TraerPersonas();
     this.displayNoSeguir = false;
   }
   onCancelar() {
@@ -159,6 +157,30 @@ export class FiltroPersonComponent implements OnInit {
       }
     } else {
       this.tr.getElementsByTagName('td').style.display = 'block';
+    }
+
+  }
+
+  myFunctionNombre2() {
+    this.input2 = document.getElementById('mInput');
+    if (this.input2 != null) {
+
+      this.filter2 = this.input2.value.toUpperCase();
+      this.table2 = document.getElementById('myTable2');
+      this.tr2 = this.table2.getElementsByTagName('tr');
+      for (this.i = 0; this.i < this.tr2.length; this.i++) {
+        this.td2 = this.tr2[this.i].getElementsByTagName('td')[0];
+        if (this.td2) {
+          this.txtValue2 = this.td2.textContent || this.td2.innerText;
+          if (this.txtValue2.toUpperCase().indexOf(this.filter2) > -1) {
+            this.tr2[this.i].style.display = '';
+          } else {
+            this.tr2[this.i].style.display = 'none';
+          }
+        }
+      }
+    } else {
+      this.tr2.getElementsByTagName('td').style.display = 'block';
     }
 
   }
