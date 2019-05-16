@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { GrupoServiceService } from '../Core/grupo-service.service';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { AuthService } from '../Core/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-grupos',
   templateUrl: './grupos.component.html',
@@ -18,7 +19,8 @@ export class GruposComponent implements OnInit {
   public filteredCountriesMultiple: any[];
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
-    public person: ServicioFiltroPersonaService) { }
+    public person: ServicioFiltroPersonaService,
+    public router: Router) { }
 
   ngOnInit() {
     this.TraerGrupos();
@@ -42,6 +44,8 @@ export class GruposComponent implements OnInit {
   }
   onCancelar() {
     this.cerrar.emit();
+    this.nombre = '';
+    this.personaseleccionada = null;
   }
   onGuardarGrupocreado() {
     this.variables();
@@ -53,7 +57,7 @@ export class GruposComponent implements OnInit {
 
   Traerperson() {
     // trae todos los libros
-    this.person.getPerfiles().subscribe((p) => {
+    this.person.getSeguidores().subscribe((p) => {
       this.personas = [];
       p.map((persondata: any) => {
         this.personas.push({
