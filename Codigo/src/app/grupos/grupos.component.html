@@ -74,53 +74,25 @@
                                             <!-- Se inicia el form (ojo todos los elementos de formulario deben ir dentro de esta etiqueta-->
                                             <!-- Inicio del div central parte de formulario información básica -->
                                             <div>
-                                                <br>
+                                             <br>
+                                                <label>Nombre de Grupo:</label>
                                                 <input type="text" class="form-control" id="nombre_grupo"
-                                                    placeholder="Nombre del Grupo" [(ngModel)]="crearGrupo.nombre_grupo" name="creargrupo"
+                                                    placeholder="Nombre del Grupo" [(ngModel)]="datosGuadar.nombre_grupo" name="nombre_grupo"
                                                     required>
-
-                                                <br>
-                                                <!-- <p-listbox [options]="personas" [(ngModel)]="personaseleccionada"
-                                                    multiple="multiple" checkbox="checkbox" filter="filter"
-                                                    optionLabel="data.nombre"
-                                                    [style]="{width: '100%', heigth: '100%'}" (click)="OcultarTablero()"
-                                                    id="crearfiltro" [required]="true">
-                                                    <p-header>
-                                                        <i class="fas fa-users"></i>
-                                                        Seguidores
-                                                    </p-header>
-                                                </p-listbox>
-                                                <p>Persona Seleccionada: <span *ngFor="let c of personaseleccionada"
-                                                        style="margin-right: 10px">{{c.data.nombre}}
-                                                        {{c.data.apellido}}</span></p> -->
-
-
-                                                <h3>Multiple</h3>
+                                                <label>Buscar personas:</label>
                                                     <span class="ui-fluid">
-                                                        <p-autoComplete [(ngModel)]="personaseleccionada"
+                                                        <p-autoComplete [(ngModel)]="personaseleccionada" name="personaseleccionada"
                                                             [suggestions]="filteredCountriesMultiple"
                                                             (completeMethod)=" BuscarPersonas($event)"
                                                             styleClass="wid100" [minLength]="1" placeholder="Personas"
-                                                            field="data.nombre" [multiple]="true">
-                                                            
+                                                            field="nombre" [multiple]="true">                         
                                                         </p-autoComplete>
-                                                    </span>
-                                                    <ul>
-                                                        <li *ngFor="let c of personaseleccionada">{{c.nombre}}</li>
-                                                    </ul>
-                                             
-                                                <br>
-
+                                                    </span>                                            
                                                 <div class="col-md-12 boton">
                                                     <button class="btn btn-primary" type="submit">Guardar</button>
-                                                    <button class="btn btn-primary"
-                                                        (click)="onCancelar()">Cancelar</button>
                                                 </div>
 
                                             </div>
-                                            <!-- Fin del div central parte de formulario información básica -->
-                                            <!-- Fin Parte central - enlaces -->
-                                            <!-- Fin del form -->
                                         </form>
 
 

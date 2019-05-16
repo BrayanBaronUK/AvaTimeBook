@@ -4,7 +4,7 @@
     <div class="card">
       <div class="card-body">
         <h1 class="text-center">REGISTRO</h1>
-        <form (submit)="onSubmitAddUser()">
+        <form (submit)="onSubmitAddUser()" [noValidate]="false">
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" [(ngModel)]="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [required]=true>

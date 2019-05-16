@@ -70,6 +70,11 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { RoomComponent } from './room/room.component';
 =======
 import {DataTableModule, SharedModule} from 'primeng/primeng';
+<<<<<<< HEAD
+>>>>>>> cesar
+=======
+import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
+import {PaginatorModule} from 'primeng/paginator';
 >>>>>>> cesar
 @NgModule({
   declarations: [
@@ -90,7 +95,11 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
     ChatComponent,
     GruposComponent,
     FiltroPersonComponent,
+<<<<<<< HEAD
     RoomComponent,
+=======
+    TablaLibrosComponent
+>>>>>>> cesar
   ],
   imports: [
 <<<<<<< HEAD
@@ -134,6 +143,7 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
+    PaginatorModule,
     AutoCompleteModule,
     DataTableModule,
     SharedModule,

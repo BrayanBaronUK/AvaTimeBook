@@ -1,16 +1,13 @@
 import { Component, OnInit, Input, Output, ChangeDetectorRef, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { UserService } from '../Core/user.service';
-import { Libros } from '../variables/libros';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InputText, SelectItem } from 'primeng/primeng';
+import { SelectItem } from 'primeng/primeng';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
-  styleUrls: ['./libros.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./libros.component.css']
 })
 export class LibrosComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
@@ -38,8 +35,6 @@ export class LibrosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Variables();
-    this.EditarLibros();
     this.TraerLibrosFiltro();
     this.TraerLibro();
     this.MostrarColumnas();
@@ -64,11 +59,6 @@ export class LibrosComponent implements OnInit {
       {label: 'Investigacion', value: 'Investigacion'}
     ];
   }
-  showDialog() {
-    this.display = true;
-  }
-  Variables() {
-  }
 
   TraerLibrosFiltro() {
     // trae todos los comentarios
@@ -89,6 +79,7 @@ export class LibrosComponent implements OnInit {
   TraerLibro() {
     // trae todos los libros
     this.UserLibro.getLibro().subscribe((libros) => {
+      this.userLibro = [];
       libros.map((librodata: any) => {
         this.userLibro.push({
               id: librodata.payload.doc.id,
@@ -101,54 +92,10 @@ export class LibrosComponent implements OnInit {
     console.log(this.userLibro);
   }
 
-  onCancelar() {
-    document.getElementById('contenedor').style.visibility = 'visible';
-    this.router.navigate(['/libros']);
-    this.display = false;
-    this.cerrar.emit();
-  }
   // crear libro por medio de perfil
-  onGuardarlibrocreado() {
-    this.UserLibro.createLibro(this.CrearLibrosProvicional);
-    this.CrearLibrosProvicional = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
-    this.flashMensaje.show('Libro creado.',
-      { cssClass: 'alert-success', timeout: 4000 });
-    this.onCancelar();
-  }
-  // editar libros
-  EditarLibros() {
-    this.InformacionLibrosProvicional = {
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
-  }
 
-  EliminarLibro(id) {
-    this.UserLibro.deleteLibro(id);
-  }
-  // se trae la informacion para editar
-  onLibro(libro, id) {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.showDialog();
-    document.getElementById('contenedor').style.visibility = 'hidden';
-    this.id = id;
-    this.InformacionLibrosProvicional = libro;
-    libro = null;
-  }
-  // guardar los libros editados
-  onGuardareditarlibro() {
-    this.UserLibro.updateLibro(this.id, this.InformacionLibrosProvicional);
-    this.onCancelar();
-  }
+  // editar libros
+
   onFiltro(id) {
     console.log(id);
   }

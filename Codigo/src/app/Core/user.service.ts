@@ -62,15 +62,33 @@ export class UserService {
     return this.db.collection('perfil').doc(this.getIud());
   }
 
+  public getPerfilEvaluar() {
+    return this.db.collection('perfil').doc(this.getIud()).get();
+  }
+
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
 
 
-  obtenerLibrofilter() {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-   return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').snapshotChanges();
+  public GuardarPersonaSeguir(id, data){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).set(data); 
+  }
+  public QuitarPersonaSeguir(id){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).delete();
+  }
+  public GuadarPersonaSeguidor(id, data){
+    return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).set(data);
+  }
+  public QuitarPersonaSeguidor(id){
+    return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).delete();
+  }
+  public CargarPersonaSeguir(){
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').snapshotChanges();
+  }
 
+
+  obtenerLibrofilter() {
+   return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').snapshotChanges();
   }
 }

@@ -14,7 +14,11 @@ import { LibrosComponent } from '../app/libros/libros.component';
 import { CrearLibroComponent } from '../app/crear-libro/crear-libro.component';
 import { ChatComponent } from './chat/chat.component';
 import { GruposComponent} from './grupos/grupos.component';
+<<<<<<< HEAD
 import { RoomComponent} from './room/room.component';
+=======
+import {TablaLibrosComponent} from './tabla-libros/tabla-libros.component'
+>>>>>>> cesar
 import { FiltroPersonComponent} from './filtro-person/filtro-person.component';
 const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
@@ -34,7 +38,11 @@ export const rootRouterConfig: Routes = [
   { path: 'libros', component: LibrosComponent, canActivate: [AuthGuard] },
   { path: 'filtropersona', component: FiltroPersonComponent, canActivate: [AuthGuard] },
   { path: 'grupos', component: GruposComponent, canActivate: [AuthGuard]},
+<<<<<<< HEAD
   { path: 'sala', component: RoomComponent, canActivate: [AuthGuard] },
+=======
+  { path: 'TablaLibros', component: TablaLibrosComponent, canActivate: [AuthGuard]},
+>>>>>>> cesar
   { path: '**', component: NotFoundComponent }
 ];
 // END OF CCSANCHEZC 15/02/2019 7:29

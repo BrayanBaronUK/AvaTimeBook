@@ -1,0 +1,89 @@
+<p-table id="vistaTabla" [value]="userLibro" [paginator]="true" [rows]="12" [responsive]="true">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Nombre Libro</th>
+          <th>Autor</th>
+          <th>Categoria</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-userLibro>
+      <tr>
+          <td>{{userLibro.nombre_libro}}</td>
+          <td>{{userLibro.autor_libro}}</td>
+          <td>{{userLibro.categoria_libro}}</td>
+          <td><button class="btn btn-primary tablalibros"
+                  (click)="onLibro(userLibro, userLibro.id)">
+                  <i class="pi pi-pencil"></i></button>
+          </td>
+          <td>
+              <button class="btn btn-primary tablalibros"
+                  (click)="EliminarLibro(userLibro.id)">
+                  <i class="pi pi-times"></i></button>
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
+<p-dialog header="Editar Libro" [(visible)]="display" [modal]="true" [responsive]="true"
+[style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+<div class="col-md-12">
+    <div class="card-body">
+        <form (ngSubmit)="onGuardareditarlibro()" [noValidate]=false>
+            <div>
+                <div>
+                    <div class="capitalize"><b>Nombre libro: </b></div>
+                    <input class="form-control" name="nombreLibro"
+                        [(ngModel)]="InformacionLibrosProvicional.nombre_libro"
+                        value="{{InformacionLibrosProvicional.nombre_libro}}" [required]=true>
+                </div>
+                <div>
+                    <div class="capitalize"><b>Autor libro: </b></div>
+                    <input class="form-control" name="autorLibro"
+                        [(ngModel)]="InformacionLibrosProvicional.autor_libro"
+                        value="{{InformacionLibrosProvicional.autor_libro}}" [required]=true>
+                </div>
+                <div>
+                    <label for="sel1">
+                        <b>Categoria:</b>
+                    </label>
+                    <select class="form-control" id="sel1"
+                        [(ngModel)]="InformacionLibrosProvicional.categoria_libro"
+                        value="{{InformacionLibrosProvicional.categoria_libro}}" name="categoriaLibro"
+                        [required]=true>
+                        <option value="">Categoria</option>
+                        <option value="Policial">Policial</option>
+                        <option value="Romántica">Romántica</option>
+                        <option value="Aventura">Aventura</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Ficcion/Realidad">Ficcion/Realidad</option>
+                        <option value="Ciencia Ficcion">Ciencia Ficción</option>
+                        <option values="Investigación">Investigación</option>
+                        <option value="Biográfica">Biográfica</option>
+                        <option value="Infantil">Infantil</option>
+                        <option value="Autoayuda">Autoayuda</option>
+                        <option value="Erótica">Erótica</option>
+                        <option value="Hogar">Hogar</option>
+                        <option value="Enciclopedia/Manual">Enciclopedia/Manual</option>
+                        <option value="Política">Política</option>
+                        <option value="Economía/Marketing">Economía/Marketing</option>
+                        <option value="Sociedad">Sociedad</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Viajes/Cultura">Viajes/Cultura</option>
+                        <option value="Otro temas/Varios">Otros temas/Varios</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="capitalize"><b>Descripción libro: </b></div>
+                    <input class="form-control" [(ngModel)]="InformacionLibrosProvicional.text_libro"
+                        value="{{InformacionLibrosProvicional.autor_libro}}" name="descripcionLibro"
+                        [required]=true>
+                </div>
+                <div>
+                    <button class="btn btn-primary"  type="submit">Guardar</button>                   
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</p-dialog>

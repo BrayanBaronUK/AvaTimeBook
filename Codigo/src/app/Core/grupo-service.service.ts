@@ -13,41 +13,14 @@ export class GrupoServiceService {
   constructor(
     public db: AngularFirestore,
     public afAuth: AngularFireAuth) { }
-
-  getCurrentUser() {
-    return new Promise<any>((resolve, reject) => {
-      // tslint:disable-next-line:no-shadowed-variable
-      const user = firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          resolve(user);
-          return user.uid;
-        } else {
-          reject('No user logged in');
-        }
-      });
-    });
-  }
   getIud() {
     return firebase.auth().currentUser.uid;
   }
-  updateCurrentUser(value) {
-    return new Promise<any>((resolve, reject) => {
-      const user = firebase.auth().currentUser;
-      user.updateProfile({
-        displayName: value.name,
-        photoURL: user.photoURL
-      }).then(res => {
-        resolve(res);
-      }, err => reject(err));
-    });
+  createGrupo(data: {nombre_grupo: String, grupo:any}) {
+    console.log(data);
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add(data);
   }
-  createGrupo(data: { nombre_grupo: string, personas_grupo: string }) {
-    return this.db.collection('perfil').doc(this.getIud()).collection('grupo-creado').
-      doc(this.getIud()).collection('grupo').add(data);
-  }
-
   getGrupos() {
-
     return this.db.collection('perfil').doc(this.getIud()).collection('grupo-creado').
       doc(this.getIud()).collection('grupo').snapshotChanges();
   }

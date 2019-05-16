@@ -35,9 +35,7 @@ export class FormPersonComponent implements OnInit {
       edad: '',
       celular: '',
       nacionalidad: '',
-      text: '',
-      seguidores:  0,
-      siguiendo: 0
+      text: ''
 
     });
   }
@@ -51,8 +49,6 @@ export class FormPersonComponent implements OnInit {
     celular: new FormControl(Validators.required, Validators.required),
     nacionalidad: new FormControl(Validators.required, Validators.pattern('[a-zA-Z ]*')),
     text: new FormControl(''),
-    seguidores: new FormControl(0),
-    siguiendo: new FormControl(0)
   });
   onSubmit() {
   }
@@ -93,8 +89,8 @@ export class FormPersonComponent implements OnInit {
         celular: form.celular,
         nacionalidad: form.nacionalidad,
         text: form.text,
-        seguidores: form.seguidores,
-        siguiendo: form.siguiendo
+        seguidores: 0,
+        siguiendo: 0
 
       };
       console.log(data);

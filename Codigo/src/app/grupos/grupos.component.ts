@@ -11,103 +11,81 @@ import { AuthService } from '../Core/auth.service';
 export class GruposComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public crearGrupo: any;
+  public datosGuadar: any;
   public grupos: any;
   public personas: any;
-  personaseleccionada: any[];
-  filteredCountriesMultiple: any[];
+  public personaseleccionada: any;
+  public filteredCountriesMultiple: any[];
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
     public person: ServicioFiltroPersonaService) { }
 
   ngOnInit() {
-    this.CrearGrupos();
     this.TraerGrupos();
     this.Traerperson();
-    this.OcultarTablero();
-
+    this.variables();
   }
 
   TraerGrupos() {
     // trae todos los grupos
     this.grupoS.getGrupos().subscribe(usuarios => {
-      this.grupos = usuarios.map((element) => {
-        return element.payload.doc.data();
+      this.grupos = [];
+      usuarios.map((element) => {
+        this.grupos.push({
+          data: element.payload.doc.data()
+        });
       });
     });
   }
 
-  CrearGrupos() {
-    this.crearGrupo = {
-      id: '',
+  variables(){
+    this.datosGuadar ={
       nombre_grupo: '',
-      personas_grupo: ''
-    };
+      grupo: this.personaseleccionada
+    }
   }
   onCancelar() {
-    this.crearGrupo = {
-      id: '',
-      nombre_grupo: '',
-      personas_grupo: ''
-    };
     this.cerrar.emit();
   }
   onGuardarGrupocreado() {
-    this.grupoS.createGrupo(this.crearGrupo);
-    this.crearGrupo = {
-      id: '',
-      nombre_libro: '',
-      autor_libro: '',
-      categoria_libro: '',
-      text_libro: ''
-    };
+    this.variables();
+    this.grupoS.createGrupo(this.datosGuadar);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
   }
 
   Traerperson() {
-    this.personas = {
-      nombre: '',
-      apellido: '',
-    };
     // trae todos los libros
     this.person.getPerfiles().subscribe((p) => {
       this.personas = [];
       p.map((persondata: any) => {
         this.personas.push({
           id: persondata.payload.doc.id,
-          data: persondata.payload.doc.data()
+          nombre: persondata.payload.doc.data().nombre
         });
       });
     });
   }
 
-  OcultarTablero() {
-    // if (this.personaseleccionada == null) {
-    //   $('.ui-listbox-list-wrapper').css('none');
-    // } else {
-    //   $('.ui-listbox-list-wrapper').css('none');
-    // }
-    jQuery(document).on('click', '.crearfiltro', function () {
-      document.getElementById('#ui-listbox-list-wrapper').style.display = 'none';
-    });
-  }
 
   BuscarPersonas(event) {
-          this.filteredCountriesMultiple = this.filterCountry(event.query, this.personas);
-    }
+    debugger;
+    this.filteredCountriesMultiple = this.filterCountry(event.query, this.personas);
+  }
 
   filterCountry(query, countries: any[]): any[] {
-      // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-      let filtered : any[] = [];
-      for(let i = 0; i < countries.length; i++) {
-          let country = countries[i];
-          if(country.data.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-              filtered.push(country);
-          }
+    // in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: any[] = [];
+    for (let i = 0; i < countries.length; i++) {
+      debugger;
+      let country = countries[i];
+      if (country.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
       }
-      console.log(filtered);
-      return filtered;
+    }
+    console.log(filtered);
+    return filtered;
   }
- 
-  }
+
+}
