@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+
+
 import {
   MatToolbarModule,
   MatGridListModule,
@@ -67,6 +69,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {DataTableModule, SharedModule} from 'primeng/primeng';
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -129,6 +133,7 @@ import {PaginatorModule} from 'primeng/paginator';
     AutoCompleteModule,
     DataTableModule,
     SharedModule,
+    PickerModule
    ],
   providers: [AuthService, AuthGuard, FlashMessagesService, ChatService],
   bootstrap: [AppComponent]
