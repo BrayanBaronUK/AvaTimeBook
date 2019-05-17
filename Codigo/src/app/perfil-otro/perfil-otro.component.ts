@@ -33,6 +33,7 @@ export class PerfilOtroComponent implements OnInit {
   public idtema;
   public temporalDatos = [];
   public id;
+  public siguiendo =[];
   public nombre: String;
   public dataSeg: any;
   displaySeguir: boolean = false;
@@ -113,7 +114,22 @@ export class PerfilOtroComponent implements OnInit {
     this.TraerInformacionUsuario(this.idLlego);
   }
   empezaCargarPerfilDondeLibro(id) {
-    this.idtema = this.UserServices.getIud();
+    this.UserServices.getCantidadSiguiendo().subscribe(sig =>{
+      this.siguiendo = [];
+      sig.map(m =>{
+        this.siguiendo.push({
+          id: m.payload.doc.id
+        })
+      });
+      for(var i=0; i<this.siguiendo.length; i++){
+        if(id == this.siguiendo[i].length){
+          this.idtema = 'Siguiendo';
+        }
+      }
+      if(this.idtema == null){
+        this.idtema = 'Seguir';
+      }
+    })
     this.idLlego = id;
     this.TraerInformacionUsuario(this.idLlego);
   }

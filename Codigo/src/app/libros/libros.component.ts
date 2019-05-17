@@ -46,7 +46,7 @@ export class LibrosComponent implements OnInit {
   }
 
   change(id):void{
-    this.childOne.empezaCargarPerfil(id); 
+    this.childOne.empezaCargarPerfilDondeLibro(id); 
     this.MostrarInformacion(); 
     this.perfil = true;
    }
