@@ -30,8 +30,9 @@ export class RoomComponent implements OnInit {
     public _csmessage: RoomService,
     //public axuliar: MessagesService,
   ) { 
- 
-    this._cs.room().subscribe((room) => {
+    this._csroom = [];
+    this._cs.chats = [];
+    this._cs.Grupos().subscribe((room) => {
       this._csroom = [];
       room.forEach((cdata: any) => {
         this._csroom.push({
@@ -40,6 +41,15 @@ export class RoomComponent implements OnInit {
         });
       });
     });
+   /* this._cs.room().subscribe((room) => {
+      this._csroom = [];
+      room.forEach((cdata: any) => {
+        this._csroom.push({
+          id: cdata.payload.doc.id,
+          data: cdata.payload.doc.data()
+        });
+      });
+    });*/ //Grupos 
     console.log( "Error");
   
 
@@ -61,16 +71,18 @@ export class RoomComponent implements OnInit {
 
   roomchange(value){
     this.roomactual = value;
-    this._cs.meesages(value).subscribe( ()=> {
+    this._cs.Gruposmeesages(value).subscribe( ()=> {
+      setTimeout( ()=> {
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+      },20) 
+    });
+    /*this._cs.meesages(value).subscribe( ()=> {//funciona
       setTimeout( ()=> {
         this.elemento.scrollTop = this.elemento.scrollHeight;
       },20)
-    });
-    debugger;
-      console.log( "Error");
-  
-
-   
+    });*/
+    debugger; 
+    
   }
 
   enviar_mensaje(){
@@ -81,8 +93,13 @@ export class RoomComponent implements OnInit {
       return;
     }
 
-    this._cs.agregarMensaje(this.roomactual, this.mensaje )
+    /*this._cs.agregarMensaje(this.roomactual, this.mensaje )
+          .then( ()=>this.mensaje="")
+          .catch( (err)=>console.error('Error al enviar', err));
+  }*/
+  this._cs.GrupoagregarMensaje(this.roomactual, this.mensaje )
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));
   }
+  
 }

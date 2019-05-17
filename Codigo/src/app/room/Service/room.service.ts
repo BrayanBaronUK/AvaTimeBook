@@ -59,16 +59,6 @@ export class RoomService {
   room(){
    return this.afs.collection('rooms').snapshotChanges();
 
- /* return this.itemsCollection.valueChanges()
-                                .map( (rooms:Room[]) =>{
-                                  
-                                  this.rooms = [];
-                                  for( let room of rooms ){
-                                    this.rooms.unshift( room );
-                                  }
-                                
-                                })*/  
-   // return this.itemsCollection.snapshotChanges();
   }
   meesages(value){
     debugger;
@@ -102,5 +92,39 @@ export class RoomService {
       nome : value,
     }
     this.afs.collection('room').add(roomss2);
+  }
+
+  Grupos(){//acceder a la colección de grupos de personas
+    return this.afs.collection('perfil').doc(this.userse.getIud())
+                                          .collection('Grupo')
+                                          .snapshotChanges();
+  }
+  Gruposmeesages(value){ //aceder a los mensajes de personas
+    debugger;
+    this.itemsCollectionmensajes = this.afs2.collection('perfil').doc(this.userse.getIud())
+    .collection('Grupo').doc(value).collection('messages', ref => 
+                                                  ref.orderBy('fecha','desc'));
+    return this.itemsCollectionmensajes.valueChanges()
+                                .map( (mensajes:Mensaje[]) =>{
+                                  
+                                  this.chats = [];
+                                  for( let mensaje of mensajes ){
+                                    this.chats.unshift( mensaje );
+                                  }
+                                
+                                })                                              
+  }
+  GrupoagregarMensaje(value, texto:string ){
+    let mensaje : Mensaje = {
+      nombre: this.usuario.nombre,
+      mensaje: texto,
+      fecha: new Date().getTime(),
+      uid: this.userse.getIud(),
+    
+    }
+    return this.afs2.collection('perfil').doc(this.userse.getIud()).collection('Grupo').doc(value).
+                                          collection("messages").add(mensaje);
+
+  // return this.itemsCollection.add( mensaje );
   }
 }

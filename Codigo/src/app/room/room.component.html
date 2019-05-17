@@ -5,7 +5,8 @@
     <div class="room-list">
         <p>Listado rooms</p> 
       <div *ngFor="let room of _csroom">
-        <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nome }}</h3>
+       <!-- <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nome }}</h3>-->
+       <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nombre_grupo }}</h3>
       </div>
     </div>
   </section>
