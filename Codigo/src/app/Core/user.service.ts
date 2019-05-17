@@ -69,6 +69,12 @@ export class UserService {
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
   }
+  public getCantidadSeguidores() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('SeguidorPersona').snapshotChanges();
+  }
+  public getCantidadSiguiendo() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').snapshotChanges();
+  }
 
 
   public GuardarPersonaSeguir(id, data){
