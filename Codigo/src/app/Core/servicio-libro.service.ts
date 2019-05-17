@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 })
 export class ServicioLibroService {
 
+  public uid = this.getIud();
   constructor(
     public db: AngularFirestore,
     public afAuth: AngularFireAuth
@@ -45,6 +46,12 @@ export class ServicioLibroService {
   //crear libro
   createLibro(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string }) {
     return this.db.collection('perfil').doc(this.getIud()).collection('libro-persona').doc(this.getIud()).collection('libro').add(data);
+  }
+  createLibroGlobal(data: { nombre_libro: string, autor_libro: string, categoria_libro: string, text_libro: string, id: any}) {
+    return this.db.collection('LibrosGlobal').doc(this.getIud()).collection('libro-persona').add(data);
+  }
+  ObtenerLibroGlobal() {
+    return this.db.collection('LibrosGlobal').doc(this.getIud()).collection('libro-persona').snapshotChanges();
   }
   //obtener libro
   getLibro() {

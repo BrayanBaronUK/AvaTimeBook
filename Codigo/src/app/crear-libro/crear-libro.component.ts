@@ -51,7 +51,15 @@ export class CrearLibroComponent implements OnInit {
         categoria_libro: form.categoria_libro,
         text_libro: form.text_libro
       };
+      const data2 = {
+        nombre_libro: form.nombre_libro,
+        autor_libro: form.autor_libro,
+        categoria_libro: form.categoria_libro,
+        text_libro: form.text_libro,
+        id: this.UserServices.getIud()
+      };
       this.UserServices.createLibro(data).then(() => {
+      this.UserServices.createLibroGlobal(data2);
         this.newlibroForm.setValue({
           nombre_libro: '',
           autor_libro: '',
