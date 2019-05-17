@@ -63,7 +63,7 @@ export class UserService {
   }
 
   public getPerfilEvaluar() {
-    return this.db.collection('perfil').doc(this.getIud()).get();
+    return this.getIud();
   }
 
   public getPerfiles() {

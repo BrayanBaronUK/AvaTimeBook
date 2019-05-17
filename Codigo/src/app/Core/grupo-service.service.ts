@@ -16,12 +16,21 @@ export class GrupoServiceService {
   getIud() {
     return firebase.auth().currentUser.uid;
   }
-  createGrupo(data: {nombre_grupo: String, grupo:any}) {
+  createGrupo(nombre_grupo: String, data: {}) {
     console.log(data);
-    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add(data);
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add({
+      nombre_grupo,
+      data
+    });
   }
   getGrupos() {
-    return this.db.collection('perfil').doc(this.getIud()).collection('grupo-creado').
-      doc(this.getIud()).collection('grupo').snapshotChanges();
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').snapshotChanges();
+  }
+  eliminarGrupo(id) {
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').doc(id).delete();
+  }
+  ActualizarGrupo(id, nombre_grupo: String, data: {}) {
+    this.eliminarGrupo(id);
+    this.createGrupo(nombre_grupo, data);
   }
 }

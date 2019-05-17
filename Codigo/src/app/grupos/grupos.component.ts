@@ -3,6 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { GrupoServiceService } from '../Core/grupo-service.service';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { AuthService } from '../Core/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-grupos',
   templateUrl: './grupos.component.html',
@@ -11,14 +12,22 @@ import { AuthService } from '../Core/auth.service';
 export class GruposComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
   public crearGrupo: any;
-  public datosGuadar: any;
+  public nombre: any;
+  public temporalNombre: any;
+  public idGrupo: any;
   public grupos: any;
   public personas: any;
   public personaseleccionada: any;
+  public guardarPersonasGrupo: any;
   public filteredCountriesMultiple: any[];
+  public display = false;
+  public displayEliminar = false;
+  public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
+  public input: any;
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
-    public person: ServicioFiltroPersonaService) { }
+    public person: ServicioFiltroPersonaService,
+    public router: Router) { }
 
   ngOnInit() {
     this.TraerGrupos();
@@ -32,32 +41,67 @@ export class GruposComponent implements OnInit {
       this.grupos = [];
       usuarios.map((element) => {
         this.grupos.push({
-          data: element.payload.doc.data()
+          id: element.payload.doc.id,
+          nombre: element.payload.doc.data().nombre_grupo,
+          data: element.payload.doc.data().data
         });
       });
     });
   }
 
-  variables(){
-    this.datosGuadar ={
-      nombre_grupo: '',
-      grupo: this.personaseleccionada
-    }
+  variables() {
   }
   onCancelar() {
     this.cerrar.emit();
+    this.nombre = '';
+    this.personaseleccionada = null;
+    this.display = false;
+    this.displayEliminar = false;
+  }
+  vistaGrupo(nombre, data, id) {
+    this.display = true;
+    this.guardarPersonasGrupo = data;
+    this.temporalNombre = nombre;
+    this.idGrupo = id;
+  }
+  EliminarPersona(id) {
+    var count = this.guardarPersonasGrupo.length;
+    var b = true;
+    while (b) {
+      b = false;
+      for (var i = 0; i < count; i++) {
+        if (id == this.guardarPersonasGrupo[i].id) {
+          this.guardarPersonasGrupo.splice(i, 1);
+          b = true;
+        }
+      }
+    }
+    this.grupoS.ActualizarGrupo(this.idGrupo, this.temporalNombre, this.guardarPersonasGrupo),
+      this.flashMensaje.show('Actualizado.',
+        { cssClass: 'alert-success', timeout: 4000 });
+    this.onCancelar();
   }
   onGuardarGrupocreado() {
     this.variables();
-    this.grupoS.createGrupo(this.datosGuadar);
+    this.grupoS.createGrupo(this.nombre, this.personaseleccionada);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
   }
+  EliminarGrupoDisplay(id){
+    this.idGrupo =id;
+    this.displayEliminar = true;
+  }
+  EliminarGrupo() {
+    this.grupoS.eliminarGrupo(this.idGrupo),
+      this.flashMensaje.show('Grupo Eliminado.',
+        { cssClass: 'alert-success', timeout: 4000 });
+    this.displayEliminar = false;
+  }
 
   Traerperson() {
     // trae todos los libros
-    this.person.getPerfiles().subscribe((p) => {
+    this.person.getSeguidores().subscribe((p) => {
       this.personas = [];
       p.map((persondata: any) => {
         this.personas.push({
@@ -86,6 +130,30 @@ export class GruposComponent implements OnInit {
     }
     console.log(filtered);
     return filtered;
+  }
+
+  myFunctionNombre() {
+    this.input = document.getElementById('myInput');
+    if (this.input != null) {
+
+      this.filter = this.input.value.toUpperCase();
+      this.table = document.getElementById('myTable');
+      this.tr = this.table.getElementsByTagName('tr');
+      for (this.i = 0; this.i < this.tr.length; this.i++) {
+        this.td = this.tr[this.i].getElementsByTagName('td')[0];
+        if (this.td) {
+          this.txtValue = this.td.textContent || this.td.innerText;
+          if (this.txtValue.toUpperCase().indexOf(this.filter) > -1) {
+            this.tr[this.i].style.display = '';
+          } else {
+            this.tr[this.i].style.display = 'none';
+          }
+        }
+      }
+    } else {
+      this.tr.getElementsByTagName('td').style.display = 'block';
+    }
+
   }
 
 }

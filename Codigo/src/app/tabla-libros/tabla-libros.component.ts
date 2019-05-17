@@ -95,7 +95,6 @@ export class TablaLibrosComponent implements OnInit {
     this.onCancelar();
   }
   onCancelar() {
-    this.router.navigate(['/libros']);
     document.getElementById('vistaTabla').style.visibility = 'visible';
     this.display = false;
     this.cerrar.emit();

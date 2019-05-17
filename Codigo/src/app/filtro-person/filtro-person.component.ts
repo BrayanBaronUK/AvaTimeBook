@@ -20,7 +20,7 @@ export class FiltroPersonComponent implements OnInit {
   public seguirBoolean = true;
   public colum: any;
   public guardarLibro = [];
-  public usrLocal = [];
+  public usrLocal;
   public temporalDatos = [];
   public id;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
@@ -38,7 +38,6 @@ export class FiltroPersonComponent implements OnInit {
 
   ngOnInit() {
     this.TraerPersonas();
-    console.log(this.nombre);
   }
 
   MostrarColumnas() {
@@ -49,58 +48,66 @@ export class FiltroPersonComponent implements OnInit {
   }
 
   TraerPersonas() {
+    this.usrLocal = this.userservicePerfil.getPerfilEvaluar();
     this.userservicePerfil.CargarPersonaSeguir().subscribe((seguir) => {
-      this.filtrouser = [];
-      this.guardarLibro = [];
       this.seguir = [];
-      this.usrLocal = [];
-      this.userservice.getPerfiles().subscribe((usuarios) => {
-        this.userservicePerfil.getPerfilEvaluar().subscribe((usrLocal) => {
-          this.usrLocal[0] = usrLocal.id;
-        });
-        usuarios.map((usuariosdata: any) => {
-          this.servicioLibroService.getLibros(usuariosdata.payload.doc.id).subscribe((libro) => {
-            libro.map(l => {
-              this.guardarLibro.push({
-                id: l.payload.doc.id,
-                data: l.payload.doc.data()
-              });
-            });
-          });
-          this.filtrouser.push({
-            id: usuariosdata.payload.doc.id,
-            data: usuariosdata.payload.doc.data(),
-            libros: [this.guardarLibro]
-          });
-        });
-        seguir.map((seguirperson: any) => {
-          for (var i = 0; i < this.filtrouser.length; i++) {
-            if (seguirperson.payload.doc.id == this.filtrouser[i].id) {
-              this.seguir.push({
-                id: seguirperson.payload.doc.id,
-                data: seguirperson.payload.doc.data(),
-                libros: [
-                  this.filtrouser[i].libros
-                ]
-              });
-              this.filtrouser.splice(i, 1);
-            }
-            else if (this.usrLocal[0] == this.filtrouser[i].id) {
-              this.filtrouser.splice(i, 1);
-            }
-          }
-
+      seguir.map((seguirperson: any) => {
+        this.seguir.push({
+          id: seguirperson.payload.doc.id,
+          data: seguirperson.payload.doc.data(),
         });
       });
     });
+
+    this.userservice.getPerfiles().subscribe((usuarios) => {
+      this.filtrouser = [];
+      usuarios.map((usuariosdata: any) => {
+        this.filtrouser.push({
+          id: usuariosdata.payload.doc.id,
+          data: usuariosdata.payload.doc.data(),
+        });
+      });
+      var b = true;
+      var count = this.filtrouser.length;
+      while (b) {
+        b = false;
+        if (this.seguir.length == 0) {
+          for (var i = 0; i < count; i++) {
+            if (this.usrLocal == this.filtrouser[i].id) {
+              this.filtrouser.splice(i, 1);
+              b = false;
+            }
+          }
+        } else {
+          for (var i = 0; i < count; i++) {
+            if (i < this.filtrouser.length) {
+              for (var j = 0; j < this.seguir.length; j++) {
+                if (this.seguir[j].id == this.filtrouser[i].id) {
+                  this.filtrouser.splice(i, 1);
+                  b = true;
+                }
+                else if (this.usrLocal == this.filtrouser[i].id) {
+                  this.filtrouser.splice(i, 1);
+                  b = true;
+                }
+              }
+            }
+          }
+        }
+
+      }
+    });
+
   }
   onfiltroNoSeguir(data, id) {
+    debugger;
     this.temporalDatos = data;
     this.id = id;
     this.displayNoSeguir = true;
     this.nombre = data.nombre;
   }
   onfiltroSeguir(data, id) {
+    debugger;
     this.temporalDatos = data;
     this.id = id;
     this.displaySeguir = true;
@@ -113,6 +120,7 @@ export class FiltroPersonComponent implements OnInit {
       this.flashMensaje.show('Informacion Aceptada.',
         { cssClass: 'alert-success', timeout: 2500 });
     });
+    this.TraerPersonas();
     this.onCancelar();
   }
   noSeguir() {
@@ -120,7 +128,8 @@ export class FiltroPersonComponent implements OnInit {
     this.userservicePerfil.QuitarPersonaSeguidor(this.id);
     this.flashMensaje.show('Informacion Aceptada.',
       { cssClass: 'alert-success', timeout: 2500 });
-      this.displayNoSeguir = false;
+    this.TraerPersonas();
+    this.displayNoSeguir = false;
   }
   onCancelar() {
     this.cerrar.emit();
@@ -148,6 +157,30 @@ export class FiltroPersonComponent implements OnInit {
       }
     } else {
       this.tr.getElementsByTagName('td').style.display = 'block';
+    }
+
+  }
+
+  myFunctionNombre2() {
+    this.input2 = document.getElementById('mInput');
+    if (this.input2 != null) {
+
+      this.filter2 = this.input2.value.toUpperCase();
+      this.table2 = document.getElementById('myTable2');
+      this.tr2 = this.table2.getElementsByTagName('tr');
+      for (this.i = 0; this.i < this.tr2.length; this.i++) {
+        this.td2 = this.tr2[this.i].getElementsByTagName('td')[0];
+        if (this.td2) {
+          this.txtValue2 = this.td2.textContent || this.td2.innerText;
+          if (this.txtValue2.toUpperCase().indexOf(this.filter2) > -1) {
+            this.tr2[this.i].style.display = '';
+          } else {
+            this.tr2[this.i].style.display = 'none';
+          }
+        }
+      }
+    } else {
+      this.tr2.getElementsByTagName('td').style.display = 'block';
     }
 
   }
