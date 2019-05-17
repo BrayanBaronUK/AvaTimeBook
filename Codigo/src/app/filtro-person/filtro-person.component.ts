@@ -47,8 +47,7 @@ export class FiltroPersonComponent implements OnInit {
   }
 
   change(id):void{
-    console.log("padre"+id);
-   this.childOne.TraerInformacionUsuario2(id); 
+   this.childOne.empezaCargarPerfil(id); 
    this.MostrarInformacion(); 
    this.perfil = true;
   }
