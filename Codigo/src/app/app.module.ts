@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-//import { PickerModule } from '@ctrl/ngx-emoji-mart'//Agregar emojis camilo
+import { PickerModule } from '@ctrl/ngx-emoji-mart'//Agregar emojis camilo
 import {
   MatToolbarModule,
   MatGridListModule,
@@ -58,7 +58,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { MenuItem } from 'primeng/api';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
-//import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
 
@@ -106,7 +106,7 @@ import { IndividualComponent } from './individual/individual.component';
     DialogModule,
     CalendarModule,
     TableModule,
-   // PickerModule,//Agregar emojis camilo
+    PickerModule,//Agregar emojis camilo
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -134,7 +134,7 @@ import { IndividualComponent } from './individual/individual.component';
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
-
+    AngularFontAwesomeModule,
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
