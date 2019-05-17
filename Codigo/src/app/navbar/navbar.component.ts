@@ -59,15 +59,21 @@ export class NavbarComponent implements OnInit {
     }
     );
     this.MostrarInformacion();
+    this.MostrarInformacionLibros();
+    document.getElementById('perfil').style.display = 'none';
   }
   onClickLogout() {
     this.authService.doLogout();
     this.router.navigate(['/login']);
   }
   MostrarInformacion() {
-    jQuery(document).on('click', '.personas', function () {
-      document.getElementById('perfil').style.display = 'none';
+    jQuery(document).on('click', '.personas', function () {      
       document.getElementById('TablaFiltroPersonas').style.display = 'block';
+    });
+  }
+  MostrarInformacionLibros() {
+    jQuery(document).on('click', '.libros', function () {
+      document.getElementById('librosOcultar').style.display = 'block';
     });
   }
   MostarInformacion() {
