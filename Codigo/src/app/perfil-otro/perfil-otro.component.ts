@@ -17,7 +17,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class PerfilOtroComponent implements OnInit {
 
-  @Input('parentData') public idLlego;
+  public idLlego;
   @Output() cerrar = new EventEmitter();
   @ViewChild('imageUser') inputImageUser: ElementRef;
   uploadPercent: Observable<number>;
@@ -27,12 +27,10 @@ export class PerfilOtroComponent implements OnInit {
   public userLibro = [];
   public item = 1;
   public currentStatus = 1;
-  private id: any;
   public InformacionUsuarioProvicional: any;
   public foto: any;
   public count = 0;
   public date14: Date;
-  public idnuevo;
   text: String;
   images: any[];
   // tslint:disable-next-line:no-inferrable-types
@@ -54,23 +52,14 @@ export class PerfilOtroComponent implements OnInit {
       ids: '',
       text: ''
     });
-
-    this.text = `This will be converted to EmojiOne emojis! :thumbsup: ❤️`;
   }
   // crea comentario
   public newcomentarioForm = new FormGroup({
     text: new FormControl(null, Validators.required),
     ids: new FormControl()
   });
-
   ngOnInit() {
-    this.TraerComentario();
-    this.TraerInformacionUsuario(this.idLlego);
-    //  this.MostrarInformacion();
   }
-
-
-
   TraerComentario() {
     // trae todos los comentarios
     this.UserComentario.getComentarioOtroPerfil(this.idLlego).subscribe((comentario) => {
@@ -85,6 +74,8 @@ export class PerfilOtroComponent implements OnInit {
   }
 
   TraerInformacionUsuario(idLlego) {
+    this.TraerLibro();
+    this.TraerComentario();
     this.userFirebase = {
       nombre: '',
       apellido: '',
@@ -95,7 +86,6 @@ export class PerfilOtroComponent implements OnInit {
       nacionalidad: '',
       text: ''
     };
-    console.log("traer" + idLlego)
     if (idLlego == null) {
       this.UserServices.getPerfil().valueChanges().subscribe((user) => {
         this.userFirebase = user;
@@ -107,43 +97,11 @@ export class PerfilOtroComponent implements OnInit {
     }
 
   }
-
   empezaCargarPerfil(id) {
     this.idLlego = id;
     console.log("empezar" + this.idLlego)
     this.TraerInformacionUsuario(this.idLlego);
   }
-
-
-
-  // resive la informacion a editar
-  onUsuario(usuario) {
-    this.InformacionUsuarioProvicional = {
-      nombre: '',
-      apellido: '',
-      edad: '',
-      url: '',
-      celular: '',
-      text: ''
-    };
-    this.showDialog();
-    this.InformacionUsuarioProvicional = usuario;
-    usuario = null;
-    this.usuarioEdit = usuario;
-  }
-
-  // actualizar informacion usuario
-
-
-
-
-  // cancelar funcion usuario
-  onCancelarUsuario() {
-    this.InformacionUsuarioProvicional = null;
-    this.display = false;
-    this.cerrar.emit();
-  }
-
   showDialog() {
     this.display = true;
   }
@@ -159,11 +117,7 @@ export class PerfilOtroComponent implements OnInit {
           categoria_libro: librodata.payload.doc.data().categoria_libro
         });
       });
+      
     });
   }
-
-
-
-  // FUNCIONES DE ELMININACION
-
 }
