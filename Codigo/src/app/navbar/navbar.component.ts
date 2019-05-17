@@ -58,10 +58,17 @@ export class NavbarComponent implements OnInit {
       }
     }
     );
+    this.MostrarInformacion();
   }
   onClickLogout() {
     this.authService.doLogout();
     this.router.navigate(['/login']);
+  }
+  MostrarInformacion() {
+    jQuery(document).on('click', '.personas', function () {
+      document.getElementById('perfil').style.display = 'none';
+      document.getElementById('TablaFiltroPersonas').style.display = 'block';
+    });
   }
   MostarInformacion() {
     // tslint:disable-next-line:no-debugger

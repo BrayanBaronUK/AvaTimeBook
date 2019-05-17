@@ -74,6 +74,7 @@ import {DataTableModule, SharedModule} from 'primeng/primeng';
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
 
+import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,7 +95,8 @@ import {PaginatorModule} from 'primeng/paginator';
     GruposComponent,
     FiltroPersonComponent,
     RoomComponent,
-    TablaLibrosComponent
+    TablaLibrosComponent,
+    PerfilOtroComponent
   ],
   imports: [
     BrowserModule,

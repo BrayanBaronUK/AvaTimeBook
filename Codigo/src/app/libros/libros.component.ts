@@ -4,6 +4,7 @@ import { UserService } from '../Core/user.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/primeng';
+import {PerfilOtroComponent} from '../perfil-otro/perfil-otro.component';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -11,6 +12,7 @@ import { SelectItem } from 'primeng/primeng';
 })
 export class LibrosComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
+  @ViewChild('child1') childOne:PerfilOtroComponent;
   public filtrouser = [];
   public userLibro = [];
   public colum: any[];
@@ -41,6 +43,11 @@ export class LibrosComponent implements OnInit {
     document.getElementById('siguiente').style.display = 'none';
   }
 
+  change(id):void{
+    this.childOne.empezaCargarPerfil(id); 
+    // this.MostrarInformacion(); 
+    // this.perfil = true;
+   }
   // iniciar variables
 
   detectChanges() {
@@ -78,14 +85,15 @@ export class LibrosComponent implements OnInit {
 
   TraerLibro() {
     // trae todos los libros
-    this.UserLibro.getLibro().subscribe((libros) => {
+    this.UserLibro.ObtenerLibroGlobal().subscribe((libros) => {
       this.userLibro = [];
       libros.map((librodata: any) => {
         this.userLibro.push({
               id: librodata.payload.doc.id,
               nombre_libro: librodata.payload.doc.data().nombre_libro,
               autor_libro: librodata.payload.doc.data().autor_libro,
-              categoria_libro: librodata.payload.doc.data().categoria_libro
+              categoria_libro: librodata.payload.doc.data().categoria_libro,
+              uid: librodata.payload.doc.data().id
         });
       });
     });
@@ -97,6 +105,9 @@ export class LibrosComponent implements OnInit {
   // editar libros
 
   onFiltro(id) {
+    console.log(id);
+  }
+  IrPerfil(id){
     console.log(id);
   }
 }

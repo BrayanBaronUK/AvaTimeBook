@@ -75,10 +75,10 @@
                                                 <label>Nombre de Grupo:</label>
                                                 <input type="text" class="form-control" id="nombre_grupo"
                                                     placeholder="Nombre del Grupo" [(ngModel)]="nombre" name="nombre"
-                                                    required>
+                                                    [required]=true>
                                                 <label>Buscar personas:</label>
                                                 <span class="ui-fluid">
-                                                    <p-autoComplete [(ngModel)]="personaseleccionada"
+                                                    <p-autoComplete [(ngModel)]="personaseleccionada" [required]=true
                                                         name="personaseleccionada"
                                                         [suggestions]="filteredCountriesMultiple"
                                                         (completeMethod)=" BuscarPersonas($event)" styleClass="wid100"

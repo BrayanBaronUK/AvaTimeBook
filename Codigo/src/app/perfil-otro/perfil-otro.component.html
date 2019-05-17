@@ -1,0 +1,255 @@
+<!------ Include the above in your HEAD tag ---------->
+<!--perfil-->
+<body>
+  <div class="containerModi main-secction">
+      <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 image-section">
+              <img src="https://png.pngtree.com/thumb_back/fw800/back_pic/00/08/57/41562ad4a92b16a.jpg">
+          </div>
+          <div class="row user-left-part">
+              <div class="col-md-3 col-sm-3 col-xs-12 user-profil-part pull-left">
+                  <div class="row ">
+                      <div class="col-md-12 col-md-12-sm-12 col-xs-12 user-image text-center">
+                          <img src="{{userFirebase.url}}" class="rounded-circle" >
+                      </div>
+                      <br>
+                      <br>
+                      <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center"
+                          style="margin-top:25%;">
+                          <div class="card">
+                              <div class="card-body">
+                                  <div class="h5">@{{userFirebase.nombre}}</div>
+                                  <div class="h7 text-muted"> Nombre : {{userFirebase.nombre}}
+                                      {{userFirebase.apellido}}</div>
+                                  <div class="h7">{{userFirebase.text}}</div>
+                              </div>
+                              <ul class="list-group list-group-flush">
+                                  <li class="list-group-item">
+                                      <div class="h6 text-muted">Seguidores</div>
+                                      <div class="h5">  </div>
+                                  </li>
+                                  <li class="list-group-item">
+                                      <div class="h6 text-muted">Siguiendo</div>
+                                      <div class="h5">  </div>
+                                  </li>
+                              </ul>
+                          </div>
+                          <br>
+                          <p-calendar [(ngModel)]="date14" [inline]="true"></p-calendar>
+                      </div>
+                      <!--social-->
+                      <div class="col-md-12 col-sm-12 col-xs-12 user-detail-section1 text-center">
+                          <div class="panel-heading">Social Media</div>
+                          <div class="panel-body">
+                            <i class="fa fa-facebook"></i> 
+                            <i class="fa fa-google-plus"></i>
+                            <i class="fa fa-twitter"></i>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+              <div class="col-md-9 col-sm-9 col-xs-12 pull-right profile-right-section">
+                  <div class="row profile-right-section-row">
+                      <!-- <div class="col-md-11 profile-header">
+                          <div class="row">
+                              <div class="col-md-4 col-sm-6 col-xs-6 profile-header-section1 text-right pull-rigth">
+                                  <a href="/search" class="btn btn-primary btn-block">Seguir o Siguiendo</a>
+                              </div>
+                          </div>
+                      </div> -->
+                      <!--publicaciones-->
+                      <div class="col-md-11">
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <ul class="nav nav-tabs" role="tablist">
+                                      <li class="nav-item">
+                                          <a class="nav-link active" href="#profile" role="tab"
+                                              data-toggle="tab">Publicaciones </a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="#buzz" role="tab" data-toggle="tab">Información
+                                              Detallada</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link" href="#Libros" role="tab" data-toggle="tab">Libros</a>
+                                      </li>
+                                  </ul>
+
+                                  <!-- Tab panes -->
+                                  <div class="tab-content">
+                                      <div role="tabpanel" class="tab-pane fade show active" id="profile">
+                                          <!--
+                                              inicio publicacion
+                                          -->
+                                          <section id="publicaciones">
+                                              <div class="col-md-12 gedf-main">
+                                                  <br>
+                                                  <p-panel header=" Publicacion de {{userFirebase.nombre}}"
+                                                      [toggleable]="true" *ngFor="let comentario of userComentario">
+                                                      <div class="card gedf-card">
+                                                          <p-header>
+
+                                                              <div class=" col-md-12 card-header">
+                                                                  <div
+                                                                      class="d-flex justify-content-between align-items-center">
+                                                                      <div
+                                                                          class="d-flex justify-content-between align-items-center">
+                                                                          <div class="mr-2">
+                                                                              <img class="rounded-circle" width="50" height="50"
+                                                                                  src="{{userFirebase.url}}" alt="">
+                                                                          </div>
+                                                                          <div class="ml-2">
+                                                                              <div class="h5 m-0">
+                                                                                  @{{userFirebase.nombre}}
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                      <div>
+                                                                          <!-- <div class="dropdown">
+                                                                              <button
+                                                                                  class="btn btn-link dropdown-toggle"
+                                                                                  type="button" id="gedf-drop1"
+                                                                                  data-toggle="dropdown"
+                                                                                  aria-haspopup="true"
+                                                                                  aria-expanded="false">
+                                                                                  <i class="fas fa-user-edit"></i>
+                                                                              </button>
+                                                                              <div class="dropdown-menu dropdown-menu-right"
+                                                                                  aria-labelledby="gedf-drop1">
+                                                                                  <div class="h6 dropdown-header">
+                                                                                      Configuracion</div>
+                                                                                  <a class="dropdown-item"
+                                                                                      (click)="EliminarComentario(comentario.id)">Eliminar</a>
+                                                                              </div>
+                                                                          </div> -->
+
+                                                                      </div>
+                                                                  </div>
+
+                                                              </div>
+                                                          </p-header>
+
+                                                          <div class="card-body">
+                                                              <div class="text-muted h7 mb-2"> <i
+                                                                      class="fa fa-clock-o"></i>{{comentario.data.date}}
+                                                              </div>
+                                                              <p class="card-text">
+                                                                  {{comentario.data.text}}
+                                                              </p>
+                                                          </div>
+                                                      </div>
+                                                  </p-panel>
+
+                                              </div>
+                                          </section>
+                                          <!--Fin de publicion-->
+                                      </div>
+
+                                      <div role="tabpanel" class="tab-pane fade" id="buzz">
+
+                                          <div class="row">
+                                              <div class="col-md-12 gedf-main">
+                                                  <section id="Verinformacion">
+                                                      <p-panel
+                                                          header="Información de {{userFirebase.nombre}} {{userFirebase.apellido}}">
+                                                          <div class="card gedf-card">
+                                                              <div class="card-body">
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize"><b>Nombre:
+                                                                              </b>{{userFirebase.nombre}}</div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize"><b>Apellido:
+                                                                              </b>{{userFirebase.apellido}}</div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Genero:</b>{{userFirebase.genero}}
+                                                                          </div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Celular:</b>{{userFirebase.celular}}
+                                                                          </div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Edad:</b>{{userFirebase.edad}}</div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Nacionalidad:</b>{{userFirebase.nacionalidad}}
+                                                                          </div>
+                                                                      </h5>
+                                                                  </div>
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Seguidores:</b>{{userFirebase.edad}}
+                                                                          </div>
+                                                                      </h5>
+                                                                  </div>
+
+                                                                  <div class="col-xs-6">
+                                                                      <h5>
+                                                                          <div class="capitalize">
+                                                                              <b>Descripcion:</b>{{userFirebase.text}}
+                                                                          </div>
+                                                                      </h5>
+                                                                  </div>
+
+                                                                  <!-- <div class="col-xs-6">
+                                                                      <button class="btn btn-primary"
+                                                                          (click)="onUsuario(userFirebase)">Editar
+                                                                          Informacion</button>
+                                                                  </div> -->
+                                                              </div>
+                                                          </div>
+                                                      </p-panel>
+
+                                                  </section>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <div role="tabpanel" class="tab-pane fade" id="Libros">
+
+                                        <p-table [value]="userLibro" [paginator]="true" [rows]="12" [responsive]="true">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>Nombre Libro</th>
+                                                    <th>Autor</th>
+                                                    <th>Categoria</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-userLibro>
+                                                <tr>
+                                                    <td>{{userLibro.nombre_libro}}</td>
+                                                    <td>{{userLibro.autor_libro}}</td>
+                                                    <td>{{userLibro.categoria_libro}}</td>
+                                                </tr>
+                                            </ng-template>
+                                          </p-table>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
