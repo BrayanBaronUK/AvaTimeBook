@@ -19,13 +19,16 @@ export class RoomComponent implements OnInit {
   elemento: any;
   openPopup: Function;//for emoji
   room : any;
+  message: any;
   _csroom : any;
-  _csrmesage : any;
+  _csrmesagess : any;
+  roomactual : any;
   constructor(
     private route: ActivatedRoute,
     public auth: AuthService,
     public _cs: RoomService,
-    public axuliar: MessagesService,
+    public _csmessage: RoomService,
+    //public axuliar: MessagesService,
   ) { 
  
     this._cs.room().subscribe((room) => {
@@ -37,7 +40,8 @@ export class RoomComponent implements OnInit {
         });
       });
     });
-
+    console.log( "Error");
+  
 
     this._cs.room().subscribe( ()=> {
       setTimeout( ()=> {
@@ -48,7 +52,7 @@ export class RoomComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.elemento = document.getElementById('room-lis');
+    this.elemento = document.getElementById('app-mensajes');
   }
   setPopupAction(fn: any) {
     console.log('setPopupAction');
@@ -56,10 +60,29 @@ export class RoomComponent implements OnInit {
   }
 
   roomchange(value){
-
-
-
-  
+    this.roomactual = value;
+    this._cs.meesages(value).subscribe( ()=> {
+      setTimeout( ()=> {
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+      },20)
+    });
     debugger;
+      console.log( "Error");
+  
+
+   
+  }
+
+  enviar_mensaje(){
+    
+    console.log( this.mensaje );
+
+    if( this.mensaje.length === 0){
+      return;
+    }
+
+    this._cs.agregarMensaje(this.roomactual, this.mensaje )
+          .then( ()=>this.mensaje="")
+          .catch( (err)=>console.error('Error al enviar', err));
   }
 }

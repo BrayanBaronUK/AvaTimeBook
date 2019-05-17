@@ -10,23 +10,22 @@
     </div>
   </section>
   <section id="chat-room">
-      <h1>Chat comunitario</h1>
+      <h1>Chat Grupal</h1>
       <div class="messages">
           <h3>Avatime<span style="color:red;">CHAT </span></h3>
           <hr>
           <p class="chat-note chat-beginning">Beginning of chat</p>
-          <div class="message" id="app-mensajes">
-               
-      
-              <div class="text-right">
-              <span class="badge badge-primary">camilo</span>
-              <p>ESTE es una mensaje </p>
+          <div class="app-mensajes" id="app-mensajes">
+
+            <div class="text-right" *ngFor="let chat of _cs.chats"
+            [ngClass]="{ 'text-right': _cs.useruid == chat.uid }">
+            <span class="badge "
+            [ngClass]="{ 'badge-primary': _cs.useruid == chat.uid,
+                        'badge-success':  _cs.useruid != chat.uid}"
+            >{{ chat.nombre }}</span>
+              <p> {{ chat.mensaje }} </p>
             </div>
-            
-            <div>
-                <span class="badge badge-success">Juan</span>
-                <p>sorry.</p>
-            </div>  
+       
       
           </div>
           <p class="chat-note chat-end">End of chat</p>
