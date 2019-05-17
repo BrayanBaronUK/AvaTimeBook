@@ -72,7 +72,7 @@
                                                 Detallada</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#fotos" role="tab" data-toggle="tab">Fotos</a>
+                                            <a class="nav-link" href="#Libros" role="tab" data-toggle="tab">Libros</a>
                                         </li>
                                     </ul>
 
@@ -324,18 +324,9 @@
                                             </div>
                                         </div>
 
-                                        <div role="tabpanel" class="tab-pane fade" id="fotos">
+                                        <div role="tabpanel" class="tab-pane fade" id="Libros">
 
-                                            <div class="row">
-                                                <div class="col-md-12 gedf-main">
-                                                    <section id="Verinformacion">
-                                                        <p-galleria [images]="images" panelWidth="500" panelHeight="313"
-                                                            showCaption="true">
-                                                        {{userFirebase.url}}
-                                                        </p-galleria>
-                                                    </section>
-                                                </div>
-                                            </div>
+                                          <app-tabla-libros></app-tabla-libros>
                                         </div>
                                     </div>
                                 </div>

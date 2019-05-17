@@ -16,9 +16,12 @@ export class GrupoServiceService {
   getIud() {
     return firebase.auth().currentUser.uid;
   }
-  createGrupo(data: {nombre_grupo: String, grupo:any}) {
+  createGrupo(nombre_grupo: String, data: {id:String, grupo: any}) {
     console.log(data);
-    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add(data);
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add({
+      nombre_grupo,
+      data
+    });
   }
   getGrupos() {
     return this.db.collection('perfil').doc(this.getIud()).collection('grupo-creado').

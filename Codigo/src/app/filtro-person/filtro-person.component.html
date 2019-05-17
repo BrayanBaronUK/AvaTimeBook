@@ -9,73 +9,100 @@
 <body>
   <p-panel id="TablaFiltro" header="Busqueda de personas">
 
-    <div class="input-group" id="seccionBuscar">
-      <input style="width: 90%; height: 25%;" type="text" id="myInput" (keyup)="myFunctionNombre()"
-        placeholder="Buscar personas..." title="Type in a name">
-      <div class="input-group-append">
-        <button style="height: 48px;" (click)="myFunctionNombre()" class="btn btn-outline-primary" type="button"
-          id="button-addon2">
-          <i class="fa fa-search"></i>
-        </button>
+    <div class="container bootstrap snippet">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <p-panel header="Siguiendo Persona">
+            <div class="input-group" id="seccionBuscar">
+              <input style="width: 90%; height: 25%;" type="text" id="myInput" (keyup)="myFunctionNombre()"
+                placeholder="Buscar personas..." title="Type in a name">
+              <div class="input-group-append">
+                <button style="height: 48px;" (click)="myFunctionNombre()" class="btn btn-outline-primary" type="button"
+                  id="button-addon2">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+
+
+            <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="5">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Persona</th>
+                  <th>Siguiendo Persona</th>
+                  <th>Ir a Perfil</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-seguir>
+                <tr>
+                  <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
+                    {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
+                  <td><button class="btn btn-primary" md-button (click)="onfiltroNoSeguir(seguir.data, seguir.id)"><i
+                        class="pi pi-check"></i> Siguiendo</button></td>
+                  <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-panel>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+          <p-panel header="Seguir Persona">
+            <div class="input-group" id="seccionBuscar">
+              <input style="width: 90%; height: 25%;" type="text" id="mInput" (keyup)="myFunctionNombre2()"
+                placeholder="Buscar personas..." title="Type in a name">
+              <div class="input-group-append">
+                <button style="height: 48px;" (click)="myFunctionNombre2()" class="btn btn-outline-primary"
+                  type="button" id="button-addon2">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <p-table id="myTable2" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="5">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Persona</th>
+                  <th>Seguir Persona</th>
+                  <th>Ir a Perfil</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-filtrouser>
+                <tr>
+                  <td><img class="rounded-circle" width="50" height="50" src="{{filtrouser.data.url}}" alt="">
+                    {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
+                  <td><button class="btn btn-primary" md-button
+                      (click)="onfiltroSeguir(filtrouser.data, filtrouser.id)"><i
+                        class="pi pi-user-plus"></i>Seguir</button></td>
+                  <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-panel>
+        </div>
       </div>
     </div>
 
 
-    <p-table id="myTable" [value]="seguir" [responsive]="true" [paginator]="true" [rows]="10">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Persona</th>
-          <th>Siguiendo Persona</th>
-          <th>Ir a Perfil</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-seguir>
-        <tr>
-          <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
-            {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
-          <td><button class="btn btn-primary" md-button (click)="onfiltroNoSeguir(seguir.data, seguir.id)"><i
-                class="pi pi-check"></i> Siguiendo</button></td>
-          <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
-        </tr>
-      </ng-template>
-    </p-table>
-    <p-table id="myTable" [value]="filtrouser" [responsive]="true" [paginator]="true" [rows]="10">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Persona</th>
-          <th>Seguir Persona</th>
-          <th>Ir a Perfil</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-filtrouser>
-        <tr>
-          <td><img class="rounded-circle" width="50" height="50" src="{{filtrouser.data.url}}" alt="">
-            {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
-          <td><button class="btn btn-primary" md-button
-              (click)="onfiltroSeguir(filtrouser.data, filtrouser.id)" ><i class="pi pi-user-plus"></i>Seguir</button></td>
-          <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
-        </tr>
-      </ng-template>
-    </p-table>
   </p-panel>
 </body>
+
 </html>
+
+
 <!-- Confirmar seguir -->
-<p-dialog header="Seguir a {{nombre}}" [(visible)]="displaySeguir" [modal]="true" [responsive]="true"
- [minY]="70" [maximizable]="true"
-[baseZIndex]="10000">
+<p-dialog header="Seguir a {{nombre}}" [(visible)]="displaySeguir" [modal]="true" [responsive]="true" [minY]="70"
+  [maximizable]="true" [baseZIndex]="10000">
   <form>
-    <button class="btn btn-primary" (click)="crearSeguir()" value="Si" ><i class="pi pi-user-plus"></i>Si</button>
+    <button class="btn btn-primary" (click)="crearSeguir()" value="Si"><i class="pi pi-user-plus"></i>Si</button>
     <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
   </form>
 </p-dialog>
 
 <!-- No seguir -->
 <p-dialog header="Decea dejar de seguir a {{nombre}}" [(visible)]="displayNoSeguir" [modal]="true" [responsive]="true"
- [minY]="70" [maximizable]="true"
-[baseZIndex]="10000">
+  [minY]="70" [maximizable]="true" [baseZIndex]="10000">
   <form>
     <button class="btn btn-primary" (click)="noSeguir()" value="Si"><i class="pi pi-user-minus"></i>Si</button>
-    <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>   
-  </form>  
+    <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
+  </form>
 </p-dialog>
