@@ -61,6 +61,9 @@ export class UserService {
   public getPerfil() {
     return this.db.collection('perfil').doc(this.getIud());
   }
+  public getPerfilOtro(id) {
+    return this.db.collection('perfil').doc(id);
+  }
 
   public getPerfilEvaluar() {
     return this.getIud();
