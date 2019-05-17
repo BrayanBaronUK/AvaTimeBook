@@ -20,6 +20,7 @@ export class LibrosComponent implements OnInit {
   public InformacionLibrosProvicional: any;
   public CrearLibrosProvicional: any;
   private id: any;
+  public perfil = false;
   public currentStatus = 1;
   // tslint:disable-next-line:no-inferrable-types
   public display: boolean = false;
@@ -40,14 +41,23 @@ export class LibrosComponent implements OnInit {
     this.TraerLibrosFiltro();
     this.TraerLibro();
     this.MostrarColumnas();
+    this.MostrarOcultar();
     document.getElementById('siguiente').style.display = 'none';
   }
 
   change(id):void{
     this.childOne.empezaCargarPerfil(id); 
-    // this.MostrarInformacion(); 
-    // this.perfil = true;
+    this.MostrarInformacion(); 
+    this.perfil = true;
    }
+   MostrarInformacion() {
+      document.getElementById('perfil').style.display = 'block';
+      document.getElementById('librosOcultar').style.display = 'none';
+  }
+  MostrarOcultar() {
+      document.getElementById('perfil').style.display = 'none';
+      document.getElementById('librosOcultar').style.display = 'block';
+  }
   // iniciar variables
 
   detectChanges() {

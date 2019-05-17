@@ -1,7 +1,7 @@
 <!------ Include the above in your HEAD tag ---------->
 <hr>
-<div class="container bootstrap snippet">
-    <div class="row" id="contenedor">
+<div class="container bootstrap snippet " id="librosOcultar">
+    <div class="row" id="contenedor" >
         <div class="col-lg-3 col-md-3 col-sm-9 col-xs-12">
             <!--left col-->
 
@@ -20,9 +20,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media</div>
                 <div class="panel-body">
-                    <i class="fab fa-facebook-square"></i>
-                    <i class="fab fa-twitter-square"></i>
-                    <i class="fab fa-google-plus-square"></i>
+                    <i class="fa fa-facebook"></i> 
+                    <i class="fa fa-google-plus"></i>
+                    <i class="fa fa-twitter"></i>
                 </div>
             </div>
 
@@ -111,9 +111,9 @@
                                                 <td *ngFor="let col of columns"  >
                                                     {{rowData[col.field]}}
                                                 </td>
-                                                <td><button class="btn btn-primary tablalibros"
+                                                <td><button class="btn btn-primary perfil"
                                                     (click)="change(rowData.uid)">
-                                                    <i class="pi pi-pencil"></i></button>
+                                                    <i class="pi pi-user"></i></button>
                                             </td>
                                             </tr>
                                         </ng-template>
@@ -131,5 +131,8 @@
         </div>
         <!--/col-9-->
     </div>
+</div>
     <!--/row-->
-    <app-perfil-otro #child1 id="perfil"></app-perfil-otro>
+<div id="perfil">
+<app-perfil-otro #child1 ></app-perfil-otro>    
+</div>  
