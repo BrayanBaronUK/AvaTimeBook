@@ -83,6 +83,10 @@ export class GruposComponent implements OnInit {
   }
   onGuardarGrupocreado() {
     this.variables();
+    console.log("hola mundo"+this.personaseleccionada);
+    for(var i=0; i< this.personaseleccionada.length; i++){
+       this.grupoS.createGrupoSegudor(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id);
+    }
     this.grupoS.createGrupo(this.nombre, this.personaseleccionada);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });

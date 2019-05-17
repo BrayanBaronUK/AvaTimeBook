@@ -23,6 +23,13 @@ export class GrupoServiceService {
       data
     });
   }
+  createGrupoSegudor(nombre_grupo: String, data: {}, id: any) {
+    console.log(data);
+    return this.db.collection('perfil').doc(id).collection('GrupoConMiSeguidor').add({
+      nombre_grupo,
+      data
+    });
+  }
   getGrupos() {
     return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').snapshotChanges();
   }
