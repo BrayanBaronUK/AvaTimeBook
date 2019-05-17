@@ -75,6 +75,7 @@ import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
 
 import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
+import { IndividualComponent } from './individual/individual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,7 +97,8 @@ import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
     FiltroPersonComponent,
     RoomComponent,
     TablaLibrosComponent,
-    PerfilOtroComponent
+    PerfilOtroComponent,
+    IndividualComponent
   ],
   imports: [
     BrowserModule,
