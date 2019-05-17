@@ -21,9 +21,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Social Media</div>
                 <div class="panel-body">
-                    <i class="fab fa-facebook-square"></i>
-                    <i class="fab fa-twitter-square"></i>
-                    <i class="fab fa-google-plus-square"></i>
+                    <i class="fa fa-facebook"></i>
+                    <i class="fa fa-google-plus"></i>
+                    <i class="fa fa-twitter"></i>
                 </div>
             </div>
 
@@ -147,8 +147,8 @@
             </p-table>
         </p-dialog>
 
-        <p-dialog header="Decea eliminar grupo" [(visible)]="displayEliminar" [modal]="true"
-            [responsive]="true" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+        <p-dialog header="Decea eliminar grupo" [(visible)]="displayEliminar" [modal]="true" [responsive]="true"
+            [minY]="70" [maximizable]="true" [baseZIndex]="10000">
             <form>
                 <button class="btn btn-primary" (click)="EliminarGrupo(grupos.id)" value="Si"><i
                         class="pi pi-user-minus"></i>Si</button>
