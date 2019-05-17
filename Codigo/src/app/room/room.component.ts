@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomService } from './Service/room.service';
+import { MessagesService } from './Service/messages.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -19,10 +20,12 @@ export class RoomComponent implements OnInit {
   openPopup: Function;//for emoji
   room : any;
   _csroom : any;
+  _csrmesage : any;
   constructor(
     private route: ActivatedRoute,
     public auth: AuthService,
-    public _cs: RoomService
+    public _cs: RoomService,
+    public axuliar: MessagesService,
   ) { 
  
     this._cs.room().subscribe((room) => {
@@ -53,7 +56,10 @@ export class RoomComponent implements OnInit {
   }
 
   roomchange(value){
-    console.log(value);
+
+
+
+  
     debugger;
   }
 }

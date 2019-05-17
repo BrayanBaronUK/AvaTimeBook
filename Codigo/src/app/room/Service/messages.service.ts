@@ -13,7 +13,7 @@ import { Room } from "../../interface/room.interface";
 export class MessagesService {
   public uids: any;
   private itemsCollection: any;
-  public rooms: Room[] = [];
+
   public usuario:any = {};
   public useruid:any;
   public mensajes: any = {};
@@ -24,11 +24,13 @@ export class MessagesService {
     private userse : UserService,
     private ref : any,
   ) {
-   // this.itemsCollection = this.afs.collection("messages").ref.where();
+     
+       this.itemsCollection = this.afs.collection("messages").snapshotChanges();
   }
 
-  getmessages($value){
+  getmessages(){
     
-   return  this.afs.collection("messages").ref.where('roomId', "==", $value);
+   //return  this.afs.collection("messages").ref.where('roomId', "==", $value);
+  // return  this.afs.collection("messages").snapshotChanges();
   }
 }
