@@ -27,6 +27,8 @@ export class FiltroPersonComponent implements OnInit {
   public temporalDatos = [];
   public id;
   public perfil = false;
+  public Siguiendo = 'Siguiendo';
+  public Seguir = 'Seguir';
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
   displaySeguir: boolean = false;
@@ -46,8 +48,9 @@ export class FiltroPersonComponent implements OnInit {
     this.MostrarOcultar();
   }
 
-  change(id):void{
-   this.childOne.empezaCargarPerfil(id); 
+  change(id, S, data):void{
+    console.log("filtro:"+S)
+   this.childOne.empezaCargarPerfil(id,S,data); 
    this.MostrarInformacion(); 
    this.perfil = true;
   }

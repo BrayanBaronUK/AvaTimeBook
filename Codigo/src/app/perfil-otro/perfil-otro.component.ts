@@ -30,6 +30,13 @@ export class PerfilOtroComponent implements OnInit {
   public InformacionUsuarioProvicional: any;
   public foto: any;
   public count = 0;
+  public idtema;
+  public temporalDatos = [];
+  public id;
+  public nombre: String;
+  public dataSeg: any;
+  displaySeguir: boolean = false;
+  displayNoSeguir: boolean = false;
   public date14: Date;
   text: String;
   images: any[];
@@ -89,6 +96,7 @@ export class PerfilOtroComponent implements OnInit {
     if (idLlego == null) {
       this.UserServices.getPerfil().valueChanges().subscribe((user) => {
         this.userFirebase = user;
+        this.dataSeg = user;
       });
     } else {
       this.UserServices.getPerfilOtro(this.idLlego).valueChanges().subscribe((user) => {
@@ -97,9 +105,16 @@ export class PerfilOtroComponent implements OnInit {
     }
 
   }
-  empezaCargarPerfil(id) {
+  empezaCargarPerfil(id,s,data) {
+    this.idtema = s;
     this.idLlego = id;
-    console.log("empezar" + this.idLlego)
+    this.dataSeg = data
+    console.log("empezar" + s)
+    this.TraerInformacionUsuario(this.idLlego);
+  }
+  empezaCargarPerfilDondeLibro(id) {
+    this.idtema = this.UserServices.getIud();
+    this.idLlego = id;
     this.TraerInformacionUsuario(this.idLlego);
   }
   showDialog() {
@@ -119,5 +134,58 @@ export class PerfilOtroComponent implements OnInit {
       });
       
     });
+  }
+  onFuction(){
+    if(this.idtema == 'Seguir'){
+      this.onfiltroSeguir(this.dataSeg,this.idLlego);
+    } else if (this.idtema == 'Siguiendo'){
+      this.onfiltroNoSeguir(this.dataSeg, this.idLlego);
+    }
+  }
+
+  onfiltroSeguir(data, id) {
+    debugger;
+    this.temporalDatos = data;
+    this.id = id;
+    this.displaySeguir = true;
+    this.nombre = data.nombre;
+  }
+  onfiltroNoSeguir(data, id) {
+    debugger;
+    this.temporalDatos = data;
+    this.id = id;
+    this.displayNoSeguir = true;
+    this.nombre = data.nombre;
+  }
+  crearSeguir() {
+    this.UserServices.GuardarPersonaSeguir(this.id, this.temporalDatos);
+    this.UserServices.getPerfil().valueChanges().subscribe((user) => {
+      this.UserServices.GuadarPersonaSeguidor(this.id, user);
+      this.idtema = 'Siguiendo'
+      this.flashMensaje.show('Informacion Aceptada.',
+        { cssClass: 'alert-success', timeout: 2500 });
+    });
+    this.onCancelar();
+  }
+  noSeguir() {
+    this.UserServices.QuitarPersonaSeguir(this.id);
+    this.UserServices.QuitarPersonaSeguidor(this.id);
+    this.idtema = 'Seguir'
+    this.flashMensaje.show('Informacion Aceptada.',
+      { cssClass: 'alert-success', timeout: 2500 });
+      this.onCancelar();
+  }
+  onCancelar() {
+    this.cerrar.emit();
+    this.displaySeguir = false;
+    this.displayNoSeguir = false;
+  }
+  Intercambio(){
+    if(this.idtema == 'Seguir'){
+      this.flashMensaje.show('Debe Seguir a '+this.userFirebase.nombre,
+      { cssClass: 'alert-success', timeout: 2500 });
+    } else if (this.idtema == 'Siguiendo'){
+      
+    }
   }
 }
