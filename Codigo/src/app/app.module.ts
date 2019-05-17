@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+//import { PickerModule } from '@ctrl/ngx-emoji-mart'//Agregar emojis camilo
 import {
   MatToolbarModule,
   MatGridListModule,
@@ -60,14 +61,21 @@ import { TableModule } from 'primeng/table';
 //import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
+
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+
+import { RoomComponent } from './room/room.component';
+
 import {DataTableModule, SharedModule} from 'primeng/primeng';
+
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
+
 import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
+import { IndividualComponent } from './individual/individual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,8 +95,10 @@ import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
     ChatComponent,
     GruposComponent,
     FiltroPersonComponent,
+    RoomComponent,
     TablaLibrosComponent,
-    PerfilOtroComponent
+    PerfilOtroComponent,
+    IndividualComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +106,7 @@ import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
     DialogModule,
     CalendarModule,
     TableModule,
-    //AngularFontAwesomeModule,
+   // PickerModule,//Agregar emojis camilo
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -124,6 +134,7 @@ import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
+
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,
