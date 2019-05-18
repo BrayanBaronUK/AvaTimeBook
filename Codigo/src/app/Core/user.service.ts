@@ -86,6 +86,12 @@ export class UserService {
   public QuitarPersonaSeguir(id){
     return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).delete();
   }
+  public CrearComunicaciones(id,data,str){
+    return this.db.collection('perfil').doc(id).collection('Comunicaciones').add({data,str});
+  }
+  public ObtenerComunicaciones(){
+    return this.db.collection('perfil').doc(this.getIud()).collection('Comunicaciones').snapshotChanges();
+  }
   public GuadarPersonaSeguidor(id, data){
     return this.db.collection('perfil').doc(id).collection('SeguidorPersona').doc(this.getIud()).set(data);
   }
