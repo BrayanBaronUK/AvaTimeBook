@@ -23,6 +23,8 @@ export class RoomComponent implements OnInit {
   _csroom : any;
   _csrmesagess : any;
   roomactual : any;
+  dueño : any;
+  rommis : any [];
   constructor(
     private route: ActivatedRoute,
     public auth: AuthService,
@@ -37,7 +39,8 @@ export class RoomComponent implements OnInit {
       room.forEach((cdata: any) => {
         this._csroom.push({
           id: cdata.payload.doc.id,
-          data: cdata.payload.doc.data()
+          data: cdata.payload.doc.data(),
+          array : cdata.payload.doc.data().data
         });
       });
     });
@@ -69,8 +72,10 @@ export class RoomComponent implements OnInit {
     this.openPopup = fn;
   }
 
-  roomchange(value){
+  roomchange(value, array: any [], dueño){
     this.roomactual = value;
+    this.rommis = array;
+    this.dueño = dueño;
     this._cs.Gruposmeesages(value).subscribe( ()=> {
       setTimeout( ()=> {
         this.elemento.scrollTop = this.elemento.scrollHeight;
@@ -97,9 +102,14 @@ export class RoomComponent implements OnInit {
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));
   }*/
-  this._cs.GrupoagregarMensaje(this.roomactual, this.mensaje )
+ 
+  this._cs.GrupoagregarMensaje(this.roomactual, this.mensaje, this.rommis, this.dueño )
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));
+     for (var i = 0 ; i< this.rommis.length ; i++){
+
+     }       
   }
+
   
 }

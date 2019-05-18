@@ -23,6 +23,13 @@ export class GrupoServiceService {
       data
     });
   }
+  createGrupoOtro(nombre_grupo: String, data: {}, id: any) {
+    console.log(data);
+    return this.db.collection('perfil').doc(id).collection('Grupo').doc(this.getIud()).set({
+      nombre_grupo,
+      data
+    });
+  }
   createGrupoSegudor(nombre_grupo: String, data: {}, id: any) {
     console.log(data);
     return this.db.collection('perfil').doc(id).collection('GrupoConMiSeguidor').doc(this.getIud()).set({
