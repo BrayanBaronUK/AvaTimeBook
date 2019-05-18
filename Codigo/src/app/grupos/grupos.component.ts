@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { GrupoServiceService } from '../Core/grupo-service.service';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
-import { AuthService } from '../Core/auth.service';
+import { UserService} from '../Core/user.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-grupos',
@@ -24,10 +24,12 @@ export class GruposComponent implements OnInit {
   public displayEliminar = false;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public input: any;
+  public uidUsr: any;
   constructor(public flashMensaje: FlashMessagesService,
     public grupoS: GrupoServiceService,
     public person: ServicioFiltroPersonaService,
-    public router: Router) { }
+    public router: Router,
+    public user: UserService) { }
 
   ngOnInit() {
     this.TraerGrupos();
@@ -65,6 +67,7 @@ export class GruposComponent implements OnInit {
     this.idGrupo = id;
   }
   EliminarPersona(id) {
+    this.uidUsr = this.user.getIud();
     var count = this.guardarPersonasGrupo.length;
     var b = true;
     while (b) {
@@ -76,29 +79,46 @@ export class GruposComponent implements OnInit {
         }
       }
     }
-    this.grupoS.ActualizarGrupo(this.idGrupo, this.temporalNombre, this.guardarPersonasGrupo),
+    this.grupoS.ActualizarGrupo(this.idGrupo, this.temporalNombre, this.guardarPersonasGrupo, this.uidUsr),
       this.flashMensaje.show('Actualizado.',
         { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
   }
   onGuardarGrupocreado() {
     this.variables();
-    console.log("hola mundo"+this.personaseleccionada);
+    this.uidUsr = this.user.getIud();
     for(var i=0; i< this.personaseleccionada.length; i++){
+<<<<<<< HEAD
       debugger;
        this.grupoS.createGrupoSegudor(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id);
        this.grupoS.createGrupoOtro(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id);
+=======
+       this.grupoS.createGrupoSegudor(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id, this.uidUsr);
+>>>>>>> cesar
     }
-    this.grupoS.createGrupo(this.nombre, this.personaseleccionada);
+    this.grupoS.createGrupo(this.nombre, this.personaseleccionada, this.uidUsr);
     this.flashMensaje.show('Grupo creado.',
       { cssClass: 'alert-success', timeout: 4000 });
     this.onCancelar();
   }
-  EliminarGrupoDisplay(id){
+
+  EliminarGrupoDisplay(id, data){
     this.idGrupo =id;
     this.displayEliminar = true;
+    this.guardarPersonasGrupo = data;
   }
   EliminarGrupo() {
+    var count = this.guardarPersonasGrupo.length;
+    var b = true;
+    while (b) {
+      b = false;
+      for (var i = 0; i < count; i++) {
+        if (this.guardarPersonasGrupo[i].uid == this.guardarPersonasGrupo[i].uid) {
+          this.guardarPersonasGrupo.splice(i, 1);
+          b = true;
+        }
+      }
+    }
     this.grupoS.eliminarGrupo(this.idGrupo),
       this.flashMensaje.show('Grupo Eliminado.',
         { cssClass: 'alert-success', timeout: 4000 });
