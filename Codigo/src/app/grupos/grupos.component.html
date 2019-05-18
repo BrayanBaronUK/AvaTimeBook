@@ -16,7 +16,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#ChatGrupal" role="tab" data-toggle="tab">Chat Grupal de grupos</a>
-                    <a class="nav-link" href="#buscarLibros" role="tab" data-toggle="tab">Grupos Chat</a>
                 </li>
             </ul>
             <div class="panel panel-default">
@@ -55,6 +54,7 @@
                                                     (click)="EliminarGrupoDisplay(grupos.nombre,grupos.id,grupos.data)">
                                                     <i class="pi pi-times"></i></button>
                                             </td>
+                            
                                         </tr>
                                     </ng-template>
                                 </p-table>
@@ -118,9 +118,9 @@
                                                 </h3>
                                             </div>
                                             <app-room></app-room>
-                                            
 
-                                            
+
+
                                             <!-- Fin del div central parte de formulario información básica -->
                                             <!-- Fin Parte central - enlaces -->
                                             <!-- Fin del form -->
@@ -177,7 +177,7 @@
             </p-table>
         </p-dialog>
 
-        <p-dialog header="Decea eliminar grupo" [(visible)]="displayEliminar" [modal]="true" [responsive]="true"
+        <p-dialog header="Desea eliminar grupo" [(visible)]="displayEliminar" [modal]="true" [responsive]="true"
             [minY]="70" [maximizable]="true" [baseZIndex]="10000">
             <form>
                 <button class="btn btn-primary" (click)="EliminarGrupo()" value="Si"><i
