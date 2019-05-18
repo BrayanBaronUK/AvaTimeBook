@@ -24,18 +24,7 @@ export class GrupoServiceService {
       uid
     });
   }
-<<<<<<< HEAD
-  createGrupoOtro(nombre_grupo: String, data: {}, id: any) {
-    console.log(data);
-    return this.db.collection('perfil').doc(id).collection('Grupo').doc(this.getIud()).set({
-      nombre_grupo,
-      data
-    });
-  }
-  createGrupoSegudor(nombre_grupo: String, data: {}, id: any) {
-=======
   createGrupoSegudor(nombre_grupo: String, data: {}, id: any, uid: any) {
->>>>>>> cesar
     console.log(data);
     return this.db.collection('perfil').doc(id).collection('Grupo').add({
       nombre_grupo,

@@ -127,17 +127,14 @@ export class RoomService {
     this.rommis = roomies;
     for(var i = 0 ; i<this.rommis.length;i++){
       debugger;
-      if(this.rommis[i].id != this.userse.getIud()){
+       
         this.afs2.collection('perfil').doc(this.rommis[i].id).collection('Grupo').doc(value).
         collection("messages").add(mensaje);
-      }
-      if(this.userse.getIud() != dueño){
-        if(this.rommis[i].id != this.userse.getIud()){
-          this.afs2.collection('perfil').doc(dueño).collection('Grupo').doc(value).
-          collection("messages").add(mensaje);
-        }
-      }
+      
+      
     }
+     
+    
     return this.afs2.collection('perfil').doc(this.userse.getIud()).collection('Grupo').doc(value).
                                           collection("messages").add(mensaje);
 

@@ -88,13 +88,7 @@ export class GruposComponent implements OnInit {
     this.variables();
     this.uidUsr = this.user.getIud();
     for(var i=0; i< this.personaseleccionada.length; i++){
-<<<<<<< HEAD
-      debugger;
-       this.grupoS.createGrupoSegudor(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id);
-       this.grupoS.createGrupoOtro(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id);
-=======
        this.grupoS.createGrupoSegudor(this.nombre,this.personaseleccionada,this.personaseleccionada[i].id, this.uidUsr);
->>>>>>> cesar
     }
     this.grupoS.createGrupo(this.nombre, this.personaseleccionada, this.uidUsr);
     this.flashMensaje.show('Grupo creado.',
