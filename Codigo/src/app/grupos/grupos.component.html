@@ -52,7 +52,7 @@
                                                     <i class="pi pi-users"></i></button>
                                             <td>
                                                 <button class="btn btn-primary tablalibros"
-                                                    (click)="EliminarGrupoDisplay(grupos.id)">
+                                                    (click)="EliminarGrupoDisplay(grupos.nombre,grupos.id,grupos.data)">
                                                     <i class="pi pi-times"></i></button>
                                             </td>
                                         </tr>
@@ -180,7 +180,7 @@
         <p-dialog header="Decea eliminar grupo" [(visible)]="displayEliminar" [modal]="true" [responsive]="true"
             [minY]="70" [maximizable]="true" [baseZIndex]="10000">
             <form>
-                <button class="btn btn-primary" (click)="EliminarGrupo(grupos.id)" value="Si"><i
+                <button class="btn btn-primary" (click)="EliminarGrupo()" value="Si"><i
                         class="pi pi-user-minus"></i>Si</button>
                 <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
             </form>
