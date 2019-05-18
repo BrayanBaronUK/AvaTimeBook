@@ -23,6 +23,8 @@ export class PerfilOtroComponent implements OnInit {
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
   public userFirebase: any;
+  public canSeguidor: any;
+  public canSeguir: any;
   public userComentario = [];
   public userLibro = [];
   public item = 1;
@@ -67,6 +69,8 @@ export class PerfilOtroComponent implements OnInit {
     ids: new FormControl()
   });
   ngOnInit() {
+    this.obtenerCantidadSeguidores();
+    this.obtenerCantidadSiguiendo();
   }
   TraerComentario() {
     // trae todos los comentarios
@@ -204,4 +208,29 @@ export class PerfilOtroComponent implements OnInit {
       
     }
   }
+
+  obtenerCantidadSeguidores(){
+    this.UserServices.getCantidadSeguidores().subscribe( seguidor => {
+      this.canSeguidor = [];
+      debugger;
+      seguidor.map( s =>{
+        this.canSeguidor.push({
+          id: s.payload.doc.id
+        });
+      });
+    });
+  }
+  obtenerCantidadSiguiendo(){
+    this.UserServices.getCantidadSiguiendo().subscribe( seguidor => {
+      this.canSeguir = [];
+      debugger;
+      seguidor.map( s =>{
+        this.canSeguir.push({
+          id: s.payload.doc.id
+        });
+      });
+    });
+  }
+
+
 }

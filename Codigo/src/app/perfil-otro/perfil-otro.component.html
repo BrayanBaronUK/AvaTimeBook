@@ -26,11 +26,11 @@
                               <ul class="list-group list-group-flush">
                                   <li class="list-group-item">
                                       <div class="h6 text-muted">Seguidores</div>
-                                      <div class="h5">  </div>
+                                      <div class="h5">{{canSeguidor.length}}</div>
                                   </li>
                                   <li class="list-group-item">
                                       <div class="h6 text-muted">Siguiendo</div>
-                                      <div class="h5">  </div>
+                                      <div class="h5">{{canSeguir.length}}</div>
                                   </li>
                               </ul>
                           </div>
@@ -197,7 +197,7 @@
                                                                   <div class="col-xs-6">
                                                                       <h5>
                                                                           <div class="capitalize">
-                                                                              <b>Seguidores:</b>{{userFirebase.edad}}
+                                                                              <b>Seguidores:</b>{{canSeguidor.length}}
                                                                           </div>
                                                                       </h5>
                                                                   </div>
