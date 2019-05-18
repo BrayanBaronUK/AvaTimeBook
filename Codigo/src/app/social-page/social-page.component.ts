@@ -3,6 +3,7 @@ import { UserService } from '../Core/user.service';
 import { ServicioLibroService } from '../core/servicio-libro.service';
 import { ServicioComentarioService } from '../Core/servicio-comentario.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { PickerModule } from '@ctrl/ngx-emoji-mart'
 import { map } from 'rxjs/operators';
 
 @Component({
