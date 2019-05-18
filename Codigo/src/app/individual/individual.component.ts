@@ -20,6 +20,7 @@ export class IndividualComponent implements OnInit {
   _csroom : any;
   _csrmesagess : any;
   roomactual : any;
+  public persona : any;
   constructor(
     private route: ActivatedRoute,
     public auth: AuthService,
@@ -66,8 +67,9 @@ export class IndividualComponent implements OnInit {
     this.openPopup = fn;
   }
 
-  roomchange(value){
+  roomchange(value, value2){
     this.roomactual = value;
+    this.persona = value2;
     this._cs.Gruposmeesages(value).subscribe( ()=> {
       setTimeout( ()=> {
         this.elemento.scrollTop = this.elemento.scrollHeight;

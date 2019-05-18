@@ -102,7 +102,7 @@ export class RoomComponent implements OnInit {
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));
   }*/
- 
+    debugger;
   this._cs.GrupoagregarMensaje(this.roomactual, this.mensaje, this.rommis, this.dueño )
           .then( ()=>this.mensaje="")
           .catch( (err)=>console.error('Error al enviar', err));

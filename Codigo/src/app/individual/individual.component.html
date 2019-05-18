@@ -6,12 +6,15 @@
           <p>Listado Amigos</p> 
         <div *ngFor="let room of _csroom">
          <!-- <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nome }}</h3>-->
-         <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nombre }}</h3>
+          
+         <h3 class="sidebar-room" (click)="roomchange(room.id, room.data.nombre)">
+            <button type="button" class="btn btn-default">{{ room.data.nombre }}</button></h3>
         </div>
+
       </div>
     </section>
     <section id="chat-room">
-        <h1>Chat Grupal</h1>
+        <h1>Chat [{{ persona }}]</h1>
         <div class="messages">
             <h3>Avatime<span style="color:red;">CHAT </span></h3>
             <hr>

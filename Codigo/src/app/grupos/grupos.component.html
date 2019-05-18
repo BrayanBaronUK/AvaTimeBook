@@ -180,11 +180,7 @@
         <p-dialog header="Desea eliminar grupo" [(visible)]="displayEliminar" [modal]="true" [responsive]="true"
             [minY]="70" [maximizable]="true" [baseZIndex]="10000">
             <form>
-<<<<<<< HEAD
-                <button class="btn btn-primary" value="Si"><i
-=======
                 <button class="btn btn-primary" (click)="EliminarGrupo()" value="Si"><i
->>>>>>> cesar
                         class="pi pi-user-minus"></i>Si</button>
                 <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
             </form>

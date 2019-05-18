@@ -58,9 +58,9 @@ export class NavbarComponent implements OnInit {
       }
     }
     );
-    this.MostrarInformacion();
-    this.MostrarInformacionLibros();
-    document.getElementById('perfil').style.display = 'none';
+  //  this.MostrarInformacion();
+   // this.MostrarInformacionLibros();
+   // document.getElementById('perfil').style.display = 'none';
   }
   onClickLogout() {
     this.authService.doLogout();
