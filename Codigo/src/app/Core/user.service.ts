@@ -87,7 +87,7 @@ export class UserService {
     return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').doc(id).delete();
   }
   public CrearComunicaciones(id,data,str){
-    return this.db.collection('perfil').doc(id).collection('Comunicaciones').add({data,str});
+    return this.db.collection('perfil').doc(id).collection('Comunicaciones').add({data,str,id});
   }
   public ObtenerComunicaciones(){
     return this.db.collection('perfil').doc(this.getIud()).collection('Comunicaciones').snapshotChanges();
