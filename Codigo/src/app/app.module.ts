@@ -76,6 +76,7 @@ import {PaginatorModule} from 'primeng/paginator';
 
 import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
 import { IndividualComponent } from './individual/individual.component';
+import { NotificacionComponent } from './notificacion/notificacion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +99,8 @@ import { IndividualComponent } from './individual/individual.component';
     RoomComponent,
     TablaLibrosComponent,
     PerfilOtroComponent,
-    IndividualComponent
+    IndividualComponent,
+    NotificacionComponent
   ],
   imports: [
     BrowserModule,
