@@ -16,28 +16,31 @@ export class GrupoServiceService {
   getIud() {
     return firebase.auth().currentUser.uid;
   }
-  createGrupo(nombre_grupo: String, data: {}) {
+  createGrupo(nombre_grupo: String, data: {}, uid: any) {
     console.log(data);
-    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').doc(this.getIud()).set({
+    return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').add({
       nombre_grupo,
-      data
+      data,
+      uid
     });
   }
-  createGrupoSegudor(nombre_grupo: String, data: {}, id: any) {
+  createGrupoSegudor(nombre_grupo: String, data: {}, id: any, uid: any) {
     console.log(data);
-    return this.db.collection('perfil').doc(id).collection('GrupoConMiSeguidor').doc(this.getIud()).set({
+    return this.db.collection('perfil').doc(id).collection('Grupo').add({
       nombre_grupo,
-      data
+      data,
+      uid
     });
   }
+
   getGrupos() {
     return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').snapshotChanges();
   }
   eliminarGrupo(id) {
     return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').doc(id).delete();
   }
-  ActualizarGrupo(id, nombre_grupo: String, data: {}) {
+  ActualizarGrupo(id, nombre_grupo: String, data: {}, uid: any) {
     this.eliminarGrupo(id);
-    this.createGrupo(nombre_grupo, data);
+    this.createGrupo(nombre_grupo, data, uid);
   }
 }
