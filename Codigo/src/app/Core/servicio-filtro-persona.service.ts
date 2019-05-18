@@ -12,11 +12,20 @@ export class ServicioFiltroPersonaService {
 
   constructor(
     public db: AngularFirestore,
-    public afAuth: AngularFireAuth
+    public afAuth: AngularFireAuth,
+    public auth: AuthService
   ) { }
 
-
+  getIud() {
+    if (this.auth.getAuth) {
+      return firebase.auth().currentUser.uid;
+    }
+  }
    getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
+  }
+
+  getSeguidores() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('SeguidorPersona').snapshotChanges();
   }
 }

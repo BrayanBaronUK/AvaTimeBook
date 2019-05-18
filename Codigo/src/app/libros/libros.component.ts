@@ -4,6 +4,7 @@ import { UserService } from '../Core/user.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
 import { SelectItem } from 'primeng/primeng';
+import {PerfilOtroComponent} from '../perfil-otro/perfil-otro.component';
 @Component({
   selector: 'app-libros',
   templateUrl: './libros.component.html',
@@ -11,6 +12,7 @@ import { SelectItem } from 'primeng/primeng';
 })
 export class LibrosComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
+  @ViewChild('child1') childOne:PerfilOtroComponent;
   public filtrouser = [];
   public userLibro = [];
   public colum: any[];
@@ -18,6 +20,7 @@ export class LibrosComponent implements OnInit {
   public InformacionLibrosProvicional: any;
   public CrearLibrosProvicional: any;
   private id: any;
+  public perfil = false;
   public currentStatus = 1;
   // tslint:disable-next-line:no-inferrable-types
   public display: boolean = false;
@@ -38,9 +41,23 @@ export class LibrosComponent implements OnInit {
     this.TraerLibrosFiltro();
     this.TraerLibro();
     this.MostrarColumnas();
+    this.MostrarOcultar();
     document.getElementById('siguiente').style.display = 'none';
   }
 
+  change(id):void{
+    this.childOne.empezaCargarPerfilDondeLibro(id); 
+    this.MostrarInformacion(); 
+    this.perfil = true;
+   }
+   MostrarInformacion() {
+      document.getElementById('perfil').style.display = 'block';
+      document.getElementById('librosOcultar').style.display = 'none';
+  }
+  MostrarOcultar() {
+      document.getElementById('perfil').style.display = 'none';
+      document.getElementById('librosOcultar').style.display = 'block';
+  }
   // iniciar variables
 
   detectChanges() {
@@ -78,14 +95,15 @@ export class LibrosComponent implements OnInit {
 
   TraerLibro() {
     // trae todos los libros
-    this.UserLibro.getLibro().subscribe((libros) => {
+    this.UserLibro.ObtenerLibroGlobal().subscribe((libros) => {
       this.userLibro = [];
       libros.map((librodata: any) => {
         this.userLibro.push({
               id: librodata.payload.doc.id,
               nombre_libro: librodata.payload.doc.data().nombre_libro,
               autor_libro: librodata.payload.doc.data().autor_libro,
-              categoria_libro: librodata.payload.doc.data().categoria_libro
+              categoria_libro: librodata.payload.doc.data().categoria_libro,
+              uid: librodata.payload.doc.data().id
         });
       });
     });
@@ -97,6 +115,9 @@ export class LibrosComponent implements OnInit {
   // editar libros
 
   onFiltro(id) {
+    console.log(id);
+  }
+  IrPerfil(id){
     console.log(id);
   }
 }

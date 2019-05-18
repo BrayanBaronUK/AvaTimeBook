@@ -1,0 +1,46 @@
+<main>
+<section id="sidebar">
+    <h1 class="sidebar-title">Bloc Chat</h1>
+     
+    <div class="room-list">
+        <p>Listado rooms</p> 
+      <div *ngFor="let room of _csroom">
+       <!-- <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nome }}</h3>-->
+       <h3 class="sidebar-room" (click)="roomchange(room.id)">{{ room.data.nombre_grupo }}</h3>
+      </div>
+    </div>
+  </section>
+  <section id="chat-room">
+      <h1>Chat Grupal</h1>
+      <div class="messages">
+          <h3>Avatime<span style="color:red;">CHAT </span></h3>
+          <hr>
+          <p class="chat-note chat-beginning">Beginning of chat</p>
+          <div class="app-mensajes" id="app-mensajes">
+
+            <div class="text-right" *ngFor="let chat of _cs.chats"
+            [ngClass]="{ 'text-right': _cs.useruid == chat.uid }">
+            <span class="badge "
+            [ngClass]="{ 'badge-primary': _cs.useruid == chat.uid,
+                        'badge-success':  _cs.useruid != chat.uid}"
+            >{{ chat.nombre }}</span>
+              <p> {{ chat.mensaje }} </p>
+            </div>
+       
+      
+          </div>
+          <p class="chat-note chat-end">End of chat</p>
+          <div id="new-message" ng-show="home.activeRoom !== null">
+            <input type="text" name="mensaje" [(ngModel)]="mensaje" 
+            class="form-control"
+            (keyup.enter)="enviar_mensaje()"
+            placeholder="Enviar mensaje" autofocus>
+          </div>
+         
+        
+                         
+      </div>
+       
+      
+  </section>
+</main>

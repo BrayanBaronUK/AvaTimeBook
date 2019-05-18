@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, } from '@angular/core';
 import { ServicioFiltroPersonaService } from '../Core/servicio-filtro-persona.service';
 import { UserService } from '../Core/user.service';
 import { ServicioLibroService } from '../Core/servicio-libro.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {PerfilOtroComponent} from '../perfil-otro/perfil-otro.component';
 @Component({
   selector: 'app-filtro-person',
   templateUrl: './filtro-person.component.html',
@@ -11,7 +12,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class FiltroPersonComponent implements OnInit {
   @Output() cerrar = new EventEmitter();
+  @ViewChild('child1') childOne:PerfilOtroComponent;
   filtrouser = [];
+  public idEnviar: any;
   public seguir = [];
   public userFirebase: any;
   public nombre: String;
@@ -23,6 +26,9 @@ export class FiltroPersonComponent implements OnInit {
   public usrLocal;
   public temporalDatos = [];
   public id;
+  public perfil = false;
+  public Siguiendo = 'Siguiendo';
+  public Seguir = 'Seguir';
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   public filter2: any; table2: any; tr2: any; td2: any; i2: any; txtValue2: any;
   displaySeguir: boolean = false;
@@ -38,8 +44,26 @@ export class FiltroPersonComponent implements OnInit {
 
   ngOnInit() {
     this.TraerPersonas();
+    this.idEnviar= this.userservicePerfil.getIud(); 
+    this.MostrarOcultar();
   }
 
+  change(id, S, data):void{
+    console.log("filtro:"+S)
+   this.childOne.empezaCargarPerfil(id,S,data); 
+   this.MostrarInformacion(); 
+   this.perfil = true;
+  }
+  MostrarInformacion() {
+    jQuery(document).on('click', '.perfil', function () {
+      document.getElementById('perfil').style.display = 'block';
+      document.getElementById('TablaFiltroPersonas').style.display = 'none';
+    });
+  }
+  MostrarOcultar() {
+      document.getElementById('perfil').style.display = 'none';
+      document.getElementById('TablaFiltroPersonas').style.display = 'block';
+  }
   MostrarColumnas() {
     this.colum = [
       { field: 'nombre_libro', header: 'Nombre' },
@@ -182,6 +206,10 @@ export class FiltroPersonComponent implements OnInit {
     } else {
       this.tr2.getElementsByTagName('td').style.display = 'block';
     }
+
+  }
+
+  enviarPerfil(id){
 
   }
 }

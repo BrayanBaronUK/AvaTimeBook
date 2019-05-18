@@ -3,6 +3,7 @@ import { UserService } from '../Core/user.service';
 import { ServicioLibroService } from '../core/servicio-libro.service';
 import { ServicioComentarioService } from '../Core/servicio-comentario.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-social-page',
@@ -17,6 +18,8 @@ export class SocialPageComponent implements OnInit {
   public userComentario = [];
   public input: any;
   public date14: Date;
+  public canSeguidor: any;
+  public canSeguir: any;
   public filter: any; table: any; tr: any; td: any; i: any; txtValue: any;
   constructor(
     public UserServices: UserService,
@@ -35,6 +38,8 @@ export class SocialPageComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.obtenerCantidadSeguidores();
+    this.obtenerCantidadSiguiendo();
     // trae informacion de usuario
     this.userFirebase = {
       nombre: '',
@@ -133,5 +138,27 @@ export class SocialPageComponent implements OnInit {
     OcultarTablero() {
         document.getElementById('filtro').style.display = 'none';
         document.getElementById('social').style.display = 'block';
+    }
+    obtenerCantidadSeguidores(){
+      this.UserServices.getCantidadSeguidores().subscribe( seguidor => {
+        this.canSeguidor = [];
+        debugger;
+        seguidor.map( s =>{
+          this.canSeguidor.push({
+            id: s.payload.doc.id
+          });
+        });
+      });
+    }
+    obtenerCantidadSiguiendo(){
+      this.UserServices.getCantidadSiguiendo().subscribe( seguidor => {
+        this.canSeguir = [];
+        debugger;
+        seguidor.map( s =>{
+          this.canSeguir.push({
+            id: s.payload.doc.id
+          });
+        });
+      });
     }
 }

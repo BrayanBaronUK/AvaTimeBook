@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <p-panel id="TablaFiltro" header="Busqueda de personas">
+  <p-panel id="TablaFiltroPersonas" header="Busqueda de personas">
 
     <div class="container bootstrap snippet">
       <div class="row">
@@ -37,9 +37,9 @@
                 <tr>
                   <td><img class="rounded-circle" width="50" height="50" src="{{seguir.data.url}}" alt="">
                     {{seguir.data.nombre}} {{seguir.data.apellido}}</td>
-                  <td><button class="btn btn-primary" md-button (click)="onfiltroNoSeguir(seguir.data, seguir.id)"><i
-                        class="pi pi-check"></i> Siguiendo</button></td>
-                  <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
+                  <td><button class="btn btn-primary " md-button (click)="onfiltroNoSeguir(seguir.data, seguir.id)"><i
+                        class="pi pi-check"></i>{{Siguiendo}}</button></td>
+                  <td><button class="btn btn-primary perfil" (click)="change(seguir.id,Siguiendo,seguir.data)" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
                 </tr>
               </ng-template>
             </p-table>
@@ -72,8 +72,8 @@
                     {{filtrouser.data.nombre}} {{filtrouser.data.apellido}}</td>
                   <td><button class="btn btn-primary" md-button
                       (click)="onfiltroSeguir(filtrouser.data, filtrouser.id)"><i
-                        class="pi pi-user-plus"></i>Seguir</button></td>
-                  <td><button class="btn btn-primary" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
+                        class="pi pi-user-plus"></i>{{Seguir}}</button></td>
+                  <td><button class="btn btn-primary perfil" (click)="change(filtrouser.id,Seguir,filtrouser.data)" md-button><i class="pi pi-user"></i>Ir Perfil</button></td>
                 </tr>
               </ng-template>
             </p-table>
@@ -106,3 +106,5 @@
     <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
   </form>
 </p-dialog>
+
+<app-perfil-otro #child1 id="perfil"></app-perfil-otro>

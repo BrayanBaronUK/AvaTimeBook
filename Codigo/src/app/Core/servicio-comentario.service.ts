@@ -46,6 +46,9 @@ export class ServicioComentarioService {
   getComentario() {
     return this.db.collection('perfil').doc(this.getIud()).collection('comentario').snapshotChanges();
   }
+  getComentarioOtroPerfil(id) {
+    return this.db.collection('perfil').doc(id).collection('comentario').snapshotChanges();
+  }
   getTimeStamp() {
     const now = new Date();
     const date = now.getUTCFullYear() + '/' +

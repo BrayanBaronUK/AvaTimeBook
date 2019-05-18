@@ -33,6 +33,8 @@ export class PerfilComponent implements OnInit {
   uploadPercent: Observable<number>;
   urlImage: Observable<string>;
   public userFirebase: any;
+  public canSeguidor: any;
+  public canSeguir: any;
   public userComentario = [];
   public item = 1;
   public currentStatus = 1;
@@ -72,6 +74,8 @@ export class PerfilComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.obtenerCantidadSeguidores();
+    this.obtenerCantidadSiguiendo();
     this.TraerComentario();
     this.TraerInformacionUsuario();
     this.fotos();
@@ -196,6 +200,29 @@ export class PerfilComponent implements OnInit {
 
   EliminarComentario(id) {
     this.UserComentario.deleteComentario(id);
+  }
+
+  obtenerCantidadSeguidores(){
+    this.UserServices.getCantidadSeguidores().subscribe( seguidor => {
+      this.canSeguidor = [];
+      debugger;
+      seguidor.map( s =>{
+        this.canSeguidor.push({
+          id: s.payload.doc.id
+        });
+      });
+    });
+  }
+  obtenerCantidadSiguiendo(){
+    this.UserServices.getCantidadSiguiendo().subscribe( seguidor => {
+      this.canSeguir = [];
+      debugger;
+      seguidor.map( s =>{
+        this.canSeguir.push({
+          id: s.payload.doc.id
+        });
+      });
+    });
   }
 
 }

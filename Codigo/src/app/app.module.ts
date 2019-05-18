@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
-
 import {
   MatToolbarModule,
   MatGridListModule,
@@ -59,18 +57,26 @@ import { AccordionModule } from 'primeng/accordion';
 import { MenuItem } from 'primeng/api';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
-//import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DialogModule } from 'primeng/dialog';
 import { CalendarModule } from 'primeng/calendar';
+
 import {ProgressBarModule} from 'primeng/progressbar';
 import {GalleriaModule} from 'primeng/galleria';
 import {ListboxModule} from 'primeng/listbox';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+
+import { RoomComponent } from './room/room.component';
+
 import {DataTableModule, SharedModule} from 'primeng/primeng';
+
 import { TablaLibrosComponent } from './tabla-libros/tabla-libros.component';
 import {PaginatorModule} from 'primeng/paginator';
 import { PickerModule } from '@ctrl/ngx-emoji-mart'
 
+
+import { PerfilOtroComponent } from './perfil-otro/perfil-otro.component';
+import { IndividualComponent } from './individual/individual.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +96,10 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart'
     ChatComponent,
     GruposComponent,
     FiltroPersonComponent,
-    TablaLibrosComponent
+    RoomComponent,
+    TablaLibrosComponent,
+    PerfilOtroComponent,
+    IndividualComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +107,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart'
     DialogModule,
     CalendarModule,
     TableModule,
-    //AngularFontAwesomeModule,
+    PickerModule,//Agregar emojis camilo
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -126,6 +135,7 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart'
     BrowserAnimationsModule,
     MatTabsModule,
     MatIconModule,
+    AngularFontAwesomeModule,
     ProgressBarModule,
     GalleriaModule,
     ListboxModule,

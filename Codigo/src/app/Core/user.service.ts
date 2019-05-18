@@ -61,6 +61,9 @@ export class UserService {
   public getPerfil() {
     return this.db.collection('perfil').doc(this.getIud());
   }
+  public getPerfilOtro(id) {
+    return this.db.collection('perfil').doc(id);
+  }
 
   public getPerfilEvaluar() {
     return this.getIud();
@@ -68,6 +71,12 @@ export class UserService {
 
   public getPerfiles() {
     return this.db.collection('perfil').snapshotChanges();
+  }
+  public getCantidadSeguidores() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('SeguidorPersona').snapshotChanges();
+  }
+  public getCantidadSiguiendo() {
+    return this.db.collection('perfil').doc(this.getIud()).collection('SiguiendoPersona').snapshotChanges();
   }
 
 
