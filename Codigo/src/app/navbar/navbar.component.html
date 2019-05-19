@@ -13,6 +13,9 @@
       <li class="nav-item active" *ngIf="isLogin">
         <a class="nav-link glyphicon glyphicon-book color" routerLink="/perfil" *ngIf="!herramientas">Perfil</a>
       </li>
+      <li class="nav-item active" *ngIf="isLogin">
+        <a class="nav-link glyphicon glyphicon-book color" routerLink="/notificacion" *ngIf="!herramientas">Notificacion</a>
+      </li>
       <li class="nav-item dropdown" *ngIf="isLogin">
         <a class="nav-link dropdown-toggle color" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
           aria-expanded="false" *ngIf="!herramientas">Configuraciones</a>
@@ -39,6 +42,7 @@
       aria-expanded="false" *ngIf="!herramientas">Comunidad</a>
     <div class="dropdown-menu">
       <a class="dropdown-item" routerLink="/chat">Chat Global</a>
+      <a class="dropdown-item" routerLink="/individual">Chat con seguidores</a>
     </div>
   </li>
   </ul>

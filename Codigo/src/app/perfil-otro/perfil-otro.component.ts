@@ -35,9 +35,11 @@ export class PerfilOtroComponent implements OnInit {
   public idtema;
   public temporalDatos = [];
   public id;
-  public siguiendo =[];
+  public siguiendo = [];
   public nombre: String;
   public dataSeg: any;
+  public userLocal: any;
+  public intereso = 'Se intereso por un libro';
   displaySeguir: boolean = false;
   displayNoSeguir: boolean = false;
   public date14: Date;
@@ -110,7 +112,7 @@ export class PerfilOtroComponent implements OnInit {
     }
 
   }
-  empezaCargarPerfil(id,s,data) {
+  empezaCargarPerfil(id, s, data) {
     this.idtema = s;
     this.idLlego = id;
     this.dataSeg = data
@@ -118,19 +120,19 @@ export class PerfilOtroComponent implements OnInit {
     this.TraerInformacionUsuario(this.idLlego);
   }
   empezaCargarPerfilDondeLibro(id) {
-    this.UserServices.getCantidadSiguiendo().subscribe(sig =>{
+    this.UserServices.getCantidadSiguiendo().subscribe(sig => {
       this.siguiendo = [];
-      sig.map(m =>{
+      sig.map(m => {
         this.siguiendo.push({
           id: m.payload.doc.id
         })
       });
-      for(var i=0; i<this.siguiendo.length; i++){
-        if(id == this.siguiendo[i].length){
+      for (var i = 0; i < this.siguiendo.length; i++) {
+        if (id == this.siguiendo[i].length) {
           this.idtema = 'Siguiendo';
         }
       }
-      if(this.idtema == null){
+      if (this.idtema == null) {
         this.idtema = 'Seguir';
       }
     })
@@ -152,13 +154,13 @@ export class PerfilOtroComponent implements OnInit {
           categoria_libro: librodata.payload.doc.data().categoria_libro
         });
       });
-      
+
     });
   }
-  onFuction(){
-    if(this.idtema == 'Seguir'){
-      this.onfiltroSeguir(this.dataSeg,this.idLlego);
-    } else if (this.idtema == 'Siguiendo'){
+  onFuction() {
+    if (this.idtema == 'Seguir') {
+      this.onfiltroSeguir(this.dataSeg, this.idLlego);
+    } else if (this.idtema == 'Siguiendo') {
       this.onfiltroNoSeguir(this.dataSeg, this.idLlego);
     }
   }
@@ -193,19 +195,20 @@ export class PerfilOtroComponent implements OnInit {
     this.idtema = 'Seguir'
     this.flashMensaje.show('Informacion Aceptada.',
       { cssClass: 'alert-success', timeout: 2500 });
-      this.onCancelar();
+    this.onCancelar();
   }
   onCancelar() {
     this.cerrar.emit();
     this.displaySeguir = false;
     this.displayNoSeguir = false;
   }
-  Intercambio(){
-    if(this.idtema == 'Seguir'){
-      this.flashMensaje.show('Debe Seguir a '+this.userFirebase.nombre,
-      { cssClass: 'alert-success', timeout: 2500 });
-    } else if (this.idtema == 'Siguiendo'){
-      
+  Intercambio() {
+    if (this.idtema == 'Seguir') {
+      this.flashMensaje.show('Debe Seguir a ' + this.userFirebase.nombre,
+        { cssClass: 'alert-success', timeout: 2500 });
+    } else if (this.idtema == 'Siguiendo') {
+      this.comunicacion(), this.flashMensaje.show('Informacion Enviada',
+        { cssClass: 'alert-success', timeout: 2500 });
     }
   }
 
@@ -233,4 +236,21 @@ export class PerfilOtroComponent implements OnInit {
   }
 
 
+  comunicacion() {
+    this.userLocal = {
+      nombre: '',
+      apellido: '',
+      genero: '',
+      edad: '',
+      url: '',
+      celular: '',
+      nacionalidad: '',
+      text: ''
+    };
+    this.UserServices.getPerfil().valueChanges().subscribe((user) => {
+      this.userLocal= user;
+      this.UserServices.CrearComunicaciones(this.idLlego,this.userLocal,this.intereso);
+
+    });
+}
 }

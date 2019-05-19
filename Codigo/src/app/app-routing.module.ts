@@ -19,6 +19,7 @@ import {TablaLibrosComponent} from './tabla-libros/tabla-libros.component'
 import { FiltroPersonComponent} from './filtro-person/filtro-person.component';
 import {PerfilOtroComponent} from './perfil-otro/perfil-otro.component';
 import { IndividualComponent } from './individual/individual.component';
+import {NotificacionComponent} from './notificacion/notificacion.component';
 const routes: Routes = [];
 // BEGIN OF CCSANCHEZC 15/02/2019 7:29
 export const rootRouterConfig: Routes = [
@@ -41,6 +42,7 @@ export const rootRouterConfig: Routes = [
   { path: 'TablaLibros', component: TablaLibrosComponent, canActivate: [AuthGuard]},
   { path: 'PerfilUsuario', component: PerfilOtroComponent, canActivate: [AuthGuard]},
   { path: 'individual', component: IndividualComponent, canActivate: [AuthGuard]},
+  {path: 'notificacion', component: NotificacionComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundComponent }
 ];
 // END OF CCSANCHEZC 15/02/2019 7:29

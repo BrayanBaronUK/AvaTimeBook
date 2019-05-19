@@ -20,6 +20,7 @@ export class RoomService {
   public usuario:any = {};
   public useruid:any;
   public chats: Mensaje[] = [];
+  public rommis : any [];
   private itemsCollectionmensajes: AngularFirestoreCollection<Mensaje>;
   constructor(
     private afs: AngularFirestore,
@@ -114,7 +115,7 @@ export class RoomService {
                                 
                                 })                                              
   }
-  GrupoagregarMensaje(value, texto:string ){
+  GrupoagregarMensaje(value, texto:string, roomies, dueño ){
     let mensaje : Mensaje = {
       nombre: this.usuario.nombre,
       mensaje: texto,
@@ -122,6 +123,18 @@ export class RoomService {
       uid: this.userse.getIud(),
     
     }
+    debugger;
+    this.rommis = roomies;
+    for(var i = 0 ; i<this.rommis.length;i++){
+      debugger;
+       
+        this.afs2.collection('perfil').doc(this.rommis[i].id).collection('Grupo').doc(value).
+        collection("messages").add(mensaje);
+      
+      
+    }
+     
+    
     return this.afs2.collection('perfil').doc(this.userse.getIud()).collection('Grupo').doc(value).
                                           collection("messages").add(mensaje);
 

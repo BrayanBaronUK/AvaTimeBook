@@ -1,0 +1,33 @@
+<p-table id="vistaTabla" [value]="m" [paginator]="true" [rows]="12" [style]="{width: '50%', minWidth: '200px', heigth: '300px'}" [responsive]="true">
+  <ng-template pTemplate="header">
+      <tr>
+          <th width="50%">Nombre</th>
+            <th>Tipo</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-m>
+      <tr>
+          <td> <img src="{{m.url}}" class="rounded-circle" width="30" height="30">
+            {{m.nombre}} </td>
+            <td><button class="btn btn-primary" md-button
+                (click)="onfiltroSeguir(m.data, m.id)"><i
+                  class="pi pi-user-plus"></i>{{m.tema}}</button></td>
+      </tr>
+  </ng-template>
+</p-table>
+<p-dialog header="" [(visible)]="displaySeguir" [modal]="true" [responsive]="true" [minY]="70"
+  [maximizable]="true" [baseZIndex]="10000">
+  <form>
+    <button class="btn btn-primary" (click)="crearSeguir()" value="Si"><i class="pi pi-user-plus"></i>Si</button>
+    <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
+  </form>
+</p-dialog>
+
+<!-- No seguir -->
+<p-dialog header="Desea dejar de seguir" [(visible)]="displayNoSeguir" [modal]="true" [responsive]="true"
+  [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+  <form>
+    <button class="btn btn-primary" (click)="noSeguir()" value="Si"><i class="pi pi-user-minus"></i>Si</button>
+    <button class="btn btn-primary" (click)="onCancelar()" value="No">No</button>
+  </form>
+</p-dialog>

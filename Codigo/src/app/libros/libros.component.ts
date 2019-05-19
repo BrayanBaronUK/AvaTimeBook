@@ -70,11 +70,6 @@ export class LibrosComponent implements OnInit {
       { field: 'autor_libro', header: 'Autor Libro' },
       { field: 'categoria_libro', header: 'Categoria' },
     ];
-
-    this.categoria = [
-      {label: 'Todo', value: 'null'},
-      {label: 'Investigacion', value: 'Investigacion'}
-    ];
   }
 
   TraerLibrosFiltro() {
@@ -95,8 +90,10 @@ export class LibrosComponent implements OnInit {
 
   TraerLibro() {
     // trae todos los libros
+    debugger;
     this.UserLibro.ObtenerLibroGlobal().subscribe((libros) => {
       this.userLibro = [];
+      debugger;
       libros.map((librodata: any) => {
         this.userLibro.push({
               id: librodata.payload.doc.id,
@@ -113,11 +110,4 @@ export class LibrosComponent implements OnInit {
   // crear libro por medio de perfil
 
   // editar libros
-
-  onFiltro(id) {
-    console.log(id);
-  }
-  IrPerfil(id){
-    console.log(id);
-  }
 }

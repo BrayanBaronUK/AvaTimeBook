@@ -32,6 +32,17 @@ export class GrupoServiceService {
       uid
     });
   }
+  ObetenerGrupoSeguidor( id) {
+    return this.db.collection('perfil').doc(id).collection('Grupo').snapshotChanges();
+  }
+
+  EliminarGrupoSeguidor(uid, idGrupo ) {
+    debugger;
+    console.log(uid);
+    console.log(idGrupo);
+    return this.db.collection('perfil').doc(uid).collection('Grupo').doc(idGrupo).delete();
+  }
+
 
   getGrupos() {
     return this.db.collection('perfil').doc(this.getIud()).collection('Grupo').snapshotChanges();
